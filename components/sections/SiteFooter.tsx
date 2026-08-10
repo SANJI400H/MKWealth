@@ -1,5 +1,7 @@
 import Link from "next/link";
 import WhatsAppLink from "@/components/ui/WhatsAppLink";
+import BookMeetingLink from "@/components/ui/BookMeetingLink";
+import SocialIcons from "@/components/ui/SocialIcons";
 import { siteConfig } from "@/lib/site-config";
 
 export default function SiteFooter() {
@@ -11,15 +13,22 @@ export default function SiteFooter() {
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink-muted">
             Off-plan investment advisor · Dubai · Huspy partner agent
           </p>
-          <WhatsAppLink
-            message="Hi Morgan, I found your site and would like to connect."
-            className="btn-primary mt-6"
-          >
-            WhatsApp
-          </WhatsAppLink>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <BookMeetingLink className="btn-primary" />
+            <WhatsAppLink
+              message="Hi Morgan, I found your site and would like to connect."
+              className="btn-ghost-dark"
+            >
+              WhatsApp
+            </WhatsAppLink>
+          </div>
+          <div className="mt-8">
+            <p className="eyebrow">Follow</p>
+            <SocialIcons className="mt-4" />
+          </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 text-sm sm:grid-cols-3">
+        <div className="grid grid-cols-2 gap-8 text-sm sm:grid-cols-2">
           <div>
             <p className="eyebrow">Site</p>
             <ul className="mt-4 space-y-2.5 text-ink-muted">
@@ -63,27 +72,6 @@ export default function SiteFooter() {
                 <Link href="/invest/rak" className="hover:text-ink">
                   Ras Al Khaimah
                 </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="eyebrow">Follow</p>
-            <ul className="mt-4 space-y-2.5 text-ink-muted">
-              <li>
-                <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-ink">
-                  Instagram
-                </a>
-              </li>
-              <li>
-                <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-ink">
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a href={siteConfig.social.tiktok} target="_blank" rel="noopener noreferrer" className="hover:text-ink">
-                  TikTok
-                </a>
               </li>
             </ul>
           </div>

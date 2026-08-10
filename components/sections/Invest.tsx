@@ -28,7 +28,7 @@ export default function Invest() {
           {investLocations.map((location, index) => (
             <RevealOnScroll key={location.id} delayMs={index * 70}>
               <Link href={location.slug} className="group block">
-                <div className="relative aspect-[4/5] overflow-hidden bg-ink/[0.04]">
+                <div className="relative aspect-[4/5] overflow-hidden bg-[#f5f5f7]">
                   <Image
                     src={location.image}
                     alt={`${location.name} real estate investment`}

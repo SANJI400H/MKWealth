@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import SiteFooter from "@/components/sections/SiteFooter";
-import WhatsAppLink from "@/components/ui/WhatsAppLink";
+import BookMeetingLink from "@/components/ui/BookMeetingLink";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -65,12 +65,7 @@ export default function AboutPage() {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 sm:flex-row">
-          <WhatsAppLink
-            message="Hi Morgan, I read your about page and would like to book a meeting."
-            className="btn-primary w-full sm:w-auto"
-          >
-            Book a Meeting
-          </WhatsAppLink>
+          <BookMeetingLink className="btn-primary w-full sm:w-auto" />
           <Link
             href="/#services"
             className="btn-ghost-dark w-full justify-center sm:w-auto"

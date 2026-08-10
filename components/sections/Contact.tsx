@@ -1,7 +1,7 @@
 import Link from "next/link";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
+import BookMeetingLink from "@/components/ui/BookMeetingLink";
 import WhatsAppLink from "@/components/ui/WhatsAppLink";
-import { siteConfig } from "@/lib/site-config";
 
 export default function Contact() {
   return (
@@ -19,14 +19,7 @@ export default function Contact() {
 
         <RevealOnScroll delayMs={80} className="mt-12">
           <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
-            <a
-              href={siteConfig.calendlyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary w-full sm:w-auto"
-            >
-              Book a Meeting
-            </a>
+            <BookMeetingLink className="btn-primary w-full sm:w-auto" />
             <Link href="/guide" className="btn-ghost-dark w-full justify-center sm:w-auto">
               Download Free Guide
             </Link>
@@ -36,18 +29,6 @@ export default function Contact() {
             >
               WhatsApp
             </WhatsAppLink>
-          </div>
-
-          <div className="mt-16 flex flex-wrap gap-x-10 gap-y-3 text-sm font-medium tracking-wide text-ink-muted">
-            <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-gold">
-              Instagram
-            </a>
-            <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-gold">
-              LinkedIn
-            </a>
-            <a href={siteConfig.social.tiktok} target="_blank" rel="noopener noreferrer" className="hover:text-gold">
-              TikTok
-            </a>
           </div>
         </RevealOnScroll>
       </div>

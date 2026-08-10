@@ -12,7 +12,13 @@ export function personSchema() {
       "@type": "Organization",
       name: siteConfig.company,
     },
-    sameAs: [siteConfig.social.instagram, siteConfig.social.linkedin, siteConfig.social.tiktok],
+    sameAs: [
+      siteConfig.social.instagram,
+      siteConfig.social.linkedin,
+      siteConfig.social.tiktok,
+      siteConfig.social.youtube,
+      siteConfig.social.facebook,
+    ],
   };
 }
 

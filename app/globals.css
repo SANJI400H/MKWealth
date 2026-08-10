@@ -15,6 +15,35 @@
 
 html {
   scroll-behavior: auto;
+  overflow-x: hidden;
+}
+
+/* Prevent GSAP pin-spacers from painting prior-act frames into the next viewport */
+.pin-spacer {
+  background-color: var(--paper);
+}
+
+/* Fixed nav clearance for gallery jumps — cinema sections snap full-bleed */
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+.cinema-section {
+  scroll-margin-top: 0;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100svh;
+}
+
+/* Visible keyboard focus without click rings */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+  outline: none;
 }
 
 body {
@@ -26,25 +55,29 @@ body {
 }
 
 @layer components {
-  /* Soft capsule — not a hard box */
+  /* Soft capsule — not a hard box.
+     No permanent will-change / filter anims (GPU cost). Framer handles WhatsApp CTAs. */
   .btn-primary {
     @apply inline-flex items-center justify-center rounded-full px-7 py-3 text-[13px] font-semibold tracking-[-0.01em];
     background: linear-gradient(180deg, var(--gold-soft) 0%, var(--gold) 100%);
     color: #1d1d1f;
     transition:
-      transform 0.45s var(--ease-out-expo),
-      opacity 0.35s var(--ease-apple),
-      filter 0.35s var(--ease-apple);
-    will-change: transform;
+      transform 0.35s var(--ease-out-expo),
+      opacity 0.35s var(--ease-apple);
   }
 
   .btn-primary:hover {
-    transform: scale(1.03);
-    filter: brightness(1.05);
+    transform: scale(1.02);
   }
 
   .btn-primary:active {
     transform: scale(0.98);
+  }
+
+  /* Framer-driven primary links skip CSS scale to avoid fighting transforms */
+  a.btn-primary[data-cta="whatsapp"]:hover,
+  a.btn-primary[data-cta="whatsapp"]:active {
+    transform: none;
   }
 
   .btn-ghost {
@@ -84,31 +117,6 @@ body {
     @apply font-display font-bold tracking-[-0.035em] text-balance;
   }
 
-  .nav-glass {
-    -webkit-backdrop-filter: saturate(160%) blur(12px);
-    backdrop-filter: saturate(160%) blur(12px);
-    transition:
-      background-color 0.45s var(--ease-apple),
-      border-color 0.45s var(--ease-apple),
-      box-shadow 0.45s var(--ease-apple);
-  }
-
-  .nav-link {
-    @apply relative text-[12px] font-medium tracking-[-0.01em];
-    transition: color 0.4s var(--ease-apple), opacity 0.4s var(--ease-apple), background-color 0.35s var(--ease-apple);
-  }
-
-  .nav-link::after {
-    content: none;
-  }
-
-  .nav-link[data-active="true"] {
-    background: rgba(255, 255, 255, 0.14);
-  }
-
-  [data-nav-theme="light"] .nav-link[data-active="true"] {
-    background: rgba(0, 0, 0, 0.06);
-  }
 }
 
 .reveal {
@@ -152,36 +160,167 @@ body {
 }
 
 .act-overlay {
-  opacity: var(--act-fade, 0);
-  transform: translate3d(0, calc((1 - var(--act-fade, 0)) * 16px), 0);
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  filter: blur(2px);
+  transition:
+    opacity 1.05s var(--ease-out-expo),
+    transform 1.05s var(--ease-out-expo),
+    filter 1.05s var(--ease-out-expo);
   pointer-events: none;
+  will-change: opacity, transform, filter;
 }
 
 [data-revealed="true"] .act-overlay {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
   pointer-events: auto;
+  will-change: auto;
+}
+
+/* Full-bleed video → white copy panel slides into place */
+.cinema-copy-panel {
+  transition: transform 1.05s var(--ease-out-expo);
+  will-change: transform;
+  pointer-events: none;
+  overflow-y: auto;
+  overscroll-contain: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile: bottom sheet so video stays visible above */
+@media (max-width: 1023px) {
+  .cinema-copy-panel {
+    inset: auto 0 0 0 !important;
+    top: auto;
+    width: 100%;
+    max-width: none !important;
+    max-height: min(68dvh, 34rem);
+    align-items: flex-start;
+    padding-top: 1.25rem !important;
+    padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px)) !important;
+    transform: translate3d(0, 108%, 0);
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  [data-panel-side="left"] .cinema-copy-panel,
+  [data-panel-side="right"] .cinema-copy-panel {
+    transform: translate3d(0, 108%, 0);
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  [data-revealed="true"] .cinema-copy-panel {
+    transform: translate3d(0, 0, 0);
+  }
+
+  [data-panel-side="left"] .cinema-copy-inner,
+  [data-panel-side="right"] .cinema-copy-inner {
+    transform: translate3d(0, 12px, 0);
+  }
+}
+
+@media (min-width: 1024px) {
+  [data-panel-side="left"] .cinema-copy-panel {
+    transform: translate3d(-104%, 0, 0);
+    box-shadow: 12px 0 40px rgba(0, 0, 0, 0.06);
+  }
+
+  [data-panel-side="right"] .cinema-copy-panel {
+    transform: translate3d(104%, 0, 0);
+    box-shadow: -12px 0 40px rgba(0, 0, 0, 0.06);
+  }
+
+  [data-panel-side="left"] .cinema-copy-inner {
+    transform: translate3d(-12px, 0, 0);
+  }
+
+  [data-panel-side="right"] .cinema-copy-inner {
+    transform: translate3d(12px, 0, 0);
+  }
+}
+
+.cinema-copy-inner {
+  opacity: 0;
+  transition:
+    opacity 0.85s var(--ease-out-expo) 0.18s,
+    transform 0.85s var(--ease-out-expo) 0.18s;
+}
+
+[data-revealed="true"] .cinema-copy-panel {
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+  will-change: auto;
+}
+
+[data-revealed="true"] .cinema-copy-inner {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Hero text-only: fade + rise over full-bleed video (no white panel) */
+.cinema-text-only {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  filter: blur(2px);
+  transition:
+    opacity 1.05s var(--ease-out-expo),
+    transform 1.05s var(--ease-out-expo),
+    filter 1.05s var(--ease-out-expo);
+  pointer-events: none;
+  will-change: opacity, transform, filter;
+}
+
+[data-revealed="true"] .cinema-text-only {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+  pointer-events: auto;
+  will-change: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .act-overlay {
     opacity: 1;
     transform: none;
+    filter: none;
+    transition: none;
+    pointer-events: auto;
+  }
+
+  .cinema-copy-panel,
+  .cinema-copy-inner,
+  .cinema-text-only {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
     pointer-events: auto;
   }
 }
 
 .media-skeleton {
-  background: #1d1d1f;
+  background: #f5f5f7;
 }
 
 .text-legibility {
-  text-shadow: 0 1px 24px rgba(0, 0, 0, 0.28);
+  text-shadow: 0 1px 18px rgba(255, 255, 255, 0.75);
 }
 
-/* Smooth image hover */
+.text-legibility-on-media {
+  text-shadow: 0 1px 28px rgba(0, 0, 0, 0.4);
+}
+
+/* Smooth image hover — promote layer only while hovering */
 .img-smooth {
   transition: transform 1.1s var(--ease-out-expo);
 }
 
 .group:hover .img-smooth {
+  will-change: transform;
   transform: scale(1.035);
+}
+
+.group:not(:hover) .img-smooth {
+  will-change: auto;
 }

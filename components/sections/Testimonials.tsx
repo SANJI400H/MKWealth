@@ -6,8 +6,22 @@ import { getTestimonials } from "@/lib/testimonials";
 
 export default function Testimonials() {
   const testimonials = getTestimonials();
+  const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: "12% 0px", threshold: 0 }
+    );
+    io.observe(section);
+    return () => io.disconnect();
+  }, []);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -15,11 +29,15 @@ export default function Testimonials() {
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const mobile = window.matchMedia("(max-width: 767px)").matches;
-    if (reduced || mobile) return;
+    if (reduced || mobile || !inView) {
+      track.style.willChange = "auto";
+      return;
+    }
 
     let raf = 0;
     let offset = 0;
     const speed = 0.22;
+    track.style.willChange = "transform";
 
     const loop = () => {
       if (!paused) {
@@ -32,13 +50,21 @@ export default function Testimonials() {
     };
 
     raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
-  }, [paused]);
+    return () => {
+      cancelAnimationFrame(raf);
+      track.style.willChange = "auto";
+    };
+  }, [paused, inView]);
 
   const looped = [...testimonials, ...testimonials];
 
   return (
-    <section id="testimonials" className="overflow-hidden bg-paper py-24 sm:py-32" aria-label="Testimonials">
+    <section
+      ref={sectionRef}
+      id="testimonials"
+      className="overflow-hidden bg-paper py-24 sm:py-32"
+      aria-label="Testimonials"
+    >
       <div className="mx-auto max-w-content px-5 sm:px-8">
         <RevealOnScroll>
           <p className="eyebrow">Testimonials</p>
@@ -69,7 +95,7 @@ export default function Testimonials() {
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        <div ref={trackRef} className="flex w-max gap-16 px-8 will-change-transform">
+        <div ref={trackRef} className="flex w-max gap-16 px-8">
           {looped.map((testimonial, index) => (
             <blockquote
               key={`${testimonial.id}-${index}`}

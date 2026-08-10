@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CinemaController from "@/components/motion/CinemaController";
 import Hero from "@/components/sections/Hero";
 import Bio from "@/components/sections/Bio";
 import Services from "@/components/sections/Services";
@@ -19,13 +20,17 @@ export const metadata: Metadata = pageMetadata({
 export default function HomePage() {
   return (
     <main>
-      <Hero />
-      <Bio />
-      <Services />
-      <Invest />
-      <Testimonials />
-      <Contact />
-      <SiteFooter />
+      <CinemaController>
+        <Hero />
+        <Bio />
+        <Services />
+      </CinemaController>
+      <div className="relative bg-paper">
+        <Invest />
+        <Testimonials />
+        <Contact />
+        <SiteFooter />
+      </div>
     </main>
   );
 }
