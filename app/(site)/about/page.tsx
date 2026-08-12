@@ -9,7 +9,7 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = pageMetadata({
   title: "About Morgan Kaiser | Dubai Off-Plan Investment Advisor",
   description:
-    "Full bio of Morgan Kaiser — Huspy partner agent advising foreign investors on Dubai off-plan property, Golden Visa eligibility, and portfolio structuring.",
+    "Full bio of Morgan Kaiser, Huspy partner agent advising foreign investors on Dubai off-plan property, Golden Visa eligibility, and portfolio structuring.",
   path: "/about",
 });
 
@@ -51,12 +51,12 @@ export default function AboutPage() {
           </p>
           <p>
             As a partner agent with Huspy, he sits inside a platform that combines brokerage and mortgage
-            advisory — useful for off-plan buyers specifically, where lender appetite and construction-linked
+            advisory, useful for off-plan buyers specifically, where lender appetite and construction-linked
             payment schedules have to line up or the deal breaks.
           </p>
           <p>
             Most clients are based outside the UAE and evaluating Dubai against other global markets. The
-            first conversation is about numbers, liquidity, and risk — not a listing tour.
+            first conversation is about numbers, liquidity, and risk, not a listing tour.
           </p>
           <p>
             For the short version of how an engagement runs: clarify the brief, shortlist units that fit,

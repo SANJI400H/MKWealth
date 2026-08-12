@@ -1,5 +1,5 @@
 /**
- * Homepage cinema acts — locked mapping:
+ * Homepage cinema acts, locked mapping:
  *   walk-1 → Hero
  *   walk-2 → About
  *   walk-3 → Services
@@ -18,11 +18,11 @@ export const videoActs = {
     src: "/videos/walk-2.mp4",
     textRevealAt: 0.5,
     heightMultiplier: 3,
-    alt: "Morgan Kaiser — about sequence",
+    alt: "Morgan Kaiser about sequence",
   },
   act3: {
     src: "/videos/walk-3.mp4",
-    textRevealAt: 0.45,
+    textRevealAt: 0.5,
     heightMultiplier: 2.8,
     alt: "Morgan Kaiser presenting services",
   },

@@ -27,7 +27,7 @@ export function pageMetadata({ title, description, path, ogImage, noIndex }: Pag
       description,
       url,
       siteName: siteConfig.name,
-      images: [{ url: image, width: 1200, height: 630, alt: `${siteConfig.name} — ${siteConfig.role}` }],
+      images: [{ url: image, width: 1200, height: 630, alt: `${siteConfig.name} | ${siteConfig.role}` }],
       locale: siteConfig.locale,
       type: "website",
     },

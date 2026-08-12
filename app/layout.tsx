@@ -15,9 +15,13 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
-  title: `${siteConfig.name} — Dubai Off-Plan Property Investment Advisor`,
+  title: `${siteConfig.name} | Dubai Off-Plan Property Investment Advisor`,
   description:
     "Morgan Kaiser is a Dubai-based off-plan real estate investment advisor and Huspy partner agent helping foreign investors buy off-plan property in Dubai with tax-free returns and Golden Visa eligibility.",
+  icons: {
+    icon: [{ url: "/images/mk-logo.png", type: "image/png" }],
+    apple: [{ url: "/images/mk-logo.png" }],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

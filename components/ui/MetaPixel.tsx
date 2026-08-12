@@ -1,7 +1,7 @@
 import Script from "next/script";
 import { siteConfig } from "@/lib/site-config";
 
-// PLACEHOLDER — set NEXT_PUBLIC_META_PIXEL_ID in .env.local. Renders nothing until it is.
+// PLACEHOLDER, set NEXT_PUBLIC_META_PIXEL_ID in .env.local. Renders nothing until it is.
 export default function MetaPixel() {
   if (!siteConfig.metaPixelId) return null;
 

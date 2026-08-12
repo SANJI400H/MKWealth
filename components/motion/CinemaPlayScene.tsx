@@ -6,32 +6,38 @@ import { useCinemaCue, type CinemaId } from "@/components/motion/CinemaControlle
 type Phase = "idle" | "playing" | "done";
 type PanelSide = "left" | "right";
 type Layout = "bleed" | "split";
+/** side = half panel slide-in; full = slow white wash across the whole scene. */
+type PanelCover = "side" | "full";
 
 interface CinemaPlaySceneProps {
   actId: CinemaId;
   src: string;
   alt: string;
-  /** Fraction of duration (0–1) when copy reveals. */
+  /** Fraction of duration (0 to 1) when copy reveals. */
   textRevealAt?: number;
   objectPosition?: string;
   /** bleed: full video + sliding white panel. split: paper page + contained video. */
   layout?: Layout;
   /** Side the white panel slides in from (bleed), or which side holds the video (split). */
   panelSide?: PanelSide;
-  /** Contained video width in split layout — default ~half, narrow is smaller. */
+  /** Contained video width in split layout, default ~half, narrow is smaller. */
   mediaSize?: "half" | "narrow";
   /** bleed only: solid white sliding panel (default) vs text-only fade over video. */
   solidPanel?: boolean;
+  /** bleed + solidPanel: side panel (About) or full-section wash (Hero). */
+  panelCover?: PanelCover;
   priority?: boolean;
   children?: ReactNode;
   className?: string;
 }
 
-const FALLBACK_MS = 8000;
+/** Wall-clock fallback; videos play at 1.2× so real clips finish sooner. */
+const PLAYBACK_RATE = 1.2;
+const FALLBACK_MS = 7000;
 
 /**
- * bleed — full-bleed video, white copy panel slides in at textRevealAt.
- * split — white paper + contained video (better when copy needs room).
+ * bleed, full-bleed video, white copy panel slides in at textRevealAt.
+ * split, white paper + contained video (better when copy needs room).
  */
 export default function CinemaPlayScene({
   actId,
@@ -43,6 +49,7 @@ export default function CinemaPlayScene({
   panelSide = "left",
   mediaSize = "half",
   solidPanel = true,
+  panelCover = "side",
   children,
   className = "",
 }: CinemaPlaySceneProps) {
@@ -126,6 +133,7 @@ export default function CinemaPlayScene({
 
       try {
         video.muted = true;
+        video.playbackRate = PLAYBACK_RATE;
         if (fromStart) {
           video.pause();
           if (video.readyState >= 1) video.currentTime = 0;
@@ -158,7 +166,7 @@ export default function CinemaPlayScene({
     }
   }, []);
 
-  // Hero: start walk-1 the moment the page can play — don't wait on scroll cues.
+  // Hero: start walk-1 the moment the page can play, don't wait on scroll cues.
   useEffect(() => {
     if (!isHome || reduced) return;
 
@@ -206,7 +214,7 @@ export default function CinemaPlayScene({
         showFinal();
         return;
       }
-      // Already introduced — stay on final frame / revealed copy.
+      // Already introduced, stay on final frame / revealed copy.
       if (isHome && homeBootedRef.current && phaseRef.current !== "idle") {
         if (phaseRef.current !== "playing") showFinal();
         return;
@@ -290,16 +298,16 @@ export default function CinemaPlayScene({
     />
   ) : null;
 
-  /* Split: white page + inset rectangular video (Services). */
+  /* Split: phone = compact video over copy; tablet+ = side-by-side. */
   if (layout === "split") {
     const copyOnLeft = panelSide === "left";
     const frameSize =
       mediaSize === "narrow"
-        ? "h-[min(34vh,16rem)] w-auto max-w-[min(100%,14rem)] sm:h-[min(40vh,20rem)] sm:max-w-[18rem] lg:h-[min(78vh,44.1rem)] lg:max-w-[41rem]"
-        : "h-[min(36vh,17rem)] w-auto max-w-[min(100%,15rem)] sm:h-[min(42vh,22rem)] sm:max-w-[20rem] lg:h-[min(80vh,46.2rem)] lg:max-w-[43rem]";
+        ? "h-[min(26vh,12.5rem)] w-auto max-w-[min(100%,11.5rem)] sm:h-[min(36vh,17rem)] sm:max-w-[16rem] md:h-[min(58vh,26rem)] md:max-w-[22rem] lg:h-[min(78vh,44.1rem)] lg:max-w-[41rem]"
+        : "h-[min(28vh,13.5rem)] w-auto max-w-[min(100%,12.5rem)] sm:h-[min(38vh,18rem)] sm:max-w-[18rem] md:h-[min(60vh,28rem)] md:max-w-[24rem] lg:h-[min(80vh,46.2rem)] lg:max-w-[43rem]";
 
     const media = (
-      <div className="flex shrink-0 items-center justify-center px-5 pb-4 pt-16 sm:px-8 sm:pb-6 lg:basis-[54%] lg:justify-end lg:px-10 lg:pb-14 lg:pt-28">
+      <div className="flex shrink-0 items-center justify-center px-5 pb-2 pt-[max(4.25rem,calc(env(safe-area-inset-top)+3.25rem))] sm:px-8 sm:pb-5 md:basis-[46%] md:justify-end md:pb-10 md:pt-24 lg:basis-[54%] lg:px-10 lg:pb-14 lg:pt-28">
         <div className={`relative aspect-[1074/1024] overflow-hidden bg-[#f5f5f7] ${frameSize}`}>
           {!ready && !reduced ? <div className="media-skeleton absolute inset-0" aria-hidden /> : null}
           {videoEl}
@@ -308,23 +316,22 @@ export default function CinemaPlayScene({
     );
 
     const copy = children ? (
-      <div className="act-overlay flex min-h-0 flex-1 flex-col justify-start overflow-y-auto overscroll-contain px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-4 sm:px-8 lg:justify-center lg:overflow-visible lg:px-12 lg:pb-16 lg:pt-28">
-        <div className="mx-auto w-full max-w-lg lg:mx-0">{children}</div>
+      <div className="act-overlay flex min-h-0 flex-1 flex-col justify-start overflow-y-auto overscroll-contain px-5 pb-[max(1.1rem,env(safe-area-inset-bottom))] pt-2 sm:px-8 sm:pt-3 md:justify-center md:overflow-visible md:px-10 md:pb-12 md:pt-24 lg:px-12 lg:pb-16 lg:pt-28">
+        <div className="mx-auto w-full max-w-lg md:mx-0">{children}</div>
       </div>
     ) : null;
 
     return (
       <div
-        className={`relative flex h-full w-full flex-col overflow-hidden bg-paper lg:flex-row lg:items-center ${className}`}
+        className={`relative flex h-full w-full flex-col overflow-hidden bg-paper md:flex-row md:items-center ${className}`}
         data-revealed={revealed ? "true" : "false"}
         data-cinema-phase={phase}
         data-cinema-layout="split"
       >
-        {/* Mobile: video on top, copy below. Desktop: side-by-side */}
         {copyOnLeft ? (
           <>
-            <div className="order-1 shrink-0 lg:order-2">{media}</div>
-            <div className="order-2 flex min-h-0 flex-1 flex-col lg:order-1">{copy}</div>
+            <div className="order-1 shrink-0 md:order-2">{media}</div>
+            <div className="order-2 flex min-h-0 flex-1 flex-col md:order-1">{copy}</div>
           </>
         ) : (
           <>
@@ -336,7 +343,9 @@ export default function CinemaPlayScene({
     );
   }
 
-  /* Bleed: full video + copy (solid sliding panel, or text-only fade). */
+  /* Bleed: full video + copy (solid sliding panel, full wash, or text-only fade). */
+  const coverFull = solidPanel && panelCover === "full";
+
   return (
     <div
       className={`relative h-full w-full overflow-hidden bg-paper ${className}`}
@@ -344,6 +353,7 @@ export default function CinemaPlayScene({
       data-cinema-phase={phase}
       data-panel-side={panelFrom}
       data-solid-panel={solidPanel ? "true" : "false"}
+      data-panel-cover={coverFull ? "full" : "side"}
     >
       <div className="absolute inset-0 bg-paper" aria-hidden />
       {!ready && !reduced ? <div className="media-skeleton absolute inset-0 z-0" aria-hidden /> : null}
@@ -351,7 +361,14 @@ export default function CinemaPlayScene({
       <div className="absolute inset-0 z-[1]">{videoEl}</div>
 
       {children ? (
-        solidPanel ? (
+        coverFull ? (
+          <>
+            <div className="cinema-wash absolute inset-0 z-10 bg-paper" aria-hidden />
+            <div className="cinema-copy-full absolute inset-0 z-20">
+              <div className="cinema-copy-inner w-full max-w-lg">{children}</div>
+            </div>
+          </>
+        ) : solidPanel ? (
           <div
             className={`cinema-copy-panel absolute inset-y-0 z-10 flex w-full max-w-xl items-center bg-paper px-5 pb-16 pt-24 sm:max-w-2xl sm:px-8 sm:pt-28 lg:max-w-[min(36rem,48%)] lg:px-10 xl:max-w-[min(40rem,46%)] ${
               panelFrom === "right" ? "right-0" : "left-0"

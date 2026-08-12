@@ -10,7 +10,7 @@ interface WhatsAppLinkProps {
   children: ReactNode;
 }
 
-/** WhatsApp CTA — transform-only micro-motion when motion is allowed. */
+/** WhatsApp CTA, transform-only micro-motion when motion is allowed. */
 export default function WhatsAppLink({ message, className = "", children }: WhatsAppLinkProps) {
   const reduceMotion = useReducedMotion();
   const animated = !reduceMotion && className.includes("btn-primary");

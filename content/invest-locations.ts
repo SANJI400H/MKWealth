@@ -21,7 +21,7 @@ export const investLocations: InvestLocation[] = [
     name: "Abu Dhabi",
     slug: "/invest/abu-dhabi",
     tag: "Lower volatility",
-    summary: "Government-anchored demand and a calmer secondary market — suited to longer hold periods.",
+    summary: "Government-anchored demand and a calmer secondary market, suited to longer hold periods.",
     image: "/images/project-2.jpg",
   },
   {
@@ -29,7 +29,7 @@ export const investLocations: InvestLocation[] = [
     name: "Ras Al Khaimah",
     slug: "/invest/rak",
     tag: "Lower entry",
-    summary: "Lower ticket sizes and a growing tourism story — with a thinner resale market as the trade-off.",
+    summary: "Lower ticket sizes and a growing tourism story, with a thinner resale market as the trade-off.",
     image: "/images/project-3.jpg",
   },
 ];

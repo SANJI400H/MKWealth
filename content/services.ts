@@ -27,13 +27,13 @@ export const services: ServiceItem[] = [
   {
     id: "corporate",
     title: "Corporate Structuring",
-    summary: "When a personal freehold title is not enough — structuring options for holding UAE property through a company.",
+    summary: "When a personal freehold title is not enough: structuring options for holding UAE property through a company.",
     whatsappMessage: "Hi Morgan, I'd like to discuss Corporate Structuring for UAE property.",
   },
   {
     id: "mortgage",
     title: "Mortgage Advisory",
-    summary: "Financing options via Huspy — matching lender appetite to your payment plan and off-plan drawdown schedule.",
+    summary: "Financing options via Huspy, matching lender appetite to your payment plan and off-plan drawdown schedule.",
     whatsappMessage: "Hi Morgan, I'd like Mortgage Advisory for an off-plan purchase in the UAE.",
   },
   {

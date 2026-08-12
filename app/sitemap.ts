@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
 
-// /guide is intentionally excluded — noindex, automation-only traffic.
+// /guide is intentionally excluded, noindex, automation-only traffic.
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/about", "/invest/dubai", "/invest/abu-dhabi", "/invest/rak"];
 

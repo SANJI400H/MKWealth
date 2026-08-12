@@ -33,12 +33,20 @@ export function useCinemaCue() {
   return useContext(CinemaContext);
 }
 
-const SNAP_DURATION_MS = 1100;
-const SNAP_DURATION_MOBILE_MS = 720;
+const SNAP_DURATION_DESKTOP_MS = 1100;
+const SNAP_DURATION_TABLET_MS = 980;
+const SNAP_DURATION_PHONE_MS = 820;
 
 function snapDurationMs() {
-  if (typeof window === "undefined") return SNAP_DURATION_MS;
-  return window.matchMedia("(max-width: 767px)").matches ? SNAP_DURATION_MOBILE_MS : SNAP_DURATION_MS;
+  if (typeof window === "undefined") return SNAP_DURATION_DESKTOP_MS;
+  if (window.matchMedia("(max-width: 767px)").matches) return SNAP_DURATION_PHONE_MS;
+  if (window.matchMedia("(max-width: 1023px)").matches) return SNAP_DURATION_TABLET_MS;
+  return SNAP_DURATION_DESKTOP_MS;
+}
+
+function touchSnapThreshold() {
+  if (typeof window === "undefined") return 48;
+  return window.matchMedia("(max-width: 767px)").matches ? 52 : 40;
 }
 
 function isCinemaId(id: string): id is CinemaId {
@@ -49,7 +57,7 @@ function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-/** Smooth in–out locomotion for section handoffs. */
+/** Smooth in, out locomotion for section handoffs. */
 function easeInOutCubic(t: number) {
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 }
@@ -234,7 +242,7 @@ export default function CinemaController({ children }: { children: ReactNode }) 
 
       const end = e.changedTouches[0]?.clientY ?? start;
       const dy = start - end;
-      if (Math.abs(dy) < 36) return;
+      if (Math.abs(dy) < touchSnapThreshold()) return;
       snap(dy > 0 ? 1 : -1);
     };
 

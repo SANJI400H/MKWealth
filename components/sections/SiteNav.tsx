@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import BookMeetingLink from "@/components/ui/BookMeetingLink";
-import { siteConfig } from "@/lib/site-config";
+import BrandLogo from "@/components/ui/BrandLogo";
 
 const links = [
   { id: "home", label: "Home" },
@@ -19,7 +19,7 @@ const links = [
 const CINEMA = new Set(["home", "about", "services"]);
 
 /**
- * Transparent cinema chrome — no bar fill; mobile drawer stays solid when open.
+ * Transparent cinema chrome, no bar fill; mobile drawer stays solid when open.
  */
 export default function SiteNav() {
   const pathname = usePathname();
@@ -27,7 +27,10 @@ export default function SiteNav() {
   const reduceMotion = useReducedMotion();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("home");
+  const [cinemaRevealed, setCinemaRevealed] = useState(false);
   const overCinema = onHome && CINEMA.has(active) && !open;
+  /** White chrome only while video still dominates; ink once the white panel/wash is in. */
+  const lightChrome = overCinema && !cinemaRevealed;
 
   useEffect(() => {
     if (!onHome) return;
@@ -83,6 +86,26 @@ export default function SiteNav() {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!onHome || !CINEMA.has(active)) {
+      setCinemaRevealed(false);
+      return;
+    }
+
+    const section = document.getElementById(active);
+    const target = section?.querySelector<HTMLElement>("[data-revealed]");
+    if (!target) {
+      setCinemaRevealed(false);
+      return;
+    }
+
+    const sync = () => setCinemaRevealed(target.getAttribute("data-revealed") === "true");
+    sync();
+    const mo = new MutationObserver(sync);
+    mo.observe(target, { attributes: true, attributeFilter: ["data-revealed"] });
+    return () => mo.disconnect();
+  }, [onHome, active]);
+
   const goToSection = (id: string) => {
     setOpen(false);
     if (!onHome) {
@@ -111,9 +134,10 @@ export default function SiteNav() {
         <button
           type="button"
           onClick={() => goToSection("home")}
-          className="shrink-0 font-display text-[13px] font-semibold tracking-[-0.02em] text-gold transition-opacity hover:opacity-80"
+          className="relative z-10 shrink-0 transition-opacity hover:opacity-80"
+          aria-label="Home"
         >
-          {siteConfig.name}
+          <BrandLogo size="nav" />
         </button>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
@@ -141,7 +165,7 @@ export default function SiteNav() {
           aria-expanded={open}
           aria-controls="mobile-nav-panel"
           aria-label={open ? "Close navigation menu" : "Open navigation menu"}
-          className={`rounded-sm p-1.5 lg:hidden ${overCinema ? "text-white" : "text-ink"}`}
+          className={`rounded-sm p-1.5 lg:hidden ${lightChrome ? "text-white" : "text-ink"}`}
         >
           {open ? <X size={18} strokeWidth={1.5} /> : <Menu size={18} strokeWidth={1.5} />}
         </button>

@@ -9,7 +9,7 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = pageMetadata({
   title: "RAK Property Investment for Foreigners | Morgan Kaiser",
   description:
-    "Ras Al Khaimah real estate investment compared to Dubai — lower entry prices, tourism growth, and the liquidity trade-offs foreign buyers should know.",
+    "Ras Al Khaimah real estate investment compared to Dubai, lower entry prices, tourism growth, and the liquidity trade-offs foreign buyers should know.",
   path: "/invest/rak",
 });
 
@@ -32,7 +32,7 @@ const faqItems = [
   {
     question: "Does RAK property qualify for the Golden Visa?",
     answer:
-      "Yes — the same federal AED 2 million threshold applies. Tax treatment is identical across the UAE.",
+      "Yes, the same federal AED 2 million threshold applies. Tax treatment is identical across the UAE.",
   },
 ];
 
@@ -52,21 +52,21 @@ export default function RakInvestPage() {
           Ras Al Khaimah Real Estate Investment
         </h1>
         <p className="mt-4 text-lg text-ink-muted">
-          Lower entry point, thinner resale market — what that trade-off means in practice.
+          Lower entry point, thinner resale market, what that trade-off means in practice.
         </p>
 
         <section className="mt-12">
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">The real trade-off</h2>
           <p className="mt-4 text-ink-muted">
             RAK can look attractive on price alone. The decision only holds if you are comfortable with less
-            liquidity and a smaller developer set — not if you need Dubai-style exit options.
+            liquidity and a smaller developer set, not if you need Dubai-style exit options.
           </p>
         </section>
 
         <section className="mt-12">
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Who it suits</h2>
           <p className="mt-4 text-ink-muted">
-            Investors with a longer horizon, lower ticket size, and appetite for tourism-led coastal growth —
+            Investors with a longer horizon, lower ticket size, and appetite for tourism-led coastal growth , 
             after Dubai (or instead of it) only when the brief actually fits.
           </p>
         </section>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import { investLocations } from "@/content/invest-locations";
 
-/** Gallery half starts here — hard cut from cinema to stark white. */
+/** Gallery half starts here, hard cut from cinema to stark white. */
 export default function Invest() {
   return (
     <section
@@ -20,7 +20,7 @@ export default function Invest() {
             Different rules.
           </h2>
           <p className="mt-6 max-w-md text-base leading-relaxed text-ink-muted sm:text-lg">
-            Dubai carries the deal flow. Abu Dhabi and Ras Al Khaimah are regional context — honest, not hyped.
+            Dubai carries the deal flow. Abu Dhabi and Ras Al Khaimah are regional context: honest, not hyped.
           </p>
         </RevealOnScroll>
 

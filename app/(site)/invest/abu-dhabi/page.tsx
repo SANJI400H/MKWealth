@@ -9,7 +9,7 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = pageMetadata({
   title: "Abu Dhabi Real Estate Investment vs. Dubai | Morgan Kaiser",
   description:
-    "How Abu Dhabi off-plan real estate investment compares to Dubai for foreign buyers — ownership rules, yields, liquidity, and who each market actually suits.",
+    "How Abu Dhabi off-plan real estate investment compares to Dubai for foreign buyers, ownership rules, yields, liquidity, and who each market actually suits.",
   path: "/invest/abu-dhabi",
 });
 
@@ -27,12 +27,12 @@ const faqItems = [
   {
     question: "What are typical rental yields in Abu Dhabi?",
     answer:
-      "Gross rental yields in Abu Dhabi's investment zones generally run in the 5–7% range, somewhat lower on average than Dubai's broader range.",
+      "Gross rental yields in Abu Dhabi's investment zones generally run in the 5 to 7% range, somewhat lower on average than Dubai's broader range.",
   },
   {
     question: "Does Abu Dhabi property qualify for the UAE Golden Visa?",
     answer:
-      "Yes — the AED 2 million federal investment threshold applies to qualifying real estate anywhere in the UAE, including Abu Dhabi.",
+      "Yes, the AED 2 million federal investment threshold applies to qualifying real estate anywhere in the UAE, including Abu Dhabi.",
   },
 ];
 
@@ -52,7 +52,7 @@ export default function AbuDhabiInvestPage() {
           Abu Dhabi Real Estate Investment
         </h1>
         <p className="mt-4 text-lg text-ink-muted">
-          Covered as regional context against Dubai — useful for comparison, not presented as equal day-to-day
+          Covered as regional context against Dubai, useful for comparison, not presented as equal day-to-day
           deal flow.
         </p>
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import WhatsAppLink from "@/components/ui/WhatsAppLink";
 import BookMeetingLink from "@/components/ui/BookMeetingLink";
+import BrandLogo from "@/components/ui/BrandLogo";
 import SocialIcons from "@/components/ui/SocialIcons";
 import { siteConfig } from "@/lib/site-config";
 
@@ -9,7 +10,7 @@ export default function SiteFooter() {
     <footer className="border-t border-line bg-paper py-14 sm:py-16">
       <div className="mx-auto flex max-w-content flex-col gap-10 px-5 sm:px-8 md:flex-row md:justify-between">
         <div>
-          <p className="font-display text-lg font-bold text-gold">{siteConfig.name}</p>
+          <BrandLogo size="footer" />
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink-muted">
             Off-plan investment advisor · Dubai · Huspy partner agent
           </p>

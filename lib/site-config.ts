@@ -8,10 +8,12 @@ export const siteConfig = {
   company: "Huspy",
   siteUrl,
   locale: "en-AE",
-  /** Digits only, country code first — used by wa.me links. */
+  /** Digits only, country code first, used by wa.me links. */
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "971585300329",
-  /** Calendly (or similar) URL for every Book a Meeting CTA. */
-  calendlyUrl: process.env.NEXT_PUBLIC_CALENDLY_URL ?? "https://calendly.com/morgan-kaiser/consultation",
+  /** Booking URL for every Book a Meeting CTA (Google Appointment Schedule). */
+  calendlyUrl:
+    process.env.NEXT_PUBLIC_CALENDLY_URL ??
+    "https://calendar.google.com/appointments/schedules/AcZssZ0vtVHhOcyykoym8P1KW-rviUeV_rLkzpQqcYkVSSE_VyYK3Pa1B1i6SeN_dzaFQ4Q8qw0YDInL",
   metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "",
   social: {
     instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "https://www.instagram.com/_morgankaiser_/",
