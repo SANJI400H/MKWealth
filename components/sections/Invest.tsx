@@ -20,7 +20,11 @@ export default function Invest() {
             Different rules.
           </h2>
           <p className="mt-6 max-w-md text-base leading-relaxed text-ink-muted sm:text-lg">
-            Dubai carries the deal flow. Abu Dhabi and Ras Al Khaimah are regional context: honest, not hyped.
+            Market intelligence pillars — not brochures. Dubai leads deal flow; Abu Dhabi and Ras Al Khaimah are
+            honest regional context.{" "}
+            <Link href="/invest" className="font-medium text-ink underline-offset-4 hover:text-gold hover:underline">
+              Explore All Markets →
+            </Link>
           </p>
         </RevealOnScroll>
 

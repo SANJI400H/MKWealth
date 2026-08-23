@@ -1,5 +1,26 @@
+/**
+ * Expanded CRM-ready lead model.
+ * Not all fields are required on every form — progressive collection.
+ */
+
 const PHONE_PATTERN = /^\+?[1-9]\d{7,14}$/;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export const LEAD_SOURCES = [
+  "guide",
+  "guide-gate", // legacy alias
+  "calculator",
+  "analyse",
+  "strategy-session",
+  "insight",
+  "whatsapp",
+  "newsletter",
+  "service",
+  "invest",
+  "contact",
+] as const;
+
+export type LeadSource = (typeof LEAD_SOURCES)[number];
 
 export type LeadInput = {
   name?: unknown;
@@ -7,6 +28,23 @@ export type LeadInput = {
   email?: unknown;
   source?: unknown;
   intent?: unknown;
+  country?: unknown;
+  propertyName?: unknown;
+  purchasePrice?: unknown;
+  expectedRent?: unknown;
+  marketType?: unknown;
+  objective?: unknown;
+  timeline?: unknown;
+  notes?: unknown;
+  budgetRange?: unknown;
+  propertyType?: unknown;
+  market?: unknown;
+  financing?: unknown;
+  existingUaeProperty?: unknown;
+  contentSource?: unknown;
+  calculatorSnapshot?: unknown;
+  attribution?: unknown;
+  leadScoreHint?: unknown;
 };
 
 export type LeadPayload = {
@@ -15,11 +53,38 @@ export type LeadPayload = {
   email: string;
   source: string;
   intent: string;
+  country: string;
+  propertyName: string;
+  purchasePrice: string;
+  expectedRent: string;
+  marketType: string;
+  objective: string;
+  timeline: string;
+  notes: string;
+  budgetRange: string;
+  propertyType: string;
+  market: string;
+  financing: string;
+  existingUaeProperty: string;
+  contentSource: string;
+  calculatorSnapshot: string;
+  attribution: string;
+  leadScoreHint: string;
   submittedAt: string;
 };
 
 function asTrimmedString(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
+}
+
+function asJsonString(value: unknown) {
+  if (value == null || value === "") return "";
+  if (typeof value === "string") return value;
+  try {
+    return JSON.stringify(value);
+  } catch {
+    return "";
+  }
 }
 
 export function parseLead(body: LeadInput):
@@ -28,7 +93,7 @@ export function parseLead(body: LeadInput):
   const name = asTrimmedString(body.name);
   const phone = asTrimmedString(body.phone).replace(/[\s()-]/g, "");
   const email = asTrimmedString(body.email);
-  const source = asTrimmedString(body.source) || "guide-gate";
+  const source = asTrimmedString(body.source) || "guide";
   const intent = asTrimmedString(body.intent);
 
   if (!name || name.length < 2) {
@@ -53,6 +118,23 @@ export function parseLead(body: LeadInput):
       email,
       source,
       intent,
+      country: asTrimmedString(body.country),
+      propertyName: asTrimmedString(body.propertyName),
+      purchasePrice: asTrimmedString(body.purchasePrice),
+      expectedRent: asTrimmedString(body.expectedRent),
+      marketType: asTrimmedString(body.marketType),
+      objective: asTrimmedString(body.objective),
+      timeline: asTrimmedString(body.timeline),
+      notes: asTrimmedString(body.notes),
+      budgetRange: asTrimmedString(body.budgetRange),
+      propertyType: asTrimmedString(body.propertyType),
+      market: asTrimmedString(body.market),
+      financing: asTrimmedString(body.financing),
+      existingUaeProperty: asTrimmedString(body.existingUaeProperty),
+      contentSource: asTrimmedString(body.contentSource),
+      calculatorSnapshot: asJsonString(body.calculatorSnapshot),
+      attribution: asJsonString(body.attribution),
+      leadScoreHint: asTrimmedString(body.leadScoreHint),
       submittedAt: new Date().toISOString(),
     },
   };
@@ -66,16 +148,9 @@ async function notifyByEmail(payload: LeadPayload) {
   if (!apiKey || !to) return false;
 
   const subject = `New lead (${payload.source}${payload.intent ? ` · ${payload.intent}` : ""})`;
-  const text = [
-    `Name: ${payload.name}`,
-    `Phone: ${payload.phone}`,
-    `Email: ${payload.email}`,
-    `Source: ${payload.source}`,
-    payload.intent ? `Intent: ${payload.intent}` : null,
-    `Submitted: ${payload.submittedAt}`,
-  ]
-    .filter(Boolean)
-    .join("\n");
+  const lines = Object.entries(payload)
+    .filter(([, v]) => v)
+    .map(([k, v]) => `${k}: ${v}`);
 
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -87,7 +162,7 @@ async function notifyByEmail(payload: LeadPayload) {
       from,
       to: [to],
       subject,
-      text,
+      text: lines.join("\n"),
     }),
   });
 
@@ -103,6 +178,9 @@ async function notifyByEmail(payload: LeadPayload) {
 export async function submitLead(body: LeadInput) {
   const parsed = parseLead(body);
   if (!parsed.ok) return parsed;
+
+  // Hook point for future CRM webhook
+  // await forwardToCrm(parsed.payload)
 
   const emailed = await notifyByEmail(parsed.payload);
   if (!emailed) {

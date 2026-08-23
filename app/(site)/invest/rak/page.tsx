@@ -32,7 +32,7 @@ const faqItems = [
   {
     question: "Does RAK property qualify for the Golden Visa?",
     answer:
-      "Yes, the same federal AED 2 million threshold applies. Tax treatment is identical across the UAE.",
+      "Yes, the same commonly cited federal investment threshold may apply, subject to current rules. Tax treatment for typical individual property investment inside the UAE is often discussed separately from home-country tax obligations — confirm both.",
   },
 ];
 

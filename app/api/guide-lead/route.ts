@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     name: body.name,
     phone: body.phone,
     email: body.email,
-    source: "guide-gate",
+    source: "guide",
     intent: body.intent,
   });
 

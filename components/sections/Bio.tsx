@@ -3,6 +3,7 @@
 import Link from "next/link";
 import CinemaPlayScene from "@/components/motion/CinemaPlayScene";
 import { videoActs } from "@/content/videos";
+import { siteConfig } from "@/lib/site-config";
 
 export default function Bio() {
   const act = videoActs.act2;
@@ -18,7 +19,7 @@ export default function Bio() {
         objectPosition="center center"
         priority
       >
-        <p className="eyebrow">About</p>
+        <p className="eyebrow">Morgan</p>
         <h2 className="display mt-3 text-[1.75rem] leading-[1.08] text-ink sm:mt-5 sm:text-5xl lg:text-6xl">
           Numbers first.
           <br />
@@ -26,15 +27,16 @@ export default function Bio() {
         </h2>
         <div className="mt-4 max-w-lg space-y-3 text-[13px] leading-relaxed text-ink-muted sm:mt-7 sm:space-y-4 sm:text-lg">
           <p>
-            Morgan Kaiser advises foreign investors on Dubai off-plan: unit selection, payment structure,
-            financing, and handover. As a Huspy partner agent, brokerage and mortgage sit under one roof.
+            {siteConfig.name} advises international investors on UAE property strategy: objective, capital, risk,
+            and structure — then acquisition across off-plan and secondary where the brief fits.
           </p>
           <p>
-            Most clients buy from abroad. The first conversation is cash flow and risk, not a sales suite.
+            As a {siteConfig.company} {siteConfig.companyRole}, brokerage and mortgage coordination can sit under one
+            roof when financing is part of the plan.
           </p>
         </div>
         <Link href="/about" className="btn-ghost-dark mt-5 sm:mt-10">
-          Full biography
+          Explore Morgan →
         </Link>
       </CinemaPlayScene>
     </section>

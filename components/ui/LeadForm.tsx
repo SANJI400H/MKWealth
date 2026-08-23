@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-
-export type LeadSource = "guide-gate" | "service" | "invest" | "contact";
+import { getAttribution, trackEvent } from "@/lib/analytics";
+import type { LeadSource } from "@/lib/leads";
 
 interface LeadFormProps {
   source?: LeadSource;
@@ -27,7 +27,7 @@ const fieldClass =
   "rounded-md border border-ink/10 bg-paper px-4 py-3 text-ink placeholder:text-ink-muted/60 focus:border-gold focus:outline-none";
 
 export default function LeadForm({
-  source = "guide-gate",
+  source = "guide",
   intent,
   submitLabel = "Submit",
   submittingLabel = "Sending…",
@@ -52,7 +52,13 @@ export default function LeadForm({
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, source, intent }),
+        body: JSON.stringify({
+          ...form,
+          source,
+          intent,
+          attribution: getAttribution(),
+          leadScoreHint: source === "analyse" || source === "strategy-session" ? "high" : "base",
+        }),
       });
 
       if (!response.ok) {
@@ -62,6 +68,7 @@ export default function LeadForm({
         return;
       }
 
+      trackEvent("guide_lead", { content_name: source, content_category: intent ?? source });
       window.fbq?.("track", "Lead", { content_name: source, content_category: intent ?? source });
       setForm(empty);
       setStatus("idle");

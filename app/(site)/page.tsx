@@ -4,19 +4,20 @@ import Hero from "@/components/sections/Hero";
 import Bio from "@/components/sections/Bio";
 import Services from "@/components/sections/Services";
 import Invest from "@/components/sections/Invest";
-import Testimonials from "@/components/sections/Testimonials";
+import InvestorIntelligence from "@/components/sections/InvestorIntelligence";
+import Proof from "@/components/sections/Proof";
 import Contact from "@/components/sections/Contact";
 import SiteFooter from "@/components/sections/SiteFooter";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Dubai Off-Plan Property Investment Advisor | Morgan Kaiser",
+  title: "Dubai Real Estate Investment Advisor | Morgan Kaiser",
   description:
-    "Morgan Kaiser, Dubai off-plan property investment advisor and Huspy partner agent, helps foreign investors buy off-plan property with Golden Visa eligibility.",
+    "Morgan Kaiser helps international investors evaluate and acquire UAE property with numbers-first underwriting across off-plan and secondary markets.",
   path: "/",
 });
 
-/** Hero (walk-1) → About (walk-2) → Services (walk-3) → Invest → Testimonials → Contact */
+/** Cinema → Invest → Intelligence → Proof → Conversion */
 export default function HomePage() {
   return (
     <main>
@@ -27,7 +28,8 @@ export default function HomePage() {
       </CinemaController>
       <div className="relative bg-paper">
         <Invest />
-        <Testimonials />
+        <InvestorIntelligence />
+        <Proof />
         <Contact />
         <SiteFooter />
       </div>

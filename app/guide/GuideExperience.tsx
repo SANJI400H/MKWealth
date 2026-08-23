@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
-import { Check, ChevronLeft, ChevronRight, Download, FileText, Lock, Play } from "lucide-react";
+import { Check, ChevronLeft, ChevronRight, Download, FileText, Play } from "lucide-react";
 import GateForm from "./GateForm";
 import {
   guideCategories,
@@ -10,6 +10,7 @@ import {
   type GuideCategoryId,
   type GuideVideo,
 } from "@/content/guide-library";
+import { trackEvent } from "@/lib/analytics";
 
 type Step = "gate" | "categories" | "library";
 
@@ -121,18 +122,20 @@ export default function GuideExperience() {
     return videos.filter((video) => ids.has(video.id)).length;
   }, [videos, watchedIds, downloadedIds]);
 
-  const reportsUnlocked = engagementCount >= 1;
-
   const toggleCategory = (id: GuideCategoryId) => {
     setSelected((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]));
   };
 
   const markWatched = (id: string) => {
     setWatchedIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+    trackEvent("watch_video", { video_id: id, threshold: "75pct" });
+    trackEvent("lead_score_signal", { signal: "video_75", video_id: id });
   };
 
   const markDownloaded = (id: string) => {
     setDownloadedIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+    trackEvent("guide_download", { asset: "video", id });
+    trackEvent("lead_score_signal", { signal: "video_download", video_id: id });
   };
 
   if (step === "gate") {
@@ -142,7 +145,8 @@ export default function GuideExperience() {
           Your Dubai off-plan investment guide is ready.
         </h1>
         <p className="max-w-sm text-ink-muted">
-          Enter your details, choose your topics, then unlock videos and PDF reports one step at a time.
+          Enter your details to unlock your topic videos and PDF briefings. Engagement helps us prioritise follow-up —
+          it does not gate the files.
         </p>
         <GateForm onUnlock={() => setStep("categories")} />
       </div>
@@ -156,8 +160,7 @@ export default function GuideExperience() {
           <p className="eyebrow">Step 2</p>
           <h1 className="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">What do you want to cover?</h1>
           <p className="mx-auto mt-3 max-w-md text-ink-muted">
-            Pick one or more topics. We&apos;ll show matching videos first, then unlock PDF reports after you watch
-            or download at least one.
+            Pick one or more topics. Matching videos and PDF reports are available immediately after this step.
           </p>
         </div>
 
@@ -207,9 +210,9 @@ export default function GuideExperience() {
     <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-12 px-6 py-12">
       <div className="text-center">
         <p className="eyebrow">Your library</p>
-        <h1 className="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">Videos, then reports</h1>
+        <h1 className="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">Your videos & reports</h1>
         <p className="mx-auto mt-3 max-w-lg text-ink-muted">
-          Watch or download at least one video to unlock the PDF reports for your selected topics.
+          Watch or download videos anytime. PDF briefings for your topics are unlocked with your registration.
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-2">
           {selected.map((id) => {
@@ -238,8 +241,7 @@ export default function GuideExperience() {
                 Video {videoIndex + 1} of {videos.length}
               </p>
               <p>
-                {engagementCount} engaged ·{" "}
-                {reportsUnlocked ? "Reports unlocked" : "Engage 1 video to unlock reports"}
+                {engagementCount} video{engagementCount === 1 ? "" : "s"} engaged · Reports unlocked
               </p>
             </div>
 
@@ -283,26 +285,13 @@ export default function GuideExperience() {
             <p className="eyebrow">PDF reports</p>
             <h2 className="mt-2 font-display text-2xl font-bold text-ink">Downloadable briefings</h2>
           </div>
-          {!reportsUnlocked ? (
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 px-3 py-1 text-xs text-ink-muted">
-              <Lock size={13} strokeWidth={1.75} aria-hidden />
-              Locked
-            </span>
-          ) : (
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 px-3 py-1 text-xs text-ink">
-              <Check size={13} strokeWidth={1.75} aria-hidden />
-              Unlocked
-            </span>
-          )}
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 px-3 py-1 text-xs text-ink">
+            <Check size={13} strokeWidth={1.75} aria-hidden />
+            Unlocked
+          </span>
         </div>
 
-        {!reportsUnlocked ? (
-          <p className="mt-4 max-w-lg text-sm text-ink-muted">
-            Watch at least 75% of a video, or download one, to unlock the reports for your topics.
-          </p>
-        ) : null}
-
-        <ul className={`mt-6 grid gap-3 ${reportsUnlocked ? "" : "pointer-events-none opacity-45"}`}>
+        <ul className="mt-6 grid gap-3">
           {reports.map((report) => (
             <li key={report.id} className="flex flex-col gap-3 border border-ink/10 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-start gap-3">
@@ -312,21 +301,18 @@ export default function GuideExperience() {
                   <p className="mt-1 text-sm text-ink-muted">{report.summary}</p>
                 </div>
               </div>
-              {reportsUnlocked ? (
-                <a
-                  href={report.href}
-                  download={report.fileName}
-                  className="btn-ghost-dark inline-flex items-center justify-center gap-2 whitespace-nowrap"
-                >
-                  <Download size={15} strokeWidth={1.5} aria-hidden />
-                  Download PDF
-                </a>
-              ) : (
-                <span className="inline-flex items-center gap-2 text-sm text-ink-muted">
-                  <Lock size={14} strokeWidth={1.75} aria-hidden />
-                  Locked
-                </span>
-              )}
+              <a
+                href={report.href}
+                download={report.fileName}
+                onClick={() => {
+                  trackEvent("guide_download", { asset: "pdf", id: report.id });
+                  trackEvent("lead_score_signal", { signal: "pdf_download", report_id: report.id });
+                }}
+                className="btn-ghost-dark inline-flex items-center justify-center gap-2 whitespace-nowrap"
+              >
+                <Download size={15} strokeWidth={1.5} aria-hidden />
+                Download PDF
+              </a>
             </li>
           ))}
         </ul>

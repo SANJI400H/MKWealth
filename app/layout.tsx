@@ -3,6 +3,8 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import JsonLd from "@/components/seo/JsonLd";
 import MetaPixel from "@/components/ui/MetaPixel";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import AttributionCapture from "@/components/analytics/AttributionCapture";
 import { personSchema, realEstateAgentSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
 
@@ -15,9 +17,9 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
-  title: `${siteConfig.name} | Dubai Off-Plan Property Investment Advisor`,
+  title: `${siteConfig.name} | ${siteConfig.role}`,
   description:
-    "Morgan Kaiser is a Dubai-based off-plan real estate investment advisor and Huspy partner agent helping foreign investors buy off-plan property in Dubai with tax-free returns and Golden Visa eligibility.",
+    "Morgan Kaiser helps international investors evaluate and acquire UAE property using investment mathematics, market context, and portfolio objectives — across off-plan and secondary markets.",
   icons: {
     icon: [{ url: "/images/mk-logo.png", type: "image/png" }],
     apple: [{ url: "/images/mk-logo.png" }],
@@ -30,7 +32,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-body bg-paper text-ink antialiased">
         <JsonLd data={personSchema()} />
         <JsonLd data={realEstateAgentSchema()} />
+        <GoogleAnalytics />
         <MetaPixel />
+        <AttributionCapture />
         {children}
       </body>
     </html>

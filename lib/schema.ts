@@ -1,3 +1,4 @@
+import type { InsightArticle } from "@/content/insights";
 import { absoluteUrl, siteConfig } from "./site-config";
 
 export function personSchema() {
@@ -82,4 +83,42 @@ export function breadcrumbListSchema(items: BreadcrumbItem[]) {
       item: absoluteUrl(item.path),
     })),
   };
+}
+
+export function articleSchema(article: InsightArticle) {
+  const data: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.excerpt,
+    datePublished: article.publishedAt,
+    dateModified: article.reviewedAt,
+    author: {
+      "@type": "Person",
+      name: article.author,
+      url: absoluteUrl("/about"),
+    },
+    publisher: {
+      "@type": "Person",
+      name: siteConfig.name,
+      url: siteConfig.siteUrl,
+    },
+    mainEntityOfPage: absoluteUrl(`/insights/${article.slug}`),
+  };
+
+  if (article.heroImage) {
+    data.image = absoluteUrl(article.heroImage);
+  }
+
+  if (article.youtubeId) {
+    data.video = {
+      "@type": "VideoObject",
+      name: article.title,
+      description: article.excerpt,
+      embedUrl: `https://www.youtube.com/embed/${article.youtubeId}`,
+      uploadDate: article.publishedAt,
+    };
+  }
+
+  return data;
 }

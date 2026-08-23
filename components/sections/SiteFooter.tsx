@@ -3,19 +3,22 @@ import WhatsAppLink from "@/components/ui/WhatsAppLink";
 import BookMeetingLink from "@/components/ui/BookMeetingLink";
 import BrandLogo from "@/components/ui/BrandLogo";
 import SocialIcons from "@/components/ui/SocialIcons";
+import { footerNav } from "@/content/navigation";
 import { siteConfig } from "@/lib/site-config";
 
 export default function SiteFooter() {
   return (
     <footer className="border-t border-line bg-paper py-14 sm:py-16">
-      <div className="mx-auto flex max-w-content flex-col gap-10 px-5 sm:px-8 md:flex-row md:justify-between">
-        <div>
+      <div className="mx-auto flex max-w-content flex-col gap-10 px-5 sm:px-8 lg:flex-row lg:justify-between">
+        <div className="max-w-sm">
           <BrandLogo size="footer" />
-          <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink-muted">
-            Off-plan investment advisor · Dubai · Huspy partner agent
+          <p className="mt-3 text-sm font-medium text-ink">{siteConfig.name}</p>
+          <p className="mt-1 text-sm leading-relaxed text-ink-muted">{siteConfig.role}</p>
+          <p className="mt-1 text-sm text-ink-muted">
+            {siteConfig.company} {siteConfig.companyRole} · {siteConfig.location}
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <BookMeetingLink className="btn-primary" />
+            <BookMeetingLink href="/strategy-session" className="btn-primary" />
             <WhatsAppLink
               message="Hi Morgan, I found your site and would like to connect."
               className="btn-ghost-dark"
@@ -29,59 +32,34 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 text-sm sm:grid-cols-2">
-          <div>
-            <p className="eyebrow">Site</p>
-            <ul className="mt-4 space-y-2.5 text-ink-muted">
-              <li>
-                <Link href="/#about" className="hover:text-ink">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/#services" className="hover:text-ink">
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link href="/#invest" className="hover:text-ink">
-                  Invest
-                </Link>
-              </li>
-              <li>
-                <Link href="/#contact" className="hover:text-ink">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="eyebrow">Invest</p>
-            <ul className="mt-4 space-y-2.5 text-ink-muted">
-              <li>
-                <Link href="/invest/dubai" className="hover:text-ink">
-                  Dubai
-                </Link>
-              </li>
-              <li>
-                <Link href="/invest/abu-dhabi" className="hover:text-ink">
-                  Abu Dhabi
-                </Link>
-              </li>
-              <li>
-                <Link href="/invest/rak" className="hover:text-ink">
-                  Ras Al Khaimah
-                </Link>
-              </li>
-            </ul>
-          </div>
+        <div className="grid grid-cols-2 gap-8 text-sm sm:grid-cols-3 lg:grid-cols-5">
+          {footerNav.map((column) => (
+            <div key={column.title}>
+              <p className="eyebrow">{column.title}</p>
+              <ul className="mt-4 space-y-2.5 text-ink-muted">
+                {column.links.map((link) => (
+                  <li key={link.href + link.label}>
+                    <Link href={link.href} className="hover:text-ink">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="mx-auto mt-12 max-w-content px-5 text-xs text-ink-muted sm:px-8">
+      <div className="mx-auto mt-12 max-w-content space-y-2 px-5 text-xs text-ink-muted sm:px-8">
         <p>
-          © {new Date().getFullYear()} {siteConfig.name}. Services in partnership with Huspy.
+          © {new Date().getFullYear()} {siteConfig.name}. Services in partnership with {siteConfig.company}.
+        </p>
+        <p>
+          Educational content only. Not legal, tax, or financial advice. See{" "}
+          <Link href="/disclaimer" className="underline-offset-2 hover:underline">
+            Disclaimer
+          </Link>
+          .
         </p>
       </div>
     </footer>

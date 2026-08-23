@@ -1,11 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useReducedMotion } from "framer-motion";
 import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 import CinemaPlayScene from "@/components/motion/CinemaPlayScene";
 import WhatsAppLink from "@/components/ui/WhatsAppLink";
-import { services, type ServiceItem } from "@/content/services";
+import { homepageServices, type ServiceItem } from "@/content/services";
 import { videoActs } from "@/content/videos";
 
 const STEP_MS = 1000;
@@ -232,13 +233,16 @@ export default function Services() {
         objectPosition="center center"
         priority
       >
-        <p className="eyebrow">Services</p>
+        <p className="eyebrow">Work With Morgan</p>
         <h2 className="display mt-2 max-w-md text-[1.75rem] leading-[1.08] text-ink sm:mt-5 sm:text-5xl">
           Around the deal,
           <br />
           not just the unit.
         </h2>
-        <ServiceCarousel items={services} />
+        <ServiceCarousel items={homepageServices} />
+        <Link href="/work-with-morgan" className="btn-ghost-dark mt-6 sm:mt-8">
+          Explore Services →
+        </Link>
       </CinemaPlayScene>
     </section>
   );

@@ -27,12 +27,12 @@ const faqItems = [
   {
     question: "What are typical rental yields in Abu Dhabi?",
     answer:
-      "Gross rental yields in Abu Dhabi's investment zones generally run in the 5 to 7% range, somewhat lower on average than Dubai's broader range.",
+      "Gross rental yields in Abu Dhabi's investment zones are often discussed in a somewhat narrower illustrative band than Dubai's wider marketing range. Treat any citywide figure as a starting filter only — underwrite the specific asset. See the regulatory notes on this site for dated, qualified framing.",
   },
   {
     question: "Does Abu Dhabi property qualify for the UAE Golden Visa?",
     answer:
-      "Yes, the AED 2 million federal investment threshold applies to qualifying real estate anywhere in the UAE, including Abu Dhabi.",
+      "Property investment at or above the commonly cited federal threshold may qualify, subject to current authority rules. Confirm requirements at the time of application — this site does not treat visa eligibility as guaranteed.",
   },
 ];
 
