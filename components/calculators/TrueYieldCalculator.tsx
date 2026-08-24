@@ -6,7 +6,7 @@ import { trackEvent } from "@/lib/analytics";
 import { siteConfig } from "@/lib/site-config";
 
 const fieldClass =
-  "w-full rounded-md border border-ink/10 bg-paper px-3 py-2.5 text-ink focus:border-gold focus:outline-none";
+  "w-full rounded-md border border-ink/10 bg-paper px-3 py-2.5 text-ink focus:border-maroon focus:outline-none";
 
 function num(value: string) {
   const n = Number(String(value).replace(/,/g, ""));
@@ -207,7 +207,7 @@ export default function TrueYieldCalculator() {
         </Link>
         <p className="text-xs text-ink-muted">
           Or{" "}
-          <Link href="/work-with-morgan" className="text-gold hover:underline">
+          <Link href="/work-with-morgan" className="text-maroon hover:underline">
             {siteConfig.cta.strategySession.toLowerCase()}
           </Link>
           . Illustrative only — not advice.

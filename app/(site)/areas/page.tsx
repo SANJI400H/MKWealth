@@ -41,7 +41,7 @@ export default function AreasIndexPage() {
                 {group.map((a) => (
                   <li key={a.slug} className="border-b border-line pb-5">
                     <Link href={`/areas/${a.slug}`} className="group block">
-                      <h3 className="font-display text-xl font-bold text-ink group-hover:text-gold">{a.name}</h3>
+                      <h3 className="font-display text-xl font-bold text-ink group-hover:text-maroon">{a.name}</h3>
                       <p className="mt-2 text-sm text-ink-muted">{a.tagline}</p>
                     </Link>
                   </li>

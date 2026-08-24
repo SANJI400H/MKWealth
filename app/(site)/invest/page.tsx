@@ -40,7 +40,7 @@ export default function InvestHubPage() {
                   />
                 </div>
                 <p className="eyebrow mt-5">{location.tag}</p>
-                <h2 className="mt-2 font-display text-2xl font-bold text-ink transition group-hover:text-gold sm:text-3xl">
+                <h2 className="mt-2 font-display text-2xl font-bold text-ink transition group-hover:text-maroon sm:text-3xl">
                   {location.name}
                 </h2>
                 <p className="mt-2 text-ink-muted">{location.summary}</p>

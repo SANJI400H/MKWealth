@@ -48,7 +48,7 @@ export default function TheRealNumbersPage() {
                     <p className="mt-2 text-xs text-ink-muted">{e.caveat}</p>
                     <p className="mt-2 text-xs text-ink-muted">Source: {e.source}</p>
                     {e.relatedHref ? (
-                      <Link href={e.relatedHref} className="mt-2 inline-block text-xs font-semibold text-gold hover:underline">
+                      <Link href={e.relatedHref} className="mt-2 inline-block text-xs font-semibold text-maroon hover:underline">
                         Related →
                       </Link>
                     ) : null}
@@ -63,11 +63,11 @@ export default function TheRealNumbersPage() {
 
         <p className="mt-10 text-sm text-ink-muted">
           Prefer tools?{" "}
-          <Link href="/calculators/true-yield" className="font-semibold text-gold hover:underline">
+          <Link href="/calculators/true-yield" className="font-semibold text-maroon hover:underline">
             True Yield
           </Link>
           {" · "}
-          <Link href="/calculators/purchase-cost" className="font-semibold text-gold hover:underline">
+          <Link href="/calculators/purchase-cost" className="font-semibold text-maroon hover:underline">
             Purchase cost
           </Link>
         </p>

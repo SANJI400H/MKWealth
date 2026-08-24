@@ -71,7 +71,7 @@ export default function SectionNavigation({
         {cta ? (
           <a
             href={cta.href}
-            className="ml-auto shrink-0 px-3 py-1.5 text-[12px] font-semibold text-gold hover:underline"
+            className="ml-auto shrink-0 px-3 py-1.5 text-[12px] font-semibold text-maroon hover:underline"
           >
             {cta.label}
           </a>

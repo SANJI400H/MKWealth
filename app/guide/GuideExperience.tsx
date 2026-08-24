@@ -226,7 +226,7 @@ export default function GuideExperience() {
           <button
             type="button"
             onClick={() => setStep("categories")}
-            className="text-xs font-medium text-gold underline-offset-2 hover:underline"
+            className="text-xs font-medium text-maroon underline-offset-2 hover:underline"
           >
             Edit topics
           </button>
@@ -295,7 +295,7 @@ export default function GuideExperience() {
           {reports.map((report) => (
             <li key={report.id} className="flex flex-col gap-3 border border-ink/10 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-start gap-3">
-                <FileText size={18} strokeWidth={1.5} className="mt-0.5 shrink-0 text-gold" aria-hidden />
+                <FileText size={18} strokeWidth={1.5} className="mt-0.5 shrink-0 text-maroon" aria-hidden />
                 <div>
                   <p className="font-display text-base font-bold text-ink">{report.title}</p>
                   <p className="mt-1 text-sm text-ink-muted">{report.summary}</p>

@@ -16,7 +16,7 @@ export interface IntelligenceVideo {
 export const intelligenceVideos: IntelligenceVideo[] = [
   {
     slug: "numbers-first-positioning",
-    title: "Numbers first — how Morgan frames the work",
+    title: "Vision first — how Morgan frames the work",
     status: "published",
     category: "morgan",
     description: "Cinema introduction clip used on the homepage — positioning before inventory.",

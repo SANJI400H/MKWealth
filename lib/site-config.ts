@@ -39,7 +39,7 @@ export const siteConfig = {
   },
   defaultOgImage: "/images/og-default.jpg",
   cta: {
-    strategySession: "Book Strategy Session",
+    strategySession: "Book Your 30-Minute Strategy Session",
     analyse: "Analyse My Investment",
     analyseSubmit: "Ask Morgan to Analyse This Investment",
     insights: "Explore Intelligence",

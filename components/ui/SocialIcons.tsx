@@ -96,7 +96,7 @@ export default function SocialIcons({ className = "" }: { className?: string }) 
             target="_blank"
             rel="noopener noreferrer"
             aria-label={icon.label}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink-muted transition-colors hover:border-gold/40 hover:text-gold"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink-muted transition-colors hover:border-maroon/40 hover:text-maroon"
           >
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden>
               {icon.svg}

@@ -33,7 +33,7 @@ export const primaryNav: NavGroup[] = [
         links: [
           { label: "Overview", href: "/about", description: "Who Morgan is" },
           { label: "Story", href: "/about#story", description: "Background and path" },
-          { label: "Investment Philosophy", href: "/about#philosophy", description: "Numbers first" },
+          { label: "Investment Philosophy", href: "/about#philosophy", description: "Vision · Strategy · Property" },
           { label: "Investment Methodology", href: "/about#methodology", description: "How deals are evaluated" },
           { label: "Credentials & Recognition", href: "/about#credentials", description: "Verified proof only" },
           { label: "Media & Appearances", href: "/about#media", description: "When available" },
@@ -160,7 +160,7 @@ export const primaryNav: NavGroup[] = [
           {
             label: "Book Strategy Session",
             href: "/strategy-session",
-            description: "High-intent conversation",
+            description: "30-minute property strategy conversation",
           },
         ],
       },

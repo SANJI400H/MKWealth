@@ -99,7 +99,7 @@ export default function AreaPage({ params }: Props) {
 
         <p className="mt-12 text-ink-muted">
           Market pillar:{" "}
-          <Link href={area.relatedMarketHref} className="font-semibold text-gold hover:underline">
+          <Link href={area.relatedMarketHref} className="font-semibold text-maroon hover:underline">
             Open market page
           </Link>
           {area.relatedInsightSlugs?.length ? (
@@ -108,7 +108,7 @@ export default function AreaPage({ params }: Props) {
               {area.relatedInsightSlugs.map((slug, i) => (
                 <span key={slug}>
                   {i > 0 ? " · " : null}
-                  <Link href={`/insights/${slug}`} className="font-semibold text-gold hover:underline">
+                  <Link href={`/insights/${slug}`} className="font-semibold text-maroon hover:underline">
                     Related insight
                   </Link>
                 </span>

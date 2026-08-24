@@ -99,7 +99,7 @@ function DesktopMega({
                           >
                             <span
                               className={`block text-[13px] font-medium ${
-                                pathMatches(pathname, link.href) ? "text-gold" : "text-ink"
+                                pathMatches(pathname, link.href) ? "text-maroon" : "text-ink"
                               }`}
                             >
                               {link.label}
@@ -122,7 +122,7 @@ function DesktopMega({
                     </p>
                     <Link
                       href={group.featured.href}
-                      className="mt-3 block text-[13px] font-medium leading-snug text-ink hover:text-gold"
+                      className="mt-3 block text-[13px] font-medium leading-snug text-ink hover:text-maroon"
                       onClick={() => setOpen(false)}
                     >
                       {group.featured.title}
@@ -133,7 +133,7 @@ function DesktopMega({
               <div className="mt-4 border-t border-line pt-3">
                 <Link
                   href={group.href}
-                  className="text-[12px] font-semibold text-gold hover:underline"
+                  className="text-[12px] font-semibold text-maroon hover:underline"
                   onClick={() => setOpen(false)}
                 >
                   View all →
@@ -330,7 +330,9 @@ export default function SiteNav() {
         </nav>
 
         <div className="hidden lg:block">
-          <BookMeetingLink href="/strategy-session" className="btn-primary !px-5 !py-2.5 text-[12px]" />
+          <BookMeetingLink href="/strategy-session" className="btn-primary !px-5 !py-2.5 text-[12px]">
+            Book Strategy Session
+          </BookMeetingLink>
         </div>
 
         <button
@@ -370,7 +372,9 @@ export default function SiteNav() {
                   onNavigate={() => setOpen(false)}
                 />
               ))}
-              <BookMeetingLink href="/strategy-session" className="btn-primary mt-4 mb-3 w-full" />
+              <BookMeetingLink href="/strategy-session" className="btn-primary mt-4 mb-3 w-full">
+                Book Strategy Session
+              </BookMeetingLink>
             </nav>
           </motion.div>
         ) : null}

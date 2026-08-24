@@ -42,11 +42,11 @@ export default function VideosHubPage() {
 
         <p className="mt-14 text-sm text-ink-muted">
           Prefer numbers? Open{" "}
-          <Link href="/the-real-numbers" className="font-semibold text-gold hover:underline">
+          <Link href="/the-real-numbers" className="font-semibold text-maroon hover:underline">
             The Real Numbers
           </Link>{" "}
           or{" "}
-          <Link href="/calculators" className="font-semibold text-gold hover:underline">
+          <Link href="/calculators" className="font-semibold text-maroon hover:underline">
             calculators
           </Link>
           .

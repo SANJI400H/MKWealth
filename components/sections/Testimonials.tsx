@@ -82,7 +82,7 @@ export default function Testimonials() {
             <footer className="mt-8">
               <p className="font-display text-base font-bold text-ink">{testimonial.name}</p>
               <p className="mt-1 text-sm text-ink-muted">{testimonial.location}</p>
-              <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
+              <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-maroon">
                 {testimonial.result}
               </p>
             </footer>
@@ -105,7 +105,7 @@ export default function Testimonials() {
               <footer className="mt-8">
                 <p className="font-display text-base font-bold text-ink">{testimonial.name}</p>
                 <p className="mt-1 text-sm text-ink-muted">{testimonial.location}</p>
-                <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
+                <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-maroon">
                   {testimonial.result}
                 </p>
               </footer>

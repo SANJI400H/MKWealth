@@ -53,7 +53,7 @@ export default function InvestorIntelligence() {
             <RevealOnScroll key={entry.href} delayMs={i * 60}>
               <Link href={entry.href} className="group block border-t border-line pt-6">
                 <p className="eyebrow">{entry.eyebrow}</p>
-                <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-ink transition group-hover:text-gold sm:text-3xl">
+                <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-ink transition group-hover:text-maroon sm:text-3xl">
                   {entry.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-ink-muted sm:text-base">{entry.summary}</p>

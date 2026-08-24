@@ -35,15 +35,15 @@ export default function CaseStudiesIndexPage() {
             <p>No published case studies yet.</p>
             <p className="mt-3 text-sm">
               Meanwhile, explore{" "}
-              <Link href="/insights" className="text-gold hover:underline">
+              <Link href="/insights" className="text-maroon hover:underline">
                 insights
               </Link>
               , the{" "}
-              <Link href="/calculators/true-yield" className="text-gold hover:underline">
+              <Link href="/calculators/true-yield" className="text-maroon hover:underline">
                 True Yield calculator
               </Link>
               , or{" "}
-              <Link href="/analyse" className="text-gold hover:underline">
+              <Link href="/analyse" className="text-maroon hover:underline">
                 {siteConfig.cta.analyse.toLowerCase()}
               </Link>
               .
@@ -53,7 +53,7 @@ export default function CaseStudiesIndexPage() {
           <ul className="mt-10 space-y-6">
             {published.map((c) => (
               <li key={c.slug}>
-                <Link href={`/case-studies/${c.slug}`} className="font-display text-xl font-bold text-ink hover:text-gold">
+                <Link href={`/case-studies/${c.slug}`} className="font-display text-xl font-bold text-ink hover:text-maroon">
                   {c.title}
                 </Link>
               </li>

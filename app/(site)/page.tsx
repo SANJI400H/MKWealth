@@ -3,6 +3,9 @@ import CinemaController from "@/components/motion/CinemaController";
 import Hero from "@/components/sections/Hero";
 import Bio from "@/components/sections/Bio";
 import Services from "@/components/sections/Services";
+import VisionPhilosophy from "@/components/sections/VisionPhilosophy";
+import FormulaOverFeelings from "@/components/sections/FormulaOverFeelings";
+import InvestmentProfile from "@/components/sections/InvestmentProfile";
 import Invest from "@/components/sections/Invest";
 import InvestorIntelligence from "@/components/sections/InvestorIntelligence";
 import Proof from "@/components/sections/Proof";
@@ -11,13 +14,13 @@ import SiteFooter from "@/components/sections/SiteFooter";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Dubai Real Estate Investment Advisor | Morgan Kaiser",
+  title: "UAE Property Portfolio Strategist | Morgan Kaiser",
   description:
-    "Morgan Kaiser helps international investors evaluate and acquire UAE property with numbers-first underwriting across off-plan and secondary markets.",
+    "Morgan Kaiser — UAE Property Portfolio Strategist. Vision first, strategy second, property third. Numbers-led guidance for international investors across Dubai, Abu Dhabi and Ras Al Khaimah.",
   path: "/",
 });
 
-/** Cinema → Invest → Intelligence → Proof → Conversion */
+/** Cinema → Philosophy → Formula → Profile → Markets → Intelligence → Proof → Conversion */
 export default function HomePage() {
   return (
     <main>
@@ -27,6 +30,9 @@ export default function HomePage() {
         <Services />
       </CinemaController>
       <div className="relative bg-paper">
+        <VisionPhilosophy />
+        <FormulaOverFeelings />
+        <InvestmentProfile />
         <Invest />
         <InvestorIntelligence />
         <Proof />

@@ -74,11 +74,11 @@ export default function AbuDhabiInvestPage() {
 
         <p className="mt-12 text-ink-muted">
           See also{" "}
-          <Link href="/invest/dubai" className="font-semibold text-gold hover:underline">
+          <Link href="/invest/dubai" className="font-semibold text-maroon hover:underline">
             Dubai
           </Link>{" "}
           and{" "}
-          <Link href="/invest/rak" className="font-semibold text-gold hover:underline">
+          <Link href="/invest/rak" className="font-semibold text-maroon hover:underline">
             Ras Al Khaimah
           </Link>
           .

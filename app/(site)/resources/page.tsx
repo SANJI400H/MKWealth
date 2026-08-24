@@ -47,7 +47,7 @@ export default function ResourcesHubPage() {
                     ))}
                   </ul>
                 ) : null}
-                <Link href={r.ctaHref} className="mt-4 inline-block text-sm font-semibold text-gold hover:underline">
+                <Link href={r.ctaHref} className="mt-4 inline-block text-sm font-semibold text-maroon hover:underline">
                   {r.ctaLabel} →
                 </Link>
               </li>
@@ -59,7 +59,7 @@ export default function ResourcesHubPage() {
           <h2 className="font-display text-2xl font-bold text-ink">Gated</h2>
           <p className="mt-3 text-sm text-ink-muted">
             Unlock via the{" "}
-            <Link href="/guide" className="font-semibold text-gold hover:underline">
+            <Link href="/guide" className="font-semibold text-maroon hover:underline">
               investor guide
             </Link>{" "}
             after sharing contact details.
@@ -70,7 +70,7 @@ export default function ResourcesHubPage() {
                 <p className="eyebrow capitalize">{r.type}</p>
                 <h3 className="mt-2 font-display text-xl font-bold text-ink">{r.title}</h3>
                 <p className="mt-2 text-ink-muted">{r.excerpt}</p>
-                <Link href={r.ctaHref} className="mt-4 inline-block text-sm font-semibold text-gold hover:underline">
+                <Link href={r.ctaHref} className="mt-4 inline-block text-sm font-semibold text-maroon hover:underline">
                   {r.ctaLabel} →
                 </Link>
               </li>

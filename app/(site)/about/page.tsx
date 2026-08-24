@@ -11,9 +11,9 @@ import { pageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Morgan Kaiser | Dubai Real Estate Investment Advisor",
+  title: "About Morgan Kaiser | UAE Property Portfolio Strategist",
   description:
-    "About Morgan Kaiser — numbers-first Dubai real estate investment advisor and property portfolio strategist working with international investors.",
+    "About Morgan Kaiser — UAE Property Portfolio Strategist and Associate Director at Huspy. Vision first, strategy second, property third.",
   path: "/about",
 });
 
@@ -53,13 +53,14 @@ export default function AboutPage() {
           </h1>
           <p className="mt-3 text-lg text-ink-muted">{morganProfile.title}</p>
           <p className="mt-1 text-sm text-ink-muted">
-            {morganProfile.company} {morganProfile.companyRole} · {morganProfile.location}
+            {morganProfile.companyRole} at {morganProfile.company} · {morganProfile.location}
           </p>
           <p className="mt-8 text-ink-muted leading-relaxed">
             Morgan advises international investors who want UAE property exposure without a developer inventory
-            pitch. The work covers strategy, underwriting, acquisition across off-plan and secondary, and
-            coordination of financing and ownership pathways where relevant.
+            pitch. The work begins with vision and strategy — then underwriting and acquisition across off-plan and
+            secondary where the brief fits — with coordination of financing and ownership pathways where relevant.
           </p>
+          <p className="mt-4 text-ink-muted leading-relaxed">{morganProfile.huspyLine}</p>
         </section>
 
         <section id="story" className="scroll-mt-28 mt-14 space-y-4">
@@ -69,9 +70,16 @@ export default function AboutPage() {
 
         <section id="philosophy" className="scroll-mt-28 mt-14 space-y-4">
           <h2 className="font-display text-2xl font-bold text-ink">Investment philosophy</h2>
-          <p className="text-ink-muted leading-relaxed">
-            <strong className="text-ink">{morganProfile.philosophy}</strong> — investor objective, capital, time
-            horizon, liquidity, desired return, acceptable risk, and exit strategy come before property selection.
+          <div className="space-y-2">
+            {morganProfile.philosophyLines.map((line) => (
+              <p key={line} className="font-display text-2xl font-bold text-maroon sm:text-3xl">
+                {line}
+              </p>
+            ))}
+          </div>
+          <p className="mt-6 text-ink-muted leading-relaxed">
+            Investor objective, capital, time horizon, liquidity, desired return, acceptable risk, and exit strategy
+            come before property selection.
           </p>
           <Placeholder>{morganProfile.aboutPlaceholders.whyNumbersFirst}</Placeholder>
         </section>
@@ -111,7 +119,7 @@ export default function AboutPage() {
               </dd>
             </div>
           </dl>
-          <Link href="/credentials" className="text-sm font-semibold text-gold hover:underline">
+          <Link href="/credentials" className="text-sm font-semibold text-maroon hover:underline">
             Full credentials page →
           </Link>
         </section>

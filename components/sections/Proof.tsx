@@ -44,7 +44,7 @@ export default function Proof() {
           ].map((item) => (
             <RevealOnScroll key={item.title}>
               <Link href={item.href} className="group block">
-                <h3 className="font-display text-xl font-bold text-ink transition group-hover:text-gold">
+                <h3 className="font-display text-xl font-bold text-ink transition group-hover:text-maroon">
                   {item.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-ink-muted sm:text-base">{item.body}</p>
@@ -55,7 +55,7 @@ export default function Proof() {
 
         {hasMedia ? (
           <RevealOnScroll className="mt-10">
-            <Link href="/about#media" className="text-sm font-semibold text-gold hover:underline">
+            <Link href="/about#media" className="text-sm font-semibold text-maroon hover:underline">
               Media & appearances →
             </Link>
           </RevealOnScroll>

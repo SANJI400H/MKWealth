@@ -24,7 +24,7 @@ interface FormState {
 const empty: FormState = { name: "", phone: "", email: "" };
 
 const fieldClass =
-  "rounded-md border border-ink/10 bg-paper px-4 py-3 text-ink placeholder:text-ink-muted/60 focus:border-gold focus:outline-none";
+  "rounded-md border border-ink/10 bg-paper px-4 py-3 text-ink placeholder:text-ink-muted/60 focus:border-maroon focus:outline-none";
 
 export default function LeadForm({
   source = "guide",

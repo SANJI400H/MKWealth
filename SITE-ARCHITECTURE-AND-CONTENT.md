@@ -398,9 +398,12 @@ Socials appear in footer and Person schema `sameAs`.
 |-------|--------|
 | Ink | `#1d1d1f` |
 | Ink muted | `#6e6e73` |
-| Gold | `#b8953f` |
-| Gold soft | `#c9a85a` |
-| Gold deep (Tailwind) | `#8F732E` |
+| Maroon (primary) | `#681A2B` |
+| Maroon dark | `#42101C` |
+| Silver | `#C4C7CB` |
+| Soft white / surface | `#F7F7F5` |
+| Charcoal / ink | `#111111` |
+| Paper / white | `#FFFFFF` |
 | Paper | `#ffffff` |
 | Font | Montserrat everywhere (display + body) |
 | Max content width | ~1120px |

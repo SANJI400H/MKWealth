@@ -16,7 +16,7 @@ export default function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
                   {item.name}
                 </span>
               ) : (
-                <Link href={item.path} className="hover:text-gold">
+                <Link href={item.path} className="hover:text-maroon">
                   {item.name}
                 </Link>
               )}

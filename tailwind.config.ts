@@ -5,12 +5,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#1d1d1f",
-        "ink-muted": "#6e6e73",
-        gold: "#B8953F",
-        "gold-deep": "#8F732E",
+        ink: "#111111",
+        "ink-muted": "#5c5c5c",
+        maroon: "#681A2B",
+        "maroon-dark": "#42101C",
+        silver: "#C4C7CB",
         paper: "#FFFFFF",
-        line: "rgba(29, 29, 31, 0.1)",
+        surface: "#F7F7F5",
+        line: "rgba(196, 199, 203, 0.65)",
       },
       fontFamily: {
         display: ["var(--font-montserrat)", "sans-serif"],

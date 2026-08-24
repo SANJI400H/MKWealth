@@ -37,7 +37,7 @@ export default function CalculatorsIndexPage() {
               </div>
               <p className="mt-2 text-ink-muted">{c.summary}</p>
               {c.status === "live" ? (
-                <Link href={c.href} className="mt-4 inline-block text-sm font-semibold text-gold hover:underline">
+                <Link href={c.href} className="mt-4 inline-block text-sm font-semibold text-maroon hover:underline">
                   Open calculator
                 </Link>
               ) : null}

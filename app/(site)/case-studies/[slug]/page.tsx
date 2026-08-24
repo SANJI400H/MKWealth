@@ -80,7 +80,7 @@ export default function CaseStudyPage({ params }: Props) {
             </section>
           ) : null}
           {study.clientQuote ? (
-            <blockquote className="border-l-2 border-gold pl-4 italic">{study.clientQuote}</blockquote>
+            <blockquote className="border-l-2 border-maroon pl-4 italic">{study.clientQuote}</blockquote>
           ) : null}
           {study.disclaimer ? <p className="text-xs">{study.disclaimer}</p> : null}
         </div>

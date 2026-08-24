@@ -20,7 +20,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
     >
       <span className="flex items-start justify-between gap-4">
         <span>
-          <span className="block font-display text-[15px] font-bold text-ink transition-colors group-hover:text-gold sm:text-base">
+          <span className="block font-display text-[15px] font-bold text-ink transition-colors group-hover:text-maroon sm:text-base">
             {service.title}
           </span>
           <span className="mt-1.5 block text-[13px] leading-snug text-ink-muted sm:text-sm">
@@ -30,7 +30,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
         <ArrowUpRight
           size={16}
           strokeWidth={1.25}
-          className="mt-0.5 shrink-0 text-gold opacity-70 transition group-hover:opacity-100"
+          className="mt-0.5 shrink-0 text-maroon opacity-70 transition group-hover:opacity-100"
           aria-hidden
         />
       </span>
@@ -198,7 +198,7 @@ function ServiceCarousel({ items }: { items: ServiceItem[] }) {
             onClick={() => goTo(active - 1, { manual: true })}
             disabled={atStart}
             aria-label="Previous service"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-sm border border-ink/15 text-ink transition enabled:hover:border-ink/40 enabled:hover:text-gold disabled:cursor-not-allowed disabled:opacity-30"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-sm border border-ink/15 text-ink transition enabled:hover:border-ink/40 enabled:hover:text-maroon disabled:cursor-not-allowed disabled:opacity-30"
           >
             <ChevronUp size={18} strokeWidth={1.5} aria-hidden />
           </button>
@@ -207,7 +207,7 @@ function ServiceCarousel({ items }: { items: ServiceItem[] }) {
             onClick={() => goTo(active + 1, { manual: true })}
             disabled={atEnd}
             aria-label="Next service"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-sm border border-ink/15 text-ink transition enabled:hover:border-ink/40 enabled:hover:text-gold disabled:cursor-not-allowed disabled:opacity-30"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-sm border border-ink/15 text-ink transition enabled:hover:border-ink/40 enabled:hover:text-maroon disabled:cursor-not-allowed disabled:opacity-30"
           >
             <ChevronDown size={18} strokeWidth={1.5} aria-hidden />
           </button>

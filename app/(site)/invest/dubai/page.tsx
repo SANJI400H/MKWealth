@@ -142,11 +142,11 @@ export default function DubaiInvestPage() {
             {regulatory.dubaiAcquisition.dldTransferFeeTypical.note}
           </p>
           <p className="mt-4">
-            <Link href="/calculators/true-yield" className="font-semibold text-gold hover:underline">
+            <Link href="/calculators/true-yield" className="font-semibold text-maroon hover:underline">
               Run the True Yield calculator
             </Link>{" "}
             or{" "}
-            <Link href="/insights/gross-vs-net-yield-dubai-property" className="font-semibold text-gold hover:underline">
+            <Link href="/insights/gross-vs-net-yield-dubai-property" className="font-semibold text-maroon hover:underline">
               read gross vs net yield
             </Link>
             .
@@ -159,14 +159,14 @@ export default function DubaiInvestPage() {
             {latest.map((article) => (
               <li key={article.slug}>
                 <Link href={`/insights/${article.slug}`} className="group block">
-                  <h3 className="font-display text-xl font-bold text-ink group-hover:text-gold">{article.title}</h3>
+                  <h3 className="font-display text-xl font-bold text-ink group-hover:text-maroon">{article.title}</h3>
                   <p className="mt-1 text-sm text-ink-muted">{article.excerpt}</p>
                 </Link>
               </li>
             ))}
           </ul>
           <p className="mt-6">
-            <Link href="/insights" className="font-semibold text-gold hover:underline">
+            <Link href="/insights" className="font-semibold text-maroon hover:underline">
               All insights →
             </Link>
           </p>
@@ -174,11 +174,11 @@ export default function DubaiInvestPage() {
 
         <p className="mt-12 text-ink-muted">
           Compare with{" "}
-          <Link href="/invest/abu-dhabi" className="font-semibold text-gold hover:underline">
+          <Link href="/invest/abu-dhabi" className="font-semibold text-maroon hover:underline">
             Abu Dhabi
           </Link>{" "}
           and{" "}
-          <Link href="/invest/rak" className="font-semibold text-gold hover:underline">
+          <Link href="/invest/rak" className="font-semibold text-maroon hover:underline">
             Ras Al Khaimah
           </Link>
           .

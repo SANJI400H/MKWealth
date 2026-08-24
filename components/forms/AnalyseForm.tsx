@@ -6,7 +6,7 @@ import { getAttribution, trackEvent } from "@/lib/analytics";
 import { siteConfig } from "@/lib/site-config";
 
 const fieldClass =
-  "rounded-md border border-ink/10 bg-paper px-4 py-3 text-ink placeholder:text-ink-muted/60 focus:border-gold focus:outline-none";
+  "rounded-md border border-ink/10 bg-paper px-4 py-3 text-ink placeholder:text-ink-muted/60 focus:border-maroon focus:outline-none";
 
 type FormState = {
   name: string;
@@ -122,7 +122,7 @@ export default function AnalyseForm() {
       </p>
 
       {calculatorSnapshot ? (
-        <p className="rounded-sm border border-gold/30 bg-gold/5 px-3 py-2 text-sm text-ink">
+        <p className="rounded-sm border border-maroon/30 bg-maroon/5 px-3 py-2 text-sm text-ink">
           Calculator values were carried into this form.
         </p>
       ) : null}

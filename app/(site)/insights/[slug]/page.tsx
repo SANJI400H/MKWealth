@@ -152,7 +152,7 @@ export default function InsightArticlePage({ params }: Props) {
               {article.sources.map((s) => (
                 <li key={s.label}>
                   {s.url ? (
-                    <a href={s.url} className="text-gold hover:underline" target="_blank" rel="noopener noreferrer">
+                    <a href={s.url} className="text-maroon hover:underline" target="_blank" rel="noopener noreferrer">
                       {s.label}
                     </a>
                   ) : (
@@ -171,7 +171,7 @@ export default function InsightArticlePage({ params }: Props) {
             <ul className="mt-4 space-y-3">
               {related.map((r) => (
                 <li key={r.slug}>
-                  <Link href={`/insights/${r.slug}`} className="font-medium text-gold hover:underline">
+                  <Link href={`/insights/${r.slug}`} className="font-medium text-maroon hover:underline">
                     {r.title}
                   </Link>
                 </li>

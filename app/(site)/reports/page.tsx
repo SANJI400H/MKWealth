@@ -27,7 +27,7 @@ export default function ReportsIndexPage() {
             <li key={r.slug} className="border-b border-line pb-6">
               <Link href={`/reports/${r.slug}`} className="group block">
                 <p className="eyebrow">{r.period}</p>
-                <h2 className="mt-2 font-display text-xl font-bold text-ink group-hover:text-gold sm:text-2xl">
+                <h2 className="mt-2 font-display text-xl font-bold text-ink group-hover:text-maroon sm:text-2xl">
                   {r.title}
                 </h2>
                 <p className="mt-2 text-ink-muted">{r.summary}</p>

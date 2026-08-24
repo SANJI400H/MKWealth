@@ -6,7 +6,7 @@ import { trackEvent } from "@/lib/analytics";
 import { siteConfig } from "@/lib/site-config";
 
 const fieldClass =
-  "w-full rounded-md border border-ink/10 bg-paper px-3 py-2.5 text-ink focus:border-gold focus:outline-none";
+  "w-full rounded-md border border-ink/10 bg-paper px-3 py-2.5 text-ink focus:border-maroon focus:outline-none";
 
 function num(value: string) {
   const n = Number(String(value).replace(/,/g, ""));
@@ -97,7 +97,7 @@ export default function PaymentPlanCalculator() {
           </ul>
           <button
             type="button"
-            className="mt-3 text-sm font-semibold text-gold hover:underline"
+            className="mt-3 text-sm font-semibold text-maroon hover:underline"
             onClick={() => setStages((prev) => [...prev, { label: `Stage ${prev.length + 1}`, pct: "0" }])}
           >
             Add stage

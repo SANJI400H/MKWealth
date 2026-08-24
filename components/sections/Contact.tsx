@@ -1,6 +1,8 @@
-import Link from "next/link";
+"use client";
+
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import BookMeetingLink from "@/components/ui/BookMeetingLink";
+import Link from "next/link";
 import WhatsAppLink from "@/components/ui/WhatsAppLink";
 import { siteConfig } from "@/lib/site-config";
 
@@ -9,10 +11,14 @@ export default function Contact() {
     <section id="contact" className="border-t border-line bg-paper py-24 sm:py-32" aria-label="Contact">
       <div className="mx-auto max-w-content px-5 sm:px-8">
         <RevealOnScroll>
-          <p className="eyebrow">Work with Morgan</p>
-          <h2 className="display mt-5 max-w-2xl text-4xl text-ink sm:text-7xl">Start with the brief.</h2>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-ink-muted sm:text-lg">
-            Match the next step to your intent — tools, analysis, or a strategy session.
+          <p className="eyebrow">Conversion</p>
+          <h2 className="display mt-5 max-w-3xl text-4xl text-ink sm:text-6xl lg:text-7xl">
+            Your 30-minute
+            <br />
+            property strategy session.
+          </h2>
+          <p className="mt-6 max-w-lg text-base leading-relaxed text-ink-muted sm:text-lg">
+            Before discussing individual properties, we establish what the investment actually needs to achieve.
           </p>
         </RevealOnScroll>
 
@@ -22,11 +28,8 @@ export default function Contact() {
             <Link href="/analyse" className="btn-ghost-dark w-full justify-center sm:w-auto">
               {siteConfig.cta.analyse}
             </Link>
-            <Link href="/calculators/true-yield" className="btn-ghost-dark w-full justify-center sm:w-auto">
-              Use a calculator
-            </Link>
             <WhatsAppLink
-              message="Hi Morgan, I'd like to discuss UAE property investment strategy."
+              message="Hi Morgan, I'd like to book a 30-minute property strategy session."
               className="btn-ghost-dark w-full justify-center sm:w-auto"
             >
               WhatsApp

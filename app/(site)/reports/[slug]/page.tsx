@@ -86,7 +86,7 @@ export default function ReportPage({ params }: Props) {
 
         {r.relatedHref ? (
           <p className="mt-8">
-            <Link href={r.relatedHref} className="font-semibold text-gold hover:underline">
+            <Link href={r.relatedHref} className="font-semibold text-maroon hover:underline">
               Related market page →
             </Link>
           </p>

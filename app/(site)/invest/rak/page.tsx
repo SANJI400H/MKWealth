@@ -73,11 +73,11 @@ export default function RakInvestPage() {
 
         <p className="mt-12 text-ink-muted">
           Compare with{" "}
-          <Link href="/invest/dubai" className="font-semibold text-gold hover:underline">
+          <Link href="/invest/dubai" className="font-semibold text-maroon hover:underline">
             Dubai
           </Link>{" "}
           and{" "}
-          <Link href="/invest/abu-dhabi" className="font-semibold text-gold hover:underline">
+          <Link href="/invest/abu-dhabi" className="font-semibold text-maroon hover:underline">
             Abu Dhabi
           </Link>
           .

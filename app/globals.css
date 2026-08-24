@@ -4,11 +4,21 @@
 
 :root {
   color-scheme: light;
-  --ink: #1d1d1f;
-  --ink-muted: #6e6e73;
-  --gold: #b8953f;
-  --gold-soft: #c9a85a;
-  --paper: #ffffff;
+  /* Brand system — maroon / silver / white (no gold) */
+  --brand-primary: #681a2b;
+  --brand-primary-dark: #42101c;
+  --brand-silver: #c4c7cb;
+  --brand-white: #ffffff;
+  --brand-surface: #f7f7f5;
+  --brand-text: #111111;
+
+  --ink: var(--brand-text);
+  --ink-muted: #5c5c5c;
+  --maroon: var(--brand-primary);
+  --maroon-dark: var(--brand-primary-dark);
+  --silver: var(--brand-silver);
+  --paper: var(--brand-white);
+  --surface: var(--brand-surface);
   --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -37,7 +47,7 @@ section[id] {
 
 /* Visible keyboard focus without click rings */
 :focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--maroon);
   outline-offset: 3px;
 }
 
@@ -55,18 +65,19 @@ body {
 }
 
 @layer components {
-  /* Soft capsule — not a hard box.
-     No permanent will-change / filter anims (GPU cost). Framer handles WhatsApp CTAs. */
+  /* Primary — solid maroon, white type */
   .btn-primary {
     @apply inline-flex items-center justify-center rounded-full px-7 py-3 text-[13px] font-semibold tracking-[-0.01em];
-    background: linear-gradient(180deg, var(--gold-soft) 0%, var(--gold) 100%);
-    color: #1d1d1f;
+    background: var(--maroon);
+    color: var(--brand-white);
     transition:
       transform 0.35s var(--ease-out-expo),
+      background-color 0.35s var(--ease-apple),
       opacity 0.35s var(--ease-apple);
   }
 
   .btn-primary:hover {
+    background: var(--maroon-dark);
     transform: scale(1.02);
   }
 
@@ -74,9 +85,10 @@ body {
     transform: scale(0.98);
   }
 
-  /* Framer-driven primary links skip CSS scale to avoid fighting transforms */
   a.btn-primary[data-cta="whatsapp"]:hover,
-  a.btn-primary[data-cta="whatsapp"]:active {
+  a.btn-primary[data-cta="whatsapp"]:active,
+  a.btn-primary[data-cta="strategy-session"]:hover,
+  a.btn-primary[data-cta="strategy-session"]:active {
     transform: none;
   }
 
@@ -100,23 +112,26 @@ body {
 
   .btn-ghost-dark {
     @apply btn-ghost text-[color:var(--ink)];
+    border: 1px solid var(--silver);
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   .btn-ghost-dark:hover {
-    color: var(--gold);
+    color: var(--maroon);
+    border-color: var(--maroon);
     transform: translateY(-1px);
   }
 
   .eyebrow {
     @apply text-[11px] font-semibold uppercase tracking-[0.24em];
-    color: var(--gold);
+    color: var(--maroon);
     letter-spacing: 0.22em;
   }
 
   .display {
     @apply font-display font-bold tracking-[-0.035em] text-balance;
   }
-
 }
 
 .reveal {
@@ -179,12 +194,6 @@ body {
   will-change: auto;
 }
 
-/*
- * Cinema panels — device-adaptive:
- * phone  (<768)  : hero wash faster, copy centered; About = full-section cover
- * tablet (768–1023): hero wash mid; About = side wipe (~58% width)
- * desktop (≥1024): hero wash slow; About = side wipe (~48% width)
- */
 .cinema-wash {
   pointer-events: none;
   transform: scaleX(0);
@@ -255,7 +264,6 @@ body {
   }
 }
 
-/* Phone only: hero copy + CTAs centered in the middle of the section */
 @media (max-width: 767px) {
   #home .cinema-copy-full {
     align-items: center;
@@ -313,7 +321,6 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Phone only: About covers the whole section after video (full-bleed panel) */
 @media (max-width: 767px) {
   [data-panel-cover="side"] .cinema-copy-panel {
     inset: 0 !important;
@@ -352,7 +359,6 @@ body {
   }
 }
 
-/* Tablet + desktop: About horizontal side wipe (not bottom sheet) */
 @media (min-width: 768px) {
   [data-panel-cover="side"][data-panel-side="left"] .cinema-copy-panel {
     left: 0;
@@ -400,7 +406,6 @@ body {
     transform 0.935s var(--ease-out-expo) 0.198s;
 }
 
-/* Hero copy rides the wash — slightly snappier on phone */
 [data-panel-cover="full"] .cinema-copy-inner {
   margin-block: auto;
   transition:
@@ -443,14 +448,12 @@ body {
   transform: translate3d(0, 0, 0);
 }
 
-/* Services phone: give the list more room under a compact video */
 @media (max-width: 767px) {
   [data-cinema-layout="split"] .service-scroller {
     max-height: min(36vh, 260px);
   }
 }
 
-/* Hero text-only: fade + rise over full-bleed video (no white panel) */
 .cinema-text-only {
   opacity: 0;
   transform: translate3d(0, 18px, 0);
@@ -498,7 +501,7 @@ body {
 }
 
 .media-skeleton {
-  background: #f5f5f7;
+  background: var(--surface);
 }
 
 .text-legibility {
@@ -509,7 +512,6 @@ body {
   text-shadow: 0 1px 28px rgba(0, 0, 0, 0.4);
 }
 
-/* Smooth image hover — promote layer only while hovering */
 .img-smooth {
   transition: transform 1.1s var(--ease-out-expo);
 }

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
   title: `${siteConfig.name} | ${siteConfig.role}`,
   description:
-    "Morgan Kaiser helps international investors evaluate and acquire UAE property using investment mathematics, market context, and portfolio objectives — across off-plan and secondary markets.",
+    "Morgan Kaiser — UAE Property Portfolio Strategist. Vision first, strategy second, property third. Numbers-led UAE property guidance for international investors.",
   icons: {
     icon: [{ url: "/images/mk-logo.png", type: "image/png" }],
     apple: [{ url: "/images/mk-logo.png" }],

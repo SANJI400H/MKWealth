@@ -86,7 +86,7 @@ export default function DeveloperPage({ params }: Props) {
           <h2 className="font-display text-2xl font-bold text-ink">Payment-plan analysis</h2>
           <p className="mt-4 text-ink-muted leading-relaxed">{d.paymentPlanNotes}</p>
           <p className="mt-4">
-            <Link href="/calculators/payment-plan" className="font-semibold text-gold hover:underline">
+            <Link href="/calculators/payment-plan" className="font-semibold text-maroon hover:underline">
               Open payment plan calculator →
             </Link>
           </p>
@@ -110,7 +110,7 @@ export default function DeveloperPage({ params }: Props) {
             {d.relatedInsightSlugs.map((slug, i) => (
               <span key={slug}>
                 {i > 0 ? " · " : null}
-                <Link href={`/insights/${slug}`} className="font-semibold text-gold hover:underline">
+                <Link href={`/insights/${slug}`} className="font-semibold text-maroon hover:underline">
                   {slug.replace(/-/g, " ")}
                 </Link>
               </span>

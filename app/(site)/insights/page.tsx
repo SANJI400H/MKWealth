@@ -89,7 +89,7 @@ export default function InsightsHubPage({
           {articles.length === 0 ? (
             <p className="mt-6 text-ink-muted">
               No published articles in this category yet.{" "}
-              <Link href="/insights" className="font-semibold text-gold hover:underline">
+              <Link href="/insights" className="font-semibold text-maroon hover:underline">
                 View all insights
               </Link>
               .
@@ -102,7 +102,7 @@ export default function InsightsHubPage({
                     <p className="eyebrow">
                       {insightCategories.find((c) => c.id === article.category)?.label}
                     </p>
-                    <h3 className="mt-2 font-display text-xl font-bold text-ink group-hover:text-gold sm:text-2xl">
+                    <h3 className="mt-2 font-display text-xl font-bold text-ink group-hover:text-maroon sm:text-2xl">
                       {article.title}
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-ink-muted sm:text-base">{article.excerpt}</p>
@@ -115,11 +115,11 @@ export default function InsightsHubPage({
 
         <p className="mt-14 text-sm text-ink-muted">
           Prefer tools? Try the{" "}
-          <Link href="/calculators/true-yield" className="font-semibold text-gold hover:underline">
+          <Link href="/calculators/true-yield" className="font-semibold text-maroon hover:underline">
             True Yield calculator
           </Link>{" "}
           or{" "}
-          <Link href="/analyse" className="font-semibold text-gold hover:underline">
+          <Link href="/analyse" className="font-semibold text-maroon hover:underline">
             ask Morgan to analyse an investment
           </Link>
           .

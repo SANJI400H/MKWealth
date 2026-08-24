@@ -33,7 +33,7 @@ export default function DevelopersIndexPage() {
           {list.map((d) => (
             <li key={d.slug} className="border-b border-line pb-6">
               <Link href={`/developers/${d.slug}`} className="group block">
-                <h2 className="font-display text-xl font-bold text-ink group-hover:text-gold sm:text-2xl">
+                <h2 className="font-display text-xl font-bold text-ink group-hover:text-maroon sm:text-2xl">
                   {d.name}
                 </h2>
                 <p className="mt-2 text-ink-muted">{d.tagline}</p>

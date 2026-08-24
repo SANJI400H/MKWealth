@@ -22,7 +22,7 @@ export default function Invest() {
           <p className="mt-6 max-w-md text-base leading-relaxed text-ink-muted sm:text-lg">
             Market intelligence pillars — not brochures. Dubai leads deal flow; Abu Dhabi and Ras Al Khaimah are
             honest regional context.{" "}
-            <Link href="/invest" className="font-medium text-ink underline-offset-4 hover:text-gold hover:underline">
+            <Link href="/invest" className="font-medium text-ink underline-offset-4 hover:text-maroon hover:underline">
               Explore All Markets →
             </Link>
           </p>
@@ -42,7 +42,7 @@ export default function Invest() {
                   />
                 </div>
                 <p className="eyebrow mt-6">{location.tag}</p>
-                <h3 className="mt-3 font-display text-3xl font-bold tracking-tight text-ink transition group-hover:text-gold">
+                <h3 className="mt-3 font-display text-3xl font-bold tracking-tight text-ink transition group-hover:text-maroon">
                   {location.name}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-ink-muted sm:text-base">{location.summary}</p>
