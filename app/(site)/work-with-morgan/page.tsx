@@ -63,7 +63,7 @@ const sections = [
 export default function WorkWithMorganPage() {
   return (
     <>
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="page-shell">
         <Breadcrumbs
           items={[
             { name: "Home", path: "/" },
@@ -71,20 +71,22 @@ export default function WorkWithMorganPage() {
           ]}
         />
 
-        <SectionNavigation
-          items={workSectionNav}
-          cta={{ label: siteConfig.cta.analyse, href: "/analyse" }}
-        />
-
-        <h1 className="font-display text-4xl font-bold text-ink sm:text-5xl">Work With Morgan</h1>
-        <p className="mt-4 text-lg text-ink-muted">
+        <h1 className="page-h1">Work With Morgan</h1>
+        <p className="page-lead">
           The engagement model — from strategy through acquisition and coordination. Where regulated specialists
           deliver (financing, residency paperwork), Morgan coordinates rather than substitutes.
         </p>
 
+        <div className="mt-10">
+          <SectionNavigation
+            items={workSectionNav}
+            cta={{ label: siteConfig.cta.analyse, href: "/analyse" }}
+          />
+        </div>
+
         {sections.map((section) => (
-          <section key={section.id} id={section.id} className="scroll-mt-28 mt-14 border-t border-line pt-10">
-            <h2 className="font-display text-2xl font-bold text-ink">{section.title}</h2>
+          <section key={section.id} id={section.id} className="page-block">
+            <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">{section.title}</h2>
             <dl className="mt-6 space-y-4 text-ink-muted">
               <div>
                 <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-ink">Who it is for</dt>

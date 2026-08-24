@@ -42,7 +42,7 @@ export default function AreaPage({ params }: Props) {
 
   return (
     <>
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="page-shell">
         <Breadcrumbs
           items={[
             { name: "Home", path: "/" },
@@ -50,41 +50,43 @@ export default function AreaPage({ params }: Props) {
             { name: area.name, path: `/areas/${area.slug}` },
           ]}
         />
-        <SectionNavigation items={sectionNav} cta={{ label: siteConfig.cta.analyse, href: "/analyse" }} />
-
-        <h1 className="font-display text-4xl font-bold text-ink sm:text-5xl">{area.name}</h1>
-        <p className="mt-4 text-lg text-ink-muted">{area.tagline}</p>
+        <h1 className="page-h1">{area.name}</h1>
+        <p className="page-lead">{area.tagline}</p>
         {area.workingNote ? (
-          <p className="mt-6 rounded-sm border border-dashed border-line bg-ink/[0.02] px-4 py-3 text-sm text-ink-muted">
+          <p className="mt-6 border border-dashed border-line bg-surface px-4 py-3 text-sm text-ink-muted">
             {area.workingNote}
           </p>
         ) : null}
 
-        <section id="view" className="scroll-mt-28 mt-12">
-          <h2 className="font-display text-2xl font-bold text-ink">Morgan&apos;s view</h2>
-          <p className="mt-4 text-ink-muted leading-relaxed">{area.morganView}</p>
+        <div className="mt-10">
+          <SectionNavigation items={sectionNav} cta={{ label: siteConfig.cta.analyse, href: "/analyse" }} />
+        </div>
+
+        <section id="view" className="page-block">
+          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Morgan&apos;s view</h2>
+          <p className="mt-4 leading-relaxed text-ink-muted">{area.morganView}</p>
         </section>
-        <section id="profile" className="scroll-mt-28 mt-12">
-          <h2 className="font-display text-2xl font-bold text-ink">Investor profile</h2>
-          <p className="mt-4 text-ink-muted leading-relaxed">{area.investorProfile}</p>
+        <section id="profile" className="page-block">
+          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Investor profile</h2>
+          <p className="mt-4 leading-relaxed text-ink-muted">{area.investorProfile}</p>
         </section>
-        <section id="price" className="scroll-mt-28 mt-12">
+        <section id="price" className="page-block">
           <h2 className="font-display text-2xl font-bold text-ink">Price context</h2>
           <p className="mt-4 text-ink-muted leading-relaxed">{area.priceContext}</p>
         </section>
-        <section id="rental" className="scroll-mt-28 mt-12">
+        <section id="rental" className="page-block">
           <h2 className="font-display text-2xl font-bold text-ink">Rental context</h2>
           <p className="mt-4 text-ink-muted leading-relaxed">{area.rentalContext}</p>
         </section>
-        <section id="supply" className="scroll-mt-28 mt-12">
+        <section id="supply" className="page-block">
           <h2 className="font-display text-2xl font-bold text-ink">Supply</h2>
           <p className="mt-4 text-ink-muted leading-relaxed">{area.supply}</p>
         </section>
-        <section id="infra" className="scroll-mt-28 mt-12">
+        <section id="infra" className="page-block">
           <h2 className="font-display text-2xl font-bold text-ink">Infrastructure</h2>
           <p className="mt-4 text-ink-muted leading-relaxed">{area.infrastructure}</p>
         </section>
-        <section id="risks" className="scroll-mt-28 mt-12">
+        <section id="risks" className="page-block">
           <h2 className="font-display text-2xl font-bold text-ink">Risks</h2>
           <ul className="mt-4 list-disc space-y-2 pl-5 text-ink-muted">
             {area.risks.map((r) => (
@@ -92,7 +94,7 @@ export default function AreaPage({ params }: Props) {
             ))}
           </ul>
         </section>
-        <section id="exit" className="scroll-mt-28 mt-12">
+        <section id="exit" className="page-block">
           <h2 className="font-display text-2xl font-bold text-ink">Exit considerations</h2>
           <p className="mt-4 text-ink-muted leading-relaxed">{area.exitConsiderations}</p>
         </section>

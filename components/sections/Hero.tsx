@@ -45,7 +45,7 @@ export default function Hero() {
           A numbers-led UAE property portfolio strategist who begins with your objectives — before any unit is on the
           table.
         </p>
-        <div className="mt-5 flex w-full max-w-md flex-col gap-2.5 sm:mt-8 sm:max-w-none sm:flex-row sm:items-center sm:gap-7">
+        <div className="cta-row mt-5 w-full max-w-md sm:mt-8 sm:max-w-none">
           <BookMeetingLink href="/strategy-session" className="btn-primary w-full sm:w-auto" />
           <Link href="/analyse" className="btn-ghost-dark w-full justify-center sm:w-auto">
             {siteConfig.cta.analyse}

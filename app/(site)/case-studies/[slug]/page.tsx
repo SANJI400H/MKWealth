@@ -27,7 +27,7 @@ export default function CaseStudyPage({ params }: Props) {
 
   return (
     <>
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="page-shell">
         <Breadcrumbs
           items={[
             { name: "Home", path: "/" },

@@ -17,7 +17,7 @@ export default function VideosHubPage() {
 
   return (
     <>
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="page-shell">
         <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Videos", path: "/videos" }]} />
         <h1 className="mt-6 font-display text-4xl font-bold text-ink sm:text-5xl">Videos</h1>
         <p className="mt-4 text-lg text-ink-muted">

@@ -4,6 +4,8 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FaqSection from "@/components/insights/FaqSection";
 import GuideCallout from "@/components/insights/GuideCallout";
 import SiteFooter from "@/components/sections/SiteFooter";
+import AreaCarousel from "@/components/invest/AreaCarousel";
+import DeveloperCarousel from "@/components/invest/DeveloperCarousel";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -39,7 +41,7 @@ const faqItems = [
 export default function RakInvestPage() {
   return (
     <>
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="page-shell-wide">
         <Breadcrumbs
           items={[
             { name: "Home", path: "/" },
@@ -48,14 +50,14 @@ export default function RakInvestPage() {
           ]}
         />
 
-        <h1 className="mt-6 font-display text-4xl font-bold text-ink sm:text-5xl">
+        <h1 className="page-h1">
           Ras Al Khaimah Real Estate Investment
         </h1>
-        <p className="mt-4 text-lg text-ink-muted">
+        <p className="mt-4 max-w-3xl text-lg text-ink-muted">
           Lower entry point, thinner resale market, what that trade-off means in practice.
         </p>
 
-        <section className="mt-12">
+        <section className="mt-12 max-w-3xl">
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">The real trade-off</h2>
           <p className="mt-4 text-ink-muted">
             RAK can look attractive on price alone. The decision only holds if you are comfortable with less
@@ -63,13 +65,16 @@ export default function RakInvestPage() {
           </p>
         </section>
 
-        <section className="mt-12">
+        <section className="mt-12 max-w-3xl">
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Who it suits</h2>
           <p className="mt-4 text-ink-muted">
-            Investors with a longer horizon, lower ticket size, and appetite for tourism-led coastal growth , 
+            Investors with a longer horizon, lower ticket size, and appetite for tourism-led coastal growth,
             after Dubai (or instead of it) only when the brief actually fits.
           </p>
         </section>
+
+        <AreaCarousel market="rak" />
+        <DeveloperCarousel market="rak" />
 
         <p className="mt-12 text-ink-muted">
           Compare with{" "}

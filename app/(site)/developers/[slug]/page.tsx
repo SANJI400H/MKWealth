@@ -41,7 +41,7 @@ export default function DeveloperPage({ params }: Props) {
 
   return (
     <>
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="page-shell">
         <Breadcrumbs
           items={[
             { name: "Home", path: "/" },
@@ -49,27 +49,29 @@ export default function DeveloperPage({ params }: Props) {
             { name: d.name, path: `/developers/${d.slug}` },
           ]}
         />
-        <SectionNavigation items={sectionNav} cta={{ label: siteConfig.cta.analyse, href: "/analyse" }} />
-
-        <h1 className="font-display text-4xl font-bold text-ink sm:text-5xl">{d.name}</h1>
-        <p className="mt-4 text-lg text-ink-muted">{d.tagline}</p>
+        <h1 className="page-h1">{d.name}</h1>
+        <p className="page-lead">{d.tagline}</p>
         {d.workingNote ? (
-          <p className="mt-6 rounded-sm border border-dashed border-line bg-ink/[0.02] px-4 py-3 text-sm text-ink-muted">
+          <p className="mt-6 border border-dashed border-line bg-surface px-4 py-3 text-sm text-ink-muted">
             {d.workingNote}
           </p>
         ) : null}
 
-        <section id="overview" className="scroll-mt-28 mt-12">
-          <h2 className="font-display text-2xl font-bold text-ink">Overview</h2>
+        <div className="mt-10">
+          <SectionNavigation items={sectionNav} cta={{ label: siteConfig.cta.analyse, href: "/analyse" }} />
+        </div>
+
+        <section id="overview" className="page-block">
+          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Overview</h2>
           <p className="mt-4 text-ink-muted leading-relaxed">{d.overview}</p>
         </section>
-        <section id="experience" className="scroll-mt-28 mt-12">
+        <section id="experience" className="page-block">
           <h2 className="font-display text-2xl font-bold text-ink">Morgan&apos;s experience</h2>
           <p className="mt-4 rounded-sm border border-dashed border-line px-4 py-3 text-sm text-ink-muted">
             {d.morganExperience}
           </p>
         </section>
-        <section id="track-record" className="scroll-mt-28 mt-12">
+        <section id="track-record" className="page-block">
           <h2 className="font-display text-2xl font-bold text-ink">Track record</h2>
           <p className="mt-4 text-ink-muted leading-relaxed">{d.trackRecord}</p>
           <ul className="mt-4 list-disc space-y-2 pl-5 text-ink-muted">
@@ -78,11 +80,11 @@ export default function DeveloperPage({ params }: Props) {
             ))}
           </ul>
         </section>
-        <section id="delivery" className="scroll-mt-28 mt-12">
+        <section id="delivery" className="page-block">
           <h2 className="font-display text-2xl font-bold text-ink">Delivery considerations</h2>
           <p className="mt-4 text-ink-muted leading-relaxed">{d.deliveryNotes}</p>
         </section>
-        <section id="payment" className="scroll-mt-28 mt-12">
+        <section id="payment" className="page-block">
           <h2 className="font-display text-2xl font-bold text-ink">Payment-plan analysis</h2>
           <p className="mt-4 text-ink-muted leading-relaxed">{d.paymentPlanNotes}</p>
           <p className="mt-4">
@@ -91,11 +93,11 @@ export default function DeveloperPage({ params }: Props) {
             </Link>
           </p>
         </section>
-        <section id="suitability" className="scroll-mt-28 mt-12">
+        <section id="suitability" className="page-block">
           <h2 className="font-display text-2xl font-bold text-ink">Investor suitability</h2>
           <p className="mt-4 text-ink-muted leading-relaxed">{d.suitability}</p>
         </section>
-        <section id="risks" className="scroll-mt-28 mt-12">
+        <section id="risks" className="page-block">
           <h2 className="font-display text-2xl font-bold text-ink">Risks</h2>
           <ul className="mt-4 list-disc space-y-2 pl-5 text-ink-muted">
             {d.risks.map((r) => (

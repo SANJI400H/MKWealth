@@ -13,7 +13,7 @@ export const metadata: Metadata = pageMetadata({
 export default function TermsPage() {
   return (
     <>
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="page-shell">
         <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Terms", path: "/terms" }]} />
         <h1 className="mt-6 font-display text-4xl font-bold text-ink">Terms of Use</h1>
         <p className="mt-2 text-sm text-ink-muted">Placeholder — mark for professional legal review.</p>

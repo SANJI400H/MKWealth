@@ -26,7 +26,7 @@ function Row({ label, value }: { label: string; value: string | null | undefined
 export default function CredentialsPage() {
   return (
     <>
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="page-shell">
         <Breadcrumbs
           items={[
             { name: "Home", path: "/" },

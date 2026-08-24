@@ -11,18 +11,18 @@ export default function Proof() {
   const hasMedia = Boolean(morganProfile.mediaAppearances?.length);
 
   return (
-    <section id="proof" className="border-t border-line bg-paper py-24 sm:py-32" aria-label="Proof">
-      <div className="mx-auto max-w-content px-5 sm:px-8">
+    <section id="proof" className="section-pad bg-paper" aria-label="Proof">
+      <div className="section-inner">
         <RevealOnScroll>
           <p className="eyebrow">Proven in practice</p>
-          <h2 className="display mt-5 max-w-3xl text-4xl text-ink sm:text-6xl">After the numbers.</h2>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-muted sm:text-lg">
+          <h2 className="section-title">After the numbers.</h2>
+          <p className="section-lead max-w-2xl">
             Credentials, results, and recognition appear here only when verified and approved — never as
             placeholders presented as fact.
           </p>
         </RevealOnScroll>
 
-        <div className="mt-14 grid gap-8 sm:grid-cols-3">
+        <div className="section-body grid gap-8 sm:grid-cols-3 sm:gap-10">
           {[
             {
               title: "Methodology",

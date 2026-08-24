@@ -8,6 +8,7 @@ import FormulaOverFeelings from "@/components/sections/FormulaOverFeelings";
 import InvestmentProfile from "@/components/sections/InvestmentProfile";
 import Invest from "@/components/sections/Invest";
 import InvestorIntelligence from "@/components/sections/InvestorIntelligence";
+import HowMorganWorks from "@/components/sections/HowMorganWorks";
 import Proof from "@/components/sections/Proof";
 import Contact from "@/components/sections/Contact";
 import SiteFooter from "@/components/sections/SiteFooter";
@@ -20,7 +21,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/",
 });
 
-/** Cinema → Philosophy → Formula → Profile → Markets → Intelligence → Proof → Conversion */
+/** Cinema film (1–3) → Philosophy → Approach (snap) → free browse */
 export default function HomePage() {
   return (
     <main>
@@ -28,13 +29,14 @@ export default function HomePage() {
         <Hero />
         <Bio />
         <Services />
-      </CinemaController>
-      <div className="relative bg-paper">
         <VisionPhilosophy />
         <FormulaOverFeelings />
+      </CinemaController>
+      <div className="relative bg-paper">
         <InvestmentProfile />
         <Invest />
         <InvestorIntelligence />
+        <HowMorganWorks />
         <Proof />
         <Contact />
         <SiteFooter />

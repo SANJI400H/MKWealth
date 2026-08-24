@@ -5,6 +5,8 @@ import FaqSection from "@/components/insights/FaqSection";
 import GuideCallout from "@/components/insights/GuideCallout";
 import SiteFooter from "@/components/sections/SiteFooter";
 import SectionNavigation from "@/components/ui/SectionNavigation";
+import AreaCarousel from "@/components/invest/AreaCarousel";
+import DeveloperCarousel from "@/components/invest/DeveloperCarousel";
 import { dubaiSectionNav } from "@/content/navigation";
 import { getPublishedInsights } from "@/content/insights";
 import { regulatory } from "@/content/regulatory";
@@ -44,7 +46,7 @@ export default function DubaiInvestPage() {
 
   return (
     <>
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="page-shell-wide">
         <Breadcrumbs
           items={[
             { name: "Home", path: "/" },
@@ -53,18 +55,23 @@ export default function DubaiInvestPage() {
           ]}
         />
 
-        <SectionNavigation
-          items={dubaiSectionNav}
-          cta={{ label: siteConfig.cta.analyse, href: "/analyse" }}
-        />
-
         <section id="overview" className="scroll-mt-28">
-          <h1 className="font-display text-4xl font-bold text-ink sm:text-5xl">Dubai Property Investment</h1>
-          <p className="mt-4 text-lg text-ink-muted">
+          <h1 className="page-h1">Dubai Property Investment</h1>
+          <p className="page-lead">
             Dubai is Morgan&apos;s primary market. Off-plan and secondary are both analysed — neither is assumed better
             until the brief, capital, and risk profile say so.
           </p>
-          <h2 className="mt-12 font-display text-2xl font-bold text-ink sm:text-3xl">Investment thesis (working)</h2>
+        </section>
+
+        <div className="mt-10">
+          <SectionNavigation
+            items={dubaiSectionNav}
+            cta={{ label: siteConfig.cta.analyse, href: "/analyse" }}
+          />
+        </div>
+
+        <section className="scroll-mt-28">
+          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Investment thesis (working)</h2>
           <p className="mt-4 text-ink-muted">
             {/* TODO: MORGAN_DISCOVERY — replace with verified thesis after interview */}
             Deepest liquidity and widest inventory in the UAE for many international buyers. Useful for investors who
@@ -83,7 +90,7 @@ export default function DubaiInvestPage() {
           <p className="mt-2 text-sm text-ink-muted">{regulatory.goldenVisa.offPlanNote}</p>
         </section>
 
-        <section id="off-plan" className="scroll-mt-28 mt-14 border-t border-line pt-10">
+        <section id="off-plan" className="page-block">
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Off-plan</h2>
           <p className="mt-4 text-ink-muted">
             Construction-linked acquisitions. Capital is often staged; income is usually delayed until handover and
@@ -96,7 +103,7 @@ export default function DubaiInvestPage() {
           </ul>
         </section>
 
-        <section id="secondary" className="scroll-mt-28 mt-14 border-t border-line pt-10">
+        <section id="secondary" className="page-block">
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Secondary market</h2>
           <p className="mt-4 text-ink-muted">
             Completed and resale stock. Day-one capital is typically higher; rental income can start sooner; the asset
@@ -133,7 +140,7 @@ export default function DubaiInvestPage() {
           </div>
         </section>
 
-        <section id="costs-yield" className="scroll-mt-28 mt-14 border-t border-line pt-10">
+        <section id="costs-yield" className="page-block">
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Costs & yield</h2>
           <p className="mt-4 text-ink-muted">{regulatory.yields.dubaiGrossIllustrative.value}</p>
           <p className="mt-2 text-sm text-ink-muted">{regulatory.yields.dubaiGrossIllustrative.note}</p>
@@ -153,7 +160,10 @@ export default function DubaiInvestPage() {
           </p>
         </section>
 
-        <section id="latest-analysis" className="scroll-mt-28 mt-14 border-t border-line pt-10">
+        <AreaCarousel market="dubai" />
+        <DeveloperCarousel market="dubai" />
+
+        <section id="latest-analysis" className="page-block">
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Latest analysis</h2>
           <ul className="mt-6 space-y-5">
             {latest.map((article) => (

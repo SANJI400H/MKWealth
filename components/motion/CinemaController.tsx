@@ -11,14 +11,22 @@ import {
   type ReactNode,
 } from "react";
 
+/** Video cinema acts — cue play/final on arrive */
 export const CINEMA_IDS = ["home", "about", "services"] as const;
 export type CinemaId = (typeof CINEMA_IDS)[number];
+
+/**
+ * Full opening snap sequence: cinema film + Philosophy + Approach.
+ * One wheel/swipe = one section. After formula, free document scroll resumes.
+ */
+export const OPENING_SNAP_IDS = ["home", "about", "services", "philosophy", "formula"] as const;
+export type OpeningSnapId = (typeof OPENING_SNAP_IDS)[number];
+
 export type CinemaArriveMode = "play" | "final";
 
 type CinemaCue = {
   id: CinemaId;
   mode: CinemaArriveMode;
-  /** Bumps on every navigate so scenes re-run even for the same id/mode. */
   token: number;
 };
 
@@ -53,11 +61,14 @@ function isCinemaId(id: string): id is CinemaId {
   return (CINEMA_IDS as readonly string[]).includes(id);
 }
 
+function isOpeningSnapId(id: string): id is OpeningSnapId {
+  return (OPENING_SNAP_IDS as readonly string[]).includes(id);
+}
+
 function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-/** Smooth in, out locomotion for section handoffs. */
 function easeInOutCubic(t: number) {
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 }
@@ -66,6 +77,15 @@ function scrollTopForId(id: string) {
   const el = document.getElementById(id);
   if (!el) return null;
   return el.getBoundingClientRect().top + window.scrollY;
+}
+
+function snapZoneBottom() {
+  const el = document.getElementById("formula");
+  if (!el) {
+    const services = document.getElementById("services");
+    return (services?.offsetTop ?? 0) + (services?.offsetHeight ?? window.innerHeight);
+  }
+  return el.offsetTop + el.offsetHeight;
 }
 
 function animateScrollTo(
@@ -114,8 +134,10 @@ function scrollToId(id: string, onDone?: () => void) {
 }
 
 /**
- * One wheel / swipe = one cinema section with a visible scroll transition.
- * Forward first visit → play after the handoff; scroll-up or nav → final frame + copy.
+ * One wheel / swipe = one opening section.
+ * Video cues only for home / about / services.
+ * Philosophy + Approach snap as full-viewport editorial acts.
+ * After formula → normal document scrolling.
  */
 export default function CinemaController({ children }: { children: ReactNode }) {
   const indexRef = useRef(0);
@@ -145,25 +167,25 @@ export default function CinemaController({ children }: { children: ReactNode }) 
     window.scrollTo({ top: 0, behavior: "auto" });
     emitCue("home", "play");
 
-    const goCinema = (index: number, prefer: CinemaArriveMode) => {
-      if (index < 0 || index >= CINEMA_IDS.length) return;
-      const id = CINEMA_IDS[index];
+    const goSnap = (index: number, prefer: CinemaArriveMode) => {
+      if (index < 0 || index >= OPENING_SNAP_IDS.length) return;
+      const id = OPENING_SNAP_IDS[index];
       indexRef.current = index;
 
-      const mode: CinemaArriveMode =
-        prefer === "final" || playedRef.current.has(id) ? "final" : "play";
-
       cancelScrollRef.current?.();
-      // Scroll first so the section handoff is visible; cue video as we settle.
       cancelScrollRef.current = scrollToId(id, () => {
-        emitCue(id, mode);
+        if (isCinemaId(id)) {
+          const mode: CinemaArriveMode =
+            prefer === "final" || playedRef.current.has(id) ? "final" : "play";
+          emitCue(id, mode);
+        }
         cancelScrollRef.current = null;
       });
     };
 
-    const afterServicesToGallery = () => {
+    const releaseToBrowse = () => {
       cancelScrollRef.current?.();
-      cancelScrollRef.current = scrollToId("invest", () => {
+      cancelScrollRef.current = scrollToId("investment-profile", () => {
         cancelScrollRef.current = null;
       });
     };
@@ -175,35 +197,31 @@ export default function CinemaController({ children }: { children: ReactNode }) 
         cooldownRef.current = false;
       }, snapDurationMs() + 100);
 
-      const servicesEl = document.getElementById("services");
-      const servicesBottom =
-        (servicesEl?.offsetTop ?? 0) + (servicesEl?.offsetHeight ?? window.innerHeight);
-      const inCinema = window.scrollY < servicesBottom - 24;
+      const zoneBottom = snapZoneBottom();
+      const inSnap = window.scrollY < zoneBottom - 24;
 
-      if (!inCinema) {
-        if (dir < 0) goCinema(CINEMA_IDS.length - 1, "final");
+      if (!inSnap) {
+        if (dir < 0) goSnap(OPENING_SNAP_IDS.length - 1, "final");
         return;
       }
 
       const next = indexRef.current + dir;
 
-      if (dir > 0 && indexRef.current >= CINEMA_IDS.length - 1) {
-        afterServicesToGallery();
+      if (dir > 0 && indexRef.current >= OPENING_SNAP_IDS.length - 1) {
+        releaseToBrowse();
         return;
       }
       if (next < 0) return;
 
-      goCinema(next, dir > 0 ? "play" : "final");
+      goSnap(next, dir > 0 ? "play" : "final");
     };
 
     const onWheel = (e: WheelEvent) => {
-      const servicesEl = document.getElementById("services");
-      const servicesBottom =
-        (servicesEl?.offsetTop ?? 0) + (servicesEl?.offsetHeight ?? window.innerHeight);
-      const inCinema = window.scrollY < servicesBottom - 24;
-      const pullingBackToCinema = !inCinema && e.deltaY < 0 && window.scrollY <= servicesBottom + 120;
+      const zoneBottom = snapZoneBottom();
+      const inSnap = window.scrollY < zoneBottom - 24;
+      const pullingBack = !inSnap && e.deltaY < 0 && window.scrollY <= zoneBottom + 120;
 
-      if (!inCinema && !pullingBackToCinema) return;
+      if (!inSnap && !pullingBack) return;
 
       e.preventDefault();
       if (Math.abs(e.deltaY) < 6) return;
@@ -211,10 +229,8 @@ export default function CinemaController({ children }: { children: ReactNode }) 
     };
 
     const onKey = (e: KeyboardEvent) => {
-      const servicesEl = document.getElementById("services");
-      const servicesBottom =
-        (servicesEl?.offsetTop ?? 0) + (servicesEl?.offsetHeight ?? window.innerHeight);
-      if (window.scrollY >= servicesBottom - 24) return;
+      const zoneBottom = snapZoneBottom();
+      if (window.scrollY >= zoneBottom - 24) return;
 
       if (["ArrowDown", "PageDown", " "].includes(e.key)) {
         e.preventDefault();
@@ -234,11 +250,9 @@ export default function CinemaController({ children }: { children: ReactNode }) 
       touchYRef.current = null;
       if (start == null) return;
 
-      const servicesEl = document.getElementById("services");
-      const servicesBottom =
-        (servicesEl?.offsetTop ?? 0) + (servicesEl?.offsetHeight ?? window.innerHeight);
-      const inCinema = window.scrollY < servicesBottom - 24;
-      if (!inCinema) return;
+      const zoneBottom = snapZoneBottom();
+      const inSnap = window.scrollY < zoneBottom - 24;
+      if (!inSnap) return;
 
       const end = e.changedTouches[0]?.clientY ?? start;
       const dy = start - end;
@@ -250,9 +264,9 @@ export default function CinemaController({ children }: { children: ReactNode }) 
       const id = (e as CustomEvent<{ id: string }>).detail?.id;
       if (!id) return;
 
-      if (isCinemaId(id)) {
-        const idx = CINEMA_IDS.indexOf(id);
-        goCinema(idx, "final");
+      if (isOpeningSnapId(id)) {
+        const idx = OPENING_SNAP_IDS.indexOf(id);
+        goSnap(idx, "final");
         return;
       }
 
@@ -261,13 +275,12 @@ export default function CinemaController({ children }: { children: ReactNode }) 
     };
 
     const onScroll = () => {
-      // Don't fight an in-flight section transition.
       if (cancelScrollRef.current) return;
 
       let best = indexRef.current;
       let bestDist = Infinity;
-      CINEMA_IDS.forEach((cinemaId, i) => {
-        const el = document.getElementById(cinemaId);
+      OPENING_SNAP_IDS.forEach((snapId, i) => {
+        const el = document.getElementById(snapId);
         if (!el) return;
         const dist = Math.abs(el.getBoundingClientRect().top);
         if (dist < bestDist) {

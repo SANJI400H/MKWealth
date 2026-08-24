@@ -4,6 +4,8 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FaqSection from "@/components/insights/FaqSection";
 import GuideCallout from "@/components/insights/GuideCallout";
 import SiteFooter from "@/components/sections/SiteFooter";
+import AreaCarousel from "@/components/invest/AreaCarousel";
+import DeveloperCarousel from "@/components/invest/DeveloperCarousel";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -39,7 +41,7 @@ const faqItems = [
 export default function AbuDhabiInvestPage() {
   return (
     <>
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="page-shell-wide">
         <Breadcrumbs
           items={[
             { name: "Home", path: "/" },
@@ -48,15 +50,15 @@ export default function AbuDhabiInvestPage() {
           ]}
         />
 
-        <h1 className="mt-6 font-display text-4xl font-bold text-ink sm:text-5xl">
+        <h1 className="page-h1">
           Abu Dhabi Real Estate Investment
         </h1>
-        <p className="mt-4 text-lg text-ink-muted">
+        <p className="mt-4 max-w-3xl text-lg text-ink-muted">
           Covered as regional context against Dubai, useful for comparison, not presented as equal day-to-day
           deal flow.
         </p>
 
-        <section className="mt-12">
+        <section className="mt-12 max-w-3xl">
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Who Abu Dhabi suits</h2>
           <p className="mt-4 text-ink-muted">
             Investors prioritizing government-anchored, lower-volatility assets and a longer hold. The secondary
@@ -64,13 +66,16 @@ export default function AbuDhabiInvestPage() {
           </p>
         </section>
 
-        <section className="mt-12">
+        <section className="mt-12 max-w-3xl">
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Ownership & areas</h2>
           <p className="mt-4 text-ink-muted">
             Freehold for foreigners in designated zones including Saadiyat, Yas, Al Reem, and Al Maryah. The
             eligible list is shorter than Dubai&apos;s, and inventory is more institutionally paced.
           </p>
         </section>
+
+        <AreaCarousel market="abu-dhabi" />
+        <DeveloperCarousel market="abu-dhabi" />
 
         <p className="mt-12 text-ink-muted">
           See also{" "}

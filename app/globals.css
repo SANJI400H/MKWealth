@@ -65,9 +65,14 @@ body {
 }
 
 @layer components {
-  /* Primary — solid maroon, white type */
+  /* ——— Buttons (shared height / type / padding) ——— */
+  .btn-primary,
+  .btn-ghost-dark {
+    @apply inline-flex min-h-11 items-center justify-center rounded-full px-7 text-[13px] font-semibold tracking-[-0.01em];
+  }
+
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full px-7 py-3 text-[13px] font-semibold tracking-[-0.01em];
+    @apply py-3;
     background: var(--maroon);
     color: var(--brand-white);
     transition:
@@ -93,7 +98,7 @@ body {
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center rounded-full px-1 py-3 text-[13px] font-medium tracking-[-0.01em];
+    @apply inline-flex min-h-11 items-center justify-center rounded-full px-1 py-3 text-[13px] font-semibold tracking-[-0.01em];
     transition:
       color 0.4s var(--ease-apple),
       opacity 0.4s var(--ease-apple),
@@ -101,7 +106,7 @@ body {
   }
 
   .btn-ghost-light {
-    @apply btn-ghost text-white/90;
+    @apply btn-ghost font-medium text-white/90;
     background: transparent;
   }
 
@@ -111,16 +116,39 @@ body {
   }
 
   .btn-ghost-dark {
-    @apply btn-ghost text-[color:var(--ink)];
+    @apply text-[color:var(--ink)];
     border: 1px solid var(--silver);
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    transition:
+      color 0.35s var(--ease-apple),
+      border-color 0.35s var(--ease-apple),
+      transform 0.35s var(--ease-out-expo);
   }
 
   .btn-ghost-dark:hover {
     color: var(--maroon);
     border-color: var(--maroon);
     transform: translateY(-1px);
+  }
+
+  /* Compact — header / dense chrome only */
+  .btn-sm {
+    @apply min-h-9 px-5 py-2 text-[12px];
+  }
+
+  .cta-row {
+    @apply flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4;
+  }
+
+  .text-link {
+    @apply text-sm font-semibold text-maroon transition hover:underline;
+  }
+
+  .text-link-muted {
+    @apply text-sm font-semibold text-ink transition hover:text-maroon;
+  }
+
+  .carousel-btn {
+    @apply inline-flex h-11 w-11 shrink-0 items-center justify-center border border-silver text-ink transition enabled:hover:border-maroon enabled:hover:text-maroon disabled:cursor-not-allowed disabled:opacity-30;
   }
 
   .eyebrow {
@@ -132,14 +160,67 @@ body {
   .display {
     @apply font-display font-bold tracking-[-0.035em] text-balance;
   }
+
+  /* ——— Layout rhythm ——— */
+  .page-shell {
+    @apply mx-auto w-full max-w-3xl px-5 py-16 sm:px-8 sm:py-20;
+  }
+
+  .page-shell-wide {
+    @apply mx-auto w-full max-w-content px-5 py-16 sm:px-8 sm:py-20;
+  }
+
+  .section-pad {
+    @apply border-t border-line py-24 sm:py-32;
+  }
+
+  .section-inner {
+    @apply mx-auto max-w-content px-5 sm:px-8;
+  }
+
+  .section-title {
+    @apply display mt-5 max-w-3xl text-4xl text-ink sm:text-5xl lg:text-6xl;
+  }
+
+  .section-lead {
+    @apply mt-6 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg;
+  }
+
+  .section-body {
+    @apply mt-12 sm:mt-14;
+  }
+
+  .page-h1 {
+    @apply mt-8 font-display text-4xl font-bold tracking-tight text-ink sm:mt-10 sm:text-5xl;
+  }
+
+  .page-lead {
+    @apply mt-4 max-w-2xl text-lg leading-relaxed text-ink-muted;
+  }
+
+  .page-block {
+    @apply scroll-mt-28 mt-14 border-t border-line pt-10;
+  }
+
+  .card-pad {
+    @apply p-6 sm:p-7;
+  }
+
+  .card-title {
+    @apply font-display text-xl font-bold tracking-tight text-ink sm:text-2xl;
+  }
+
+  .card-title-lg {
+    @apply font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl;
+  }
 }
 
 .reveal {
   opacity: 0;
-  transform: translate3d(0, 18px, 0);
+  transform: translate3d(0, 14px, 0);
   transition:
-    opacity 0.7s var(--ease-out-expo),
-    transform 0.7s var(--ease-out-expo);
+    opacity 0.55s var(--ease-out-expo),
+    transform 0.55s var(--ease-out-expo);
 }
 
 .reveal.is-visible {

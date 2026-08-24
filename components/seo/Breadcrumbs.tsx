@@ -6,7 +6,7 @@ export default function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
   return (
     <>
       <JsonLd data={breadcrumbListSchema(items)} />
-      <nav aria-label="Breadcrumb" className="text-xs font-semibold uppercase tracking-wide text-ink-muted">
+      <nav aria-label="Breadcrumb" className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
         <ol className="flex flex-wrap items-center gap-2">
           {items.map((item, index) => (
             <li key={item.path} className="flex items-center gap-2">

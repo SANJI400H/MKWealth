@@ -219,7 +219,7 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
   },
 ];
 
-export const cinemaSectionIds = ["home", "about", "services"] as const;
+export const cinemaSectionIds = ["home", "about", "services", "philosophy", "formula"] as const;
 
 export type SectionNavItem = { id: string; label: string };
 
@@ -230,7 +230,7 @@ export const aboutSectionNav: SectionNavItem[] = [
   { id: "methodology", label: "Methodology" },
   { id: "credentials", label: "Credentials" },
   { id: "media", label: "Media" },
-  { id: "results", label: "Client Results" },
+  { id: "results", label: "Case studies" },
 ];
 
 export const dubaiSectionNav: SectionNavItem[] = [
@@ -238,6 +238,8 @@ export const dubaiSectionNav: SectionNavItem[] = [
   { id: "off-plan", label: "Off-Plan" },
   { id: "secondary", label: "Secondary" },
   { id: "costs-yield", label: "Costs & Yield" },
+  { id: "areas", label: "Areas" },
+  { id: "developers", label: "Developers" },
   { id: "latest-analysis", label: "Latest Analysis" },
 ];
 

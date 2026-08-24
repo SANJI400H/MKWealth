@@ -36,10 +36,10 @@ export default function InsightsHubPage({
 
   return (
     <>
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="page-shell">
         <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Insights", path: "/insights" }]} />
 
-        <h1 className="mt-6 font-display text-4xl font-bold text-ink sm:text-5xl">Investment Insights</h1>
+        <h1 className="page-h1">Investment Insights</h1>
         <p className="mt-4 text-lg text-ink-muted">
           Public knowledge from {siteConfig.name}: how to read yields, payment plans, markets, and risk — before
           you decide what to buy.

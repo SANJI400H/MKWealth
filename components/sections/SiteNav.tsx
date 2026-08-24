@@ -330,7 +330,7 @@ export default function SiteNav() {
         </nav>
 
         <div className="hidden lg:block">
-          <BookMeetingLink href="/strategy-session" className="btn-primary !px-5 !py-2.5 text-[12px]">
+          <BookMeetingLink href="/strategy-session" className="btn-primary btn-sm">
             Book Strategy Session
           </BookMeetingLink>
         </div>

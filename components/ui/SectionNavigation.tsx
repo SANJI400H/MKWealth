@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 export type SectionNavItem = { id: string; label: string };
 
 /**
- * Restrained local section nav for deep editorial pages.
- * Does not compete with the global header.
+ * Quiet on-page rail for deep editorial pages.
+ * Left-aligned text; thin active underline — does not compete with global header.
  */
 export default function SectionNavigation({
   items,
@@ -40,7 +40,7 @@ export default function SectionNavigation({
         }
         sync();
       },
-      { rootMargin: "-30% 0px -55% 0px", threshold: [0, 0.2, 0.45, 0.7, 1] }
+      { rootMargin: "-28% 0px -55% 0px", threshold: [0, 0.2, 0.45, 0.7, 1] }
     );
 
     for (const item of items) {
@@ -52,28 +52,34 @@ export default function SectionNavigation({
   }, [items]);
 
   return (
-    <nav
-      aria-label="On this page"
-      className="sticky top-14 z-30 -mx-6 mb-10 border-y border-line bg-paper/95 backdrop-blur-sm sm:top-16"
-    >
-      <div className="flex items-center gap-1 overflow-x-auto px-6 py-3 scrollbar-none">
-        {items.map((item) => (
-          <a
-            key={item.id}
-            href={`#${item.id}`}
-            className={`shrink-0 px-3 py-1.5 text-[12px] font-medium tracking-[-0.01em] transition-colors ${
-              active === item.id ? "text-ink" : "text-ink-muted hover:text-ink"
-            }`}
-          >
-            {item.label}
-          </a>
-        ))}
+    <nav aria-label="On this page" className="sticky top-14 z-30 mb-10 bg-paper/90 backdrop-blur-sm sm:top-16">
+      <div className="no-scrollbar -mx-1 flex items-end gap-0 overflow-x-auto border-b border-line px-1">
+        {items.map((item) => {
+          const isActive = active === item.id;
+          return (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`relative shrink-0 px-3 pb-3 pt-2 text-[12px] tracking-[-0.01em] transition-colors sm:px-3.5 ${
+                isActive ? "font-semibold text-ink" : "font-medium text-ink-muted hover:text-ink"
+              }`}
+            >
+              {item.label}
+              <span
+                aria-hidden
+                className={`absolute inset-x-3 bottom-0 h-px transition-colors sm:inset-x-3.5 ${
+                  isActive ? "bg-maroon" : "bg-transparent"
+                }`}
+              />
+            </a>
+          );
+        })}
         {cta ? (
           <a
             href={cta.href}
-            className="ml-auto shrink-0 px-3 py-1.5 text-[12px] font-semibold text-maroon hover:underline"
+            className="ml-auto shrink-0 px-3 pb-3 pt-2 text-[12px] font-semibold text-maroon hover:underline"
           >
-            {cta.label}
+            {cta.label} →
           </a>
         ) : null}
       </div>

@@ -8,22 +8,22 @@ import { siteConfig } from "@/lib/site-config";
 
 export default function Contact() {
   return (
-    <section id="contact" className="border-t border-line bg-paper py-24 sm:py-32" aria-label="Contact">
-      <div className="mx-auto max-w-content px-5 sm:px-8">
+    <section id="contact" className="section-pad bg-paper" aria-label="Contact">
+      <div className="section-inner">
         <RevealOnScroll>
           <p className="eyebrow">Conversion</p>
-          <h2 className="display mt-5 max-w-3xl text-4xl text-ink sm:text-6xl lg:text-7xl">
+          <h2 className="section-title">
             Your 30-minute
             <br />
             property strategy session.
           </h2>
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-ink-muted sm:text-lg">
+          <p className="section-lead">
             Before discussing individual properties, we establish what the investment actually needs to achieve.
           </p>
         </RevealOnScroll>
 
-        <RevealOnScroll delayMs={80} className="mt-12">
-          <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
+        <RevealOnScroll delayMs={80} className="section-body">
+          <div className="cta-row">
             <BookMeetingLink href="/strategy-session" className="btn-primary w-full sm:w-auto" />
             <Link href="/analyse" className="btn-ghost-dark w-full justify-center sm:w-auto">
               {siteConfig.cta.analyse}

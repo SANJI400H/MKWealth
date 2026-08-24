@@ -17,10 +17,10 @@ export const metadata: Metadata = pageMetadata({
 export default function InvestHubPage() {
   return (
     <>
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="page-shell">
         <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Invest", path: "/invest" }]} />
 
-        <h1 className="mt-6 font-display text-4xl font-bold text-ink sm:text-5xl">Invest in the UAE</h1>
+        <h1 className="page-h1">Invest in the UAE</h1>
         <p className="mt-4 text-lg text-ink-muted">
           Three markets. Different rules. {siteConfig.name} treats these as intelligence pillars — not inventory
           catalogues.

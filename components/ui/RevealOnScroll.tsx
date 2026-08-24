@@ -8,15 +8,22 @@ interface RevealOnScrollProps {
   delayMs?: number;
 }
 
-// Adds `.reveal` (defined in globals.css) and toggles `.is-visible` once the
-// element crosses into the viewport. Falls back to always-visible content if
-// IntersectionObserver is unavailable or the element never enters view.
+/** Subtle post-cinema reveal. Respects prefers-reduced-motion. */
 export default function RevealOnScroll({ children, className = "", delayMs = 0 }: RevealOnScrollProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const node = ref.current;
-    if (!node || typeof IntersectionObserver === "undefined") return;
+    if (!node) return;
+
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduce || typeof IntersectionObserver === "undefined") {
+      node.classList.add("is-visible");
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -27,7 +34,7 @@ export default function RevealOnScroll({ children, className = "", delayMs = 0 }
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
     );
 
     observer.observe(node);

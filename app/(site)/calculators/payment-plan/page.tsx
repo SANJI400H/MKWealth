@@ -15,7 +15,7 @@ export const metadata: Metadata = pageMetadata({
 export default function PaymentPlanPage() {
   return (
     <>
-      <main className="mx-auto max-w-5xl px-6 py-16">
+      <main className="page-shell-wide">
         <Breadcrumbs
           items={[
             { name: "Home", path: "/" },

@@ -17,7 +17,7 @@ export default function SiteFooter() {
           <p className="mt-1 text-sm text-ink-muted">
             {siteConfig.company} {siteConfig.companyRole} · {siteConfig.location}
           </p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="mt-6 cta-row">
             <BookMeetingLink href="/strategy-session" className="btn-primary" />
             <WhatsAppLink
               message="Hi Morgan, I found your site and would like to connect."
