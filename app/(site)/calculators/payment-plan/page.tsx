@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import SiteFooter from "@/components/sections/SiteFooter";
 import PaymentPlanCalculator from "@/components/calculators/PaymentPlanCalculator";
+import { ToolsGateProvider } from "@/components/tools/ToolsGateProvider";
 import { regulatory } from "@/content/regulatory";
 import { pageMetadata } from "@/lib/metadata";
+import { TOOLS_ACCESS_COOKIE, verifyToolsAccessCookie } from "@/lib/tools-access";
 
 export const metadata: Metadata = pageMetadata({
   title: "Off-Plan Payment Plan Calculator | Morgan Kaiser",
@@ -12,14 +15,16 @@ export const metadata: Metadata = pageMetadata({
   path: "/calculators/payment-plan",
 });
 
-export default function PaymentPlanPage() {
+export default async function PaymentPlanPage() {
+  const unlocked = await verifyToolsAccessCookie(cookies().get(TOOLS_ACCESS_COOKIE)?.value);
+
   return (
     <>
       <main className="page-shell-wide">
         <Breadcrumbs
           items={[
             { name: "Home", path: "/" },
-            { name: "Calculators", path: "/calculators" },
+            { name: "Tools", path: "/tools" },
             { name: "Payment Plan", path: "/calculators/payment-plan" },
           ]}
         />
@@ -27,10 +32,16 @@ export default function PaymentPlanPage() {
           Off-Plan Payment Plan Calculator
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-ink-muted">
-          Match SPA instalments to your liquidity. Marketing shorthand is not a cash-flow plan.
+          Match SPA instalments to your liquidity. Register once to edit the schedule and reveal the liquidity check.
         </p>
         <div className="mt-10">
-          <PaymentPlanCalculator />
+          <ToolsGateProvider
+            initialUnlocked={unlocked}
+            title="Unlock calculator results"
+            intro="Enter your name, WhatsApp number, and email to edit assumptions and see your numbers."
+          >
+            <PaymentPlanCalculator />
+          </ToolsGateProvider>
         </div>
         <p className="mt-10 max-w-3xl text-xs text-ink-muted">{regulatory.disclaimerShort}</p>
       </main>

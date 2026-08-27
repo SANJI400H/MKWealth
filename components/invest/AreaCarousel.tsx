@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import EditorialCarousel from "@/components/ui/EditorialCarousel";
-import EditorialImagePlaceholder from "@/components/ui/EditorialImagePlaceholder";
+import EditorialImage from "@/components/ui/EditorialImage";
+import { areaImages } from "@/content/editorial-images";
 import { getAreasByMarket, type AreaMarket } from "@/content/areas";
 
 /** Image-led areas rail — only published area routes for the given market. */
@@ -12,20 +13,32 @@ export default function AreaCarousel({ market }: { market: AreaMarket }) {
 
   const useGrid = areas.length <= 2;
 
-  const cards = areas.map((area) => (
-    <Link
-      key={area.slug}
-      href={`/areas/${area.slug}`}
-      className="group flex h-full flex-col border border-silver bg-paper"
-    >
-      <EditorialImagePlaceholder categoryLabel="Area" ratio="4:5" className="border-0 border-b border-silver" />
-      <div className="card-pad flex flex-1 flex-col space-y-3">
-        <h3 className="card-title transition group-hover:text-maroon">{area.name}</h3>
-        <p className="text-sm leading-relaxed text-ink-muted">{area.tagline}</p>
-        <span className="text-link mt-auto pt-2 transition group-hover:translate-x-1">Explore →</span>
-      </div>
-    </Link>
-  ));
+  const cards = areas.map((area) => {
+    const photo = area.image
+      ? { src: area.image, alt: area.imageAlt ?? area.name }
+      : areaImages[area.slug];
+
+    return (
+      <Link
+        key={area.slug}
+        href={`/areas/${area.slug}`}
+        className="group flex h-full flex-col border border-silver bg-paper"
+      >
+        <EditorialImage
+          src={photo?.src}
+          alt={photo?.alt ?? `${area.name} — UAE micro-market context`}
+          categoryLabel="Area"
+          ratio="4:5"
+          className="border-0 border-b border-silver"
+        />
+        <div className="card-pad flex flex-1 flex-col space-y-3">
+          <h3 className="card-title transition group-hover:text-maroon">{area.name}</h3>
+          <p className="text-sm leading-relaxed text-ink-muted">{area.tagline}</p>
+          <span className="text-link mt-auto pt-2 transition group-hover:translate-x-1">Explore →</span>
+        </div>
+      </Link>
+    );
+  });
 
   return (
     <section id="areas" className="page-block" aria-label="Areas to understand">

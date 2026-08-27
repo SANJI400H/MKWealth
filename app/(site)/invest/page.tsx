@@ -50,14 +50,11 @@ export default function InvestHubPage() {
         </ul>
 
         <div className="mt-14 flex flex-col gap-3 border-t border-line pt-10 sm:flex-row sm:flex-wrap">
-          <Link href="/calculators/true-yield" className="btn-ghost-dark w-full justify-center sm:w-auto">
-            True Yield calculator
+          <Link href="/strategy-session" className="btn-primary w-full sm:w-auto">
+            {siteConfig.cta.strategySession}
           </Link>
-          <Link href="/analyse" className="btn-primary w-full sm:w-auto">
-            {siteConfig.cta.analyse}
-          </Link>
-          <Link href="/insights" className="btn-ghost-dark w-full justify-center sm:w-auto">
-            Insights
+          <Link href="/work-with-morgan" className="btn-ghost-dark w-full justify-center sm:w-auto">
+            Work With Morgan
           </Link>
         </div>
       </main>

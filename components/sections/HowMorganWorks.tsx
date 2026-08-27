@@ -4,10 +4,13 @@ import Link from "next/link";
 import { useState } from "react";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import EditorialCarousel from "@/components/ui/EditorialCarousel";
-import EditorialImagePlaceholder from "@/components/ui/EditorialImagePlaceholder";
+import EditorialImage from "@/components/ui/EditorialImage";
+import { serviceImages } from "@/content/editorial-images";
 import { howMorganWorksStages, type HowMorganStage } from "@/content/how-morgan-works";
 
 function StageBody({ stage }: { stage: HowMorganStage }) {
+  const photo = serviceImages[stage.assetId];
+
   return (
     <div className="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start lg:gap-12">
       <div>
@@ -28,10 +31,13 @@ function StageBody({ stage }: { stage: HowMorganStage }) {
           {stage.cta.label} →
         </Link>
       </div>
-      <EditorialImagePlaceholder
+      <EditorialImage
+        src={photo?.src}
+        alt={photo?.alt ?? `${stage.title} — engagement stage`}
         assetId={stage.assetId}
         categoryLabel={stage.categoryLabel}
         ratio="16:10"
+        className="border border-silver"
       />
     </div>
   );

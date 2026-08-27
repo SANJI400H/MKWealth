@@ -8,7 +8,6 @@ import { morganProfile } from "@/content/morgan-profile";
  */
 export default function Proof() {
   const hasCredentials = Boolean(morganProfile.reraOrDldCredential || morganProfile.awards?.length);
-  const hasMedia = Boolean(morganProfile.mediaAppearances?.length);
 
   return (
     <section id="proof" className="section-pad bg-paper" aria-label="Proof">
@@ -17,12 +16,11 @@ export default function Proof() {
           <p className="eyebrow">Proven in practice</p>
           <h2 className="section-title">After the numbers.</h2>
           <p className="section-lead max-w-2xl">
-            Credentials, results, and recognition appear here only when verified and approved — never as
-            placeholders presented as fact.
+            Credentials and methodology appear here only when verified — never as placeholders presented as fact.
           </p>
         </RevealOnScroll>
 
-        <div className="section-body grid gap-8 sm:grid-cols-3 sm:gap-10">
+        <div className="section-body grid gap-8 sm:grid-cols-2 sm:gap-10">
           {[
             {
               title: "Methodology",
@@ -32,14 +30,11 @@ export default function Proof() {
             {
               title: "Credentials",
               body: hasCredentials
-                ? "Verified professional credentials."
+                ? `${morganProfile.reraOrDldCredential ?? "Licence on file"}${
+                    morganProfile.awards.length ? ` · ${morganProfile.awards.join(" · ")}` : ""
+                  }`
                 : "Structure ready — awaiting verified licence and recognition details.",
               href: "/about#credentials",
-            },
-            {
-              title: "Client results",
-              body: "Case studies publish only with permission. Anonymised examples welcome.",
-              href: "/case-studies",
             },
           ].map((item) => (
             <RevealOnScroll key={item.title}>
@@ -52,14 +47,6 @@ export default function Proof() {
             </RevealOnScroll>
           ))}
         </div>
-
-        {hasMedia ? (
-          <RevealOnScroll className="mt-10">
-            <Link href="/about#media" className="text-sm font-semibold text-maroon hover:underline">
-              Media & appearances →
-            </Link>
-          </RevealOnScroll>
-        ) : null}
       </div>
     </section>
   );

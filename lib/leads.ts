@@ -9,6 +9,7 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const LEAD_SOURCES = [
   "guide",
   "guide-gate", // legacy alias
+  "tools",
   "calculator",
   "analyse",
   "strategy-session",
@@ -147,32 +148,37 @@ async function notifyByEmail(payload: LeadPayload) {
 
   if (!apiKey || !to) return false;
 
-  const subject = `New lead (${payload.source}${payload.intent ? ` · ${payload.intent}` : ""})`;
-  const lines = Object.entries(payload)
-    .filter(([, v]) => v)
-    .map(([k, v]) => `${k}: ${v}`);
+  try {
+    const subject = `New lead (${payload.source}${payload.intent ? ` · ${payload.intent}` : ""})`;
+    const lines = Object.entries(payload)
+      .filter(([, v]) => v)
+      .map(([k, v]) => `${k}: ${v}`);
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from,
-      to: [to],
-      subject,
-      text: lines.join("\n"),
-    }),
-  });
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        subject,
+        text: lines.join("\n"),
+      }),
+    });
 
-  if (!response.ok) {
-    const detail = await response.text().catch(() => "");
-    console.error("lead: Resend failed", response.status, detail);
+    if (!response.ok) {
+      const detail = await response.text().catch(() => "");
+      console.error("lead: Resend failed", response.status, detail);
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error("lead: Resend request error", error);
     return false;
   }
-
-  return true;
 }
 
 export async function submitLead(body: LeadInput) {

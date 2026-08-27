@@ -9,7 +9,6 @@ export interface Developer {
   markets: ("dubai" | "abu-dhabi" | "rak")[];
   tagline: string;
   overview: string;
-  /** Explicit placeholder until Morgan confirms. */
   morganExperience: string;
   trackRecord: string;
   projects: string[];
@@ -22,8 +21,8 @@ export interface Developer {
   workingNote?: string;
 }
 
-const WORKING =
-  "Working developer evaluation framework. Morgan’s personal experience and rankings are placeholders until verified. Not a recommendation to buy any project.";
+const ACTIVE =
+  "Morgan listed this developer among those he knows particularly well or actively works with. That is evaluation access — not an endorsement of any project.";
 
 export const developers: Developer[] = [
   {
@@ -32,11 +31,11 @@ export const developers: Developer[] = [
     status: "published",
     markets: ["dubai"],
     tagline: "Large-scale master developer — brand strength is not a substitute for unit underwriting.",
-    workingNote: WORKING,
+    workingNote: ACTIVE,
     overview:
       "Emaar is among the most visible Dubai developers, associated with landmark communities and high marketing reach. Visibility can support liquidity narratives, but each project still needs price, fees, delivery timing, and exit logic underwritten separately.",
     morganExperience:
-      "TODO: MORGAN_DISCOVERY — document real transaction experience with Emaar projects (if any), without inventing volume or rankings.",
+      "Included in Morgan’s active developer set for international portfolio work. Treat every launch as a separate underwrite — brand does not waive payment-plan, fee or exit scrutiny.",
     trackRecord:
       "Public track record should be read from delivered communities and disclosed project histories — not from brochure claims alone. This page does not publish unverified delivery statistics.",
     projects: [
@@ -56,7 +55,7 @@ export const developers: Developer[] = [
       "Assuming past landmark success guarantees future launches",
     ],
     relatedInsightSlugs: ["how-dubai-off-plan-payment-plans-work", "gross-vs-net-yield-dubai-property"],
-    sources: [{ label: "Framework page — pending Morgan-verified project notes" }],
+    sources: [{ label: "Morgan discovery questionnaire — active developer list (Aug 2026)" }],
   },
   {
     slug: "nakheel",
@@ -64,11 +63,11 @@ export const developers: Developer[] = [
     status: "published",
     markets: ["dubai"],
     tagline: "Waterfront and island-scale master planning — delivery and masterplan risk sit beside brand.",
-    workingNote: WORKING,
+    workingNote: ACTIVE,
     overview:
       "Nakheel is closely associated with large waterfront and island concepts in Dubai. Masterplan ambition can create long-dated optionality — and long-dated uncertainty. Underwrite the phase you can actually buy.",
     morganExperience:
-      "TODO: MORGAN_DISCOVERY — Morgan’s direct experience with Nakheel stock (if any).",
+      "Included in Morgan’s active developer set. Palm Jebel Ali and related island product sit in his priority community list — still phase-by-phase underwriting only.",
     trackRecord:
       "Assess delivered phases vs announced masterplan. Do not treat concept renders as completion evidence.",
     projects: [
@@ -88,7 +87,7 @@ export const developers: Developer[] = [
       "Cross-cycle hold requirements",
     ],
     relatedInsightSlugs: ["how-dubai-off-plan-payment-plans-work"],
-    sources: [{ label: "Framework page — pending Morgan-verified project notes" }],
+    sources: [{ label: "Morgan discovery questionnaire — active developer list (Aug 2026)" }],
   },
   {
     slug: "aldar",
@@ -96,11 +95,11 @@ export const developers: Developer[] = [
     status: "published",
     markets: ["abu-dhabi"],
     tagline: "Major Abu Dhabi developer — evaluate on AD liquidity and cycle, not Dubai comps.",
-    workingNote: WORKING,
+    workingNote: ACTIVE,
     overview:
       "Aldar is a primary Abu Dhabi development name across residential and mixed-use contexts. Cross-emirate investors should reset liquidity and yield expectations vs Dubai before comparing ticket prices.",
     morganExperience:
-      "TODO: MORGAN_DISCOVERY — Morgan’s direct experience with Aldar projects (if any).",
+      "Included in Morgan’s active developer set for Abu Dhabi work (including island / leisure-adjacent contexts such as Saadiyat and Yas — underwrite the specific project).",
     trackRecord:
       "Use disclosed Abu Dhabi delivery history and community performance — this page does not invent rankings.",
     projects: [
@@ -120,7 +119,102 @@ export const developers: Developer[] = [
       "Fee and process differences vs Dubai",
     ],
     relatedInsightSlugs: [],
-    sources: [{ label: "Framework page — pending Morgan-verified project notes" }],
+    sources: [{ label: "Morgan discovery questionnaire — active developer list (Aug 2026)" }],
+  },
+  {
+    slug: "modon",
+    name: "Modon",
+    status: "published",
+    markets: ["abu-dhabi"],
+    tagline: "Abu Dhabi–anchored development context — underwrite on AD terms.",
+    workingNote: ACTIVE,
+    overview:
+      "Modon sits in Morgan’s active Abu Dhabi developer set. Use this page as an evaluation framework for projects linked to Modon — not as a recommendation list.",
+    morganExperience:
+      "Named by Morgan among developers he knows particularly well or actively works with. Project-level maths still decide.",
+    trackRecord: "Assess disclosed delivery and community performance — no invented rankings here.",
+    projects: ["Evaluate live launches unit by unit against the investor brief"],
+    deliveryNotes: "Confirm construction status, SPA milestones and what is delivered vs marketed for your phase.",
+    paymentPlanNotes: "Stress-test schedules against liquidity; do not assume a standard plan.",
+    suitability: "Investors allocating to Abu Dhabi with patient capital and clear exit logic.",
+    risks: ["Cross-emirate comparison mistakes", "Phase delivery risk", "Liquidity thinner than core Dubai pockets"],
+    sources: [{ label: "Morgan discovery questionnaire — active developer list (Aug 2026)" }],
+  },
+  {
+    slug: "meraas",
+    name: "Meraas",
+    status: "published",
+    markets: ["dubai"],
+    tagline: "Lifestyle and masterplan-led Dubai product — underwrite the phase you can buy.",
+    workingNote: ACTIVE,
+    overview:
+      "Meraas is associated with distinctive Dubai lifestyle and waterfront concepts. Brand and place-making do not replace payment-plan, fee and exit underwriting.",
+    morganExperience:
+      "Named by Morgan among developers he knows particularly well or actively works with — not an endorsement of any launch.",
+    trackRecord: "Read delivered phases and disclosed histories; do not treat renders as completion evidence.",
+    projects: ["Lifestyle / waterfront master communities — phase-specific"],
+    deliveryNotes: "Infrastructure and amenity delivery timing can dominate outcomes.",
+    paymentPlanNotes: "Construction-linked schedules must match cash-flow reality.",
+    suitability: "Investors who accept masterplan sequencing risk when the brief fits.",
+    risks: ["Masterplan timing", "Concept premium vs rent", "Liquidity variance by phase"],
+    sources: [{ label: "Morgan discovery questionnaire — active developer list (Aug 2026)" }],
+  },
+  {
+    slug: "sobha",
+    name: "Sobha",
+    status: "published",
+    markets: ["dubai"],
+    tagline: "Quality and delivery narratives still need unit-level maths.",
+    workingNote: ACTIVE,
+    overview:
+      "Sobha is often discussed in quality and delivery conversations. Treat those narratives as hypotheses — underwrite price, fees, handover and exit for the specific unit.",
+    morganExperience:
+      "Named by Morgan among developers he knows particularly well or actively works with.",
+    trackRecord: "Use disclosed delivery history — this page does not invent rankings.",
+    projects: ["Evaluate live and secondary stock against the brief"],
+    deliveryNotes: "Confirm construction status and SPA definitions of handover.",
+    paymentPlanNotes: "Compare instalment weightings carefully against liquidity.",
+    suitability: "Investors who want delivery-sensitive underwriting, not brochure trust.",
+    risks: ["Brand premium", "Service-charge outcomes", "Supply clustering nearby"],
+    sources: [{ label: "Morgan discovery questionnaire — active developer list (Aug 2026)" }],
+  },
+  {
+    slug: "ellington",
+    name: "Ellington",
+    status: "published",
+    markets: ["dubai"],
+    tagline: "Design-led product — still underwrite capital deployed and exit.",
+    workingNote: ACTIVE,
+    overview:
+      "Ellington is frequently associated with design-led residential product. Design does not waive yield, fee or liquidity scrutiny.",
+    morganExperience:
+      "Named by Morgan among developers he knows particularly well or actively works with.",
+    trackRecord: "Assess delivered projects and disclosed histories without inventing rankings.",
+    projects: ["Evaluate launches and completed stock unit by unit"],
+    deliveryNotes: "Confirm milestones and what is contractually delivered.",
+    paymentPlanNotes: "Stress-test the schedule against the investor’s cash-flow.",
+    suitability: "Investors comparing design premiums against net return.",
+    risks: ["Design premium vs rent", "Building-level variance", "Exit competition"],
+    sources: [{ label: "Morgan discovery questionnaire — active developer list (Aug 2026)" }],
+  },
+  {
+    slug: "dar-global",
+    name: "Dar Global",
+    status: "published",
+    markets: ["dubai"],
+    tagline: "International-facing product — underwrite UAE liquidity on UAE terms.",
+    workingNote: ACTIVE,
+    overview:
+      "Dar Global appears in international-facing UAE conversations. Cross-border marketing does not change local fee stacks, handover risk or exit reality.",
+    morganExperience:
+      "Named by Morgan among developers he knows particularly well or actively works with.",
+    trackRecord: "Use disclosed project histories — no invented delivery statistics here.",
+    projects: ["Evaluate specific launches against the investor brief"],
+    deliveryNotes: "Confirm construction progress and SPA handover definitions.",
+    paymentPlanNotes: "Align financing appetite with drawdown schedules where leverage is used.",
+    suitability: "International buyers who still insist on local underwriting discipline.",
+    risks: ["Marketing vs local liquidity", "Payment-plan stress", "Exit timing"],
+    sources: [{ label: "Morgan discovery questionnaire — active developer list (Aug 2026)" }],
   },
 ];
 

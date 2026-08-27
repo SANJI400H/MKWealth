@@ -7,11 +7,11 @@ const fieldClass =
   "w-full rounded-sm border border-silver bg-paper px-4 py-3.5 text-ink placeholder:text-ink-muted/50 focus:border-maroon focus:outline-none";
 
 const CAPITAL_OPTIONS = [
-  "Under AED 500K",
-  "AED 500K – 1M",
-  "AED 1M – 2M",
   "AED 2M – 5M",
-  "AED 5M+",
+  "AED 5M – 10M",
+  "AED 10M+",
+  "AED 1M – 2M",
+  "Under AED 1M",
   "Prefer to discuss",
 ] as const;
 

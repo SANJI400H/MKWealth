@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import EditorialCarousel from "@/components/ui/EditorialCarousel";
-import EditorialImagePlaceholder from "@/components/ui/EditorialImagePlaceholder";
+import EditorialImage from "@/components/ui/EditorialImage";
+import { developerImages } from "@/content/editorial-images";
 import { getPublishedDevelopers, type Developer } from "@/content/developers";
 
 function filterByMarket(market?: "dubai" | "abu-dhabi" | "rak") {
@@ -12,12 +13,16 @@ function filterByMarket(market?: "dubai" | "abu-dhabi" | "rak") {
 }
 
 function DeveloperCard({ developer }: { developer: Developer }) {
+  const photo = developerImages[developer.slug];
+
   return (
     <Link
       href={`/developers/${developer.slug}`}
       className="group flex h-full flex-col border border-silver bg-paper"
     >
-      <EditorialImagePlaceholder
+      <EditorialImage
+        src={photo?.src}
+        alt={photo?.alt ?? `${developer.name} — developer evaluation context`}
         categoryLabel="Developer framework"
         ratio="16:10"
         className="border-0 border-b border-silver"

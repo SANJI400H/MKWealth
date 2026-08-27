@@ -44,14 +44,14 @@ export default function Methodology() {
         </div>
 
         <RevealOnScroll className="mt-12 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
-          <Link href="/credentials" className="btn-ghost-dark w-full justify-center sm:w-auto">
+          <Link href="/about#credentials" className="btn-ghost-dark w-full justify-center sm:w-auto">
             Credentials
           </Link>
-          <Link href="/case-studies" className="btn-ghost-dark w-full justify-center sm:w-auto">
-            Case studies
+          <Link href="/work-with-morgan" className="btn-ghost-dark w-full justify-center sm:w-auto">
+            Work With Morgan
           </Link>
-          <Link href="/analyse" className="btn-primary w-full sm:w-auto">
-            {siteConfig.cta.analyse}
+          <Link href="/strategy-session" className="btn-primary w-full sm:w-auto">
+            {siteConfig.cta.strategySession}
           </Link>
         </RevealOnScroll>
       </div>

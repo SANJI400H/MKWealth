@@ -1,6 +1,7 @@
 /**
- * Global IA — Morgan · Invest · Intelligence · Work With Morgan
- * Phase 2/3 hubs wired when live.
+ * Global IA — Morgan · Invest · Tools · Work With Morgan
+ * Soft launch: Intelligence hubs stay in codebase but are not advertised.
+ * Tools are lead-gated (Name / WhatsApp / email → cookie unlock).
  */
 
 export type NavLink = {
@@ -36,8 +37,6 @@ export const primaryNav: NavGroup[] = [
           { label: "Investment Philosophy", href: "/about#philosophy", description: "Vision · Strategy · Property" },
           { label: "Investment Methodology", href: "/about#methodology", description: "How deals are evaluated" },
           { label: "Credentials & Recognition", href: "/about#credentials", description: "Verified proof only" },
-          { label: "Media & Appearances", href: "/about#media", description: "When available" },
-          { label: "Client Results", href: "/case-studies", description: "Permissioned case studies" },
         ],
       },
     ],
@@ -55,80 +54,19 @@ export const primaryNav: NavGroup[] = [
           { label: "Ras Al Khaimah", href: "/invest/rak", description: "Lower entry" },
         ],
       },
-      {
-        title: "Strategies",
-        links: [
-          {
-            label: "Off-Plan",
-            href: "/invest/dubai#off-plan",
-            description: "Construction-linked acquisitions",
-          },
-          {
-            label: "Secondary Market",
-            href: "/invest/dubai#secondary",
-            description: "Completed and resale stock",
-          },
-        ],
-      },
-      {
-        title: "Explore",
-        links: [
-          { label: "Areas", href: "/areas", description: "Micro-market frameworks" },
-          { label: "Developers", href: "/developers", description: "Evaluation frameworks" },
-        ],
-      },
     ],
-    featured: {
-      eyebrow: "Latest analysis",
-      title: "Gross Yield vs Net Yield in Dubai Property",
-      href: "/insights/gross-vs-net-yield-dubai-property",
-    },
   },
   {
-    id: "intelligence",
-    label: "Intelligence",
-    href: "/insights",
+    id: "tools",
+    label: "Tools",
+    href: "/tools",
     columns: [
       {
-        title: "Learn",
+        title: "Tools",
         links: [
-          { label: "Insights", href: "/insights", description: "Investment intelligence hub" },
-          {
-            label: "Market Intelligence",
-            href: "/insights?category=market-intelligence",
-            description: "Emirate and micro-market context",
-          },
-          {
-            label: "Investment Mathematics",
-            href: "/insights?category=investment-mathematics",
-            description: "Yield, costs, capital deployed",
-          },
-          {
-            label: "Deal Analysis",
-            href: "/insights?category=deal-analysis",
-            description: "Underwriting frameworks",
-          },
-          {
-            label: "Portfolio Strategy",
-            href: "/insights?category=portfolio-strategy",
-            description: "Allocation and horizon",
-          },
-        ],
-      },
-      {
-        title: "Use",
-        links: [
-          { label: "Calculators", href: "/calculators", description: "Underwriting tools" },
-          { label: "True Yield", href: "/calculators/true-yield", description: "Beyond advertised yield" },
-          { label: "Investor Resources", href: "/resources", description: "Primers and worksheets" },
-          { label: "Market Reports", href: "/reports", description: "Working briefs" },
-        ],
-      },
-      {
-        title: "Watch",
-        links: [
-          { label: "Videos", href: "/videos", description: "Orientation clips" },
-          { label: "The Real Numbers", href: "/the-real-numbers", description: "Sourced figures" },
+          { label: "Overview", href: "/tools", description: "Unlock calculators and guide" },
+          { label: "Calculators", href: "/calculators", description: "True yield, costs, payment plans" },
+          { label: "Investor Guide", href: "/guide", description: "Videos and briefings" },
         ],
       },
     ],
@@ -139,23 +77,12 @@ export const primaryNav: NavGroup[] = [
     href: "/work-with-morgan",
     columns: [
       {
-        title: "Services",
-        links: [
-          { label: "Investment Strategy", href: "/work-with-morgan#strategy" },
-          { label: "Property Acquisition", href: "/work-with-morgan#acquisition" },
-          { label: "Deal Underwriting", href: "/work-with-morgan#underwriting" },
-          { label: "Property Portfolio Strategy", href: "/work-with-morgan#portfolio" },
-          { label: "Financing Coordination", href: "/work-with-morgan#financing" },
-          { label: "Residency / Purchase Coordination", href: "/work-with-morgan#coordination" },
-        ],
-      },
-      {
-        title: "Take Action",
+        title: "Work With Morgan",
         links: [
           {
-            label: "Analyse My Investment",
-            href: "/analyse",
-            description: "Medium-intent underwriting request",
+            label: "Services",
+            href: "/work-with-morgan",
+            description: "How engagement works",
           },
           {
             label: "Book Strategy Session",
@@ -175,7 +102,6 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
       { label: "About", href: "/about" },
       { label: "Methodology", href: "/about#methodology" },
       { label: "Credentials", href: "/about#credentials" },
-      { label: "Client Results", href: "/case-studies" },
     ],
   },
   {
@@ -184,27 +110,21 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
       { label: "Dubai", href: "/invest/dubai" },
       { label: "Abu Dhabi", href: "/invest/abu-dhabi" },
       { label: "Ras Al Khaimah", href: "/invest/rak" },
-      { label: "Areas", href: "/areas" },
-      { label: "Developers", href: "/developers" },
       { label: "Markets overview", href: "/invest" },
     ],
   },
   {
-    title: "Intelligence",
+    title: "Tools",
     links: [
-      { label: "Insights", href: "/insights" },
+      { label: "Overview", href: "/tools" },
       { label: "Calculators", href: "/calculators" },
-      { label: "Resources", href: "/resources" },
-      { label: "Reports", href: "/reports" },
-      { label: "Videos", href: "/videos" },
-      { label: "The Real Numbers", href: "/the-real-numbers" },
+      { label: "Investor Guide", href: "/guide" },
     ],
   },
   {
     title: "Work With Morgan",
     links: [
       { label: "Services", href: "/work-with-morgan" },
-      { label: "Analyse Investment", href: "/analyse" },
       { label: "Strategy Session", href: "/strategy-session" },
     ],
   },
@@ -229,8 +149,6 @@ export const aboutSectionNav: SectionNavItem[] = [
   { id: "philosophy", label: "Philosophy" },
   { id: "methodology", label: "Methodology" },
   { id: "credentials", label: "Credentials" },
-  { id: "media", label: "Media" },
-  { id: "results", label: "Case studies" },
 ];
 
 export const dubaiSectionNav: SectionNavItem[] = [
@@ -241,6 +159,41 @@ export const dubaiSectionNav: SectionNavItem[] = [
   { id: "areas", label: "Areas" },
   { id: "developers", label: "Developers" },
   { id: "latest-analysis", label: "Latest Analysis" },
+];
+
+export const abuDhabiSectionNav: SectionNavItem[] = [
+  { id: "overview", label: "Overview" },
+  { id: "ownership", label: "Ownership" },
+  { id: "areas", label: "Areas" },
+  { id: "developers", label: "Developers" },
+];
+
+export const rakSectionNav: SectionNavItem[] = [
+  { id: "overview", label: "Overview" },
+  { id: "who", label: "Who it suits" },
+  { id: "areas", label: "Areas" },
+  { id: "developers", label: "Developers" },
+];
+
+export const areaDetailNav: SectionNavItem[] = [
+  { id: "view", label: "Morgan's view" },
+  { id: "profile", label: "Investor profile" },
+  { id: "price", label: "Price" },
+  { id: "rental", label: "Rental" },
+  { id: "supply", label: "Supply" },
+  { id: "infra", label: "Infrastructure" },
+  { id: "risks", label: "Risks" },
+  { id: "exit", label: "Exit" },
+];
+
+export const developerDetailNav: SectionNavItem[] = [
+  { id: "overview", label: "Overview" },
+  { id: "experience", label: "Experience" },
+  { id: "track-record", label: "Track record" },
+  { id: "delivery", label: "Delivery" },
+  { id: "payment", label: "Payment plans" },
+  { id: "suitability", label: "Suitability" },
+  { id: "risks", label: "Risks" },
 ];
 
 export const workSectionNav: SectionNavItem[] = [

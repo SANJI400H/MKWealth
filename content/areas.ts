@@ -22,10 +22,16 @@ export interface Area {
   relatedMarketHref: string;
   sources?: AreaSource[];
   workingNote?: string;
+  /** Editorial photo under /public/images */
+  image?: string;
+  imageAlt?: string;
 }
 
 const WORKING =
-  "Working analysis for underwriting orientation. Not a ranking, forecast, or inventory pitch. Replace with Morgan-verified views after discovery.";
+  "Working analysis for underwriting orientation. Not a ranking, forecast, or inventory pitch.";
+
+const PRIORITY =
+  "Listed by Morgan among the communities he is most confident advising international investors on. Still unit-level underwriting — not a buy recommendation.";
 
 export const areas: Area[] = [
   {
@@ -155,7 +161,7 @@ export const areas: Area[] = [
     market: "abu-dhabi",
     status: "published",
     tagline: "Abu Dhabi cultural / leisure island context — underwrite slower cycle and different liquidity vs Dubai.",
-    workingNote: WORKING,
+    workingNote: PRIORITY,
     morganView:
       "Frame Saadiyat as an Abu Dhabi thesis: cultural infrastructure and lifestyle positioning matter, but Dubai-style liquidity assumptions do not transfer automatically. Prefer patience and quality over flip narratives.",
     investorProfile:
@@ -184,7 +190,7 @@ export const areas: Area[] = [
     market: "rak",
     status: "published",
     tagline: "RAK waterfront / entertainment-led growth narrative — entry math and developer delivery dominate.",
-    workingNote: WORKING,
+    workingNote: PRIORITY,
     morganView:
       "Al Marjan sits in a Ras Al Khaimah growth narrative often linked to hospitality and entertainment infrastructure. Underwrite payment plans, delivery, and exit liquidity in RAK terms — not Dubai comps.",
     investorProfile:
@@ -207,6 +213,119 @@ export const areas: Area[] = [
       "Exit may require longer marketing periods; price discipline at entry is the main control.",
     relatedInsightSlugs: ["how-dubai-off-plan-payment-plans-work"],
     relatedMarketHref: "/invest/rak",
+  },
+  {
+    slug: "hudayriyat-island",
+    name: "Hudayriyat Island",
+    market: "abu-dhabi",
+    status: "published",
+    tagline: "Abu Dhabi island growth narrative — underwrite phase delivery and AD liquidity, not Dubai comps.",
+    workingNote: PRIORITY,
+    morganView:
+      "Hudayriyat sits in Morgan’s priority community set for international investors. Treat it as an Abu Dhabi thesis: masterplan timing, payment structure and exit liquidity matter more than brochure lifestyle language.",
+    investorProfile:
+      "Capital-ready investors diversifying into Abu Dhabi island product with patience for phase delivery.",
+    priceContext:
+      "Compare within Abu Dhabi island comps and total capital deployed — not Dubai waterfront ticket sizes alone.",
+    rentalContext:
+      "Model achievable rent and vacancy explicitly; do not import Dubai tourism-rent assumptions blindly.",
+    supply: "Phased island supply can cluster — overlay handover calendars against your hold period.",
+    infrastructure: "Verify what access and amenity infrastructure is delivered for the phase you buy.",
+    risks: ["Phase delivery", "Thinner secondary depth than core Dubai", "Concept premium vs rent"],
+    exitConsiderations: "Plan longer holds or clearer exit paths; price discipline at entry is the control.",
+    relatedMarketHref: "/invest/abu-dhabi",
+  },
+  {
+    slug: "ramhan-island",
+    name: "Ramhan Island",
+    market: "abu-dhabi",
+    status: "published",
+    tagline: "Abu Dhabi island context — masterplan and delivery first, marketing second.",
+    workingNote: PRIORITY,
+    morganView:
+      "Ramhan is on Morgan’s priority advisory list. Underwrite infrastructure timing and payment schedules before treating island branding as an investment thesis.",
+    investorProfile: "Investors with Abu Dhabi allocation intent and tolerance for masterplan sequencing.",
+    priceContext: "Underwrite AED/sq ft and fees for the specific product — avoid citywide averages.",
+    rentalContext: "Confirm use case and realistic lease assumptions before modelling yield.",
+    supply: "Track competing island and mainland inventory overlapping your handover window.",
+    infrastructure: "Access and amenity delivery are first-order risks on island product.",
+    risks: ["Delivery timing", "Liquidity", "Cross-emirate comparison mistakes"],
+    exitConsiderations: "Do not assume Dubai-like bid depth on exit.",
+    relatedMarketHref: "/invest/abu-dhabi",
+  },
+  {
+    slug: "yas-island",
+    name: "Yas Island",
+    market: "abu-dhabi",
+    status: "published",
+    tagline: "Leisure and entertainment adjacency — still underwrite the unit, not the theme park.",
+    workingNote: PRIORITY,
+    morganView:
+      "Yas is a priority community for Morgan’s international advisory work. Entertainment infrastructure can support demand narratives — it does not replace net yield and exit maths.",
+    investorProfile: "Investors seeking Abu Dhabi leisure-adjacent stock with patient capital.",
+    priceContext: "Premiums for location must be justified by rent, capital preservation or exit — not footfall photos.",
+    rentalContext: "Tourism adjacency may help some strategies where permitted; confirm building rules early.",
+    supply: "Ongoing hospitality and residential delivery can pressure rents and exits in soft cycles.",
+    infrastructure: "Transport and amenity density help accessibility — fees still hit net yield.",
+    risks: ["Overpaying for brand", "Service charges", "Cycle sensitivity"],
+    exitConsiderations: "Liquidity varies by product; correctly priced units exit more cleanly.",
+    relatedMarketHref: "/invest/abu-dhabi",
+  },
+  {
+    slug: "al-reem-island",
+    name: "Al Reem Island",
+    market: "abu-dhabi",
+    status: "published",
+    tagline: "Established Abu Dhabi island densification — underwrite building and micro-location.",
+    workingNote: PRIORITY,
+    morganView:
+      "Al Reem is on Morgan’s confident advisory list. Tower and micro-location selection matter more than island branding alone.",
+    investorProfile: "Investors wanting recognisable Abu Dhabi stock with clearer comps than fringe product.",
+    priceContext: "Wide dispersion between buildings — secondary comps and fees can swing net returns.",
+    rentalContext: "Corporate and residential demand vary by tower; confirm realistic rent before modelling.",
+    supply: "Dense existing stock plus ongoing delivery — map competing handovers.",
+    infrastructure: "Connectivity supports accessibility; parking and association rules still matter.",
+    risks: ["Building-quality variance", "Service-charge drag", "Supply clustering"],
+    exitConsiderations: "Prefer assets with clearer comparable sets.",
+    relatedMarketHref: "/invest/abu-dhabi",
+  },
+  {
+    slug: "maritime-city",
+    name: "Dubai Maritime City",
+    market: "dubai",
+    status: "published",
+    tagline: "Waterfront densification narrative — underwrite delivery, fees and exit depth.",
+    workingNote: PRIORITY,
+    morganView:
+      "Maritime City is among Morgan’s priority Dubai communities for international investors. Off-plan structures dominate current work — payment plans and handover timing are first-order.",
+    investorProfile: "Investors comfortable with off-plan cash-flow staging when the brief fits.",
+    priceContext: "Compare total capital deployed and plan schedules, not headline ticket size alone.",
+    rentalContext: "Income usually waits for handover and lease-up — model vacancy explicitly.",
+    supply: "Competing waterfront inventory can pressure rents and exits.",
+    infrastructure: "Confirm access and amenity delivery for the phase you buy.",
+    risks: ["Payment-plan liquidity stress", "Delivery timing", "Service charges"],
+    exitConsiderations: "Exit depends on price, condition and cycle — not waterfront branding alone.",
+    relatedInsightSlugs: ["how-dubai-off-plan-payment-plans-work"],
+    relatedMarketHref: "/invest/dubai",
+  },
+  {
+    slug: "palm-jebel-ali",
+    name: "Palm Jebel Ali",
+    market: "dubai",
+    status: "published",
+    tagline: "Large-scale island masterplan — long-dated optionality with long-dated risk.",
+    workingNote: PRIORITY,
+    morganView:
+      "Palm Jebel Ali is on Morgan’s priority list. Masterplan ambition is not completion evidence — underwrite the phase, payment schedule and exit assumptions you can actually own.",
+    investorProfile: "Longer-horizon capital that can tolerate masterplan sequencing — not short flip narratives.",
+    priceContext: "Concept premiums must survive capital deployed and hold-period maths.",
+    rentalContext: "Do not model mature Palm Jumeirah rents onto early phases without evidence.",
+    supply: "Phased delivery and competing inventory timing are core risks.",
+    infrastructure: "Island access and amenity delivery dominate outcomes — verify what is live for your phase.",
+    risks: ["Masterplan delays", "Liquidity thinner than established cores", "Off-plan cash-flow stress"],
+    exitConsiderations: "Price discipline at entry is the primary control.",
+    relatedInsightSlugs: ["how-dubai-off-plan-payment-plans-work"],
+    relatedMarketHref: "/invest/dubai",
   },
 ];
 

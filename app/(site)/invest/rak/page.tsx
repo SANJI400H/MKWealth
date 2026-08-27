@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FaqSection from "@/components/insights/FaqSection";
 import GuideCallout from "@/components/insights/GuideCallout";
 import SiteFooter from "@/components/sections/SiteFooter";
-import AreaCarousel from "@/components/invest/AreaCarousel";
-import DeveloperCarousel from "@/components/invest/DeveloperCarousel";
+import RakInvestTabs, { RakCompareLinks } from "@/components/invest/RakInvestTabs";
+import PageIntro from "@/components/ui/PageIntro";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -43,50 +42,21 @@ export default function RakInvestPage() {
     <>
       <main className="page-shell-wide">
         <Breadcrumbs
+          visible={false}
           items={[
             { name: "Home", path: "/" },
-            { name: "Invest", path: "/#invest" },
+            { name: "Invest", path: "/invest" },
             { name: "Ras Al Khaimah", path: "/invest/rak" },
           ]}
         />
 
-        <h1 className="page-h1">
-          Ras Al Khaimah Real Estate Investment
-        </h1>
-        <p className="mt-4 max-w-3xl text-lg text-ink-muted">
-          Lower entry point, thinner resale market, what that trade-off means in practice.
-        </p>
+        <PageIntro
+          title="Ras Al Khaimah Real Estate Investment"
+          lead="Lower entry point, thinner resale market, what that trade-off means in practice."
+        />
 
-        <section className="mt-12 max-w-3xl">
-          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">The real trade-off</h2>
-          <p className="mt-4 text-ink-muted">
-            RAK can look attractive on price alone. The decision only holds if you are comfortable with less
-            liquidity and a smaller developer set, not if you need Dubai-style exit options.
-          </p>
-        </section>
-
-        <section className="mt-12 max-w-3xl">
-          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Who it suits</h2>
-          <p className="mt-4 text-ink-muted">
-            Investors with a longer horizon, lower ticket size, and appetite for tourism-led coastal growth,
-            after Dubai (or instead of it) only when the brief actually fits.
-          </p>
-        </section>
-
-        <AreaCarousel market="rak" />
-        <DeveloperCarousel market="rak" />
-
-        <p className="mt-12 text-ink-muted">
-          Compare with{" "}
-          <Link href="/invest/dubai" className="font-semibold text-maroon hover:underline">
-            Dubai
-          </Link>{" "}
-          and{" "}
-          <Link href="/invest/abu-dhabi" className="font-semibold text-maroon hover:underline">
-            Abu Dhabi
-          </Link>
-          .
-        </p>
+        <RakInvestTabs />
+        <RakCompareLinks />
 
         <FaqSection items={faqItems} />
         <GuideCallout />

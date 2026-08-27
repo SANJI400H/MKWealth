@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FaqSection from "@/components/insights/FaqSection";
 import GuideCallout from "@/components/insights/GuideCallout";
 import SiteFooter from "@/components/sections/SiteFooter";
-import AreaCarousel from "@/components/invest/AreaCarousel";
-import DeveloperCarousel from "@/components/invest/DeveloperCarousel";
+import AbuDhabiInvestTabs, { AbuDhabiCompareLinks } from "@/components/invest/AbuDhabiInvestTabs";
+import PageIntro from "@/components/ui/PageIntro";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -43,51 +42,21 @@ export default function AbuDhabiInvestPage() {
     <>
       <main className="page-shell-wide">
         <Breadcrumbs
+          visible={false}
           items={[
             { name: "Home", path: "/" },
-            { name: "Invest", path: "/#invest" },
+            { name: "Invest", path: "/invest" },
             { name: "Abu Dhabi", path: "/invest/abu-dhabi" },
           ]}
         />
 
-        <h1 className="page-h1">
-          Abu Dhabi Real Estate Investment
-        </h1>
-        <p className="mt-4 max-w-3xl text-lg text-ink-muted">
-          Covered as regional context against Dubai, useful for comparison, not presented as equal day-to-day
-          deal flow.
-        </p>
+        <PageIntro
+          title="Abu Dhabi Real Estate Investment"
+          lead="Covered with real advisory focus alongside Dubai — useful for diversification, not as identical day-to-day deal flow. Morgan reports strong working knowledge across all three emirates."
+        />
 
-        <section className="mt-12 max-w-3xl">
-          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Who Abu Dhabi suits</h2>
-          <p className="mt-4 text-ink-muted">
-            Investors prioritizing government-anchored, lower-volatility assets and a longer hold. The secondary
-            market is thinner than Dubai&apos;s, which cuts both speculation and easy early exits.
-          </p>
-        </section>
-
-        <section className="mt-12 max-w-3xl">
-          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Ownership & areas</h2>
-          <p className="mt-4 text-ink-muted">
-            Freehold for foreigners in designated zones including Saadiyat, Yas, Al Reem, and Al Maryah. The
-            eligible list is shorter than Dubai&apos;s, and inventory is more institutionally paced.
-          </p>
-        </section>
-
-        <AreaCarousel market="abu-dhabi" />
-        <DeveloperCarousel market="abu-dhabi" />
-
-        <p className="mt-12 text-ink-muted">
-          See also{" "}
-          <Link href="/invest/dubai" className="font-semibold text-maroon hover:underline">
-            Dubai
-          </Link>{" "}
-          and{" "}
-          <Link href="/invest/rak" className="font-semibold text-maroon hover:underline">
-            Ras Al Khaimah
-          </Link>
-          .
-        </p>
+        <AbuDhabiInvestTabs />
+        <AbuDhabiCompareLinks />
 
         <FaqSection items={faqItems} />
         <GuideCallout />

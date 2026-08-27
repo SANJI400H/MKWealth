@@ -22,11 +22,11 @@ export default function Bio() {
       >
         <p className="eyebrow">Morgan</p>
         <h2 className="display mt-3 text-[1.75rem] leading-[1.08] text-ink sm:mt-5 sm:text-5xl lg:text-6xl">
-          The investor.
+          Investor
           <br />
-          Then the strategy.
+          Strategy
           <br />
-          Then the property.
+          Property
         </h2>
         <div className="mt-4 max-w-lg space-y-3 text-[13px] leading-relaxed text-ink-muted sm:mt-7 sm:space-y-4 sm:text-lg">
           <p>

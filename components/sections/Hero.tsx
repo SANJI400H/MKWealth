@@ -47,8 +47,8 @@ export default function Hero() {
         </p>
         <div className="cta-row mt-5 w-full max-w-md sm:mt-8 sm:max-w-none">
           <BookMeetingLink href="/strategy-session" className="btn-primary w-full sm:w-auto" />
-          <Link href="/analyse" className="btn-ghost-dark w-full justify-center sm:w-auto">
-            {siteConfig.cta.analyse}
+          <Link href="/work-with-morgan" className="btn-ghost-dark w-full justify-center sm:w-auto">
+            Work With Morgan
           </Link>
         </div>
       </CinemaPlayScene>

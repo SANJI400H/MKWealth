@@ -1,5 +1,21 @@
 import { NextResponse } from "next/server";
 import { submitLead } from "@/lib/leads";
+import {
+  createToolsAccessToken,
+  shouldUnlockToolsForLeadSource,
+  TOOLS_ACCESS_COOKIE,
+  toolsAccessCookieOptions,
+} from "@/lib/tools-access";
+
+function cookieShouldBeSecure(request: Request) {
+  try {
+    const url = new URL(request.url);
+    if (url.hostname === "localhost" || url.hostname === "127.0.0.1") return false;
+    return url.protocol === "https:";
+  } catch {
+    return process.env.NODE_ENV === "production";
+  }
+}
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -14,5 +30,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: result.error }, { status: result.status });
   }
 
-  return NextResponse.json({ ok: true, emailed: result.emailed });
+  const response = NextResponse.json({ ok: true, emailed: result.emailed });
+
+  if (shouldUnlockToolsForLeadSource(result.payload.source)) {
+    const token = await createToolsAccessToken();
+    if (token) {
+      response.cookies.set(
+        TOOLS_ACCESS_COOKIE,
+        token,
+        toolsAccessCookieOptions(cookieShouldBeSecure(request)),
+      );
+    }
+  }
+
+  return response;
 }

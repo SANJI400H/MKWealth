@@ -4,7 +4,6 @@ import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import BookMeetingLink from "@/components/ui/BookMeetingLink";
 import Link from "next/link";
 import WhatsAppLink from "@/components/ui/WhatsAppLink";
-import { siteConfig } from "@/lib/site-config";
 
 export default function Contact() {
   return (
@@ -25,8 +24,8 @@ export default function Contact() {
         <RevealOnScroll delayMs={80} className="section-body">
           <div className="cta-row">
             <BookMeetingLink href="/strategy-session" className="btn-primary w-full sm:w-auto" />
-            <Link href="/analyse" className="btn-ghost-dark w-full justify-center sm:w-auto">
-              {siteConfig.cta.analyse}
+            <Link href="/work-with-morgan" className="btn-ghost-dark w-full justify-center sm:w-auto">
+              Work With Morgan
             </Link>
             <WhatsAppLink
               message="Hi Morgan, I'd like to book a 30-minute property strategy session."

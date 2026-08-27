@@ -12,6 +12,7 @@ export default function GateForm({ onUnlock }: GateFormProps) {
     <LeadForm
       source="guide"
       intro="Enter your details to unlock the guide"
+      phoneLabel="WhatsApp number"
       submitLabel="Unlock guide"
       onSuccess={() => {
         trackEvent("guide_lead", { funnel: "guide" });

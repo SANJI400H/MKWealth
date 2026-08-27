@@ -18,13 +18,13 @@ export default function CalculatorsIndexPage() {
         <Breadcrumbs
           items={[
             { name: "Home", path: "/" },
+            { name: "Tools", path: "/tools" },
             { name: "Calculators", path: "/calculators" },
           ]}
         />
         <h1 className="mt-6 font-display text-4xl font-bold text-ink sm:text-5xl">Investment tools</h1>
         <p className="mt-4 text-lg text-ink-muted">
-          Underwriting helpers with visible methodology. Use them to think clearly — then ask Morgan to review a
-          live deal.
+          Browse the tools below. Editing inputs or revealing live results asks for a quick registration.
         </p>
         <ul className="mt-10 space-y-6">
           {calculators.map((c) => (

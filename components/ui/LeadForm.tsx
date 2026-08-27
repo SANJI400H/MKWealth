@@ -11,6 +11,7 @@ interface LeadFormProps {
   submitLabel?: string;
   submittingLabel?: string;
   intro?: string;
+  phoneLabel?: string;
   onSuccess?: () => void;
   className?: string;
 }
@@ -32,6 +33,7 @@ export default function LeadForm({
   submitLabel = "Submit",
   submittingLabel = "Sending…",
   intro = "Enter your details below",
+  phoneLabel = "Phone number",
   onSuccess,
   className = "",
 }: LeadFormProps) {
@@ -97,7 +99,7 @@ export default function LeadForm({
       </label>
 
       <label className="flex flex-col gap-1.5 text-sm text-ink-muted">
-        Phone number
+        {phoneLabel}
         <input
           name="phone"
           type="tel"

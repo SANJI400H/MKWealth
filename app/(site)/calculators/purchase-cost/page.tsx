@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import SiteFooter from "@/components/sections/SiteFooter";
 import PurchaseCostCalculator from "@/components/calculators/PurchaseCostCalculator";
+import { ToolsGateProvider } from "@/components/tools/ToolsGateProvider";
 import { regulatory } from "@/content/regulatory";
 import { pageMetadata } from "@/lib/metadata";
+import { TOOLS_ACCESS_COOKIE, verifyToolsAccessCookie } from "@/lib/tools-access";
 
 export const metadata: Metadata = pageMetadata({
   title: "Dubai Purchase Cost Calculator | Morgan Kaiser",
@@ -12,23 +15,31 @@ export const metadata: Metadata = pageMetadata({
   path: "/calculators/purchase-cost",
 });
 
-export default function PurchaseCostPage() {
+export default async function PurchaseCostPage() {
+  const unlocked = await verifyToolsAccessCookie(cookies().get(TOOLS_ACCESS_COOKIE)?.value);
+
   return (
     <>
       <main className="page-shell-wide">
         <Breadcrumbs
           items={[
             { name: "Home", path: "/" },
-            { name: "Calculators", path: "/calculators" },
+            { name: "Tools", path: "/tools" },
             { name: "Purchase Cost", path: "/calculators/purchase-cost" },
           ]}
         />
         <h1 className="mt-6 font-display text-4xl font-bold text-ink sm:text-5xl">Dubai Purchase Cost Calculator</h1>
         <p className="mt-4 max-w-2xl text-lg text-ink-muted">
-          Ticket price is not capital deployed. Adjust fee assumptions to see the full stack before you commit.
+          Ticket price is not capital deployed. Register once to edit fee assumptions and reveal the full stack.
         </p>
         <div className="mt-10">
-          <PurchaseCostCalculator />
+          <ToolsGateProvider
+            initialUnlocked={unlocked}
+            title="Unlock calculator results"
+            intro="Enter your name, WhatsApp number, and email to edit assumptions and see your numbers."
+          >
+            <PurchaseCostCalculator />
+          </ToolsGateProvider>
         </div>
         <p className="mt-10 max-w-3xl text-xs text-ink-muted">{regulatory.disclaimerShort}</p>
       </main>

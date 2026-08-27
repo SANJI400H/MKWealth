@@ -7,7 +7,6 @@ import VisionPhilosophy from "@/components/sections/VisionPhilosophy";
 import FormulaOverFeelings from "@/components/sections/FormulaOverFeelings";
 import InvestmentProfile from "@/components/sections/InvestmentProfile";
 import Invest from "@/components/sections/Invest";
-import InvestorIntelligence from "@/components/sections/InvestorIntelligence";
 import HowMorganWorks from "@/components/sections/HowMorganWorks";
 import Proof from "@/components/sections/Proof";
 import Contact from "@/components/sections/Contact";
@@ -35,7 +34,6 @@ export default function HomePage() {
       <div className="relative bg-paper">
         <InvestmentProfile />
         <Invest />
-        <InvestorIntelligence />
         <HowMorganWorks />
         <Proof />
         <Contact />
