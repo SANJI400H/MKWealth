@@ -17,7 +17,7 @@ export default function RakInvestTabs() {
         overview: (
           <div>
             <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">The real trade-off</h2>
-            <p className="mt-4 max-w-3xl text-ink-muted">
+            <p className="body-copy mt-4">
               RAK can look attractive on price alone. The decision only holds if you are comfortable with less liquidity
               and a smaller developer set, not if you need Dubai-style exit options.
             </p>
@@ -26,7 +26,7 @@ export default function RakInvestTabs() {
         who: (
           <div>
             <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Who it suits</h2>
-            <p className="mt-4 max-w-3xl text-ink-muted">
+            <p className="body-copy mt-4">
               Investors with a longer horizon, lower ticket size, and appetite for tourism-led coastal growth, after
               Dubai (or instead of it) only when the brief actually fits.
             </p>
@@ -41,7 +41,7 @@ export default function RakInvestTabs() {
 
 export function RakCompareLinks() {
   return (
-    <p className="mt-12 text-ink-muted">
+    <p className="body-copy mt-12">
       Compare with{" "}
       <Link href="/invest/dubai" className="font-semibold text-maroon hover:underline">
         Dubai

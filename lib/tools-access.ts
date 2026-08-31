@@ -9,7 +9,7 @@ function getSecret(): string | null {
   const secret = process.env.TOOLS_ACCESS_SECRET?.trim();
   if (!secret) {
     if (process.env.NODE_ENV === "production") {
-      console.error("tools-access: TOOLS_ACCESS_SECRET is missing — fail closed");
+      console.error("tools-access: TOOLS_ACCESS_SECRET is missing; fail closed");
     }
     return null;
   }

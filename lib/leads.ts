@@ -1,6 +1,6 @@
 /**
  * Expanded CRM-ready lead model.
- * Not all fields are required on every form — progressive collection.
+ * Not all fields are required on every form. Progressive collection.
  */
 
 const PHONE_PATTERN = /^\+?[1-9]\d{7,14}$/;

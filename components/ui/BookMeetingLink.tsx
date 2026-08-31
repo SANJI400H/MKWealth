@@ -12,7 +12,7 @@ interface BookMeetingLinkProps {
   href?: string;
 }
 
-/** Strategy session CTA — calendar by default; pass href for in-site briefing. */
+/** Strategy session CTA. Calendar by default; pass href for in-site briefing. */
 export default function BookMeetingLink({
   className = "",
   children = siteConfig.cta.strategySession,

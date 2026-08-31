@@ -34,7 +34,7 @@ export default function ToolsPage() {
             {liveCalculators.map((c) => (
               <li key={c.slug} className="border-b border-line pb-6">
                 <h3 className="font-display text-xl font-bold text-ink">{c.title}</h3>
-                <p className="mt-2 text-ink-muted">{c.summary}</p>
+                <p className="body-copy mt-2">{c.summary}</p>
                 <Link href={c.href} className="mt-4 inline-block text-sm font-semibold text-maroon hover:underline">
                   Open calculator →
                 </Link>

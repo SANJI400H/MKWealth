@@ -13,7 +13,7 @@ export default function AreaDetailTabs({ area }: { area: Area }) {
     <>
       <PageIntro title={area.name} lead={area.tagline}>
         {area.workingNote ? (
-          <p className="mt-6 border border-dashed border-line bg-surface px-4 py-3 text-sm text-ink-muted">
+          <p className="mt-6 border border-line bg-surface px-4 py-3 text-sm text-ink-muted">
             {area.workingNote}
           </p>
         ) : null}
@@ -28,37 +28,37 @@ export default function AreaDetailTabs({ area }: { area: Area }) {
           view: (
             <div>
               <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Morgan&apos;s view</h2>
-              <p className="mt-4 leading-relaxed text-ink-muted">{area.morganView}</p>
+              <p className="body-copy mt-4">{area.morganView}</p>
             </div>
           ),
           profile: (
             <div>
               <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Investor profile</h2>
-              <p className="mt-4 leading-relaxed text-ink-muted">{area.investorProfile}</p>
+              <p className="body-copy mt-4">{area.investorProfile}</p>
             </div>
           ),
           price: (
             <div>
               <h2 className="font-display text-2xl font-bold text-ink">Price context</h2>
-              <p className="mt-4 leading-relaxed text-ink-muted">{area.priceContext}</p>
+              <p className="body-copy mt-4">{area.priceContext}</p>
             </div>
           ),
           rental: (
             <div>
               <h2 className="font-display text-2xl font-bold text-ink">Rental context</h2>
-              <p className="mt-4 leading-relaxed text-ink-muted">{area.rentalContext}</p>
+              <p className="body-copy mt-4">{area.rentalContext}</p>
             </div>
           ),
           supply: (
             <div>
               <h2 className="font-display text-2xl font-bold text-ink">Supply</h2>
-              <p className="mt-4 leading-relaxed text-ink-muted">{area.supply}</p>
+              <p className="body-copy mt-4">{area.supply}</p>
             </div>
           ),
           infra: (
             <div>
               <h2 className="font-display text-2xl font-bold text-ink">Infrastructure</h2>
-              <p className="mt-4 leading-relaxed text-ink-muted">{area.infrastructure}</p>
+              <p className="body-copy mt-4">{area.infrastructure}</p>
             </div>
           ),
           risks: (
@@ -74,13 +74,13 @@ export default function AreaDetailTabs({ area }: { area: Area }) {
           exit: (
             <div>
               <h2 className="font-display text-2xl font-bold text-ink">Exit considerations</h2>
-              <p className="mt-4 leading-relaxed text-ink-muted">{area.exitConsiderations}</p>
+              <p className="body-copy mt-4">{area.exitConsiderations}</p>
             </div>
           ),
         }}
       />
 
-      <p className="mt-12 text-ink-muted">
+      <p className="body-copy mt-12">
         Market pillar:{" "}
         <Link href={area.relatedMarketHref} className="font-semibold text-maroon hover:underline">
           Open market page
@@ -108,7 +108,7 @@ export default function AreaDetailTabs({ area }: { area: Area }) {
           All areas
         </Link>
       </div>
-      <p className="mt-10 text-xs text-ink-muted">{regulatory.disclaimerShort}</p>
+      <p className="body-copy-sm mt-10">{regulatory.disclaimerShort}</p>
     </>
   );
 }

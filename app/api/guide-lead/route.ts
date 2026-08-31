@@ -16,7 +16,7 @@ function cookieShouldBeSecure(request: Request) {
   }
 }
 
-/** Legacy endpoint — same simple lead capture as /api/lead; unlocks Tools cookie. */
+/** Legacy endpoint: same simple lead capture as /api/lead; unlocks Tools cookie. */
 export async function POST(request: Request) {
   let body: Record<string, unknown>;
   try {

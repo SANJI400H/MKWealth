@@ -183,7 +183,11 @@ body {
   }
 
   .section-lead {
-    @apply mt-6 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg;
+    @apply mt-6 w-full max-w-3xl text-base leading-[1.75] text-ink-muted sm:text-lg;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
   }
 
   .section-body {
@@ -195,7 +199,28 @@ body {
   }
 
   .page-lead {
-    @apply mt-4 max-w-2xl text-lg leading-relaxed text-ink-muted;
+    @apply mt-4 w-full text-lg leading-[1.75] text-ink-muted;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  /* Body paragraphs — justified edges, shared measure with page-lead */
+  .body-copy {
+    @apply w-full text-base leading-[1.75] text-ink-muted sm:text-[1.0625rem];
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  .body-copy-sm {
+    @apply w-full text-sm leading-[1.7] text-ink-muted;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
   }
 
   .page-block {

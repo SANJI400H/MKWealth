@@ -3,7 +3,7 @@ import { siteConfig } from "@/lib/site-config";
 import { getPublishedAreas } from "@/content/areas";
 import { getPublishedDevelopers } from "@/content/developers";
 
-/** Soft launch sitemap — Tier 1 + Tier 2 only. Intelligence hubs re-added when content earns them. */
+/** Soft launch sitemap: Tier 1 + Tier 2 only. Intelligence hubs re-added when content earns them. */
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",

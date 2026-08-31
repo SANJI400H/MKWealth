@@ -112,7 +112,7 @@ export default function PaymentPlanCalculator() {
         <div className="pt-2">
           <p className="text-sm font-medium text-ink">Schedule (% of price)</p>
           <p className="mt-1 text-xs text-ink-muted">
-            Edit labels and percentages to match the SPA — defaults are illustrative only.
+            Edit labels and percentages to match the SPA. Defaults are illustrative only.
           </p>
           <ul className="mt-4 space-y-3">
             {stages.map((s, i) => (
@@ -181,7 +181,7 @@ export default function PaymentPlanCalculator() {
           </dl>
           {Math.abs(result.totalPct - 100) > 0.05 ? (
             <p className="mt-4 text-xs text-ink-muted">
-              Percentages currently sum to {result.totalPct.toFixed(1)}% — SPA schedules usually total 100% of price
+              Percentages currently sum to {result.totalPct.toFixed(1)}%. SPA schedules usually total 100% of price
               (fees are separate).
             </p>
           ) : null}

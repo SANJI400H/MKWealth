@@ -15,7 +15,7 @@ export default function DeveloperDetailTabs({ developer }: { developer: Develope
     <>
       <PageIntro title={d.name} lead={d.tagline}>
         {d.workingNote ? (
-          <p className="mt-6 border border-dashed border-line bg-surface px-4 py-3 text-sm text-ink-muted">
+          <p className="mt-6 border border-line bg-surface px-4 py-3 text-sm text-ink-muted">
             {d.workingNote}
           </p>
         ) : null}
@@ -30,13 +30,13 @@ export default function DeveloperDetailTabs({ developer }: { developer: Develope
           overview: (
             <div>
               <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Overview</h2>
-              <p className="mt-4 leading-relaxed text-ink-muted">{d.overview}</p>
+              <p className="body-copy mt-4">{d.overview}</p>
             </div>
           ),
           experience: (
             <div>
               <h2 className="font-display text-2xl font-bold text-ink">Morgan&apos;s experience</h2>
-              <p className="mt-4 rounded-sm border border-dashed border-line px-4 py-3 text-sm text-ink-muted">
+              <p className="mt-4 rounded-sm border border-line px-4 py-3 text-sm text-ink-muted">
                 {d.morganExperience}
               </p>
             </div>
@@ -44,7 +44,7 @@ export default function DeveloperDetailTabs({ developer }: { developer: Develope
           "track-record": (
             <div>
               <h2 className="font-display text-2xl font-bold text-ink">Track record</h2>
-              <p className="mt-4 leading-relaxed text-ink-muted">{d.trackRecord}</p>
+              <p className="body-copy mt-4">{d.trackRecord}</p>
               <ul className="mt-4 list-disc space-y-2 pl-5 text-ink-muted">
                 {d.projects.map((p) => (
                   <li key={p}>{p}</li>
@@ -55,13 +55,13 @@ export default function DeveloperDetailTabs({ developer }: { developer: Develope
           delivery: (
             <div>
               <h2 className="font-display text-2xl font-bold text-ink">Delivery considerations</h2>
-              <p className="mt-4 leading-relaxed text-ink-muted">{d.deliveryNotes}</p>
+              <p className="body-copy mt-4">{d.deliveryNotes}</p>
             </div>
           ),
           payment: (
             <div>
               <h2 className="font-display text-2xl font-bold text-ink">Payment-plan analysis</h2>
-              <p className="mt-4 leading-relaxed text-ink-muted">{d.paymentPlanNotes}</p>
+              <p className="body-copy mt-4">{d.paymentPlanNotes}</p>
               <p className="mt-4">
                 <Link href="/calculators/payment-plan" className="font-semibold text-maroon hover:underline">
                   Open payment plan calculator →
@@ -72,7 +72,7 @@ export default function DeveloperDetailTabs({ developer }: { developer: Develope
           suitability: (
             <div>
               <h2 className="font-display text-2xl font-bold text-ink">Investor suitability</h2>
-              <p className="mt-4 leading-relaxed text-ink-muted">{d.suitability}</p>
+              <p className="body-copy mt-4">{d.suitability}</p>
             </div>
           ),
           risks: (
@@ -89,7 +89,7 @@ export default function DeveloperDetailTabs({ developer }: { developer: Develope
       />
 
       {d.relatedInsightSlugs?.length ? (
-        <p className="mt-12 text-ink-muted">
+        <p className="body-copy mt-12">
           Related:{" "}
           {d.relatedInsightSlugs.map((slug, i) => (
             <span key={slug}>
@@ -110,7 +110,7 @@ export default function DeveloperDetailTabs({ developer }: { developer: Develope
           All developers
         </Link>
       </div>
-      <p className="mt-10 text-xs text-ink-muted">{regulatory.disclaimerShort}</p>
+      <p className="body-copy-sm mt-10">{regulatory.disclaimerShort}</p>
     </>
   );
 }

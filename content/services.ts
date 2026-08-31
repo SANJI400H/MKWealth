@@ -6,7 +6,7 @@ export interface ServiceItem {
   whatsappMessage: string;
 }
 
-/** Provisional service set — edit after Morgan confirms scope. Prefer "coordination" where licensed specialists deliver. */
+/** Provisional service set. Edit after Morgan confirms scope. Prefer "coordination" where licensed specialists deliver. */
 export const services: ServiceItem[] = [
   {
     id: "strategy",
@@ -54,7 +54,7 @@ export const services: ServiceItem[] = [
     id: "visa",
     title: "Golden Visa & Residency Coordination",
     group: "post-purchase",
-    summary: "Coordinate residency pathways tied to qualifying property investment — subject to current rules.",
+    summary: "Coordinate residency pathways tied to qualifying property investment, subject to current rules.",
     whatsappMessage: "Hi Morgan, I'd like to discuss Golden Visa & Residency Coordination.",
   },
   {
@@ -66,7 +66,7 @@ export const services: ServiceItem[] = [
   },
 ];
 
-/** Cinema carousel — six positioned offerings. */
+/** Cinema carousel: six positioned offerings. */
 export const homepageServices = services.filter((s) =>
   ["strategy", "underwriting", "off-plan", "portfolio", "mortgage", "visa"].includes(s.id)
 ).map((s) => {

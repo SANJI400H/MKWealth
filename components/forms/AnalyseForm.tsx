@@ -117,7 +117,7 @@ export default function AnalyseForm() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <p className="text-sm text-ink-muted">
-        Share what you have — a brochure, listing, or payment plan summary. Document upload will be added later;
+        Share what you have: a brochure, listing, or payment plan summary. Document upload will be added later;
         paste key numbers for now.
       </p>
 
@@ -198,7 +198,7 @@ export default function AnalyseForm() {
           Investment timeline
           <input
             className={fieldClass}
-            placeholder="e.g. 3–6 months"
+            placeholder="e.g. 3 to 6 months"
             value={form.timeline}
             onChange={(e) => update("timeline", e.target.value)}
           />
