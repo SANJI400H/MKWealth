@@ -1,0 +1,28 @@
+name: mkwealth
+
+services:
+  web:
+    image: ${APP_IMAGE:?Set APP_IMAGE to the published GHCR image digest}
+    restart: unless-stopped
+    init: true
+    env_file:
+      - runtime.env
+    environment:
+      NODE_ENV: production
+      HOSTNAME: 0.0.0.0
+      PORT: "3000"
+      TOOLS_ACCESS_SECRET: ${TOOLS_ACCESS_SECRET:?Set a long random TOOLS_ACCESS_SECRET in runtime.env}
+      RESEND_API_KEY: ${RESEND_API_KEY:?Set RESEND_API_KEY in runtime.env}
+      LEAD_NOTIFY_EMAIL: ${LEAD_NOTIFY_EMAIL:?Set LEAD_NOTIFY_EMAIL in runtime.env}
+      LEAD_FROM_EMAIL: ${LEAD_FROM_EMAIL:?Set LEAD_FROM_EMAIL in runtime.env}
+    ports:
+      - "${APP_BIND_ADDRESS:-127.0.0.1}:${APP_PORT:-3000}:3000"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
