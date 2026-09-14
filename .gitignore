@@ -13,6 +13,11 @@
 .env
 .env.local
 .env*.local
+runtime.env
+image.env
+image.previous.env
+.image.env.pending
+.deploy.lock
 
 # misc
 .DS_Store

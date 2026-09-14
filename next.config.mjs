@@ -4,6 +4,7 @@ const isDevCommand =
 
 const nextConfig = {
   reactStrictMode: true,
+  output: "standalone",
   /**
    * Isolate caches so `next build` / `next start` never corrupt `next dev`.
    * Shared .next symptom: CSS/JS 404s → stretched images, missing nav, unstyled HTML.
