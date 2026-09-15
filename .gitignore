@@ -28,3 +28,6 @@ npm-debug.log*
 *.tsbuildinfo
 next-env.d.ts
 .vercel
+
+# local scrape / research dumps
+.firecrawl/

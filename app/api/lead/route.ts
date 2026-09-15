@@ -30,7 +30,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: result.error }, { status: result.status });
   }
 
-  const response = NextResponse.json({ ok: true, emailed: result.emailed });
+  const response = NextResponse.json({
+    ok: true,
+    emailed: result.emailed,
+    saved: result.saved,
+    leadId: result.leadId,
+  });
 
   if (shouldUnlockToolsForLeadSource(result.payload.source)) {
     const token = await createToolsAccessToken();

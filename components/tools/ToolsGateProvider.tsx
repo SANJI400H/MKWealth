@@ -17,9 +17,11 @@ import { trackEvent } from "@/lib/analytics";
 
 type ToolsGateContextValue = {
   unlocked: boolean;
-  /** If locked, opens modal and returns false. If unlocked, runs onAllowed and returns true. */
   requireAccess: (onAllowed?: () => void) => boolean;
   openGate: () => void;
+  markUnlocked: () => void;
+  /** Attach latest calculator inputs/outputs to the next lead submit. */
+  setCalculatorSnapshot: (snapshot: Record<string, unknown> | null) => void;
 };
 
 const ToolsGateContext = createContext<ToolsGateContextValue | null>(null);
@@ -41,14 +43,16 @@ export function ToolsGateProvider({
 }: {
   initialUnlocked: boolean;
   children: ReactNode;
-  source?: "tools" | "guide";
+  source?: "tools" | "guide" | "calculator";
   title?: string;
   intro?: string;
 }) {
   const router = useRouter();
   const [unlocked, setUnlocked] = useState(initialUnlocked);
   const [open, setOpen] = useState(false);
+  const [snapshotVersion, setSnapshotVersion] = useState(0);
   const pendingRef = useRef<(() => void) | null>(null);
+  const snapshotRef = useRef<Record<string, unknown> | null>(null);
 
   useEffect(() => {
     if (initialUnlocked) setUnlocked(true);
@@ -56,6 +60,11 @@ export function ToolsGateProvider({
 
   const openGate = useCallback(() => {
     setOpen(true);
+  }, []);
+
+  const setCalculatorSnapshot = useCallback((snapshot: Record<string, unknown> | null) => {
+    snapshotRef.current = snapshot;
+    setSnapshotVersion((v) => v + 1);
   }, []);
 
   const requireAccess = useCallback(
@@ -82,10 +91,23 @@ export function ToolsGateProvider({
     router.refresh();
   }, [router, source]);
 
+  const markUnlocked = useCallback(() => {
+    setUnlocked(true);
+    setOpen(false);
+    pendingRef.current = null;
+    router.refresh();
+  }, [router]);
+
   const value = useMemo(
-    () => ({ unlocked, requireAccess, openGate }),
-    [unlocked, requireAccess, openGate],
+    () => ({ unlocked, requireAccess, openGate, markUnlocked, setCalculatorSnapshot }),
+    [unlocked, requireAccess, openGate, markUnlocked, setCalculatorSnapshot],
   );
+
+  const extraPayload = useMemo(() => {
+    void snapshotVersion;
+    if (!snapshotRef.current) return undefined;
+    return { calculatorSnapshot: snapshotRef.current };
+  }, [snapshotVersion, open]);
 
   return (
     <ToolsGateContext.Provider value={value}>
@@ -103,17 +125,17 @@ export function ToolsGateProvider({
             }
           }}
         >
-          <div className="relative w-full max-w-md border border-silver bg-paper p-6 shadow-lg sm:p-8">
+          <div className="relative w-full max-w-md max-h-[90dvh] overflow-y-auto border border-silver bg-paper p-6 shadow-lg sm:p-8">
             <button
               type="button"
-              className="absolute right-3 top-3 rounded p-1 text-ink-muted hover:text-ink"
+              className="absolute right-2 top-2 inline-flex min-h-11 min-w-11 items-center justify-center rounded text-ink-muted hover:text-ink"
               aria-label="Close"
               onClick={() => {
                 pendingRef.current = null;
                 setOpen(false);
               }}
             >
-              <X size={18} strokeWidth={1.75} />
+              <X size={20} strokeWidth={1.75} />
             </button>
             <p className="eyebrow">Registration</p>
             <h2 id="tools-gate-title" className="mt-2 font-display text-2xl font-bold text-ink">
@@ -121,10 +143,11 @@ export function ToolsGateProvider({
             </h2>
             <div className="mt-6">
               <LeadForm
-                source={source}
+                source={source === "guide" ? "guide" : source === "calculator" ? "calculator" : "tools"}
                 intro={intro}
                 phoneLabel="WhatsApp number"
                 submitLabel="Unlock access"
+                extraPayload={extraPayload}
                 onSuccess={handleSuccess}
               />
             </div>

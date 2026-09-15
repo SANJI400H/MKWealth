@@ -30,6 +30,13 @@ export const calculators: CalculatorMeta[] = [
  href: "/calculators/payment-plan",
  },
  {
+ slug: "mortgage-estimate",
+ title: "Mortgage Estimate",
+ summary: "Indicative monthly payment from price, down payment, rate, and term.",
+ status: "live",
+ href: "/calculators/mortgage-estimate",
+ },
+ {
  slug: "cash-on-cash",
  title: "Cash-on-Cash Return Calculator",
  summary: "Return on equity when financing is part of the structure.",

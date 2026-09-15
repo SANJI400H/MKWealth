@@ -8,7 +8,7 @@ import { trackEvent } from "@/lib/analytics";
 import { siteConfig } from "@/lib/site-config";
 
 const fieldClass =
-  "w-full rounded-md border border-ink/10 bg-paper px-3 py-2.5 text-ink focus:border-maroon focus:outline-none";
+  "w-full rounded-md border border-ink/10 bg-paper px-3 py-2.5 text-base text-ink focus:border-maroon focus:outline-none";
 
 function num(value: string) {
   const n = Number(String(value).replace(/,/g, ""));
@@ -23,7 +23,7 @@ type Stage = { label: string; pct: string };
 
 /** Stress-test construction-linked payment schedules against available cash. */
 export default function PaymentPlanCalculator() {
-  const { unlocked, requireAccess } = useToolsGate();
+  const { unlocked, requireAccess, setCalculatorSnapshot } = useToolsGate();
   const [purchasePrice, setPurchasePrice] = useState("2000000");
   const [availableCash, setAvailableCash] = useState("800000");
   const [stages, setStages] = useState<Stage[]>([
@@ -64,6 +64,20 @@ export default function PaymentPlanCalculator() {
   }, [purchasePrice, availableCash, stages]);
 
   useEffect(() => {
+    setCalculatorSnapshot({
+      calculator: "payment-plan",
+      inputs: { purchasePrice, availableCash, stages },
+      outputs: {
+        totalPct: result.totalPct,
+        totalAmount: result.totalAmount,
+        shortfall: result.shortfall,
+        headroom: result.headroom,
+        rows: result.rows,
+      },
+    });
+  }, [setCalculatorSnapshot, purchasePrice, availableCash, stages, result]);
+
+  useEffect(() => {
     if (!unlocked || completed || result.price <= 0) return;
     setCompleted(true);
     trackEvent("calculator_complete", { calculator: "payment-plan" });
@@ -77,7 +91,7 @@ export default function PaymentPlanCalculator() {
 
   return (
     <div className="grid gap-10 lg:grid-cols-2">
-      <div className="space-y-4">
+      <div className="order-2 space-y-4 lg:order-1">
         <label className="block text-sm">
           <span className="text-ink-muted">Purchase price (AED)</span>
           <input
@@ -152,7 +166,7 @@ export default function PaymentPlanCalculator() {
         </div>
       </div>
 
-      <GatedResults>
+      <GatedResults className="order-1 lg:order-2">
         <div className="border border-line bg-ink/[0.02] p-6">
           <h2 className="font-display text-xl font-bold text-ink">Liquidity check</h2>
           <dl className="mt-6 space-y-3 text-sm">

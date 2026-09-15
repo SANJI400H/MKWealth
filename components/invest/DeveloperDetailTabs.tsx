@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import EditorialTabs from "@/components/ui/EditorialTabs";
 import PageIntro from "@/components/ui/PageIntro";
+import StickySectionNav from "@/components/ui/StickySectionNav";
 import { developerDetailNav } from "@/content/navigation";
 import type { Developer } from "@/content/developers";
 import { siteConfig } from "@/lib/site-config";
@@ -15,78 +15,65 @@ export default function DeveloperDetailTabs({ developer }: { developer: Develope
     <>
       <PageIntro title={d.name} lead={d.tagline}>
         {d.workingNote ? (
-          <p className="mt-6 border border-line bg-surface px-4 py-3 text-sm text-ink-muted">
-            {d.workingNote}
-          </p>
+          <p className="mt-6 border border-line bg-surface px-4 py-3 text-sm text-ink-muted">{d.workingNote}</p>
         ) : null}
       </PageIntro>
 
-      <EditorialTabs
+      <StickySectionNav
         items={developerDetailNav}
-        layoutId={`developer-tab-${d.slug}`}
+        layoutId={`developer-section-${d.slug}`}
         ariaLabel={`${d.name} topics`}
-        cta={{ label: "Book Strategy Session", href: "/strategy-session" }}
-        panels={{
-          overview: (
-            <div>
-              <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Overview</h2>
-              <p className="body-copy mt-4">{d.overview}</p>
-            </div>
-          ),
-          experience: (
-            <div>
-              <h2 className="font-display text-2xl font-bold text-ink">Morgan&apos;s experience</h2>
-              <p className="mt-4 rounded-sm border border-line px-4 py-3 text-sm text-ink-muted">
-                {d.morganExperience}
-              </p>
-            </div>
-          ),
-          "track-record": (
-            <div>
-              <h2 className="font-display text-2xl font-bold text-ink">Track record</h2>
-              <p className="body-copy mt-4">{d.trackRecord}</p>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-ink-muted">
-                {d.projects.map((p) => (
-                  <li key={p}>{p}</li>
-                ))}
-              </ul>
-            </div>
-          ),
-          delivery: (
-            <div>
-              <h2 className="font-display text-2xl font-bold text-ink">Delivery considerations</h2>
-              <p className="body-copy mt-4">{d.deliveryNotes}</p>
-            </div>
-          ),
-          payment: (
-            <div>
-              <h2 className="font-display text-2xl font-bold text-ink">Payment-plan analysis</h2>
-              <p className="body-copy mt-4">{d.paymentPlanNotes}</p>
-              <p className="mt-4">
-                <Link href="/calculators/payment-plan" className="font-semibold text-maroon hover:underline">
-                  Open payment plan calculator →
-                </Link>
-              </p>
-            </div>
-          ),
-          suitability: (
-            <div>
-              <h2 className="font-display text-2xl font-bold text-ink">Investor suitability</h2>
-              <p className="body-copy mt-4">{d.suitability}</p>
-            </div>
-          ),
-          risks: (
-            <div>
-              <h2 className="font-display text-2xl font-bold text-ink">Risks</h2>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-ink-muted">
-                {d.risks.map((r) => (
-                  <li key={r}>{r}</li>
-                ))}
-              </ul>
-            </div>
-          ),
-        }}
+        className="mt-8"
       />
+
+      <section id="overview" className="scroll-mt-[calc(3.5rem+env(safe-area-inset-top,0px)+3.75rem)] sm:scroll-mt-[calc(4rem+env(safe-area-inset-top,0px)+4rem)] mt-10">
+        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Overview</h2>
+        <p className="body-copy mt-4">{d.overview}</p>
+      </section>
+
+      <section id="experience" className="page-block">
+        <h2 className="font-display text-2xl font-bold text-ink">Morgan&apos;s experience</h2>
+        <p className="mt-4 rounded-sm border border-line px-4 py-3 text-sm text-ink-muted">{d.morganExperience}</p>
+      </section>
+
+      <section id="track-record" className="page-block">
+        <h2 className="font-display text-2xl font-bold text-ink">Track record</h2>
+        <p className="body-copy mt-4">{d.trackRecord}</p>
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-ink-muted">
+          {d.projects.map((p) => (
+            <li key={p}>{p}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section id="delivery" className="page-block">
+        <h2 className="font-display text-2xl font-bold text-ink">Delivery considerations</h2>
+        <p className="body-copy mt-4">{d.deliveryNotes}</p>
+      </section>
+
+      <section id="payment" className="page-block">
+        <h2 className="font-display text-2xl font-bold text-ink">Payment-plan analysis</h2>
+        <p className="body-copy mt-4">{d.paymentPlanNotes}</p>
+        <p className="mt-4">
+          <Link href="/calculators/payment-plan" className="font-semibold text-maroon hover:underline">
+            Open payment plan calculator →
+          </Link>
+        </p>
+      </section>
+
+      <section id="suitability" className="page-block">
+        <h2 className="font-display text-2xl font-bold text-ink">Investor suitability</h2>
+        <p className="body-copy mt-4">{d.suitability}</p>
+      </section>
+
+      <section id="risks" className="page-block">
+        <h2 className="font-display text-2xl font-bold text-ink">Risks</h2>
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-ink-muted">
+          {d.risks.map((r) => (
+            <li key={r}>{r}</li>
+          ))}
+        </ul>
+      </section>
 
       {d.relatedInsightSlugs?.length ? (
         <p className="body-copy mt-12">

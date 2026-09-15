@@ -8,7 +8,7 @@ import { trackEvent } from "@/lib/analytics";
 import { siteConfig } from "@/lib/site-config";
 
 const fieldClass =
- "w-full rounded-md border border-ink/10 bg-paper px-3 py-2.5 text-ink focus:border-maroon focus:outline-none";
+ "w-full rounded-md border border-ink/10 bg-paper px-3 py-2.5 text-base text-ink focus:border-maroon focus:outline-none";
 
 function num(value: string) {
  const n = Number(String(value).replace(/,/g, ""));
@@ -33,7 +33,7 @@ function ratio(n: number) {
  * Educational, not advice. Methodology shown inline.
  */
 export default function TrueYieldCalculator() {
- const { unlocked, requireAccess } = useToolsGate();
+ const { unlocked, requireAccess, setCalculatorSnapshot } = useToolsGate();
  const [purchasePrice, setPurchasePrice] = useState("2000000");
  const [annualRent, setAnnualRent] = useState("140000");
  const [dldPct, setDldPct] = useState("4");
@@ -120,6 +120,35 @@ export default function TrueYieldCalculator() {
  ]);
 
  useEffect(() => {
+ setCalculatorSnapshot({
+ calculator: "true-yield",
+ inputs: {
+ purchasePrice,
+ annualRent,
+ dldPct,
+ agencyPct,
+ trusteeFee,
+ otherAcquisition,
+ serviceCharges,
+ managementPct,
+ vacancyPct,
+ maintenance,
+ insurance,
+ cooling,
+ otherAnnual,
+ },
+ outputs: {
+ capital: result.capital,
+ netIncome: result.netIncome,
+ grossYield: result.grossYield,
+ netYieldOnPrice: result.netYieldOnPrice,
+ netYieldOnCapital: result.netYieldOnCapital,
+ annualCosts: result.annualCosts,
+ },
+ });
+ }, [setCalculatorSnapshot, purchasePrice, annualRent, dldPct, agencyPct, trusteeFee, otherAcquisition, serviceCharges, managementPct, vacancyPct, maintenance, insurance, cooling, otherAnnual, result]);
+
+ useEffect(() => {
  if (!unlocked) return;
  trackEvent("calculator_complete", {
  calculator: "true-yield",
@@ -146,7 +175,7 @@ export default function TrueYieldCalculator() {
 
  return (
  <div className="grid gap-10 lg:grid-cols-2">
- <div className="space-y-4">
+ <div className="order-2 space-y-4 lg:order-1">
  {fields.map((f) => (
  <label key={f.label} className="block text-sm text-ink-muted">
  <span className="font-medium text-ink">{f.label}</span>
@@ -167,7 +196,7 @@ export default function TrueYieldCalculator() {
  ))}
  </div>
 
- <GatedResults>
+ <GatedResults className="order-1 lg:order-2">
  <div className="space-y-6 lg:sticky lg:top-24 lg:self-start">
  <div className="rounded-sm border border-line p-5">
  <p className="eyebrow">Outputs</p>

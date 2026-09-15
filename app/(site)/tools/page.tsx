@@ -3,14 +3,16 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import SiteFooter from "@/components/sections/SiteFooter";
 import BookMeetingLink from "@/components/ui/BookMeetingLink";
+import StickySectionNav from "@/components/ui/StickySectionNav";
 import { calculators } from "@/content/calculators";
+import { toolsSectionNav } from "@/content/navigation";
 import { pageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = pageMetadata({
   title: "Investment Tools | Morgan Kaiser",
   description:
-    "Browse UAE property calculators and the investor guide. Register with name, WhatsApp, and email to download files or run live results.",
+    "UAE property calculators. Register with name, WhatsApp, and email to run live results — your numbers ship with your details.",
   path: "/tools",
 });
 
@@ -20,15 +22,29 @@ export default function ToolsPage() {
   return (
     <>
       <main className="page-shell">
-        <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Tools", path: "/tools" }]} />
+        <Breadcrumbs
+          visible={false}
+          items={[
+            { name: "Home", path: "/" },
+            { name: "Tools", path: "/tools" },
+          ]}
+        />
 
         <h1 className="page-h1">Tools</h1>
         <p className="page-lead">
-          Browse freely. When you edit a calculator or download a guide file, a short registration unlocks access on
-          this browser for ninety days.
+          Browse calculators freely. When you edit inputs or reveal results, a short registration (name,
+          WhatsApp, email) unlocks access and sends your calculation snapshot with your details to Morgan.
+          Current investors use the Client Portal for the portfolio dashboard.
         </p>
 
-        <section id="calculators" className="page-block space-y-6">
+        <StickySectionNav
+          items={toolsSectionNav}
+          layoutId="tools-section-pill"
+          ariaLabel="Tools sections"
+          className="mt-8"
+        />
+
+        <section id="calculators" className="scroll-mt-[calc(3.5rem+env(safe-area-inset-top,0px)+3.75rem)] sm:scroll-mt-[calc(4rem+env(safe-area-inset-top,0px)+4rem)] mt-10 space-y-6">
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Calculators</h2>
           <ul className="space-y-6">
             {liveCalculators.map((c) => (
@@ -43,13 +59,13 @@ export default function ToolsPage() {
           </ul>
         </section>
 
-        <section id="guide" className="page-block space-y-4">
-          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Investor guide</h2>
-          <p className="text-ink-muted">
-            Topic videos you can watch immediately. Downloads unlock after name, WhatsApp, and email.
+        <section id="portal" className="page-block space-y-4">
+          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Client Portal</h2>
+          <p className="body-copy">
+            Private Desk for current clients — opens the hosted Private Wealth dashboard.
           </p>
-          <Link href="/guide" className="btn-ghost-dark w-full justify-center sm:w-auto">
-            Open guide →
+          <Link href="/portal" className="btn-ghost-dark w-full justify-center sm:w-auto">
+            Client Portal →
           </Link>
         </section>
 

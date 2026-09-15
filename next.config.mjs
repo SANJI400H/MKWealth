@@ -31,6 +31,23 @@ const nextConfig = {
         destination: "/invest/rak",
         permanent: true,
       },
+      // Credentials live on About — no separate page
+      {
+        source: "/credentials",
+        destination: "/about#credentials",
+        permanent: true,
+      },
+      // Private Desk = Client Portal (hosted dashboard or /portal teaser)
+      {
+        source: "/desk",
+        destination: "/portal",
+        permanent: false,
+      },
+      {
+        source: "/desk/unlock",
+        destination: "/portal",
+        permanent: false,
+      },
     ];
   },
   async headers() {

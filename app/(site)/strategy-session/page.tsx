@@ -86,6 +86,13 @@ export default function StrategySessionPage() {
  See all services
  </Link>
  </div>
+ <p className="mt-6 max-w-xl text-sm text-ink-muted">
+ After we speak, existing clients use the{" "}
+ <Link href="/portal" className="font-semibold text-maroon hover:underline">
+ Client Portal
+ </Link>{" "}
+ (Private Desk) for their portfolio dashboard.
+ </p>
  </section>
  </main>
  <SiteFooter />

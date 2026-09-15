@@ -21,7 +21,7 @@ export default function Methodology() {
  </p>
  </RevealOnScroll>
 
- <div className="mt-14 grid gap-8 sm:grid-cols-3">
+ <div className="mt-14 grid gap-8 md:grid-cols-3">
  {[
  {
  title: "Brief first",

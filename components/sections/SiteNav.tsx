@@ -193,7 +193,7 @@ function MobileAccordion({
                         <Link
                           href={link.href}
                           onClick={onNavigate}
-                          className={`block py-2 text-[13px] ${
+                          className={`flex min-h-11 items-center py-3 text-[14px] ${
                             pathMatches(pathname, link.href) ? "font-medium text-ink" : "text-ink-muted"
                           }`}
                         >
@@ -341,9 +341,9 @@ export default function SiteNav() {
           aria-expanded={open}
           aria-controls="mobile-nav-panel"
           aria-label={open ? "Close navigation menu" : "Open navigation menu"}
-          className={`rounded-sm p-1.5 lg:hidden ${lightChrome && !solidChrome ? "text-white" : "text-ink"}`}
+          className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm lg:hidden ${lightChrome && !solidChrome ? "text-white" : "text-ink"}`}
         >
-          {open ? <X size={18} strokeWidth={1.5} /> : <Menu size={18} strokeWidth={1.5} />}
+          {open ? <X size={22} strokeWidth={1.5} /> : <Menu size={22} strokeWidth={1.5} />}
         </button>
       </div>
 
@@ -359,7 +359,7 @@ export default function SiteNav() {
             animate={{ opacity: 1, y: 0 }}
             exit={reduceMotion ? undefined : { opacity: 0, y: -6 }}
             transition={{ duration: 0.2, ease: easeOut }}
-            className="pointer-events-auto max-h-[min(82vh,40rem)] overflow-y-auto border-b border-line bg-paper lg:hidden"
+            className="pointer-events-auto h-[calc(100dvh-3.5rem-env(safe-area-inset-top,0px))] overflow-y-auto overscroll-contain border-b border-line bg-paper pb-[env(safe-area-inset-bottom,0px)] sm:h-[calc(100dvh-4rem-env(safe-area-inset-top,0px))] lg:hidden"
           >
             <nav className="mx-auto flex max-w-content flex-col px-5 py-2 sm:px-8">
               {primaryNav.map((group) => (
@@ -372,7 +372,7 @@ export default function SiteNav() {
                   onNavigate={() => setOpen(false)}
                 />
               ))}
-              <BookMeetingLink href="/strategy-session" className="btn-primary mt-4 mb-3 w-full">
+              <BookMeetingLink href="/strategy-session" className="btn-primary mt-4 mb-6 w-full">
                 Book Strategy Session
               </BookMeetingLink>
             </nav>

@@ -1,31 +1,29 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
-import GuideExperience from "./GuideExperience";
-import { ToolsGateProvider } from "@/components/tools/ToolsGateProvider";
+import GuideGate from "./GuideGate";
+import { GUIDE_ACCESS_COOKIE, verifyGuideAccessCookie } from "@/lib/guide-access";
 import { pageMetadata } from "@/lib/metadata";
-import { TOOLS_ACCESS_COOKIE, verifyToolsAccessCookie } from "@/lib/tools-access";
 
-// Automation-only traffic (Instagram DM funnel), never meant to rank, hence noIndex.
 export const metadata: Metadata = pageMetadata({
- title: "Unlock the Dubai Off-Plan Investment Guide",
- description: "Browse Morgan Kaiser's Dubai off-plan guide, register to download videos and PDF briefings.",
- path: "/guide",
- noIndex: true,
+  title: "Private Investor Guide | Morgan Kaiser",
+  description:
+    "Qualify for Morgan Kaiser's private investor guide. Access after review, or automated approval when enabled.",
+  path: "/guide",
+  noIndex: true,
 });
 
-export default async function GuidePage() {
- const unlocked = await verifyToolsAccessCookie(cookies().get(TOOLS_ACCESS_COOKIE)?.value);
+type Props = { searchParams: { error?: string; unlocked?: string } };
 
- return (
- <main className="flex min-h-screen flex-col bg-paper">
- <ToolsGateProvider
- initialUnlocked={unlocked}
- source="guide"
- title="Unlock downloads"
- intro="Enter your name, WhatsApp number, and email to download videos and PDF briefings."
- >
- <GuideExperience />
- </ToolsGateProvider>
- </main>
- );
+export default async function GuidePage({ searchParams }: Props) {
+  const unlocked = await verifyGuideAccessCookie(cookies().get(GUIDE_ACCESS_COOKIE)?.value);
+
+  return (
+    <main className="flex min-h-screen flex-col bg-paper">
+      <GuideGate
+        initialUnlocked={unlocked}
+        error={searchParams.error}
+        justUnlocked={searchParams.unlocked === "1"}
+      />
+    </main>
+  );
 }

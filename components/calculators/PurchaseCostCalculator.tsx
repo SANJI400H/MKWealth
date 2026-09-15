@@ -8,7 +8,7 @@ import { trackEvent } from "@/lib/analytics";
 import { siteConfig } from "@/lib/site-config";
 
 const fieldClass =
- "w-full rounded-md border border-ink/10 bg-paper px-3 py-2.5 text-ink focus:border-maroon focus:outline-none";
+ "w-full rounded-md border border-ink/10 bg-paper px-3 py-2.5 text-base text-ink focus:border-maroon focus:outline-none";
 
 function num(value: string) {
  const n = Number(String(value).replace(/,/g, ""));
@@ -25,7 +25,7 @@ function money(n: number) {
 
 /** Dubai freehold acquisition cost stack, editable assumptions. */
 export default function PurchaseCostCalculator() {
- const { unlocked, requireAccess } = useToolsGate();
+ const { unlocked, requireAccess, setCalculatorSnapshot } = useToolsGate();
  const [purchasePrice, setPurchasePrice] = useState("2000000");
  const [dldPct, setDldPct] = useState("4");
  const [agencyPct, setAgencyPct] = useState("2");
@@ -65,6 +65,14 @@ export default function PurchaseCostCalculator() {
  }, [purchasePrice, dldPct, agencyPct, trusteeFee, adminFees, furniture, other]);
 
  useEffect(() => {
+ setCalculatorSnapshot({
+ calculator: "purchase-cost",
+ inputs: { purchasePrice, dldPct, agencyPct, trusteeFee, adminFees, furniture, other },
+ outputs: result,
+ });
+ }, [setCalculatorSnapshot, purchasePrice, dldPct, agencyPct, trusteeFee, adminFees, furniture, other, result]);
+
+ useEffect(() => {
  if (!unlocked || completed || result.price <= 0) return;
  setCompleted(true);
  trackEvent("calculator_complete", { calculator: "purchase-cost" });
@@ -72,7 +80,7 @@ export default function PurchaseCostCalculator() {
 
  return (
  <div className="grid gap-10 lg:grid-cols-2">
- <div className="space-y-4">
+ <div className="order-2 space-y-4 lg:order-1">
  <label className="block text-sm">
  <span className="text-ink-muted">Purchase price (AED)</span>
  <input
@@ -156,7 +164,7 @@ export default function PurchaseCostCalculator() {
  </p>
  </div>
 
- <GatedResults>
+ <GatedResults className="order-1 lg:order-2">
  <div className="border border-line bg-ink/[0.02] p-6">
  <h2 className="font-display text-xl font-bold text-ink">Cost stack</h2>
  <dl className="mt-6 space-y-3 text-sm">

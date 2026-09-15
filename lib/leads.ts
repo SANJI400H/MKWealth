@@ -1,7 +1,9 @@
 /**
  * Expanded CRM-ready lead model.
- * Not all fields are required on every form. Progressive collection.
+ * Persists to Supabase (when configured) and emails Morgan via Resend.
  */
+
+import { getSupabaseAdmin } from "@/lib/supabase/admin";
 
 const PHONE_PATTERN = /^\+?[1-9]\d{7,14}$/;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -13,6 +15,7 @@ export const LEAD_SOURCES = [
   "calculator",
   "analyse",
   "strategy-session",
+  "desk-request",
   "insight",
   "whatsapp",
   "newsletter",
@@ -88,6 +91,23 @@ function asJsonString(value: unknown) {
   }
 }
 
+function parseJsonField(value: string): Record<string, unknown> | unknown[] | null {
+  if (!value) return null;
+  try {
+    return JSON.parse(value) as Record<string, unknown> | unknown[];
+  } catch {
+    return null;
+  }
+}
+
+function deriveStatus(payload: LeadPayload): string {
+  if (payload.notes.includes("guide_status=pending_manual")) return "pending_manual";
+  if (payload.notes.includes("guide_status=auto_approved")) return "auto_approved";
+  if (payload.source === "strategy-session") return "session_booked";
+  if (payload.leadScoreHint === "high" || payload.leadScoreHint === "qualified") return "qualified";
+  return "new";
+}
+
 export function parseLead(body: LeadInput):
   | { ok: true; payload: LeadPayload }
   | { ok: false; error: string; status: number } {
@@ -141,6 +161,49 @@ export function parseLead(body: LeadInput):
   };
 }
 
+async function saveLeadToDatabase(
+  payload: LeadPayload,
+): Promise<{ ok: true; id: string } | { ok: false; error: string }> {
+  const supabase = getSupabaseAdmin();
+  if (!supabase) {
+    return { ok: false, error: "Supabase not configured (missing URL or SERVICE_ROLE_KEY)." };
+  }
+
+  const row = {
+    full_name: payload.name,
+    phone: payload.phone,
+    email: payload.email.toLowerCase(),
+    source: payload.source,
+    intent: payload.intent || null,
+    country: payload.country || null,
+    property_name: payload.propertyName || null,
+    purchase_price: payload.purchasePrice || null,
+    expected_rent: payload.expectedRent || null,
+    market_type: payload.marketType || null,
+    objective: payload.objective || null,
+    timeline: payload.timeline || null,
+    notes: payload.notes || null,
+    budget_range: payload.budgetRange || null,
+    property_type: payload.propertyType || null,
+    market: payload.market || null,
+    financing: payload.financing || null,
+    existing_uae_property: payload.existingUaeProperty || null,
+    content_source: payload.contentSource || null,
+    calculator_snapshot: parseJsonField(payload.calculatorSnapshot),
+    attribution: parseJsonField(payload.attribution),
+    lead_score_hint: payload.leadScoreHint || null,
+    status: deriveStatus(payload),
+    submitted_at: payload.submittedAt,
+  };
+
+  const { data, error } = await supabase.from("leads").insert(row).select("id").single();
+  if (error) {
+    console.error("lead: Supabase insert failed", error.message);
+    return { ok: false, error: error.message };
+  }
+  return { ok: true, id: data.id as string };
+}
+
 async function notifyByEmail(payload: LeadPayload) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.LEAD_NOTIFY_EMAIL;
@@ -185,13 +248,45 @@ export async function submitLead(body: LeadInput) {
   const parsed = parseLead(body);
   if (!parsed.ok) return parsed;
 
-  // Hook point for future CRM webhook
-  // await forwardToCrm(parsed.payload)
+  const saved = await saveLeadToDatabase(parsed.payload);
+  // #region agent log
+  fetch("http://127.0.0.1:7382/ingest/2d9bf8dc-52ce-4796-a4a2-5c48f1176b5c", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "048fbd" },
+    body: JSON.stringify({
+      sessionId: "048fbd",
+      runId: "supabase-leads",
+      hypothesisId: "DB-1",
+      location: "lib/leads.ts:submitLead",
+      message: "lead persist attempt",
+      data: {
+        saved: saved.ok,
+        error: saved.ok ? null : saved.error.slice(0, 160),
+        source: parsed.payload.source,
+      },
+      timestamp: Date.now(),
+    }),
+  }).catch(() => {});
+  // #endregion
+
+  if (!saved.ok) {
+    console.error("lead: database save failed —", saved.error);
+  }
 
   const emailed = await notifyByEmail(parsed.payload);
   if (!emailed) {
-    console.info("lead (email not configured or failed):", parsed.payload);
+    console.info("lead (email not configured or failed):", {
+      email: parsed.payload.email,
+      source: parsed.payload.source,
+      saved: saved.ok,
+    });
   }
 
-  return { ok: true as const, emailed, payload: parsed.payload };
+  return {
+    ok: true as const,
+    emailed,
+    saved: saved.ok,
+    leadId: saved.ok ? saved.id : null,
+    payload: parsed.payload,
+  };
 }

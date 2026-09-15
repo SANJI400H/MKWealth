@@ -1,7 +1,9 @@
 /**
- * Global IA. Morgan · Invest · Tools · Work With Morgan
+ * Global IA. Morgan · Invest · Tools · Work With Morgan · Portal
  * Soft launch: Intelligence hubs stay in codebase but are not advertised.
- * Tools are lead-gated (Name / WhatsApp / email → cookie unlock).
+ * Investor Guide: unlock via qualification questions (dataroom-style) → cookie.
+ * Calculators: soft gate (Name / WhatsApp / email).
+ * Portal / Private Desk: current investors → hosted dashboard URL (or /portal teaser).
  */
 
 export type NavLink = {
@@ -64,9 +66,8 @@ export const primaryNav: NavGroup[] = [
  {
  title: "Tools",
  links: [
- { label: "Overview", href: "/tools", description: "Unlock calculators and guide" },
- { label: "Calculators", href: "/calculators", description: "True yield, costs, payment plans" },
- { label: "Investor Guide", href: "/guide", description: "Videos and briefings" },
+ { label: "Overview", href: "/tools", description: "Calculators for underwriting" },
+ { label: "Calculators", href: "/calculators", description: "True yield, costs, mortgage, plans" },
  ],
  },
  ],
@@ -88,6 +89,23 @@ export const primaryNav: NavGroup[] = [
  label: "Book Strategy Session",
  href: "/strategy-session",
  description: "30-minute property strategy conversation",
+ },
+ ],
+ },
+ ],
+ },
+ {
+ id: "portal",
+ label: "Portal",
+ href: "/portal",
+ columns: [
+ {
+ title: "Client Portal",
+ links: [
+ {
+ label: "Client Portal",
+ href: "/portal",
+ description: "Current investors — Private Desk dashboard",
  },
  ],
  },
@@ -118,7 +136,6 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
  links: [
  { label: "Overview", href: "/tools" },
  { label: "Calculators", href: "/calculators" },
- { label: "Investor Guide", href: "/guide" },
  ],
  },
  {
@@ -127,6 +144,10 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
  { label: "Services", href: "/work-with-morgan" },
  { label: "Strategy Session", href: "/strategy-session" },
  ],
+ },
+ {
+ title: "Clients",
+ links: [{ label: "Client Portal", href: "/portal" }],
  },
  {
  title: "Legal",
@@ -149,6 +170,18 @@ export const aboutSectionNav: SectionNavItem[] = [
  { id: "philosophy", label: "Philosophy" },
  { id: "methodology", label: "Methodology" },
  { id: "credentials", label: "Credentials" },
+];
+
+export const toolsSectionNav: SectionNavItem[] = [
+  { id: "calculators", label: "Calculators" },
+  { id: "portal", label: "Client Portal" },
+];
+
+export const deskSectionNav: SectionNavItem[] = [
+  { id: "how-to-use", label: "How to use" },
+  { id: "market-stance", label: "Market stance" },
+  { id: "underwriting", label: "Underwriting" },
+  { id: "next-steps", label: "Working together" },
 ];
 
 export const dubaiSectionNav: SectionNavItem[] = [

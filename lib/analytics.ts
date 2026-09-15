@@ -11,6 +11,7 @@ export type AnalyticsEvent =
   | "calculator_complete"
   | "guide_lead"
   | "guide_download"
+  | "guide_qualify_step"
   | "analyse_start"
   | "analyse_submit"
   | "whatsapp_click"

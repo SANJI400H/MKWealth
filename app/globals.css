@@ -163,15 +163,29 @@ body {
 
   /* ——— Layout rhythm ——— */
   .page-shell {
-    @apply mx-auto w-full max-w-3xl px-5 py-16 sm:px-8 sm:py-20;
+    @apply mx-auto w-full max-w-3xl px-5 pb-16 sm:px-8 sm:pb-20;
+    padding-top: calc(3.5rem + env(safe-area-inset-top, 0px) + 1.25rem);
+  }
+
+  @media (min-width: 640px) {
+    .page-shell {
+      padding-top: calc(4rem + env(safe-area-inset-top, 0px) + 1.5rem);
+    }
   }
 
   .page-shell-wide {
-    @apply mx-auto w-full max-w-content px-5 py-16 sm:px-8 sm:py-20;
+    @apply mx-auto w-full max-w-content px-5 pb-16 sm:px-8 sm:pb-20;
+    padding-top: calc(3.5rem + env(safe-area-inset-top, 0px) + 1.25rem);
+  }
+
+  @media (min-width: 640px) {
+    .page-shell-wide {
+      padding-top: calc(4rem + env(safe-area-inset-top, 0px) + 1.5rem);
+    }
   }
 
   .section-pad {
-    @apply border-t border-line py-24 sm:py-32;
+    @apply border-t border-line py-16 sm:py-24 lg:py-32;
   }
 
   .section-inner {
@@ -179,52 +193,83 @@ body {
   }
 
   .section-title {
-    @apply display mt-5 max-w-3xl text-4xl text-ink sm:text-5xl lg:text-6xl;
+    @apply display mt-5 max-w-3xl text-3xl text-ink sm:text-5xl lg:text-6xl;
   }
 
   .section-lead {
     @apply mt-6 w-full max-w-3xl text-base leading-[1.75] text-ink-muted sm:text-lg;
-    text-align: justify;
-    text-justify: inter-word;
+    text-align: left;
     hyphens: auto;
     -webkit-hyphens: auto;
+  }
+
+  @media (min-width: 640px) {
+    .section-lead {
+      text-align: justify;
+      text-justify: inter-word;
+    }
   }
 
   .section-body {
-    @apply mt-12 sm:mt-14;
+    @apply mt-10 sm:mt-14;
   }
 
   .page-h1 {
-    @apply mt-8 font-display text-4xl font-bold tracking-tight text-ink sm:mt-10 sm:text-5xl;
+    @apply mt-8 font-display text-3xl font-bold tracking-tight text-ink sm:mt-10 sm:text-5xl;
   }
 
   .page-lead {
-    @apply mt-4 w-full text-lg leading-[1.75] text-ink-muted;
-    text-align: justify;
-    text-justify: inter-word;
+    @apply mt-4 w-full text-base leading-[1.75] text-ink-muted sm:text-lg;
+    text-align: left;
     hyphens: auto;
     -webkit-hyphens: auto;
   }
 
-  /* Body paragraphs — justified edges, shared measure with page-lead */
+  @media (min-width: 640px) {
+    .page-lead {
+      text-align: justify;
+      text-justify: inter-word;
+    }
+  }
+
+  /* Body paragraphs — left on mobile, justified from sm up */
   .body-copy {
     @apply w-full text-base leading-[1.75] text-ink-muted sm:text-[1.0625rem];
-    text-align: justify;
-    text-justify: inter-word;
+    text-align: left;
     hyphens: auto;
     -webkit-hyphens: auto;
+  }
+
+  @media (min-width: 640px) {
+    .body-copy {
+      text-align: justify;
+      text-justify: inter-word;
+    }
   }
 
   .body-copy-sm {
     @apply w-full text-sm leading-[1.7] text-ink-muted;
-    text-align: justify;
-    text-justify: inter-word;
+    text-align: left;
     hyphens: auto;
     -webkit-hyphens: auto;
   }
 
+  @media (min-width: 640px) {
+    .body-copy-sm {
+      text-align: justify;
+      text-justify: inter-word;
+    }
+  }
+
   .page-block {
-    @apply scroll-mt-28 mt-14 border-t border-line pt-10;
+    @apply mt-14 border-t border-line pt-10;
+    scroll-margin-top: calc(3.5rem + env(safe-area-inset-top, 0px) + 3.75rem);
+  }
+
+  @media (min-width: 640px) {
+    .page-block {
+      scroll-margin-top: calc(4rem + env(safe-area-inset-top, 0px) + 4rem);
+    }
   }
 
   .card-pad {
@@ -555,8 +600,10 @@ body {
 }
 
 @media (max-width: 767px) {
+  /* Avoid nested scroll fighting cinema snap — show full list within act */
   [data-cinema-layout="split"] .service-scroller {
-    max-height: min(36vh, 260px);
+    max-height: none;
+    overflow: visible;
   }
 }
 

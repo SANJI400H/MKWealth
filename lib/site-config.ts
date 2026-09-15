@@ -38,12 +38,21 @@ export const siteConfig = {
     facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL ?? "https://www.facebook.com/share/18TWwVSoLe/",
   },
   defaultOgImage: "/images/og-default.jpg",
+  /**
+   * Hosted Private Wealth / client maintenance dashboard (Firebase).
+   * Leave empty until the dashboard is deployed; Portal page shows a contact fallback.
+   */
+  clientPortalUrl: (process.env.NEXT_PUBLIC_CLIENT_PORTAL_URL ?? "").replace(/\/$/, ""),
+  /** Dedicated Investor Guide property (subdomain). Empty = guide stays on main host path /guide. */
+  guideUrl: (process.env.NEXT_PUBLIC_GUIDE_URL ?? "").replace(/\/$/, ""),
   cta: {
     strategySession: "Book Your 30-Minute Strategy Session",
     analyse: "Analyse My Investment",
     analyseSubmit: "Ask Morgan to Analyse This Investment",
     insights: "Explore Intelligence",
     guide: "Investor Resources",
+    portal: "Client Portal",
+    desk: "Private Desk",
   },
 } as const;
 

@@ -36,8 +36,9 @@ export default async function TrueYieldPage() {
  <div className="mt-10">
  <ToolsGateProvider
  initialUnlocked={unlocked}
+ source="calculator"
  title="Unlock calculator results"
- intro="Enter your name, WhatsApp number, and email to edit assumptions and see your numbers."
+ intro="Enter your name, WhatsApp number, and email. Your calculation snapshot is sent with your details."
  >
  <TrueYieldCalculator />
  </ToolsGateProvider>

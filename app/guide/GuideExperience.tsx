@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useRef, useState, type MouseEvent } from "react";
+import { useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { Check, ChevronLeft, ChevronRight, Download, FileText, Play } from "lucide-react";
-import { useToolsGate } from "@/components/tools/ToolsGateProvider";
 import {
   guideCategories,
   reportsForCategories,
@@ -11,6 +11,7 @@ import {
   type GuideVideo,
 } from "@/content/guide-library";
 import { trackEvent } from "@/lib/analytics";
+import { siteConfig } from "@/lib/site-config";
 
 type Step = "categories" | "library";
 
@@ -25,7 +26,7 @@ function GuideVideoPlayer({
 }: {
   video: GuideVideo;
   onWatched: () => void;
-  onDownloadClick: (event: MouseEvent<HTMLAnchorElement>) => void;
+  onDownloadClick: () => void;
   watched: boolean;
   downloaded: boolean;
 }) {
@@ -106,8 +107,8 @@ function GuideVideoPlayer({
   );
 }
 
+/** Library only — rendered after guide access is approved. */
 export default function GuideExperience() {
-  const { unlocked, requireAccess } = useToolsGate();
   const [step, setStep] = useState<Step>("categories");
   const [selected, setSelected] = useState<GuideCategoryId[]>([]);
   const [videoIndex, setVideoIndex] = useState(0);
@@ -130,47 +131,20 @@ export default function GuideExperience() {
   const markWatched = (id: string) => {
     setWatchedIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
     trackEvent("watch_video", { video_id: id, threshold: "75pct" });
-    trackEvent("lead_score_signal", { signal: "video_75", video_id: id });
   };
 
   const markDownloaded = (id: string) => {
     setDownloadedIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
     trackEvent("guide_download", { asset: "video", id });
-    trackEvent("lead_score_signal", { signal: "video_download", video_id: id });
-  };
-
-  const handleDownload = (
-    event: MouseEvent<HTMLAnchorElement>,
-    afterUnlock: () => void,
-  ) => {
-    if (unlocked) {
-      afterUnlock();
-      return;
-    }
-    event.preventDefault();
-    const href = event.currentTarget.href;
-    const downloadName = event.currentTarget.getAttribute("download");
-    requireAccess(() => {
-      afterUnlock();
-      const a = document.createElement("a");
-      a.href = href;
-      if (downloadName) a.setAttribute("download", downloadName);
-      a.rel = "noopener";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    });
   };
 
   if (step === "categories") {
     return (
       <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-8 px-6 py-14">
         <div className="text-center">
-          <p className="eyebrow">Investor guide</p>
+          <p className="eyebrow">Private library</p>
           <h1 className="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">What do you want to cover?</h1>
-          <p className="mx-auto mt-3 max-w-md text-ink-muted">
-            Pick topics and browse videos freely. Downloads unlock after a quick registration.
-          </p>
+          <p className="mx-auto mt-3 max-w-md text-ink-muted">Pick topics to open your videos and PDF briefings.</p>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2">
@@ -218,7 +192,7 @@ export default function GuideExperience() {
         <p className="eyebrow">Your library</p>
         <h1 className="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">Your videos & reports</h1>
         <p className="mx-auto mt-3 max-w-lg text-ink-muted">
-          Watch videos anytime. Download videos and PDF briefings after a one-time registration.
+          Private access for approved investors. Existing clients use the Client Portal for portfolios.
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-2">
           {selected.map((id) => {
@@ -248,7 +222,6 @@ export default function GuideExperience() {
               </p>
               <p>
                 {engagementCount} video{engagementCount === 1 ? "" : "s"} engaged
-                {unlocked ? " · Downloads unlocked" : ""}
               </p>
             </div>
 
@@ -257,11 +230,7 @@ export default function GuideExperience() {
               watched={watchedIds.includes(activeVideo.id)}
               downloaded={downloadedIds.includes(activeVideo.id)}
               onWatched={() => markWatched(activeVideo.id)}
-              onDownloadClick={(event) =>
-                handleDownload(event, () => {
-                  markDownloaded(activeVideo.id);
-                })
-              }
+              onDownloadClick={() => markDownloaded(activeVideo.id)}
             />
 
             <div className="mt-6 flex items-center justify-between gap-3">
@@ -297,14 +266,8 @@ export default function GuideExperience() {
             <h2 className="mt-2 font-display text-2xl font-bold text-ink">Downloadable briefings</h2>
           </div>
           <span className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 px-3 py-1 text-xs text-ink">
-            {unlocked ? (
-              <>
-                <Check size={13} strokeWidth={1.75} aria-hidden />
-                Unlocked
-              </>
-            ) : (
-              "Registration required to download"
-            )}
+            <Check size={13} strokeWidth={1.75} aria-hidden />
+            Unlocked
           </span>
         </div>
 
@@ -324,13 +287,8 @@ export default function GuideExperience() {
               <a
                 href={report.href}
                 download={report.fileName}
-                onClick={(event) =>
-                  handleDownload(event, () => {
-                    trackEvent("guide_download", { asset: "pdf", id: report.id });
-                    trackEvent("lead_score_signal", { signal: "pdf_download", report_id: report.id });
-                  })
-                }
-                className="btn-ghost-dark inline-flex items-center justify-center gap-2 whitespace-nowrap"
+                onClick={() => trackEvent("guide_download", { asset: "pdf", id: report.id })}
+                className="btn-ghost-dark inline-flex w-full items-center justify-center gap-2 sm:w-auto"
               >
                 <Download size={15} strokeWidth={1.5} aria-hidden />
                 Download PDF
@@ -338,6 +296,15 @@ export default function GuideExperience() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="border-t border-line pt-10 text-center">
+        <p className="text-sm text-ink-muted">
+          Already investing with Morgan?{" "}
+          <Link href={siteConfig.clientPortalUrl || "/portal"} className="font-semibold text-maroon hover:underline">
+            Open Client Portal
+          </Link>
+        </p>
       </section>
     </div>
   );

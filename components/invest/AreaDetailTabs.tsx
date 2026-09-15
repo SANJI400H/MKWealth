@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import EditorialTabs from "@/components/ui/EditorialTabs";
 import PageIntro from "@/components/ui/PageIntro";
+import StickySectionNav from "@/components/ui/StickySectionNav";
 import { areaDetailNav } from "@/content/navigation";
 import type { Area } from "@/content/areas";
 import { siteConfig } from "@/lib/site-config";
@@ -13,72 +13,60 @@ export default function AreaDetailTabs({ area }: { area: Area }) {
     <>
       <PageIntro title={area.name} lead={area.tagline}>
         {area.workingNote ? (
-          <p className="mt-6 border border-line bg-surface px-4 py-3 text-sm text-ink-muted">
-            {area.workingNote}
-          </p>
+          <p className="mt-6 border border-line bg-surface px-4 py-3 text-sm text-ink-muted">{area.workingNote}</p>
         ) : null}
       </PageIntro>
 
-      <EditorialTabs
+      <StickySectionNav
         items={areaDetailNav}
-        layoutId={`area-tab-${area.slug}`}
+        layoutId={`area-section-${area.slug}`}
         ariaLabel={`${area.name} topics`}
-        cta={{ label: "Book Strategy Session", href: "/strategy-session" }}
-        panels={{
-          view: (
-            <div>
-              <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Morgan&apos;s view</h2>
-              <p className="body-copy mt-4">{area.morganView}</p>
-            </div>
-          ),
-          profile: (
-            <div>
-              <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Investor profile</h2>
-              <p className="body-copy mt-4">{area.investorProfile}</p>
-            </div>
-          ),
-          price: (
-            <div>
-              <h2 className="font-display text-2xl font-bold text-ink">Price context</h2>
-              <p className="body-copy mt-4">{area.priceContext}</p>
-            </div>
-          ),
-          rental: (
-            <div>
-              <h2 className="font-display text-2xl font-bold text-ink">Rental context</h2>
-              <p className="body-copy mt-4">{area.rentalContext}</p>
-            </div>
-          ),
-          supply: (
-            <div>
-              <h2 className="font-display text-2xl font-bold text-ink">Supply</h2>
-              <p className="body-copy mt-4">{area.supply}</p>
-            </div>
-          ),
-          infra: (
-            <div>
-              <h2 className="font-display text-2xl font-bold text-ink">Infrastructure</h2>
-              <p className="body-copy mt-4">{area.infrastructure}</p>
-            </div>
-          ),
-          risks: (
-            <div>
-              <h2 className="font-display text-2xl font-bold text-ink">Risks</h2>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-ink-muted">
-                {area.risks.map((r) => (
-                  <li key={r}>{r}</li>
-                ))}
-              </ul>
-            </div>
-          ),
-          exit: (
-            <div>
-              <h2 className="font-display text-2xl font-bold text-ink">Exit considerations</h2>
-              <p className="body-copy mt-4">{area.exitConsiderations}</p>
-            </div>
-          ),
-        }}
+        className="mt-8"
       />
+
+      <section id="view" className="scroll-mt-[calc(3.5rem+env(safe-area-inset-top,0px)+3.75rem)] sm:scroll-mt-[calc(4rem+env(safe-area-inset-top,0px)+4rem)] mt-10">
+        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Morgan&apos;s view</h2>
+        <p className="body-copy mt-4">{area.morganView}</p>
+      </section>
+
+      <section id="profile" className="page-block">
+        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Investor profile</h2>
+        <p className="body-copy mt-4">{area.investorProfile}</p>
+      </section>
+
+      <section id="price" className="page-block">
+        <h2 className="font-display text-2xl font-bold text-ink">Price context</h2>
+        <p className="body-copy mt-4">{area.priceContext}</p>
+      </section>
+
+      <section id="rental" className="page-block">
+        <h2 className="font-display text-2xl font-bold text-ink">Rental context</h2>
+        <p className="body-copy mt-4">{area.rentalContext}</p>
+      </section>
+
+      <section id="supply" className="page-block">
+        <h2 className="font-display text-2xl font-bold text-ink">Supply</h2>
+        <p className="body-copy mt-4">{area.supply}</p>
+      </section>
+
+      <section id="infra" className="page-block">
+        <h2 className="font-display text-2xl font-bold text-ink">Infrastructure</h2>
+        <p className="body-copy mt-4">{area.infrastructure}</p>
+      </section>
+
+      <section id="risks" className="page-block">
+        <h2 className="font-display text-2xl font-bold text-ink">Risks</h2>
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-ink-muted">
+          {area.risks.map((r) => (
+            <li key={r}>{r}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section id="exit" className="page-block">
+        <h2 className="font-display text-2xl font-bold text-ink">Exit considerations</h2>
+        <p className="body-copy mt-4">{area.exitConsiderations}</p>
+      </section>
 
       <p className="body-copy mt-12">
         Market pillar:{" "}

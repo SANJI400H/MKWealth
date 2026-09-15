@@ -12,6 +12,8 @@ interface LeadFormProps {
   submittingLabel?: string;
   intro?: string;
   phoneLabel?: string;
+  /** Extra fields merged into the lead POST (e.g. calculatorSnapshot). */
+  extraPayload?: Record<string, unknown>;
   onSuccess?: () => void;
   className?: string;
 }
@@ -34,6 +36,7 @@ export default function LeadForm({
   submittingLabel = "Sending…",
   intro = "Enter your details below",
   phoneLabel = "Phone number",
+  extraPayload,
   onSuccess,
   className = "",
 }: LeadFormProps) {
@@ -54,12 +57,14 @@ export default function LeadForm({
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
         body: JSON.stringify({
           ...form,
           source,
           intent,
           attribution: getAttribution(),
           leadScoreHint: source === "analyse" || source === "strategy-session" ? "high" : "base",
+          ...extraPayload,
         }),
       });
 

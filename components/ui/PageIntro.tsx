@@ -18,7 +18,7 @@ export default function PageIntro({
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="scroll-mt-28">
+    <section className="scroll-mt-[calc(3.5rem+env(safe-area-inset-top,0px)+3.75rem)] sm:scroll-mt-[calc(4rem+env(safe-area-inset-top,0px)+4rem)]">
       <motion.h1
         className="page-h1"
         initial={reduceMotion ? false : { opacity: 0, y: 18 }}

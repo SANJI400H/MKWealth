@@ -3,7 +3,7 @@
 export const TOOLS_ACCESS_COOKIE = "mk_tools_access";
 export const TOOLS_ACCESS_MAX_AGE_SEC = 60 * 60 * 24 * 90;
 
-const SOURCES_THAT_UNLOCK = new Set(["tools", "guide", "guide-gate"]);
+const SOURCES_THAT_UNLOCK = new Set(["tools", "guide-gate", "calculator"]);
 
 function getSecret(): string | null {
   const secret = process.env.TOOLS_ACCESS_SECRET?.trim();

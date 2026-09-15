@@ -3,39 +3,49 @@
 import Link from "next/link";
 import AreaCarousel from "@/components/invest/AreaCarousel";
 import DeveloperCarousel from "@/components/invest/DeveloperCarousel";
-import EditorialTabs from "@/components/ui/EditorialTabs";
+import StickySectionNav from "@/components/ui/StickySectionNav";
 import { rakSectionNav } from "@/content/navigation";
 
 export default function RakInvestTabs() {
   return (
-    <EditorialTabs
-      items={rakSectionNav}
-      layoutId="rak-tab-underline"
-      ariaLabel="Ras Al Khaimah topics"
-      cta={{ label: "Book Strategy Session", href: "/strategy-session" }}
-      panels={{
-        overview: (
-          <div>
-            <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">The real trade-off</h2>
-            <p className="body-copy mt-4">
-              RAK can look attractive on price alone. The decision only holds if you are comfortable with less liquidity
-              and a smaller developer set, not if you need Dubai-style exit options.
-            </p>
-          </div>
-        ),
-        who: (
-          <div>
-            <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Who it suits</h2>
-            <p className="body-copy mt-4">
-              Investors with a longer horizon, lower ticket size, and appetite for tourism-led coastal growth, after
-              Dubai (or instead of it) only when the brief actually fits.
-            </p>
-          </div>
-        ),
-        areas: <AreaCarousel market="rak" />,
-        developers: <DeveloperCarousel market="rak" />,
-      }}
-    />
+    <>
+      <StickySectionNav
+        items={rakSectionNav}
+        layoutId="rak-section-pill"
+        ariaLabel="Ras Al Khaimah topics"
+        className="mt-8"
+      />
+
+      <section id="overview" className="scroll-mt-[calc(3.5rem+env(safe-area-inset-top,0px)+3.75rem)] sm:scroll-mt-[calc(4rem+env(safe-area-inset-top,0px)+4rem)] mt-10">
+        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">The real trade-off</h2>
+        <p className="body-copy mt-4">
+          RAK can look attractive on price alone. The decision only holds if you are comfortable with less liquidity and
+          a smaller developer set, not if you need Dubai-style exit options.
+        </p>
+      </section>
+
+      <section id="who" className="page-block">
+        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Who it suits</h2>
+        <p className="body-copy mt-4">
+          Investors with a longer horizon, lower ticket size, and appetite for tourism-led coastal growth, after Dubai
+          (or instead of it) only when the brief actually fits.
+        </p>
+      </section>
+
+      <section id="areas" className="page-block">
+        <AreaCarousel market="rak" />
+      </section>
+
+      <section id="developers" className="page-block">
+        <DeveloperCarousel market="rak" />
+      </section>
+
+      <p className="mt-10 text-center">
+        <Link href="/strategy-session" className="text-[12px] font-semibold text-maroon hover:underline">
+          Book Strategy Session →
+        </Link>
+      </p>
+    </>
   );
 }
 

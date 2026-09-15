@@ -32,7 +32,7 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 text-sm sm:grid-cols-3 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-8 text-sm sm:grid-cols-3 lg:grid-cols-5">
           {footerNav.map((column) => (
             <div key={column.title}>
               <p className="eyebrow">{column.title}</p>
