@@ -239,7 +239,7 @@ export default function SiteNav() {
     setPastCinema(false);
 
     const ratios = new Map<string, number>();
-    const sectionIds = ["home", "about", "services", "invest", "intelligence", "proof", "contact"];
+    const sectionIds = ["home", "about", "services", "invest", "intelligence", "proof", "social", "contact"];
 
     const sync = () => {
       let best = "home";

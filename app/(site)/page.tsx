@@ -9,9 +9,13 @@ import InvestmentProfile from "@/components/sections/InvestmentProfile";
 import Invest from "@/components/sections/Invest";
 import HowMorganWorks from "@/components/sections/HowMorganWorks";
 import Proof from "@/components/sections/Proof";
+import SocialVideoStrip from "@/components/sections/SocialVideoStrip";
 import Contact from "@/components/sections/Contact";
 import SiteFooter from "@/components/sections/SiteFooter";
 import { pageMetadata } from "@/lib/metadata";
+
+/** Refresh social strip + homepage data about hourly. */
+export const revalidate = 3600;
 
 export const metadata: Metadata = pageMetadata({
  title: "UAE Property Portfolio Strategist | Morgan Kaiser",
@@ -21,7 +25,7 @@ export const metadata: Metadata = pageMetadata({
 });
 
 /** Cinema film (1, 3) → Philosophy → Approach (snap) → free browse */
-export default function HomePage() {
+export default async function HomePage() {
  return (
  <main>
  <CinemaController>
@@ -36,6 +40,7 @@ export default function HomePage() {
  <Invest />
  <HowMorganWorks />
  <Proof />
+ <SocialVideoStrip />
  <Contact />
  <SiteFooter />
  </div>

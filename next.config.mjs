@@ -12,6 +12,16 @@ const nextConfig = {
   distDir: isDevCommand ? ".next-dev" : ".next",
   images: {
     formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      { protocol: "https", hostname: "i.ytimg.com" },
+      { protocol: "https", hostname: "i1.ytimg.com" },
+      { protocol: "https", hostname: "i2.ytimg.com" },
+      { protocol: "https", hostname: "i3.ytimg.com" },
+      { protocol: "https", hostname: "i4.ytimg.com" },
+      { protocol: "https", hostname: "img.youtube.com" },
+      { protocol: "https", hostname: "scontent.cdninstagram.com" },
+      { protocol: "https", hostname: "scontent.xx.fbcdn.net" },
+    ],
   },
   async redirects() {
     return [

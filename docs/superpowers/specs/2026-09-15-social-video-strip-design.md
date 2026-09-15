@@ -1,7 +1,7 @@
 # Social Video Strip — Design Spec
 
 **Date:** 2026-09-15  
-**Status:** Ready for review  
+**Status:** Implemented (v1)  
 **Profiles:** YouTube `@itsmorgankaiser` · Instagram `@_morgankaiser_` (Creator)
 
 ## Goal
