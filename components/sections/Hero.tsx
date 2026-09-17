@@ -23,7 +23,7 @@ export default function Hero() {
  objectPosition="center center"
  priority
  >
- <div>
+ <div className="w-full text-center md:text-left">
  <p className="font-display text-2xl font-bold tracking-tight text-maroon sm:text-3xl md:text-4xl">
  {siteConfig.name}
  </p>
@@ -34,19 +34,19 @@ export default function Hero() {
  {siteConfig.companyRole} at {siteConfig.company}
  </p>
  </div>
- <h1 className="display mt-4 max-w-xl text-[1.55rem] leading-[1.1] text-ink sm:mt-6 sm:text-5xl lg:text-[3.25rem]">
+ <h1 className="display mt-4 max-w-xl text-center text-[1.55rem] leading-[1.1] text-ink sm:mt-6 sm:text-5xl md:text-left lg:text-[3.25rem]">
  Vision First.
  <br />
  Strategy Second.
  <br />
  Property Third.
  </h1>
- <p className="mt-3 max-w-md text-[13px] leading-relaxed text-ink-muted sm:mt-6 sm:text-lg">
+ <p className="mt-3 max-w-md text-center text-[13px] leading-relaxed text-ink-muted sm:mt-6 sm:text-lg md:text-left">
  A numbers-led UAE property portfolio strategist who begins with your objectives, before any unit is on the
  table.
  </p>
- <div className="cta-row mt-5 w-full max-w-md sm:mt-8 sm:max-w-none">
- <BookMeetingLink href="/strategy-session" className="btn-primary w-full sm:w-auto" />
+ <div className="cta-row mt-5 w-full max-w-md sm:mt-8 sm:max-w-none md:justify-start">
+ <BookMeetingLink href="/strategy-session" className="btn-primary w-full justify-center sm:w-auto" />
  <Link href="/work-with-morgan" className="btn-ghost-dark w-full justify-center sm:w-auto">
  Work With Morgan
  </Link>
