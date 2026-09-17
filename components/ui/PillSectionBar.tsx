@@ -39,7 +39,9 @@ export default function PillSectionBar({
     const track = trackRef.current;
     if (!track) return;
     const btn = track.querySelector<HTMLButtonElement>(`[data-pill-id="${CSS.escape(active)}"]`);
-    btn?.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+    if (!btn) return;
+    const left = btn.offsetLeft - (track.clientWidth - btn.offsetWidth) / 2;
+    track.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
   }, [active]);
 
   return (

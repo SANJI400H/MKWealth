@@ -318,7 +318,7 @@ export default function SiteNav() {
 
   return (
     <header className={`pointer-events-none fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ${headerClass}`}>
-      <div className="pointer-events-auto mx-auto flex h-14 max-w-content items-center justify-between gap-3 px-4 pt-[env(safe-area-inset-top,0px)] sm:h-16 sm:px-8">
+      <div className="pointer-events-auto mx-auto flex h-14 max-w-content items-center justify-between gap-3 px-5 pt-[env(safe-area-inset-top,0px)] sm:h-16 sm:px-8">
         <Link href="/" className="relative z-10 shrink-0 transition-opacity hover:opacity-80" aria-label="Home" onClick={() => setOpen(false)}>
           <BrandLogo size="nav" />
         </Link>

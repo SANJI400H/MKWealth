@@ -68,7 +68,7 @@ export default function Testimonials() {
       <div className="mx-auto max-w-content px-5 sm:px-8">
         <RevealOnScroll>
           <p className="eyebrow">Testimonials</p>
-          <h2 className="display mt-5 text-4xl text-ink sm:text-6xl">After closing.</h2>
+          <h2 className="display mt-5 text-3xl text-ink sm:text-6xl">After closing.</h2>
         </RevealOnScroll>
       </div>
 

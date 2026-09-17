@@ -201,25 +201,25 @@ export default function TrueYieldCalculator() {
  <div className="rounded-sm border border-line p-5">
  <p className="eyebrow">Outputs</p>
  <dl className="mt-4 space-y-3 text-sm">
- <div className="flex justify-between gap-4 border-b border-line pb-2">
- <dt className="text-ink-muted">Advertised / gross yield</dt>
- <dd className="font-semibold text-ink">{ratio(result.grossYield)}</dd>
+ <div className="flex justify-between gap-3 border-b border-line pb-2 sm:gap-4">
+ <dt className="min-w-0 pr-2 text-ink-muted">Advertised / gross yield</dt>
+ <dd className="shrink-0 text-right font-semibold tabular-nums text-ink">{ratio(result.grossYield)}</dd>
  </div>
- <div className="flex justify-between gap-4 border-b border-line pb-2">
- <dt className="text-ink-muted">Net annual rental income</dt>
- <dd className="font-semibold text-ink">AED {money(result.netIncome)}</dd>
+ <div className="flex justify-between gap-3 border-b border-line pb-2 sm:gap-4">
+ <dt className="min-w-0 pr-2 text-ink-muted">Net annual rental income</dt>
+ <dd className="shrink-0 text-right font-semibold tabular-nums text-ink">AED {money(result.netIncome)}</dd>
  </div>
- <div className="flex justify-between gap-4 border-b border-line pb-2">
- <dt className="text-ink-muted">True capital deployed</dt>
- <dd className="font-semibold text-ink">AED {money(result.capital)}</dd>
+ <div className="flex justify-between gap-3 border-b border-line pb-2 sm:gap-4">
+ <dt className="min-w-0 pr-2 text-ink-muted">True capital deployed</dt>
+ <dd className="shrink-0 text-right font-semibold tabular-nums text-ink">AED {money(result.capital)}</dd>
  </div>
- <div className="flex justify-between gap-4 border-b border-line pb-2">
- <dt className="text-ink-muted">Net yield on purchase price</dt>
- <dd className="font-semibold text-ink">{ratio(result.netYieldOnPrice)}</dd>
+ <div className="flex justify-between gap-3 border-b border-line pb-2 sm:gap-4">
+ <dt className="min-w-0 pr-2 text-ink-muted">Net yield on purchase price</dt>
+ <dd className="shrink-0 text-right font-semibold tabular-nums text-ink">{ratio(result.netYieldOnPrice)}</dd>
  </div>
- <div className="flex justify-between gap-4">
- <dt className="text-ink-muted">Net yield on capital deployed</dt>
- <dd className="font-semibold text-ink">{ratio(result.netYieldOnCapital)}</dd>
+ <div className="flex justify-between gap-3 sm:gap-4">
+ <dt className="min-w-0 pr-2 text-ink-muted">Net yield on capital deployed</dt>
+ <dd className="shrink-0 text-right font-semibold tabular-nums text-ink">{ratio(result.netYieldOnCapital)}</dd>
  </div>
  </dl>
  </div>

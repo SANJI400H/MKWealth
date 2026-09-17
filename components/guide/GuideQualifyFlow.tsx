@@ -30,7 +30,7 @@ const empty: Answers = {
 };
 
 const fieldClass =
-  "mt-1 w-full rounded-md border border-ink/10 bg-paper px-3 py-2.5 text-ink focus:border-maroon focus:outline-none";
+  "mt-1 w-full rounded-md border border-ink/10 bg-paper px-3 py-2.5 text-base text-ink focus:border-maroon focus:outline-none";
 
 type Props = {
   onApproved: () => void;
@@ -241,11 +241,11 @@ export default function GuideQualifyFlow({ onApproved }: Props) {
             funnels.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <button type="button" className="btn-ghost-dark inline-flex items-center gap-1.5" onClick={goBack}>
+            <button type="button" className="btn-ghost-dark inline-flex w-full items-center justify-center gap-1.5 sm:w-auto" onClick={goBack}>
               <ChevronLeft size={16} strokeWidth={1.5} aria-hidden />
               Back
             </button>
-            <button type="submit" className="btn-primary w-full sm:w-auto" disabled={loading}>
+            <button type="submit" className="btn-primary w-full justify-center sm:w-auto" disabled={loading}>
               {loading ? "Submitting…" : "Submit for access"}
             </button>
           </div>
@@ -254,7 +254,7 @@ export default function GuideQualifyFlow({ onApproved }: Props) {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <button
             type="button"
-            className="btn-ghost-dark inline-flex items-center gap-1.5 disabled:opacity-40"
+            className="btn-ghost-dark inline-flex w-full items-center justify-center gap-1.5 disabled:opacity-40 sm:w-auto"
             onClick={goBack}
             disabled={stepIndex === 0}
           >
@@ -263,7 +263,7 @@ export default function GuideQualifyFlow({ onApproved }: Props) {
           </button>
           <button
             type="button"
-            className="btn-primary w-full sm:w-auto disabled:opacity-50"
+            className="btn-primary w-full justify-center sm:w-auto disabled:opacity-50"
             disabled={!canContinue}
             onClick={goNext}
           >

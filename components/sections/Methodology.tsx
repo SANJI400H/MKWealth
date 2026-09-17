@@ -12,7 +12,7 @@ export default function Methodology() {
  <div className="mx-auto max-w-content px-5 sm:px-8">
  <RevealOnScroll>
  <p className="eyebrow">How Morgan works</p>
- <h2 className="display mt-5 max-w-3xl text-4xl text-ink sm:text-6xl">
+ <h2 className="display mt-5 max-w-3xl text-3xl text-ink sm:text-6xl">
  {siteConfig.philosophy}
  </h2>
  <p className="body-copy mt-6 max-w-3xl sm:text-lg">

@@ -161,7 +161,7 @@ export default function SocialStripClient({ feed }: { feed: SocialFeed }) {
         >
           <div className="relative w-full max-w-3xl border border-silver bg-paper p-3 sm:p-4">
             <div className="mb-3 flex items-start justify-between gap-3">
-              <h3 id={titleId} className="font-display text-lg font-bold text-ink sm:text-xl">
+              <h3 id={titleId} className="min-w-0 flex-1 font-display text-lg font-bold leading-snug text-ink line-clamp-2 sm:text-xl">
                 {active.title}
               </h3>
               <button

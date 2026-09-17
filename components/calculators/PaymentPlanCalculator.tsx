@@ -130,7 +130,7 @@ export default function PaymentPlanCalculator() {
           </p>
           <ul className="mt-4 space-y-3">
             {stages.map((s, i) => (
-              <li key={i} className="grid grid-cols-[1fr_5rem] gap-2">
+              <li key={i} className="grid grid-cols-1 gap-2 sm:grid-cols-[minmax(0,1fr)_5rem]">
                 <input
                   className={fieldClass}
                   value={s.label}
@@ -171,22 +171,22 @@ export default function PaymentPlanCalculator() {
           <h2 className="font-display text-xl font-bold text-ink">Liquidity check</h2>
           <dl className="mt-6 space-y-3 text-sm">
             {result.rows.map((r) => (
-              <div key={r.label} className="flex justify-between gap-4 border-b border-line/60 py-2">
+              <div key={r.label} className="flex justify-between gap-3 sm:gap-4 border-b border-line/60 py-2">
                 <dt className="text-ink-muted">
                   {r.label} ({r.pct}%)
                 </dt>
                 <dd className="font-medium text-ink">AED {money(r.amount)}</dd>
               </div>
             ))}
-            <div className="flex justify-between gap-4 pt-2">
+            <div className="flex justify-between gap-3 sm:gap-4 pt-2">
               <dt className="font-semibold text-ink">Schedule total ({result.totalPct.toFixed(1)}%)</dt>
               <dd className="font-semibold text-ink">AED {money(result.totalAmount)}</dd>
             </div>
-            <div className="flex justify-between gap-4">
+            <div className="flex justify-between gap-3 sm:gap-4">
               <dt className="text-ink-muted">Cash available</dt>
               <dd className="text-ink">AED {money(result.cash)}</dd>
             </div>
-            <div className="flex justify-between gap-4">
+            <div className="flex justify-between gap-3 sm:gap-4">
               <dt className="text-ink-muted">{result.shortfall > 0 ? "Shortfall" : "Headroom"}</dt>
               <dd className={result.shortfall > 0 ? "font-semibold text-ink" : "text-ink"}>
                 AED {money(result.shortfall > 0 ? result.shortfall : result.headroom)}
@@ -199,7 +199,7 @@ export default function PaymentPlanCalculator() {
               (fees are separate).
             </p>
           ) : null}
-          <Link href="/strategy-session" className="btn-primary mt-8 inline-flex">
+          <Link href="/strategy-session" className="btn-primary mt-8 inline-flex w-full justify-center sm:w-auto">
             {siteConfig.cta.strategySession}
           </Link>
         </div>

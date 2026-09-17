@@ -23,7 +23,7 @@ export default function Contact() {
 
         <RevealOnScroll delayMs={80} className="section-body">
           <div className="cta-row">
-            <BookMeetingLink href="/strategy-session" className="btn-primary w-full sm:w-auto" />
+            <BookMeetingLink href="/strategy-session" className="btn-primary w-full justify-center sm:w-auto" />
             <Link href="/work-with-morgan" className="btn-ghost-dark w-full justify-center sm:w-auto">
               Work With Morgan
             </Link>

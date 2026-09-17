@@ -97,7 +97,7 @@ function GuideVideoPlayer({
           href={video.src}
           download={video.downloadName}
           onClick={onDownloadClick}
-          className="btn-ghost-dark inline-flex items-center justify-center gap-2"
+          className="btn-ghost-dark inline-flex w-full items-center justify-center gap-2 sm:w-auto"
         >
           <Download size={16} strokeWidth={1.5} aria-hidden />
           Download video
@@ -233,10 +233,10 @@ export default function GuideExperience() {
               onDownloadClick={() => markDownloaded(activeVideo.id)}
             />
 
-            <div className="mt-6 flex items-center justify-between gap-3">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <button
                 type="button"
-                className="btn-ghost-dark inline-flex items-center gap-1.5 disabled:opacity-40"
+                className="btn-ghost-dark inline-flex w-full items-center justify-center gap-1.5 disabled:opacity-40 sm:w-auto"
                 disabled={videoIndex <= 0}
                 onClick={() => setVideoIndex((index) => Math.max(0, index - 1))}
               >
@@ -245,7 +245,7 @@ export default function GuideExperience() {
               </button>
               <button
                 type="button"
-                className="btn-ghost-dark inline-flex items-center gap-1.5 disabled:opacity-40"
+                className="btn-ghost-dark inline-flex w-full items-center justify-center gap-1.5 disabled:opacity-40 sm:w-auto"
                 disabled={videoIndex >= videos.length - 1}
                 onClick={() => setVideoIndex((index) => Math.min(videos.length - 1, index + 1))}
               >

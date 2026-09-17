@@ -273,7 +273,7 @@ body {
   }
 
   .card-pad {
-    @apply p-6 sm:p-7;
+    @apply p-5 sm:p-7;
   }
 
   .card-title {
@@ -600,12 +600,16 @@ body {
 }
 
 @media (max-width: 767px) {
-  /* Avoid nested scroll fighting cinema snap — show full list within act */
+  /* Keep services list scrollable inside cinema act so CTAs stay reachable */
   [data-cinema-layout="split"] .service-scroller {
-    max-height: none;
-    overflow: visible;
+    max-height: min(34vh, 250px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
 }
+
+/* Shared mobile CTA alignment helper used via Tailwind classes in components */
 
 .cinema-text-only {
   opacity: 0;

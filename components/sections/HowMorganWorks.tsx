@@ -14,9 +14,9 @@ function StageBody({ stage }: { stage: HowMorganStage }) {
  return (
  <div className="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start lg:gap-12">
  <div>
- <p className="font-display text-5xl font-bold tracking-tight text-maroon sm:text-6xl">{stage.number}</p>
- <h3 className="mt-4 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">{stage.title}</h3>
- <p className="mt-4 text-lg font-medium text-ink sm:text-xl">{stage.question}</p>
+ <p className="font-display text-4xl font-bold tracking-tight text-maroon sm:text-6xl">{stage.number}</p>
+ <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-ink sm:mt-4 sm:text-4xl">{stage.title}</h3>
+ <p className="mt-4 text-base font-medium text-ink sm:text-xl">{stage.question}</p>
  <p className="body-copy mt-4 sm:text-lg">{stage.body}</p>
  <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.16em] text-maroon">We examine</p>
  <ul className="mt-3 grid gap-2 sm:grid-cols-2">
@@ -27,7 +27,7 @@ function StageBody({ stage }: { stage: HowMorganStage }) {
  </li>
  ))}
  </ul>
- <Link href={stage.cta.href} className="btn-primary mt-8 inline-flex">
+ <Link href={stage.cta.href} className="btn-primary mt-8 inline-flex w-full justify-center sm:w-auto">
  {stage.cta.label} →
  </Link>
  </div>

@@ -35,7 +35,7 @@ export default function Bio() {
  </p>
  <p>{morganProfile.huspyLine}</p>
  </div>
- <Link href="/about" className="btn-ghost-dark mt-5 sm:mt-10">
+ <Link href="/about" className="btn-ghost-dark mt-5 w-full justify-center sm:mt-10 sm:w-auto">
  Explore Morgan →
  </Link>
  </CinemaPlayScene>

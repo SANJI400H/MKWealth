@@ -18,10 +18,10 @@ export default function SiteFooter() {
             {siteConfig.company} {siteConfig.companyRole} · {siteConfig.location}
           </p>
           <div className="mt-6 cta-row">
-            <BookMeetingLink href="/strategy-session" className="btn-primary" />
+            <BookMeetingLink href="/strategy-session" className="btn-primary w-full justify-center sm:w-auto" />
             <WhatsAppLink
               message="Hi Morgan, I found your site and would like to connect."
-              className="btn-ghost-dark"
+              className="btn-ghost-dark w-full justify-center sm:w-auto"
             >
               WhatsApp
             </WhatsAppLink>

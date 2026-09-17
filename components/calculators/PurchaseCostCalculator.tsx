@@ -177,21 +177,21 @@ export default function PurchaseCostCalculator() {
  ["Furniture", result.furn],
  ["Other", result.oth],
  ].map(([label, value]) => (
- <div key={String(label)} className="flex justify-between gap-4 border-b border-line/60 py-2">
+ <div key={String(label)} className="flex justify-between gap-3 sm:gap-4 border-b border-line/60 py-2">
  <dt className="text-ink-muted">{label}</dt>
  <dd className="font-medium text-ink">AED {money(Number(value))}</dd>
  </div>
  ))}
- <div className="flex justify-between gap-4 pt-2">
+ <div className="flex justify-between gap-3 sm:gap-4 pt-2">
  <dt className="font-semibold text-ink">Total capital deployed</dt>
  <dd className="font-semibold text-ink">AED {money(result.total)}</dd>
  </div>
- <div className="flex justify-between gap-4">
+ <div className="flex justify-between gap-3 sm:gap-4">
  <dt className="text-ink-muted">Acquisition costs / price</dt>
  <dd className="text-ink">{(result.acquisitionPct * 100).toFixed(2)}%</dd>
  </div>
  </dl>
- <Link href="/strategy-session" className="btn-primary mt-8 inline-flex">
+ <Link href="/strategy-session" className="btn-primary mt-8 inline-flex w-full justify-center sm:w-auto">
  {siteConfig.cta.strategySession}
  </Link>
  </div>

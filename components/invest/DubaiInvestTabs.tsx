@@ -69,7 +69,8 @@ export default function DubaiInvestTabs({ latest }: { latest: InsightTeaser[] })
           Completed and resale stock. Day-one capital is typically higher; rental income can start sooner; the asset is
           inspectable; price discovery comes from comps and negotiation.
         </p>
-        <div className="mt-8 overflow-x-auto">
+        <div className="mt-8 -mx-5 overflow-x-auto px-5 sm:mx-0 sm:px-0">
+          <p className="mb-2 text-xs text-ink-muted sm:hidden">Swipe to see full table</p>
           <p className="mb-4 text-sm font-medium text-ink">Off-plan vs secondary, comparison dimensions</p>
           <table className="w-full min-w-[32rem] border-collapse text-left text-sm">
             <thead>

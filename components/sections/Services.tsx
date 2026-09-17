@@ -240,7 +240,7 @@ export default function Services() {
           not just the unit.
         </h2>
         <ServiceCarousel items={homepageServices} />
-        <Link href="/work-with-morgan" className="btn-ghost-dark mt-6 sm:mt-8">
+        <Link href="/work-with-morgan" className="btn-ghost-dark mt-6 w-full justify-center sm:mt-8 sm:w-auto">
           Explore Services →
         </Link>
       </CinemaPlayScene>

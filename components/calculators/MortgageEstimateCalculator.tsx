@@ -178,11 +178,11 @@ export default function MortgageEstimateCalculator() {
 
             {detailsOpen ? (
               <div className="space-y-2 border-t border-line pt-4 text-sm">
-                <div className="flex justify-between gap-4">
+                <div className="flex justify-between gap-3 sm:gap-4">
                   <span className="text-ink-muted">Total loan repayments</span>
                   <strong className="text-ink">AED {money(result.total)}</strong>
                 </div>
-                <div className="flex justify-between gap-4">
+                <div className="flex justify-between gap-3 sm:gap-4">
                   <span className="text-ink-muted">Total interest</span>
                   <strong className="text-ink">AED {money(result.interest)}</strong>
                 </div>
