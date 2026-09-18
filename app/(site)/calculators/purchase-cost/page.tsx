@@ -30,14 +30,14 @@ export default async function PurchaseCostPage() {
  />
  <h1 className="mt-6 font-display text-4xl font-bold text-ink sm:text-5xl">Dubai Purchase Cost Calculator</h1>
  <p className="mt-4 max-w-2xl text-lg text-ink-muted">
- Ticket price is not capital deployed. Register once to edit fee assumptions and reveal the full stack.
+ Ticket price is not capital deployed. Edit fee assumptions freely; name and email unlock the full stack.
  </p>
  <div className="mt-10">
  <ToolsGateProvider
  initialUnlocked={unlocked}
  source="calculator"
- title="Unlock calculator results"
- intro="Enter your name, WhatsApp number, and email. Your calculation snapshot is sent with your details."
+ title="See your results"
+ intro="Enter your name and email to unlock this calculation. We'll keep your numbers with your enquiry."
  >
  <PurchaseCostCalculator />
  </ToolsGateProvider>

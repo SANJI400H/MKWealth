@@ -38,8 +38,8 @@ export function ToolsGateProvider({
   initialUnlocked,
   children,
   source = "tools",
-  title = "Unlock to continue",
-  intro = "Enter your name, WhatsApp number, and email to download files or run the calculators.",
+  title = "See your results",
+  intro = "Enter your name and email to unlock this calculation. We’ll keep your numbers with your enquiry.",
 }: {
   initialUnlocked: boolean;
   children: ReactNode;
@@ -144,8 +144,11 @@ export function ToolsGateProvider({
               <LeadForm
                 source={source === "guide" ? "guide" : source === "calculator" ? "calculator" : "tools"}
                 intro={intro}
+                requirePhone={source === "guide"}
+                leadScoreHint={source === "guide" ? "tier_2" : "tier_3"}
                 phoneLabel="WhatsApp number"
-                submitLabel="Unlock access"
+                submitLabel="Show results"
+                submittingLabel="Unlocking…"
                 extraPayload={extraPayload}
                 onSuccess={handleSuccess}
               />

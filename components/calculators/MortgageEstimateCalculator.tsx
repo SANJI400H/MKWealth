@@ -24,7 +24,7 @@ function money(n: number) {
  * Educational only — not a lender quote.
  */
 export default function MortgageEstimateCalculator() {
-  const { unlocked, requireAccess, setCalculatorSnapshot } = useToolsGate();
+  const { unlocked, setCalculatorSnapshot } = useToolsGate();
   const [price, setPrice] = useState("10000000");
   const [depositPct, setDepositPct] = useState("30");
   const [rate, setRate] = useState("4.5");
@@ -38,14 +38,6 @@ export default function MortgageEstimateCalculator() {
     setStarted(true);
     trackEvent("calculator_start", { calculator: "mortgage-estimate" });
   }, [started]);
-
-  const guardSet = (set: (v: string) => void) => (value: string) => {
-    if (!unlocked) {
-      requireAccess();
-      return;
-    }
-    set(value);
-  };
 
   const result = useMemo(() => {
     const t = num(price);
@@ -88,7 +80,7 @@ export default function MortgageEstimateCalculator() {
           <input
             className={`${fieldClass} mt-1`}
             value={price}
-            onChange={(e) => guardSet(setPrice)(e.target.value)}
+            onChange={(e) => setPrice(e.target.value)}
             inputMode="decimal"
           />
           <input
@@ -98,7 +90,7 @@ export default function MortgageEstimateCalculator() {
             max={100000000}
             step={100000}
             value={Math.min(100000000, Math.max(500000, num(price) || 500000))}
-            onChange={(e) => guardSet(setPrice)(e.target.value)}
+            onChange={(e) => setPrice(e.target.value)}
             aria-label="Property price slider"
           />
           <span className="mt-1 block text-xs text-ink-muted">Typical range AED 500,000 – 100,000,000</span>
@@ -109,7 +101,7 @@ export default function MortgageEstimateCalculator() {
           <input
             className={`${fieldClass} mt-1`}
             value={depositPct}
-            onChange={(e) => guardSet(setDepositPct)(e.target.value)}
+            onChange={(e) => setDepositPct(e.target.value)}
             inputMode="decimal"
           />
           <input
@@ -119,7 +111,7 @@ export default function MortgageEstimateCalculator() {
             max={90}
             step={1}
             value={Math.min(90, Math.max(10, num(depositPct) || 10))}
-            onChange={(e) => guardSet(setDepositPct)(e.target.value)}
+            onChange={(e) => setDepositPct(e.target.value)}
             aria-label="Down payment slider"
           />
         </label>
@@ -130,7 +122,7 @@ export default function MortgageEstimateCalculator() {
             <input
               className={`${fieldClass} mt-1`}
               value={rate}
-              onChange={(e) => guardSet(setRate)(e.target.value)}
+              onChange={(e) => setRate(e.target.value)}
               inputMode="decimal"
             />
           </label>
@@ -139,7 +131,7 @@ export default function MortgageEstimateCalculator() {
             <input
               className={`${fieldClass} mt-1`}
               value={termYears}
-              onChange={(e) => guardSet(setTermYears)(e.target.value)}
+              onChange={(e) => setTermYears(e.target.value)}
               inputMode="numeric"
             />
           </label>

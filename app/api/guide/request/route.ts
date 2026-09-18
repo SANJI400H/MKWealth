@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     ...input,
     source: "guide",
     intent: typeof input.intent === "string" ? input.intent : "Investor Guide qualification",
-    leadScoreHint: "qualified",
+    leadScoreHint: "tier_2",
     notes:
       typeof input.notes === "string" && input.notes.trim()
         ? `${input.notes} | guide_status=${auto ? "auto_approved" : "pending_manual"}`

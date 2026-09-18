@@ -33,7 +33,7 @@ function ratio(n: number) {
  * Educational, not advice. Methodology shown inline.
  */
 export default function TrueYieldCalculator() {
- const { unlocked, requireAccess, setCalculatorSnapshot } = useToolsGate();
+ const { unlocked, setCalculatorSnapshot } = useToolsGate();
  const [purchasePrice, setPurchasePrice] = useState("2000000");
  const [annualRent, setAnnualRent] = useState("140000");
  const [dldPct, setDldPct] = useState("4");
@@ -54,14 +54,6 @@ export default function TrueYieldCalculator() {
  setStarted(true);
  trackEvent("calculator_start", { calculator: "true-yield" });
  }, [started]);
-
- const guardSet = (set: (v: string) => void) => (value: string) => {
- if (!unlocked) {
- requireAccess();
- return;
- }
- set(value);
- };
 
  const result = useMemo(() => {
  const price = num(purchasePrice);
@@ -184,10 +176,7 @@ export default function TrueYieldCalculator() {
  <input
  className={fieldClass}
  value={f.value}
- onChange={(e) => guardSet(f.set)(e.target.value)}
- onFocus={() => {
- if (!unlocked) requireAccess();
- }}
+ onChange={(e) => f.set(e.target.value)}
  inputMode="decimal"
  />
  {f.suffix ? <span className="text-ink-muted">{f.suffix}</span> : null}

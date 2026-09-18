@@ -31,14 +31,14 @@ export default async function TrueYieldPage() {
  <h1 className="mt-6 font-display text-4xl font-bold text-ink sm:text-5xl">True Yield Calculator</h1>
  <p className="mt-4 max-w-2xl text-lg text-ink-muted">
  Advertised yield is a starting point. This tool shows what happens when acquisition costs and annual
- operating reality enter the maths. Register once to edit inputs and reveal live results.
+ operating reality enter the maths. Edit inputs freely; name and email unlock your results.
  </p>
  <div className="mt-10">
  <ToolsGateProvider
  initialUnlocked={unlocked}
  source="calculator"
- title="Unlock calculator results"
- intro="Enter your name, WhatsApp number, and email. Your calculation snapshot is sent with your details."
+ title="See your results"
+ intro="Enter your name and email to unlock this calculation. We'll keep your numbers with your enquiry."
  >
  <TrueYieldCalculator />
  </ToolsGateProvider>

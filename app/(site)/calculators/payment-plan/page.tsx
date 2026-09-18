@@ -32,14 +32,14 @@ export default async function PaymentPlanPage() {
           Off-Plan Payment Plan Calculator
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-ink-muted">
-          Match SPA instalments to your liquidity. Register once to edit the schedule and reveal the liquidity check.
+          Match SPA instalments to your liquidity. Edit the schedule freely; name and email unlock the liquidity check.
         </p>
         <div className="mt-10">
  <ToolsGateProvider
  initialUnlocked={unlocked}
  source="calculator"
- title="Unlock calculator results"
- intro="Enter your name, WhatsApp number, and email. Your calculation snapshot is sent with your details."
+ title="See your results"
+ intro="Enter your name and email to unlock this calculation. We'll keep your numbers with your enquiry."
  >
             <PaymentPlanCalculator />
           </ToolsGateProvider>

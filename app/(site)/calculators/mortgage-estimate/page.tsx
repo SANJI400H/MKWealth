@@ -33,15 +33,16 @@ export default async function MortgageEstimatePage() {
           Mortgage estimate
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-ink-muted">
-          Explore an indicative monthly payment. Register once to edit assumptions. Financing
-          coordination runs through {siteConfig.company} when a real application is the next step.
+          Explore an indicative monthly payment. Edit assumptions freely; name and email unlock
+          results. Financing coordination runs through {siteConfig.company} when a real application
+          is the next step.
         </p>
         <div className="mt-10">
           <ToolsGateProvider
             initialUnlocked={unlocked}
             source="calculator"
-            title="Unlock calculator results"
-            intro="Enter your name, WhatsApp number, and email. Your calculation snapshot is sent with your details."
+            title="See your results"
+            intro="Enter your name and email to unlock this calculation. We'll keep your numbers with your enquiry."
           >
             <MortgageEstimateCalculator />
           </ToolsGateProvider>

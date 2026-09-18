@@ -60,7 +60,7 @@ async function updateSessionLeadStatus(
   const supabase = getSupabaseAdmin();
   if (!supabase) return false;
   const { error } = await supabase
-    .from("leads")
+    .from("website_leads")
     .update({ status })
     .eq("email", email.toLowerCase())
     .eq("source", "strategy-session");

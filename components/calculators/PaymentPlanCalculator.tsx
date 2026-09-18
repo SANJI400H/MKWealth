@@ -23,7 +23,7 @@ type Stage = { label: string; pct: string };
 
 /** Stress-test construction-linked payment schedules against available cash. */
 export default function PaymentPlanCalculator() {
-  const { unlocked, requireAccess, setCalculatorSnapshot } = useToolsGate();
+  const { unlocked, setCalculatorSnapshot } = useToolsGate();
   const [purchasePrice, setPurchasePrice] = useState("2000000");
   const [availableCash, setAvailableCash] = useState("800000");
   const [stages, setStages] = useState<Stage[]>([
@@ -39,14 +39,6 @@ export default function PaymentPlanCalculator() {
     setStarted(true);
     trackEvent("calculator_start", { calculator: "payment-plan" });
   }, [started]);
-
-  const guardAction = (fn: () => void) => {
-    if (!unlocked) {
-      requireAccess();
-      return;
-    }
-    fn();
-  };
 
   const result = useMemo(() => {
     const price = num(purchasePrice);
@@ -84,9 +76,7 @@ export default function PaymentPlanCalculator() {
   }, [unlocked, completed, result.price]);
 
   const updateStage = (index: number, patch: Partial<Stage>) => {
-    guardAction(() => {
-      setStages((prev) => prev.map((s, i) => (i === index ? { ...s, ...patch } : s)));
-    });
+    setStages((prev) => prev.map((s, i) => (i === index ? { ...s, ...patch } : s)));
   };
 
   return (
@@ -97,14 +87,7 @@ export default function PaymentPlanCalculator() {
           <input
             className={`${fieldClass} mt-1`}
             value={purchasePrice}
-            onChange={(e) =>
-              guardAction(() => {
-                setPurchasePrice(e.target.value);
-              })
-            }
-            onFocus={() => {
-              if (!unlocked) requireAccess();
-            }}
+            onChange={(e) => setPurchasePrice(e.target.value)}
           />
         </label>
         <label className="block text-sm">
@@ -112,14 +95,7 @@ export default function PaymentPlanCalculator() {
           <input
             className={`${fieldClass} mt-1`}
             value={availableCash}
-            onChange={(e) =>
-              guardAction(() => {
-                setAvailableCash(e.target.value);
-              })
-            }
-            onFocus={() => {
-              if (!unlocked) requireAccess();
-            }}
+            onChange={(e) => setAvailableCash(e.target.value)}
           />
         </label>
 
@@ -135,18 +111,12 @@ export default function PaymentPlanCalculator() {
                   className={fieldClass}
                   value={s.label}
                   onChange={(e) => updateStage(i, { label: e.target.value })}
-                  onFocus={() => {
-                    if (!unlocked) requireAccess();
-                  }}
                   aria-label={`Stage ${i + 1} label`}
                 />
                 <input
                   className={fieldClass}
                   value={s.pct}
                   onChange={(e) => updateStage(i, { pct: e.target.value })}
-                  onFocus={() => {
-                    if (!unlocked) requireAccess();
-                  }}
                   aria-label={`Stage ${i + 1} percent`}
                 />
               </li>
@@ -156,9 +126,7 @@ export default function PaymentPlanCalculator() {
             type="button"
             className="mt-3 text-sm font-semibold text-maroon hover:underline"
             onClick={() =>
-              guardAction(() => {
-                setStages((prev) => [...prev, { label: `Stage ${prev.length + 1}`, pct: "0" }]);
-              })
+              setStages((prev) => [...prev, { label: `Stage ${prev.length + 1}`, pct: "0" }])
             }
           >
             Add stage

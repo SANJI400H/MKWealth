@@ -105,8 +105,35 @@ function deriveStatus(payload: LeadPayload): string {
   if (payload.notes.includes("guide_status=auto_approved")) return "auto_approved";
   if (payload.notes.includes("session_status=pending_manual")) return "pending_manual";
   if (payload.source === "strategy-session") return "pending_manual";
-  if (payload.leadScoreHint === "high" || payload.leadScoreHint === "qualified") return "qualified";
+  if (
+    payload.leadScoreHint === "high" ||
+    payload.leadScoreHint === "qualified" ||
+    payload.leadScoreHint === "tier_1" ||
+    payload.leadScoreHint === "tier_2"
+  ) {
+    return "qualified";
+  }
   return "new";
+}
+
+/** Soft-launch tiers: 1 strategy, 2 guide, 3 calculator/tools. */
+export function deriveLeadTier(payload: Pick<LeadPayload, "leadScoreHint" | "source">): 1 | 2 | 3 {
+  const hint = payload.leadScoreHint;
+  if (hint === "tier_1" || hint === "high") return 1;
+  if (hint === "tier_2" || hint === "qualified") return 2;
+  if (hint === "tier_3") return 3;
+  if (payload.source === "strategy-session" || payload.source === "analyse" || payload.source === "desk-request") {
+    return 1;
+  }
+  if (payload.source === "guide" || payload.source === "guide-gate") return 2;
+  if (payload.source === "calculator" || payload.source === "tools") return 3;
+  return 3;
+}
+
+function phoneOptionalForLead(source: string, leadScoreHint: string) {
+  return (
+    leadScoreHint === "tier_3" || source === "calculator" || source === "tools"
+  );
 }
 
 export function parseLead(body: LeadInput):
@@ -117,11 +144,20 @@ export function parseLead(body: LeadInput):
   const email = asTrimmedString(body.email);
   const source = asTrimmedString(body.source) || "guide";
   const intent = asTrimmedString(body.intent);
+  const leadScoreHint = asTrimmedString(body.leadScoreHint);
+  const allowEmptyPhone = phoneOptionalForLead(source, leadScoreHint);
 
   if (!name || name.length < 2) {
     return { ok: false, error: "Enter your full name.", status: 400 };
   }
-  if (!PHONE_PATTERN.test(phone)) {
+  if (!allowEmptyPhone && !PHONE_PATTERN.test(phone)) {
+    return {
+      ok: false,
+      error: "Enter a valid phone number with country code (e.g. +971…).",
+      status: 400,
+    };
+  }
+  if (phone && !PHONE_PATTERN.test(phone)) {
     return {
       ok: false,
       error: "Enter a valid phone number with country code (e.g. +971…).",
@@ -156,7 +192,7 @@ export function parseLead(body: LeadInput):
       contentSource: asTrimmedString(body.contentSource),
       calculatorSnapshot: asJsonString(body.calculatorSnapshot),
       attribution: asJsonString(body.attribution),
-      leadScoreHint: asTrimmedString(body.leadScoreHint),
+      leadScoreHint,
       submittedAt: new Date().toISOString(),
     },
   };
@@ -197,7 +233,7 @@ async function saveLeadToDatabase(
     submitted_at: payload.submittedAt,
   };
 
-  const { data, error } = await supabase.from("leads").insert(row).select("id").single();
+  const { data, error } = await supabase.from("website_leads").insert(row).select("id").single();
   if (error) {
     console.error("lead: Supabase insert failed", error.message);
     return { ok: false, error: error.message };
@@ -213,10 +249,14 @@ async function notifyByEmail(payload: LeadPayload) {
   if (!apiKey || !to) return false;
 
   try {
-    const subject = `New lead (${payload.source}${payload.intent ? ` · ${payload.intent}` : ""})`;
-    const lines = Object.entries(payload)
-      .filter(([, v]) => v)
-      .map(([k, v]) => `${k}: ${v}`);
+    const tier = deriveLeadTier(payload);
+    const subject = `New lead · Tier ${tier} (${payload.source}${payload.intent ? ` · ${payload.intent}` : ""})`;
+    const lines = [
+      `Lead tier: ${tier}`,
+      ...Object.entries(payload)
+        .filter(([, v]) => v)
+        .map(([k, v]) => `${k}: ${v}`),
+    ];
 
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",

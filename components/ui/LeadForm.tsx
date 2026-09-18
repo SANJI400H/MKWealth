@@ -12,6 +12,10 @@ interface LeadFormProps {
   submittingLabel?: string;
   intro?: string;
   phoneLabel?: string;
+  /** When false, omit phone (tier-3 calculator gate). Default true. */
+  requirePhone?: boolean;
+  /** Explicit soft-launch tier hint: tier_1 | tier_2 | tier_3 */
+  leadScoreHint?: string;
   /** Extra fields merged into the lead POST (e.g. calculatorSnapshot). */
   extraPayload?: Record<string, unknown>;
   onSuccess?: () => void;
@@ -36,6 +40,8 @@ export default function LeadForm({
   submittingLabel = "Sending…",
   intro = "Enter your details below",
   phoneLabel = "Phone number",
+  requirePhone = true,
+  leadScoreHint,
   extraPayload,
   onSuccess,
   className = "",
@@ -46,6 +52,14 @@ export default function LeadForm({
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function defaultTierHint() {
+    if (leadScoreHint) return leadScoreHint;
+    if (source === "analyse" || source === "strategy-session") return "tier_1";
+    if (source === "guide" || source === "guide-gate") return "tier_2";
+    if (source === "calculator" || source === "tools") return "tier_3";
+    return "tier_3";
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -59,11 +73,13 @@ export default function LeadForm({
         headers: { "Content-Type": "application/json" },
         credentials: "same-origin",
         body: JSON.stringify({
-          ...form,
+          name: form.name,
+          email: form.email,
+          phone: requirePhone ? form.phone : "",
           source,
           intent,
           attribution: getAttribution(),
-          leadScoreHint: source === "analyse" || source === "strategy-session" ? "high" : "base",
+          leadScoreHint: defaultTierHint(),
           ...extraPayload,
         }),
       });
@@ -102,20 +118,22 @@ export default function LeadForm({
         />
       </label>
 
-      <label className="flex flex-col gap-1.5 text-sm text-ink-muted">
-        {phoneLabel}
-        <input
-          name="phone"
-          type="tel"
-          inputMode="tel"
-          required
-          autoComplete="tel"
-          placeholder="+971 …"
-          value={form.phone}
-          onChange={(e) => update("phone", e.target.value)}
-          className={fieldClass}
-        />
-      </label>
+      {requirePhone ? (
+        <label className="flex flex-col gap-1.5 text-sm text-ink-muted">
+          {phoneLabel}
+          <input
+            name="phone"
+            type="tel"
+            inputMode="tel"
+            required
+            autoComplete="tel"
+            placeholder="+971 …"
+            value={form.phone}
+            onChange={(e) => update("phone", e.target.value)}
+            className={fieldClass}
+          />
+        </label>
+      ) : null}
 
       <label className="flex flex-col gap-1.5 text-sm text-ink-muted">
         Email

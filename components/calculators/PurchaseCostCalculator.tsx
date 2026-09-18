@@ -25,7 +25,7 @@ function money(n: number) {
 
 /** Dubai freehold acquisition cost stack, editable assumptions. */
 export default function PurchaseCostCalculator() {
- const { unlocked, requireAccess, setCalculatorSnapshot } = useToolsGate();
+ const { unlocked, setCalculatorSnapshot } = useToolsGate();
  const [purchasePrice, setPurchasePrice] = useState("2000000");
  const [dldPct, setDldPct] = useState("4");
  const [agencyPct, setAgencyPct] = useState("2");
@@ -41,14 +41,6 @@ export default function PurchaseCostCalculator() {
  setStarted(true);
  trackEvent("calculator_start", { calculator: "purchase-cost" });
  }, [started]);
-
- const guardSet = (set: (v: string) => void) => (value: string) => {
- if (!unlocked) {
- requireAccess();
- return;
- }
- set(value);
- };
 
  const result = useMemo(() => {
  const price = num(purchasePrice);
@@ -86,10 +78,7 @@ export default function PurchaseCostCalculator() {
  <input
  className={`${fieldClass} mt-1`}
  value={purchasePrice}
- onChange={(e) => guardSet(setPurchasePrice)(e.target.value)}
- onFocus={() => {
- if (!unlocked) requireAccess();
- }}
+ onChange={(e) => setPurchasePrice(e.target.value)}
  />
  </label>
  <label className="block text-sm">
@@ -97,10 +86,7 @@ export default function PurchaseCostCalculator() {
  <input
  className={`${fieldClass} mt-1`}
  value={dldPct}
- onChange={(e) => guardSet(setDldPct)(e.target.value)}
- onFocus={() => {
- if (!unlocked) requireAccess();
- }}
+ onChange={(e) => setDldPct(e.target.value)}
  />
  </label>
  <label className="block text-sm">
@@ -108,10 +94,7 @@ export default function PurchaseCostCalculator() {
  <input
  className={`${fieldClass} mt-1`}
  value={agencyPct}
- onChange={(e) => guardSet(setAgencyPct)(e.target.value)}
- onFocus={() => {
- if (!unlocked) requireAccess();
- }}
+ onChange={(e) => setAgencyPct(e.target.value)}
  />
  </label>
  <label className="block text-sm">
@@ -119,10 +102,7 @@ export default function PurchaseCostCalculator() {
  <input
  className={`${fieldClass} mt-1`}
  value={trusteeFee}
- onChange={(e) => guardSet(setTrusteeFee)(e.target.value)}
- onFocus={() => {
- if (!unlocked) requireAccess();
- }}
+ onChange={(e) => setTrusteeFee(e.target.value)}
  />
  </label>
  <label className="block text-sm">
@@ -130,10 +110,7 @@ export default function PurchaseCostCalculator() {
  <input
  className={`${fieldClass} mt-1`}
  value={adminFees}
- onChange={(e) => guardSet(setAdminFees)(e.target.value)}
- onFocus={() => {
- if (!unlocked) requireAccess();
- }}
+ onChange={(e) => setAdminFees(e.target.value)}
  />
  </label>
  <label className="block text-sm">
@@ -141,10 +118,7 @@ export default function PurchaseCostCalculator() {
  <input
  className={`${fieldClass} mt-1`}
  value={furniture}
- onChange={(e) => guardSet(setFurniture)(e.target.value)}
- onFocus={() => {
- if (!unlocked) requireAccess();
- }}
+ onChange={(e) => setFurniture(e.target.value)}
  />
  </label>
  <label className="block text-sm">
@@ -152,10 +126,7 @@ export default function PurchaseCostCalculator() {
  <input
  className={`${fieldClass} mt-1`}
  value={other}
- onChange={(e) => guardSet(setOther)(e.target.value)}
- onFocus={() => {
- if (!unlocked) requireAccess();
- }}
+ onChange={(e) => setOther(e.target.value)}
  />
  </label>
  <p className="text-xs text-ink-muted">

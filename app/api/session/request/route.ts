@@ -26,7 +26,7 @@ export async function POST(request: Request) {
       typeof input.intent === "string" && input.intent.trim()
         ? input.intent
         : "30-minute-strategy-session",
-    leadScoreHint: "high",
+    leadScoreHint: "tier_1",
     notes:
       typeof input.notes === "string" && input.notes.trim()
         ? `${input.notes} | session_status=pending_manual`

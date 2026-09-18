@@ -2,22 +2,20 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import SiteFooter from "@/components/sections/SiteFooter";
+import CalculatorToolsCarousel from "@/components/calculators/CalculatorToolsCarousel";
 import BookMeetingLink from "@/components/ui/BookMeetingLink";
 import StickySectionNav from "@/components/ui/StickySectionNav";
-import { calculators } from "@/content/calculators";
 import { toolsSectionNav } from "@/content/navigation";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Investment Tools | Morgan Kaiser",
   description:
-    "UAE property calculators. Register with name, WhatsApp, and email to run live results — your numbers ship with your details.",
+    "UAE property calculators. Explore freely; unlock results with name and email — your numbers ship with your enquiry.",
   path: "/tools",
 });
 
 export default function ToolsPage() {
-  const liveCalculators = calculators.filter((c) => c.status === "live");
-
   return (
     <>
       <main className="page-shell">
@@ -31,9 +29,9 @@ export default function ToolsPage() {
 
         <h1 className="page-h1">Tools</h1>
         <p className="page-lead">
-          Browse calculators freely. When you edit inputs or reveal results, a short registration (name,
-          WhatsApp, email) unlocks access and sends your calculation snapshot with your details to Morgan.
-          Current investors use the Client Portal for the portfolio dashboard.
+          Browse calculators freely and edit inputs without registering. When you calculate results, a short
+          name and email unlocks your numbers and sends the snapshot with your enquiry. Current investors use
+          the Client Portal for the portfolio dashboard.
         </p>
 
         <StickySectionNav
@@ -43,19 +41,12 @@ export default function ToolsPage() {
           className="mt-8"
         />
 
-        <section id="calculators" className="scroll-mt-[calc(3.5rem+env(safe-area-inset-top,0px)+3.75rem)] sm:scroll-mt-[calc(4rem+env(safe-area-inset-top,0px)+4rem)] mt-10 space-y-6">
+        <section
+          id="calculators"
+          className="scroll-mt-[calc(3.5rem+env(safe-area-inset-top,0px)+3.75rem)] sm:scroll-mt-[calc(4rem+env(safe-area-inset-top,0px)+4rem)] mt-10 space-y-6"
+        >
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Calculators</h2>
-          <ul className="space-y-6">
-            {liveCalculators.map((c) => (
-              <li key={c.slug} className="border-b border-line pb-6">
-                <h3 className="font-display text-xl font-bold text-ink">{c.title}</h3>
-                <p className="body-copy mt-2">{c.summary}</p>
-                <Link href={c.href} className="mt-4 inline-block text-sm font-semibold text-maroon hover:underline">
-                  Open calculator →
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <CalculatorToolsCarousel />
         </section>
 
         <section id="portal" className="page-block space-y-4">
