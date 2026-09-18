@@ -17,6 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/areas",
     "/developers",
     "/tools",
+    "/video-guides",
+    "/true-cost",
     "/privacy",
     "/terms",
     "/disclaimer",

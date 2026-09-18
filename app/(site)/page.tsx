@@ -9,12 +9,12 @@ import InvestmentProfile from "@/components/sections/InvestmentProfile";
 import Invest from "@/components/sections/Invest";
 import HowMorganWorks from "@/components/sections/HowMorganWorks";
 import Proof from "@/components/sections/Proof";
-import SocialVideoStrip from "@/components/sections/SocialVideoStrip";
+import VideoGuidesPreview from "@/components/sections/VideoGuidesPreview";
 import Contact from "@/components/sections/Contact";
 import SiteFooter from "@/components/sections/SiteFooter";
 import { pageMetadata } from "@/lib/metadata";
 
-/** Refresh social strip + homepage data about hourly. */
+/** Refresh homepage data about hourly. */
 export const revalidate = 3600;
 
 export const metadata: Metadata = pageMetadata({
@@ -40,7 +40,7 @@ export default async function HomePage() {
  <Invest />
  <HowMorganWorks />
  <Proof />
- <SocialVideoStrip />
+ <VideoGuidesPreview />
  <Contact />
  <SiteFooter />
  </div>

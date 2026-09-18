@@ -16,7 +16,9 @@ export type AnalyticsEvent =
   | "analyse_submit"
   | "whatsapp_click"
   | "book_session_click"
+  | "session_request"
   | "session_booked"
+  | "worksheet_lead"
   | "case_study_view"
   | "view_area"
   | "view_developer"
@@ -110,11 +112,19 @@ export function trackEvent(event: AnalyticsEvent, props: AnalyticsProps = {}) {
 
   window.gtag?.("event", event, payload);
 
-  // Map high-value events to Meta when Pixel is present
-  if (event === "guide_lead" || event === "analyse_submit" || event === "newsletter_signup") {
+  // Meta: Lead for form captures only (do not also call fbq in components).
+  if (
+    event === "guide_lead" ||
+    event === "analyse_submit" ||
+    event === "newsletter_signup" ||
+    event === "session_request" ||
+    event === "worksheet_lead"
+  ) {
     window.fbq?.("track", "Lead", { content_name: event, ...props });
   }
-  if (event === "book_session_click" || event === "session_booked") {
+
+  // Meta Schedule only when a calendar slot is actually booked — not request-page clicks.
+  if (event === "session_booked") {
     window.fbq?.("track", "Schedule", { content_name: event, ...props });
   }
 }

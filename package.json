@@ -5,8 +5,10 @@
   "scripts": {
     "clean": "rm -rf .next .next-dev",
     "dev": "WATCHPACK_POLLING=true next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "next build && npm run prepare:standalone",
+    "prepare:standalone": "mkdir -p .next/standalone/.next && rm -rf .next/standalone/public .next/standalone/.next/static && cp -R public .next/standalone/public && cp -R .next/static .next/standalone/.next/static",
+    "start": "HOSTNAME=0.0.0.0 PORT=3000 node .next/standalone/server.js",
+    "start:next": "next start",
     "lint": "next lint"
   },
   "dependencies": {

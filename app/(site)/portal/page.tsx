@@ -3,7 +3,6 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import SiteFooter from "@/components/sections/SiteFooter";
-import BookMeetingLink from "@/components/ui/BookMeetingLink";
 import WhatsAppLink from "@/components/ui/WhatsAppLink";
 import { pageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site-config";
@@ -58,7 +57,6 @@ export default function PortalPage() {
               >
                 WhatsApp Morgan
               </WhatsAppLink>
-              <BookMeetingLink href="/strategy-session" className="btn-ghost-dark w-full sm:w-auto" />
             </div>
           </div>
         </section>

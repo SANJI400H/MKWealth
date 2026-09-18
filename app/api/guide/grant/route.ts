@@ -132,10 +132,11 @@ export async function GET(request: Request) {
       text: [
         "Morgan has approved your access to the private Investor Guide.",
         "",
-        "Open this link to unlock videos and briefings (limited-time link):",
+        "Open this link to choose your topics:",
         unlockUrl,
         "",
-        "After unlocking, return to the guide anytime on this browser.",
+        "Private videos and PDF briefings will be emailed to you for the topics you select.",
+        "You can return to the guide on this browser after unlocking.",
       ].join("\n"),
     });
     emailed = prospect.ok;

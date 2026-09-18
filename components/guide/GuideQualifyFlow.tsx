@@ -116,7 +116,6 @@ export default function GuideQualifyFlow({ onApproved }: Props) {
       }
       trackEvent("guide_lead", { funnel: "guide_qualify", status: data.status ?? "unknown" });
       trackEvent("lead_score_signal", { signal: "guide_qualify_complete" });
-      window.fbq?.("track", "Lead", { content_name: "guide_qualify" });
 
       if (data.status === "approved") {
         onApproved();
@@ -136,8 +135,8 @@ export default function GuideQualifyFlow({ onApproved }: Props) {
         <p className="eyebrow">Application received</p>
         <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">Pending Morgan’s review</h1>
         <p className="text-ink-muted">
-          Your details are with Morgan. If approved, you will receive an email with a private unlock
-          link for the Investor Guide videos and briefings. This is a gated room, not an open catalogue.
+          Your details are with Morgan. If approved, you will get access to choose topics — private guide
+          videos and PDFs will then be emailed to you.
         </p>
       </div>
     );

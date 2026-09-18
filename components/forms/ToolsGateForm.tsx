@@ -16,7 +16,6 @@ export default function ToolsGateForm() {
       phoneLabel="WhatsApp number"
       submitLabel="Unlock tools"
       onSuccess={() => {
-        trackEvent("guide_lead", { funnel: "tools" });
         trackEvent("lead_score_signal", { signal: "tools_lead" });
         const dest =
           next && next.startsWith("/") && !next.startsWith("//") ? next : "/tools";

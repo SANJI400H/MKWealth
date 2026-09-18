@@ -68,6 +68,9 @@ export const primaryNav: NavGroup[] = [
  links: [
  { label: "Overview", href: "/tools", description: "Calculators for underwriting" },
  { label: "Calculators", href: "/calculators", description: "True yield, costs, mortgage, plans" },
+ { label: "Video Guides", href: "/video-guides", description: "Short educational videos" },
+ { label: "True Cost worksheet", href: "/true-cost", description: "Buying-cost checklist magnet" },
+ { label: "Investor Guide", href: "/guide", description: "Private library — qualify for access" },
  ],
  },
  ],
@@ -136,6 +139,8 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
  links: [
  { label: "Overview", href: "/tools" },
  { label: "Calculators", href: "/calculators" },
+ { label: "Video Guides", href: "/video-guides" },
+ { label: "True Cost worksheet", href: "/true-cost" },
  ],
  },
  {

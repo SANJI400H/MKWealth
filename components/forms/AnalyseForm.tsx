@@ -36,12 +36,13 @@ const empty: FormState = {
   notes: "",
 };
 
-/** Medium-intent investment analysis request. Document upload reserved for a later phase. */
+/** Medium-intent analysis request — contact first; deal detail optional. */
 export default function AnalyseForm() {
   const searchParams = useSearchParams();
   const [form, setForm] = useState<FormState>(empty);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
+  const [showMore, setShowMore] = useState(false);
 
   const calculatorSnapshot = useMemo(() => {
     const snap: Record<string, string> = {};
@@ -54,6 +55,7 @@ export default function AnalyseForm() {
   useEffect(() => {
     trackEvent("analyse_start", { has_calculator: Boolean(calculatorSnapshot) });
     if (!calculatorSnapshot) return;
+    setShowMore(true);
     setForm((prev) => ({
       ...prev,
       purchasePrice: calculatorSnapshot.purchasePrice ?? prev.purchasePrice,
@@ -82,7 +84,6 @@ export default function AnalyseForm() {
           calculatorSnapshot,
           attribution: getAttribution(),
           leadScoreHint: "high",
-          // Future: attachments[] when upload is enabled
         }),
       });
 
@@ -107,8 +108,7 @@ export default function AnalyseForm() {
       <div className="rounded-sm border border-line bg-ink/[0.02] p-6">
         <p className="font-display text-xl font-bold text-ink">Request received</p>
         <p className="mt-3 text-ink-muted">
-          Morgan will review the details you shared. For faster follow-up, you can also WhatsApp with the same
-          project name.
+          Morgan will review what you shared. For faster follow-up, WhatsApp with the same project name.
         </p>
       </div>
     );
@@ -117,8 +117,7 @@ export default function AnalyseForm() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <p className="text-sm text-ink-muted">
-        Share what you have: a brochure, listing, or payment plan summary. Document upload will be added later;
-        paste key numbers for now.
+        Start with contact details. Add deal numbers if you have them — upload comes later.
       </p>
 
       {calculatorSnapshot ? (
@@ -142,7 +141,7 @@ export default function AnalyseForm() {
             onChange={(e) => update("email", e.target.value)}
           />
         </label>
-        <label className="flex flex-col gap-1.5 text-sm text-ink-muted">
+        <label className="flex flex-col gap-1.5 text-sm text-ink-muted sm:col-span-2">
           WhatsApp / phone
           <input
             required
@@ -153,75 +152,88 @@ export default function AnalyseForm() {
             onChange={(e) => update("phone", e.target.value)}
           />
         </label>
-        <label className="flex flex-col gap-1.5 text-sm text-ink-muted">
-          Country
-          <input className={fieldClass} value={form.country} onChange={(e) => update("country", e.target.value)} />
-        </label>
         <label className="flex flex-col gap-1.5 text-sm text-ink-muted sm:col-span-2">
-          Property / project name
+          Property / project name (optional)
           <input
             className={fieldClass}
             value={form.propertyName}
             onChange={(e) => update("propertyName", e.target.value)}
           />
         </label>
-        <label className="flex flex-col gap-1.5 text-sm text-ink-muted">
-          Purchase price (AED)
-          <input
-            className={fieldClass}
-            value={form.purchasePrice}
-            onChange={(e) => update("purchasePrice", e.target.value)}
-          />
-        </label>
-        <label className="flex flex-col gap-1.5 text-sm text-ink-muted">
-          Expected annual rent (if known)
-          <input
-            className={fieldClass}
-            value={form.expectedRent}
-            onChange={(e) => update("expectedRent", e.target.value)}
-          />
-        </label>
-        <label className="flex flex-col gap-1.5 text-sm text-ink-muted">
-          Off-plan or secondary
-          <select
-            className={fieldClass}
-            value={form.marketType}
-            onChange={(e) => update("marketType", e.target.value)}
-          >
-            <option value="">Select…</option>
-            <option value="off-plan">Off-plan</option>
-            <option value="secondary">Secondary</option>
-            <option value="unsure">Not sure</option>
-          </select>
-        </label>
-        <label className="flex flex-col gap-1.5 text-sm text-ink-muted">
-          Investment timeline
-          <input
-            className={fieldClass}
-            placeholder="e.g. 3 to 6 months"
-            value={form.timeline}
-            onChange={(e) => update("timeline", e.target.value)}
-          />
-        </label>
-        <label className="flex flex-col gap-1.5 text-sm text-ink-muted sm:col-span-2">
-          Investment objective
-          <input
-            className={fieldClass}
-            placeholder="Yield, Golden Visa path, portfolio diversification…"
-            value={form.objective}
-            onChange={(e) => update("objective", e.target.value)}
-          />
-        </label>
-        <label className="flex flex-col gap-1.5 text-sm text-ink-muted sm:col-span-2">
-          Notes / comments
-          <textarea
-            rows={4}
-            className={fieldClass}
-            value={form.notes}
-            onChange={(e) => update("notes", e.target.value)}
-          />
-        </label>
       </div>
+
+      <button
+        type="button"
+        className="text-left text-sm font-semibold text-maroon underline-offset-2 hover:underline"
+        onClick={() => setShowMore((v) => !v)}
+      >
+        {showMore ? "Hide extra deal details" : "Add deal details (optional)"}
+      </button>
+
+      {showMore ? (
+        <div className="grid gap-4 border-t border-line pt-4 sm:grid-cols-2">
+          <label className="flex flex-col gap-1.5 text-sm text-ink-muted">
+            Country
+            <input className={fieldClass} value={form.country} onChange={(e) => update("country", e.target.value)} />
+          </label>
+          <label className="flex flex-col gap-1.5 text-sm text-ink-muted">
+            Off-plan or secondary
+            <select
+              className={fieldClass}
+              value={form.marketType}
+              onChange={(e) => update("marketType", e.target.value)}
+            >
+              <option value="">Select…</option>
+              <option value="off-plan">Off-plan</option>
+              <option value="secondary">Secondary</option>
+              <option value="unsure">Not sure</option>
+            </select>
+          </label>
+          <label className="flex flex-col gap-1.5 text-sm text-ink-muted">
+            Purchase price (AED)
+            <input
+              className={fieldClass}
+              value={form.purchasePrice}
+              onChange={(e) => update("purchasePrice", e.target.value)}
+            />
+          </label>
+          <label className="flex flex-col gap-1.5 text-sm text-ink-muted">
+            Expected annual rent
+            <input
+              className={fieldClass}
+              value={form.expectedRent}
+              onChange={(e) => update("expectedRent", e.target.value)}
+            />
+          </label>
+          <label className="flex flex-col gap-1.5 text-sm text-ink-muted">
+            Timeline
+            <input
+              className={fieldClass}
+              placeholder="e.g. 3 to 6 months"
+              value={form.timeline}
+              onChange={(e) => update("timeline", e.target.value)}
+            />
+          </label>
+          <label className="flex flex-col gap-1.5 text-sm text-ink-muted">
+            Objective
+            <input
+              className={fieldClass}
+              placeholder="Yield, Golden Visa…"
+              value={form.objective}
+              onChange={(e) => update("objective", e.target.value)}
+            />
+          </label>
+          <label className="flex flex-col gap-1.5 text-sm text-ink-muted sm:col-span-2">
+            Notes
+            <textarea
+              rows={3}
+              className={fieldClass}
+              value={form.notes}
+              onChange={(e) => update("notes", e.target.value)}
+            />
+          </label>
+        </div>
+      ) : null}
 
       {error ? <p className="text-sm text-red-500">{error}</p> : null}
 

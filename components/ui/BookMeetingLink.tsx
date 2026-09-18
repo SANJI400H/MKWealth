@@ -24,7 +24,12 @@ export default function BookMeetingLink({
   const external = target.startsWith("http");
 
   const onClick = () => {
-    trackEvent("book_session_click", { cta: "strategy_session" });
+    // Only fire Schedule-intent when opening a live calendar URL.
+    // In-site /strategy-session is a request form, not a booked slot.
+    trackEvent("book_session_click", {
+      cta: "strategy_session",
+      destination: external ? "calendar" : "request_page",
+    });
   };
 
   const shared = {

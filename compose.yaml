@@ -12,6 +12,7 @@ services:
       HOSTNAME: 0.0.0.0
       PORT: "3000"
       TOOLS_ACCESS_SECRET: ${TOOLS_ACCESS_SECRET:?Set a long random TOOLS_ACCESS_SECRET in runtime.env}
+      GUIDE_GRANT_SECRET: ${GUIDE_GRANT_SECRET:-}
       RESEND_API_KEY: ${RESEND_API_KEY:?Set RESEND_API_KEY in runtime.env}
       LEAD_NOTIFY_EMAIL: ${LEAD_NOTIFY_EMAIL:?Set LEAD_NOTIFY_EMAIL in runtime.env}
       LEAD_FROM_EMAIL: ${LEAD_FROM_EMAIL:?Set LEAD_FROM_EMAIL in runtime.env}

@@ -7,7 +7,6 @@ import StickySectionNav from "@/components/ui/StickySectionNav";
 import { calculators } from "@/content/calculators";
 import { toolsSectionNav } from "@/content/navigation";
 import { pageMetadata } from "@/lib/metadata";
-import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = pageMetadata({
   title: "Investment Tools | Morgan Kaiser",
@@ -75,12 +74,6 @@ export default function ToolsPage() {
             Work With Morgan
           </Link>
         </div>
-        <p className="mt-6 text-xs text-ink-muted">
-          Prefer to talk first?{" "}
-          <Link href="/strategy-session" className="font-semibold text-maroon hover:underline">
-            {siteConfig.cta.strategySession}
-          </Link>
-        </p>
       </main>
       <SiteFooter />
     </>

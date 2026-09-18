@@ -5,16 +5,16 @@
 
 export const marketImages: Record<string, { src: string; alt: string }> = {
  dubai: {
- src: "/images/markets/dubai.jpg",
- alt: "Dubai skyline. UAE property investment context",
+ src: "/images/markets/dubai-skyline.jpg",
+ alt: "Dubai skyline with Burj Khalifa at golden hour",
  },
  "abu-dhabi": {
- src: "/images/markets/abu-dhabi.jpg",
- alt: "Abu Dhabi waterfront. UAE property investment context",
+ src: "/images/markets/abu-dhabi-skyline.jpg",
+ alt: "Abu Dhabi skyline near Etihad Towers and Qasr Al Watan",
  },
  rak: {
- src: "/images/markets/rak.jpg",
- alt: "Ras Al Khaimah coastal context. UAE property investment",
+ src: "/images/markets/rak-coast.jpg",
+ alt: "Ras Al Khaimah coastal resort and beachfront",
  },
 };
 

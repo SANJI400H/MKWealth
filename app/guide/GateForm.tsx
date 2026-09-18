@@ -15,7 +15,6 @@ export default function GateForm({ onUnlock }: GateFormProps) {
       phoneLabel="WhatsApp number"
       submitLabel="Unlock guide"
       onSuccess={() => {
-        trackEvent("guide_lead", { funnel: "guide" });
         trackEvent("lead_score_signal", { signal: "guide_lead" });
         onUnlock();
       }}

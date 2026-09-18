@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useReducedMotion } from "framer-motion";
 import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 import CinemaPlayScene from "@/components/motion/CinemaPlayScene";
-import WhatsAppLink from "@/components/ui/WhatsAppLink";
 import { homepageServices, type ServiceItem } from "@/content/services";
 import { videoActs } from "@/content/videos";
 
@@ -14,8 +13,8 @@ const MANUAL_PAUSE_MS = 5000;
 
 function ServiceCard({ service }: { service: ServiceItem }) {
   return (
-    <WhatsAppLink
-      message={service.whatsappMessage}
+    <Link
+      href="/work-with-morgan"
       className="service-card group block border-b border-ink/10 py-3.5 transition-opacity duration-300 last:border-b-0 hover:opacity-100 sm:py-4"
     >
       <span className="flex items-start justify-between gap-4">
@@ -34,7 +33,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
           aria-hidden
         />
       </span>
-    </WhatsAppLink>
+    </Link>
   );
 }
 
@@ -231,7 +230,6 @@ export default function Services() {
         panelSide="left"
         mediaSize="narrow"
         objectPosition="center center"
-        priority
       >
         <p className="eyebrow">Work With Morgan</p>
         <h2 className="display mt-2 max-w-md text-[1.75rem] leading-[1.08] text-ink sm:mt-5 sm:text-5xl">

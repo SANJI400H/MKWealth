@@ -76,6 +76,7 @@ Optional **repository variables**:
 | `NEXT_PUBLIC_TIKTOK_URL` | Existing social URL default |
 | `NEXT_PUBLIC_YOUTUBE_URL` | Existing social URL default |
 | `NEXT_PUBLIC_FACEBOOK_URL` | Existing social URL default |
+| `NEXT_PUBLIC_CLIENT_PORTAL_URL` | Hosted Private Wealth dashboard; empty keeps /portal teaser |
 
 Use **repository** variables for public build configuration: the build job does not use the production environment. Empty variables retain the defaults in `lib/site-config.ts`. Changes to public variables require another build; setting them only on the VPS does not update browser bundles. Never put private credentials in `NEXT_PUBLIC_*` variables or Docker build arguments.
 

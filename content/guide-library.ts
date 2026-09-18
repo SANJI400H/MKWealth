@@ -14,6 +14,8 @@ export interface GuideVideo {
   poster: string;
   src: string;
   downloadName: string;
+  /** False until Morgan uploads a real guide clip (not cinema reuse). */
+  ready: boolean;
 }
 
 export interface GuideReport {
@@ -23,6 +25,8 @@ export interface GuideReport {
   summary: string;
   href: string;
   fileName: string;
+  /** False until real PDFs replace ~600B stubs. */
+  ready: boolean;
 }
 
 export const guideCategories: GuideCategory[] = [
@@ -48,7 +52,10 @@ export const guideCategories: GuideCategory[] = [
   },
 ];
 
-/** Design placeholders reuse cinema walks until dedicated guide clips are uploaded. */
+/**
+ * Private guide clips. ready:false until dedicated files replace cinema walks.
+ * Public Video Guides live on /video-guides (YouTube click-to-play).
+ */
 export const guideVideos: GuideVideo[] = [
   {
     id: "vid-off-plan-1",
@@ -58,6 +65,7 @@ export const guideVideos: GuideVideo[] = [
     poster: "/images/morgan-hero.jpg",
     src: "/videos/walk-1.mp4",
     downloadName: "morgan-kaiser-off-plan-basics.mp4",
+    ready: false,
   },
   {
     id: "vid-payments-1",
@@ -67,6 +75,7 @@ export const guideVideos: GuideVideo[] = [
     poster: "/images/morgan-offer.jpg",
     src: "/videos/walk-2.mp4",
     downloadName: "morgan-kaiser-payment-plans.mp4",
+    ready: false,
   },
   {
     id: "vid-visa-1",
@@ -76,6 +85,7 @@ export const guideVideos: GuideVideo[] = [
     poster: "/images/morgan-portrait.jpg",
     src: "/videos/walk-3.mp4",
     downloadName: "morgan-kaiser-golden-visa.mp4",
+    ready: false,
   },
   {
     id: "vid-dubai-1",
@@ -85,6 +95,7 @@ export const guideVideos: GuideVideo[] = [
     poster: "/images/morgan-walk-wave-poster.jpg",
     src: "/videos/morgan-walk-wave.mp4",
     downloadName: "morgan-kaiser-dubai-market.mp4",
+    ready: false,
   },
 ];
 
@@ -96,6 +107,7 @@ export const guideReports: GuideReport[] = [
     summary: "A one-page checklist before you reserve a unit.",
     href: "/reports/off-plan-basics.pdf",
     fileName: "off-plan-basics.pdf",
+    ready: false,
   },
   {
     id: "pdf-payments",
@@ -104,6 +116,7 @@ export const guideReports: GuideReport[] = [
     summary: "How to compare 60/40 vs 70/30 style structures.",
     href: "/reports/payment-plans.pdf",
     fileName: "payment-plans.pdf",
+    ready: false,
   },
   {
     id: "pdf-visa",
@@ -112,6 +125,7 @@ export const guideReports: GuideReport[] = [
     summary: "Eligibility points to confirm with the Land Department path.",
     href: "/reports/golden-visa.pdf",
     fileName: "golden-visa.pdf",
+    ready: false,
   },
   {
     id: "pdf-dubai",
@@ -120,6 +134,7 @@ export const guideReports: GuideReport[] = [
     summary: "A short briefing on where Morgan focuses day to day.",
     href: "/reports/dubai-market.pdf",
     fileName: "dubai-market.pdf",
+    ready: false,
   },
 ];
 

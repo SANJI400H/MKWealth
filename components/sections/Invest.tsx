@@ -12,7 +12,10 @@ function MarketCard({
  location: (typeof investLocations)[number];
 }) {
  return (
- <article className="group flex h-full flex-col border border-silver bg-paper">
+ <Link
+ href={location.slug}
+ className="group flex h-full flex-col border border-silver bg-paper"
+ >
  <div className="relative aspect-[4/5] overflow-hidden bg-surface">
  <Image
  src={location.image}
@@ -24,7 +27,7 @@ function MarketCard({
  </div>
  <div className="card-pad flex flex-1 flex-col space-y-4">
  <p className="eyebrow">{location.tag}</p>
- <h3 className="card-title-lg">{location.name}</h3>
+ <h3 className="card-title-lg transition group-hover:text-maroon">{location.name}</h3>
  <p className="body-copy">{location.summary}</p>
  <ul className="space-y-2 border-t border-silver pt-4 text-sm text-ink-muted">
  {location.factors.map((f) => (
@@ -34,16 +37,11 @@ function MarketCard({
  </li>
  ))}
  </ul>
- <div className="cta-row mt-auto pt-2 !gap-3 sm:!gap-5">
- <Link href={location.slug} className="text-link">
- Morgan&apos;s View →
- </Link>
- <Link href={location.slug} className="text-link-muted">
+ <span className="text-link mt-auto pt-2 transition group-hover:translate-x-1">
  Explore {location.name} →
+ </span>
+ </div>
  </Link>
- </div>
- </div>
- </article>
  );
 }
 

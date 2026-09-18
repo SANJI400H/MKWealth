@@ -22,7 +22,7 @@ export const investLocations: InvestLocation[] = [
  "Current acquisition focus is 100% off-plan, still brief-first",
  "Priority communities include Maritime City and Palm Jebel Ali among others",
  ],
- image: "/images/markets/dubai.jpg",
+ image: "/images/markets/dubai-skyline.jpg",
  assetId: "market-dubai",
  },
  {
@@ -36,7 +36,7 @@ export const investLocations: InvestLocation[] = [
  "Priority communities include Hudayriyat, Ramhan, Saadiyat, Yas and Al Reem",
  "Active developer set includes Aldar and Modon, still unit-level underwriting",
  ],
- image: "/images/markets/abu-dhabi.jpg",
+ image: "/images/markets/abu-dhabi-skyline.jpg",
  assetId: "market-abudhabi",
  },
  {
@@ -50,7 +50,7 @@ export const investLocations: InvestLocation[] = [
  "Al Marjan Island is on his priority advisory community list",
  "Masterplan and delivery timing remain first-order risks",
  ],
- image: "/images/markets/rak.jpg",
+ image: "/images/markets/rak-coast.jpg",
  assetId: "market-rak",
  },
 ];

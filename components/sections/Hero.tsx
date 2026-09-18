@@ -47,10 +47,12 @@ export default function Hero() {
  </p>
  <div className="cta-row mt-5 w-full max-w-md sm:mt-8 sm:max-w-none md:justify-start">
  <BookMeetingLink href="/strategy-session" className="btn-primary w-full justify-center sm:w-auto" />
- <Link href="/work-with-morgan" className="btn-ghost-dark w-full justify-center sm:w-auto">
- Work With Morgan
- </Link>
  </div>
+ <p className="mt-3 text-center text-sm text-ink-muted md:text-left">
+ <Link href="/work-with-morgan" className="font-semibold text-maroon underline-offset-2 hover:underline">
+ How engagement works →
+ </Link>
+ </p>
  </CinemaPlayScene>
  </section>
  );

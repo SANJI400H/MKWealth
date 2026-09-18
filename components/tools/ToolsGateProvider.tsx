@@ -81,7 +81,6 @@ export function ToolsGateProvider({
   );
 
   const handleSuccess = useCallback(() => {
-    trackEvent("guide_lead", { funnel: source });
     trackEvent("lead_score_signal", { signal: `${source}_lead` });
     setUnlocked(true);
     setOpen(false);

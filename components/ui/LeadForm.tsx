@@ -76,7 +76,6 @@ export default function LeadForm({
       }
 
       trackEvent("guide_lead", { content_name: source, content_category: intent ?? source });
-      window.fbq?.("track", "Lead", { content_name: source, content_category: intent ?? source });
       setForm(empty);
       setStatus("idle");
       onSuccess?.();

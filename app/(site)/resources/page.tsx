@@ -58,11 +58,7 @@ export default function ResourcesHubPage() {
  <section className="mt-14">
  <h2 className="font-display text-2xl font-bold text-ink">Gated</h2>
  <p className="mt-3 text-sm text-ink-muted">
- Unlock via the{" "}
- <Link href="/guide" className="font-semibold text-maroon hover:underline">
- investor guide
- </Link>{" "}
- after sharing contact details.
+ Unlock via the investor guide after sharing contact details.
  </p>
  <ul className="mt-6 space-y-6">
  {gatedItems.map((r) => (

@@ -42,6 +42,8 @@ function DesktopMega({
   const linkTone = lightChrome ? "text-white/80 hover:text-white" : "text-ink-muted hover:text-ink";
   const activeTone = lightChrome ? "text-white" : "text-ink";
   const multi = group.columns.length > 1 || Boolean(group.featured);
+  const childHrefs = group.columns.flatMap((col) => col.links.map((link) => link.href));
+  const showViewAll = !childHrefs.includes(group.href);
 
   return (
     <div
@@ -130,15 +132,17 @@ function DesktopMega({
                   </div>
                 ) : null}
               </div>
-              <div className="mt-4 border-t border-line pt-3">
-                <Link
-                  href={group.href}
-                  className="text-[12px] font-semibold text-maroon hover:underline"
-                  onClick={() => setOpen(false)}
-                >
-                  View all →
-                </Link>
-              </div>
+              {showViewAll ? (
+                <div className="mt-4 border-t border-line pt-3">
+                  <Link
+                    href={group.href}
+                    className="text-[12px] font-semibold text-maroon hover:underline"
+                    onClick={() => setOpen(false)}
+                  >
+                    View all →
+                  </Link>
+                </div>
+              ) : null}
             </div>
           </motion.div>
         ) : null}

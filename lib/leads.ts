@@ -103,7 +103,8 @@ function parseJsonField(value: string): Record<string, unknown> | unknown[] | nu
 function deriveStatus(payload: LeadPayload): string {
   if (payload.notes.includes("guide_status=pending_manual")) return "pending_manual";
   if (payload.notes.includes("guide_status=auto_approved")) return "auto_approved";
-  if (payload.source === "strategy-session") return "session_booked";
+  if (payload.notes.includes("session_status=pending_manual")) return "pending_manual";
+  if (payload.source === "strategy-session") return "pending_manual";
   if (payload.leadScoreHint === "high" || payload.leadScoreHint === "qualified") return "qualified";
   return "new";
 }
@@ -249,25 +250,6 @@ export async function submitLead(body: LeadInput) {
   if (!parsed.ok) return parsed;
 
   const saved = await saveLeadToDatabase(parsed.payload);
-  // #region agent log
-  fetch("http://127.0.0.1:7382/ingest/2d9bf8dc-52ce-4796-a4a2-5c48f1176b5c", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "048fbd" },
-    body: JSON.stringify({
-      sessionId: "048fbd",
-      runId: "supabase-leads",
-      hypothesisId: "DB-1",
-      location: "lib/leads.ts:submitLead",
-      message: "lead persist attempt",
-      data: {
-        saved: saved.ok,
-        error: saved.ok ? null : saved.error.slice(0, 160),
-        source: parsed.payload.source,
-      },
-      timestamp: Date.now(),
-    }),
-  }).catch(() => {});
-  // #endregion
 
   if (!saved.ok) {
     console.error("lead: database save failed —", saved.error);
