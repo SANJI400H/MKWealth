@@ -1,0 +1,100 @@
+name: Sync Supabase runtime env
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mkwealth-runtime-supabase
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: production
+    env:
+      VPS_HOST: ${{ secrets.VPS_HOST }}
+      VPS_USER: ${{ secrets.VPS_USER }}
+      VPS_PORT: ${{ vars.VPS_PORT || '22' }}
+      VPS_DEPLOY_PATH: ${{ secrets.VPS_DEPLOY_PATH || '/opt/mkwealth' }}
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - name: Configure verified SSH connection
+        env:
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          [[ "$VPS_HOST" =~ ^[a-zA-Z0-9][a-zA-Z0-9.-]*$ ]] || { echo 'Set VPS_HOST.' >&2; exit 1; }
+          [[ "$VPS_USER" =~ ^[a-z_][a-z0-9_-]*$ ]] || { echo 'Set VPS_USER.' >&2; exit 1; }
+          [[ "$VPS_PORT" =~ ^[0-9]{1,5}$ ]] && (( 10#$VPS_PORT > 0 && 10#$VPS_PORT <= 65535 )) || { echo 'Invalid VPS_PORT.' >&2; exit 1; }
+          [[ "$VPS_DEPLOY_PATH" =~ ^(/[a-zA-Z0-9_-]+)+/?$ ]] || { echo 'Invalid VPS_DEPLOY_PATH.' >&2; exit 1; }
+          [[ -n "$VPS_SSH_KEY" && -n "$VPS_KNOWN_HOSTS" ]] || { echo 'Missing SSH secrets.' >&2; exit 1; }
+          [[ -n "$NEXT_PUBLIC_SUPABASE_URL" && -n "$SUPABASE_SERVICE_ROLE_KEY" ]] || { echo 'Missing Supabase secrets.' >&2; exit 1; }
+          SSH_DIR="$RUNNER_TEMP/mkwealth-ssh"
+          umask 077
+          mkdir -p "$SSH_DIR"
+          printf '%s\n' "$VPS_SSH_KEY" > "$SSH_DIR/key"
+          printf '%s\n' "$VPS_KNOWN_HOSTS" > "$SSH_DIR/known_hosts"
+          cat > "$SSH_DIR/config" <<EOF
+          Host deployment
+            HostName $VPS_HOST
+            User $VPS_USER
+            Port $VPS_PORT
+            IdentityFile $SSH_DIR/key
+            UserKnownHostsFile $SSH_DIR/known_hosts
+            StrictHostKeyChecking yes
+            IdentitiesOnly yes
+            BatchMode yes
+            ConnectTimeout 15
+          EOF
+
+      - name: Upsert Supabase keys into runtime.env and restart
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          SSH_DIR="$RUNNER_TEMP/mkwealth-ssh"
+          # Pass values via env on remote without writing them into the Actions log summary.
+          ssh -F "$SSH_DIR/config" deployment \
+            "DEPLOY_PATH='$VPS_DEPLOY_PATH' NEXT_PUBLIC_SUPABASE_URL='$NEXT_PUBLIC_SUPABASE_URL' SUPABASE_URL='${SUPABASE_URL:-$NEXT_PUBLIC_SUPABASE_URL}' SUPABASE_SERVICE_ROLE_KEY='$SUPABASE_SERVICE_ROLE_KEY' bash -s" <<'REMOTE'
+          set -Eeuo pipefail
+          cd "$DEPLOY_PATH"
+          test -f runtime.env
+          python3 - <<'PY'
+          import os, re
+          from pathlib import Path
+          path = Path("runtime.env")
+          text = path.read_text()
+          updates = {
+            "NEXT_PUBLIC_SUPABASE_URL": os.environ["NEXT_PUBLIC_SUPABASE_URL"].strip().rstrip("/"),
+            "SUPABASE_URL": os.environ["SUPABASE_URL"].strip().rstrip("/"),
+            "SUPABASE_SERVICE_ROLE_KEY": os.environ["SUPABASE_SERVICE_ROLE_KEY"].strip(),
+          }
+          for key, value in updates.items():
+            pattern = re.compile(rf"^(?:#\s*)?{re.escape(key)}=.*$", re.M)
+            line = f"{key}={value}"
+            if pattern.search(text):
+              text = pattern.sub(line, text, count=1)
+            else:
+              if not text.endswith("\n"):
+                  text += "\n"
+              text += line + "\n"
+          path.write_text(text)
+          path.chmod(0o600)
+          print("runtime.env updated (supabase keys upserted)")
+          PY
+          docker compose --env-file runtime.env --env-file image.env up -d --force-recreate --wait --wait-timeout 120
+          echo "container restarted"
+          REMOTE
+
+      - name: Remove SSH credentials
+        if: always()
+        run: |
+          SSH_DIR="$RUNNER_TEMP/mkwealth-ssh"
+          rm -f -- "$SSH_DIR/key" "$SSH_DIR/known_hosts" "$SSH_DIR/config"
