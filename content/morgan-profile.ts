@@ -51,8 +51,11 @@ export const morganProfile = {
  awards: ["Huspy No.1 Broker", "Allegiance No.1 B2C Broker"] as string[],
  mediaAppearances: null as string[] | null,
  yearsExperience: null as number | null,
- /** Current commercial mix from discovery */
- currentMixNote: "Current acquisition focus is 100% off-plan.",
+ /**
+ * TODO verify £87m revenue and £14m Black Horse
+ * Current commercial mix from discovery. Off-plan is one strategy, not the only one.
+ */
+ currentMixNote: "Off-plan and completed stock are both underwritten. The brief decides which structure fits.",
  marketFocusNote: "Strong working knowledge across Dubai, Abu Dhabi and Ras Al Khaimah.",
  priorityAreas: [
  "Hudayriyat Island",
@@ -87,7 +90,7 @@ export const morganProfile = {
  ] as string[],
  about: {
  careerStory:
- "Morgan went from washing caravans in the rain at the largest leisure-home sales company in the UK to becoming their top sales representative, then business manager, managing the largest leisure finance account in the UK. He moved to Dubai to pursue a life without a ceiling. Real estate was new; business, finance and money were not. He attended international roadshows in the UAE selling Dubai property before transitioning companies to build a better platform for scaling investment property portfolios for international clients.",
+ "Morgan went from washing caravans in the rain at the largest leisure-home sales company in the UK to becoming their top sales representative, then business manager. He managed the sales team of the business, which generated about £87 million a year in revenue. The finance account was with Black Horse, a £14 million a year Black Horse finance account. He moved to Dubai to pursue a life without a ceiling. Real estate was new; business, finance and money were not. He attended international road shows all over the world selling Dubai property, before transitioning companies to build a better platform for scaling investment property portfolios for international clients. The work is framed as wealth protection as much as acquisition: structure, downside, and hold logic before any unit.",
  whyNumbersFirst:
  "The work starts with a strategy session: where the investor is today, what the motivations are, and where capital needs to go over the next decade, before any brochure shortlist. Emirate, area and product only come after that brief is clear.",
  internationalExperience:

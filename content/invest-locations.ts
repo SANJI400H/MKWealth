@@ -19,7 +19,7 @@ export const investLocations: InvestLocation[] = [
  summary: "Scale, liquidity and breadth of opportunity.",
  factors: [
  "Morgan’s primary day-to-day market for international investors",
- "Current acquisition focus is 100% off-plan, still brief-first",
+ "Off-plan is one structure among others. The brief decides.",
  "Priority communities include Maritime City and Palm Jebel Ali among others",
  ],
  image: "/images/markets/dubai-skyline.jpg",

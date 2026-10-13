@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Mail } from "lucide-react";
+import WhatsAppLink from "@/components/ui/WhatsAppLink";
 import { guideCategories, type GuideCategoryId } from "@/content/guide-library";
 import { siteConfig } from "@/lib/site-config";
 
@@ -38,7 +39,7 @@ export default function GuideExperience() {
         <p className="eyebrow">Investor Guide</p>
         <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">We’ll email your materials</h1>
         <p className="text-ink-muted leading-relaxed">
-          Thanks — your topics are noted
+          Thanks. Your topics are noted
           {topicLabels ? (
             <>
               {" "}
@@ -48,14 +49,29 @@ export default function GuideExperience() {
           . Private guide videos and PDF briefings will be emailed to the address you registered with.
         </p>
         <p className="text-sm text-ink-muted">Check your inbox (and spam folder) over the next day or two.</p>
-        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:justify-center">
-          <Link href="/strategy-session" className="btn-primary w-full justify-center sm:w-auto">
-            Request strategy session
+        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
+          <Link href="/calculators" className="btn-primary w-full justify-center sm:w-auto">
+            Explore calculators
           </Link>
-          <Link href="/video-guides" className="btn-ghost-dark w-full justify-center sm:w-auto">
-            Public Video Guides
+          <Link href="/areas" className="btn-ghost-dark w-full justify-center sm:w-auto">
+            Browse micro markets
+          </Link>
+          <Link href="/developers" className="btn-ghost-dark w-full justify-center sm:w-auto">
+            View developers
+          </Link>
+          <Link href="/" className="btn-ghost-dark w-full justify-center sm:w-auto">
+            Back to home
           </Link>
         </div>
+        <p className="text-sm text-ink-muted">
+          <WhatsAppLink message="Hi Morgan, I just requested the investor guide." className="font-semibold text-maroon hover:underline">
+            WhatsApp Morgan
+          </WhatsAppLink>
+          {" · "}
+          <Link href="/strategy-session" className="font-semibold text-maroon hover:underline">
+            Request a strategy session
+          </Link>
+        </p>
         <p className="mt-6 text-sm text-ink-muted">
           Already investing with Morgan?{" "}
           <Link href={siteConfig.clientPortalUrl || "/portal"} className="font-semibold text-maroon hover:underline">
@@ -72,7 +88,7 @@ export default function GuideExperience() {
         <p className="eyebrow">Private Investor Guide</p>
         <h1 className="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">What should we send you?</h1>
         <p className="mx-auto mt-3 max-w-md text-ink-muted">
-          Pick the topics you care about. We’ll email the matching videos and briefings — nothing to download
+          Pick the topics you care about. We’ll email the matching videos and briefings. Nothing to download
           on this page yet.
         </p>
       </div>
@@ -106,7 +122,7 @@ export default function GuideExperience() {
           disabled={selected.length === 0}
           onClick={() => setStep("confirmed")}
         >
-          Confirm — email me these topics
+          Confirm and email me these topics
         </button>
       </div>
     </div>

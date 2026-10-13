@@ -4,6 +4,16 @@ import { morganProfile } from "@/content/morgan-profile";
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.morgankaiser.com").replace(/\/$/, "");
 
+/**
+ * Google Appointment Schedule. Env wins. Empty string means the calendar is not configured.
+ * TODO: confirm NEXT_PUBLIC_BOOKING_URL with Morgan before treating open slots as the public booking path.
+ */
+export const BOOKING_URL = (
+  process.env.NEXT_PUBLIC_BOOKING_URL ??
+  process.env.NEXT_PUBLIC_CALENDLY_URL ??
+  "https://calendar.google.com/appointments/schedules/AcZssZ0vtVHhOcyykoym8P1KW-rviUeV_rLkzpQqcYkVSSE_VyYK3Pa1B1i6SeN_dzaFQ4Q8qw0YDInL"
+).trim();
+
 export const siteConfig = {
   name: morganProfile.name,
   role: morganProfile.title,
@@ -17,12 +27,11 @@ export const siteConfig = {
   /** Digits only, country code first, used by wa.me links. */
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "971585300329",
   /**
-   * Strategy session booking URL (Google Appointment Schedule).
-   * Env name kept for backwards compatibility.
+   * Strategy session booking URL.
+   * TODO: set NEXT_PUBLIC_BOOKING_URL (or the legacy NEXT_PUBLIC_CALENDLY_URL) to Morgan's Google Appointment Schedule.
+   * The fallback is the schedule already configured for this site, not a placeholder.
    */
-  bookingUrl:
-    process.env.NEXT_PUBLIC_CALENDLY_URL ??
-    "https://calendar.google.com/appointments/schedules/AcZssZ0vtVHhOcyykoym8P1KW-rviUeV_rLkzpQqcYkVSSE_VyYK3Pa1B1i6SeN_dzaFQ4Q8qw0YDInL",
+  bookingUrl: BOOKING_URL,
   /** @deprecated Use bookingUrl */
   get calendlyUrl() {
     return this.bookingUrl;

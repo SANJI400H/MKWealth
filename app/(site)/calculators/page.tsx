@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import CalculatorToolsCarousel from "@/components/calculators/CalculatorToolsCarousel";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -30,7 +29,6 @@ export default function CalculatorsIndexPage() {
           <CalculatorToolsCarousel />
         </div>
       </main>
-      <SiteFooter />
     </>
   );
 }

@@ -11,7 +11,6 @@ import HowMorganWorks from "@/components/sections/HowMorganWorks";
 import Proof from "@/components/sections/Proof";
 import VideoGuidesPreview from "@/components/sections/VideoGuidesPreview";
 import Contact from "@/components/sections/Contact";
-import SiteFooter from "@/components/sections/SiteFooter";
 import { pageMetadata } from "@/lib/metadata";
 
 /** Refresh homepage data about hourly. */
@@ -42,7 +41,6 @@ export default async function HomePage() {
  <Proof />
  <VideoGuidesPreview />
  <Contact />
- <SiteFooter />
  </div>
  </main>
  );

@@ -117,7 +117,7 @@ export default function AnalyseForm() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <p className="text-sm text-ink-muted">
-        Start with contact details. Add deal numbers if you have them — upload comes later.
+        Start with contact details. Add deal numbers if you have them. Upload comes later.
       </p>
 
       {calculatorSnapshot ? (

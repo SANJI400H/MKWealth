@@ -17,7 +17,7 @@ export default async function SocialVideoStrip() {
           <p className="eyebrow">Watch</p>
           <h2 className="section-title">From the feed.</h2>
           <p className="section-lead">
-            Latest uploads and most-watched clips from YouTube and Instagram — numbers first, then
+            Latest uploads and most-watched clips from YouTube and Instagram. Numbers first, then
             property.
           </p>
         </RevealOnScroll>

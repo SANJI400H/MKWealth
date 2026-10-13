@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import JsonLd from "@/components/seo/JsonLd";
-import SiteFooter from "@/components/sections/SiteFooter";
 import {
  getInsightBySlug,
  getPublishedInsights,
@@ -198,7 +197,6 @@ export default function InsightArticlePage({ params }: Props) {
  <p className="mt-10 text-xs leading-relaxed text-ink-muted">{regulatory.disclaimerShort}</p>
  ) : null}
  </main>
- <SiteFooter />
  </>
  );
 }

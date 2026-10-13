@@ -28,16 +28,17 @@ export default function DubaiInvestTabs({ latest }: { latest: InsightTeaser[] })
         <div>
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Investment thesis</h2>
           <p className="body-copy mt-4">
-            Dubai remains Morgan&apos;s primary day-to-day market for international investors. Current acquisition work
-            is focused on off-plan, still only when the brief, capital and risk profile fit. Liquidity and marketing
-            volume are not substitutes for unit-level underwriting.
+            Dubai remains Morgan&apos;s primary day-to-day market for international investors. Off-plan and completed
+            stock are both underwritten. The brief, capital and risk profile decide which structure fits. Liquidity and
+            marketing volume are not substitutes for unit-level underwriting.
           </p>
         </div>
         <div>
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Ownership context</h2>
           <p className="body-copy mt-4">
-            Dubai has permitted foreign freehold ownership in designated areas for many years. You typically do not need
-            UAE residency to purchase. You do need clarity on funding, fees, and (if relevant) financing.
+            Foreign buyers have been permitted freehold ownership in designated areas of the UAE since 2002. You typically
+            do not need UAE residency to purchase. You do need clarity on funding, fees, and, if relevant, financing,
+            alongside areas, market movements and potential risks.
           </p>
         </div>
         <div>
@@ -64,41 +65,61 @@ export default function DubaiInvestTabs({ latest }: { latest: InsightTeaser[] })
       </section>
 
       <section id="secondary" className="page-block">
-        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Secondary market</h2>
+        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Off-plan and ready</h2>
         <p className="body-copy mt-4">
-          Completed and resale stock. Day-one capital is typically higher; rental income can start sooner; the asset is
-          inspectable; price discovery comes from comps and negotiation.
+          There are pros and cons to both. Off-plan spreads cash and can suit investors who can wait. Ready stock suits
+          people who want to live in the residence, take income now, or renovate. The right choice depends on the goal.
         </p>
-        <div className="mt-8 -mx-5 overflow-x-auto px-5 sm:mx-0 sm:px-0">
-          <p className="mb-2 text-xs text-ink-muted sm:hidden">Swipe to see full table</p>
-          <p className="mb-4 text-sm font-medium text-ink">Off-plan vs secondary, comparison dimensions</p>
-          <table className="w-full min-w-[32rem] border-collapse text-left text-sm">
-            <thead>
-              <tr className="border-b border-line">
-                <th className="py-2 pr-3 text-ink">Factor</th>
-                <th className="py-2 pr-3 text-ink">Off-plan</th>
-                <th className="py-2 text-ink">Secondary</th>
-              </tr>
-            </thead>
-            <tbody className="text-ink-muted">
-              {[
-                ["Capital timing", "Often staged; lower day-one cash possible", "Higher day-one capital typical"],
-                ["Income", "Usually delayed until handover + lease-up", "Immediate rental possible"],
-                ["Price discovery", "Developer list + incentives", "Resale comps / negotiation"],
-                ["Delivery risk", "Construction / handover timing", "Physical asset inspectable"],
-                ["Financing", "Must match drawdown schedule", "Often clearer for lenders"],
-                ["Liquidity / exit", "Depends on project & cycle", "Deeper resale in many areas"],
-                ["Payment plans", "Core product feature", "Usually full or mortgage-led"],
-              ].map((row) => (
-                <tr key={row[0]} className="border-b border-line/70">
-                  <td className="py-2 pr-3 font-medium text-ink">{row[0]}</td>
-                  <td className="py-2 pr-3">{row[1]}</td>
-                  <td className="py-2">{row[2]}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          <article className="card-lift border border-line bg-surface p-5">
+            <h3 className="font-display text-xl font-bold text-ink">Off-plan</h3>
+            <p className="mt-4 text-sm font-semibold text-ink">Pros</p>
+            <ul className="mt-2 list-disc space-y-2 pl-5 text-sm text-ink-muted">
+              <li>Capital allocation is significantly lighter, and cash deployment is slower, spread over the payment plan.</li>
+              <li>Greater leverage can be assumed, including developer payment plans.</li>
+              <li>Typically bought under market value, so the appreciation curve is more aggressive.</li>
+              <li>More accessible to international investors.</li>
+              <li>Lets you generate funds significantly faster using the leverage the developer provides.</li>
+              <li>Newest calibre asset in the UAE: specs, amenities, building quality.</li>
+            </ul>
+            <p className="mt-4 text-sm font-semibold text-ink">Watch points</p>
+            <ul className="mt-2 list-disc space-y-2 pl-5 text-sm text-ink-muted">
+              <li>Delivery and construction risk.</li>
+              <li>No rent until handover.</li>
+              <li>Price discovery depends on the developer.</li>
+            </ul>
+          </article>
+          <article className="card-lift border border-line bg-paper p-5">
+            <h3 className="font-display text-xl font-bold text-ink">Ready (secondary)</h3>
+            <p className="mt-4 text-sm font-semibold text-ink">Pros</p>
+            <ul className="mt-2 list-disc space-y-2 pl-5 text-sm text-ink-muted">
+              <li>Useful if you want to live in the residence yourself or want an immediate return.</li>
+              <li>Can be lucrative for assets you can renovate.</li>
+            </ul>
+            <p className="mt-4 text-sm font-semibold text-ink">Cons</p>
+            <ul className="mt-2 list-disc space-y-2 pl-5 text-sm text-ink-muted">
+              <li>Much more aggressive capital deployment upfront.</li>
+              <li>
+                International investors get a maximum loan to value of around 60%, so including fees you are typically
+                50%, sometimes 60%, down before you begin. This makes it inaccessible to many investors and slows your
+                cash on cash return.
+              </li>
+              <li>Renovation opportunities need substantially more cash upfront.</li>
+            </ul>
+          </article>
         </div>
+        <p className="body-copy mt-6">
+          In many cases the delayed gratification of off-plan yields significantly better results in the future, but the
+          right choice depends on the investor&apos;s goals.
+        </p>
+        <p className="mt-4 flex flex-col gap-2 text-sm sm:flex-row sm:gap-6">
+          <Link href="/calculators/mortgage-estimate" className="font-semibold text-maroon hover:underline">
+            Mortgage calculator
+          </Link>
+          <Link href="/calculators/payment-plan" className="font-semibold text-maroon hover:underline">
+            Off-plan payment calculator
+          </Link>
+        </p>
       </section>
 
       <section id="costs-yield" className="page-block">

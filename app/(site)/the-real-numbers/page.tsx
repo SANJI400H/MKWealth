@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import { getPublishedRealNumbers } from "@/content/real-numbers";
 import { pageMetadata } from "@/lib/metadata";
 import { regulatory } from "@/content/regulatory";
@@ -73,7 +72,6 @@ export default function TheRealNumbersPage() {
  </p>
  <p className="mt-6 text-xs text-ink-muted">{regulatory.disclaimerShort}</p>
  </main>
- <SiteFooter />
  </>
  );
 }

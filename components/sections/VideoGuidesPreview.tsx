@@ -18,7 +18,7 @@ export default function VideoGuidesPreview() {
             you book.
           </h2>
           <p className="section-lead">
-            Short guides on cost, yield, and off-plan — then a clear next step on every video.
+            Short guides on cost, yield, and off-plan, then a clear next step on every video.
           </p>
         </RevealOnScroll>
 

@@ -17,9 +17,9 @@ const sections = [
   {
     id: "acquisition",
     title: "Property Acquisition",
-    who: "Buyers ready to select and secure off-plan or secondary stock that fits the brief.",
-    what: "Unit selection and structuring against payment plans, delivery risk, and price discovery.",
-    next: "Deal underwriting and, where relevant, financing coordination.",
+    who: "People with a vision to build wealth and prosperity in the UAE who are looking for high returning real estate advice.",
+    what: "A formulated plan that lets you achieve the best returns possible while mitigating downside as aggressively as possible, including unit selection and structuring against payment plans, delivery risk and price discovery. Morgan builds a full A to Z plan on how to acquire assets in the UAE that are profitable and, just as importantly, tells you exactly what to avoid so you do not risk losing money.",
+    next: "Proceed with a position only once the asset clearly fits the investor's vision, goal and direction, or renegotiate the assumptions. At a bare minimum you walk away with 100% clarity on what you do or do not want in the market.",
   },
   {
     id: "underwriting",
@@ -31,16 +31,16 @@ const sections = [
   {
     id: "portfolio",
     title: "Property Portfolio Strategy",
-    who: "Investors allocating across assets, markets, or handover timelines.",
-    what: "Diversification, concentration risk, and capital preservation in a Dubai-first context.",
-    next: "Targeted acquisition or rebalancing recommendations.",
+    who: "International investors, family offices and institutional conglomerates that prioritise diversification and empire expansion in the UAE.",
+    what: "A UAE wide, unbiased overview, not Dubai first, that lets you compare multiple emirates, multiple markets and multiple asset classes at the same time, backed by a deep understanding of international markets.",
+    next: "Targeted acquisition for expansion, or rebalancing and recalibration recommendations for existing assets you may or may not hold.",
   },
   {
     id: "financing",
     title: "Financing Coordination",
-    who: "Buyers considering mortgage or construction-linked drawdowns.",
-    what: "Coordination via Huspy and lenders where appetite must match payment schedules, not a personal lending service.",
-    next: "Aligned financing path or a clear cash-purchase alternative.",
+    who: "Buyers considering a mortgage or construction linked drawdowns, as well as investors who use leverage to snowball their portfolios and increase their cash on cash return potential.",
+    what: "Clarity on funding, fees and, if relevant, financing, alongside areas, market movements and potential risks. Foreign buyers have been permitted freehold ownership in designated areas of the UAE since 2002. Coordination runs via Huspy and lenders where appetite must match the schedule. This is not a personal lending service.",
+    next: "Aligned financing path or a clear cash purchase alternative.",
   },
   {
     id: "coordination",

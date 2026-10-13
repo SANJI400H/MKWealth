@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import AnalyseForm from "@/components/forms/AnalyseForm";
 import { pageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site-config";
@@ -36,7 +35,6 @@ export default function AnalysePage() {
  </Suspense>
  </div>
  </main>
- <SiteFooter />
  </>
  );
 }

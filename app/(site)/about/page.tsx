@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import StickySectionNav from "@/components/ui/StickySectionNav";
 import BookMeetingLink from "@/components/ui/BookMeetingLink";
 import { aboutSectionNav } from "@/content/navigation";
 import { morganProfile } from "@/content/morgan-profile";
+import { homepageServices } from "@/content/services";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -21,7 +21,6 @@ export default function AboutPage() {
     <>
       <main className="page-shell">
         <Breadcrumbs
-          visible={false}
           items={[
             { name: "Home", path: "/" },
             { name: "Morgan", path: "/about" },
@@ -61,6 +60,20 @@ export default function AboutPage() {
           </p>
           <p className="body-copy mt-4">{morganProfile.huspyLine}</p>
           <p className="body-copy-sm mt-4">{morganProfile.idealClientFilter}</p>
+          <dl className="mt-8 grid gap-3 sm:grid-cols-3">
+            <div className="border border-silver bg-surface px-4 py-4">
+              <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Role</dt>
+              <dd className="mt-2 font-display text-lg font-bold text-ink">{morganProfile.companyRole}</dd>
+            </div>
+            <div className="border border-silver bg-surface px-4 py-4">
+              <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">RERA</dt>
+              <dd className="mt-2 font-display text-lg font-bold text-ink">{morganProfile.reraOrDldCredential}</dd>
+            </div>
+            <div className="border border-silver bg-surface px-4 py-4">
+              <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Client geographies</dt>
+              <dd className="mt-2 font-display text-lg font-bold text-ink">{morganProfile.clientGeographies.length}</dd>
+            </div>
+          </dl>
         </section>
 
         <section id="story" className="page-block space-y-4">
@@ -119,6 +132,18 @@ export default function AboutPage() {
           </dl>
         </section>
 
+        <section className="page-block">
+          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">How the work is structured</h2>
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+            {homepageServices.map((service) => (
+              <li key={service.id} className="card-lift border border-silver bg-paper px-5 py-5">
+                <h3 className="font-display text-xl font-bold text-ink">{service.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-muted">{service.summary}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+
         <div className="mt-14 flex flex-col gap-3 border-t border-line pt-10 sm:flex-row">
           <BookMeetingLink href="/strategy-session" className="btn-primary w-full sm:w-auto" />
           <Link href="/work-with-morgan" className="btn-ghost-dark w-full justify-center sm:w-auto">
@@ -126,7 +151,6 @@ export default function AboutPage() {
           </Link>
         </div>
       </main>
-      <SiteFooter />
     </>
   );
 }

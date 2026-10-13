@@ -17,15 +17,16 @@ export default function AreaCarousel({ market }: { market: AreaMarket }) {
  const photo = area.image
  ? { src: area.image, alt: area.imageAlt ?? area.name }
  : areaImages[area.slug];
+ const src = photo?.src || undefined;
 
  return (
  <Link
  key={area.slug}
  href={`/areas/${area.slug}`}
- className="group flex h-full flex-col border border-silver bg-paper"
+ className="card-lift group flex h-full flex-col border border-silver bg-paper"
  >
  <EditorialImage
- src={photo?.src}
+ src={src}
  alt={photo?.alt ?? `${area.name}. UAE micro-market context`}
  categoryLabel="Area"
  ratio="4:5"
@@ -34,6 +35,7 @@ export default function AreaCarousel({ market }: { market: AreaMarket }) {
  <div className="card-pad flex flex-1 flex-col space-y-3">
  <h3 className="card-title transition group-hover:text-maroon">{area.name}</h3>
  <p className="text-sm leading-relaxed text-ink-muted">{area.tagline}</p>
+ {area.imageCredit ? <p className="text-[11px] leading-snug text-ink-muted">{area.imageCredit}</p> : null}
  <span className="text-link mt-auto pt-2 transition group-hover:translate-x-1">Explore →</span>
  </div>
  </Link>

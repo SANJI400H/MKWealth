@@ -2,41 +2,44 @@
 
 import Link from "next/link";
 import EditorialCarousel from "@/components/ui/EditorialCarousel";
-import EditorialImage from "@/components/ui/EditorialImage";
-import { developerImages } from "@/content/editorial-images";
 import { getPublishedDevelopers, type Developer } from "@/content/developers";
+import { developerLogos } from "@/content/editorial-images";
 
 function filterByMarket(market?: "dubai" | "abu-dhabi" | "rak") {
- const all = getPublishedDevelopers();
- if (!market) return all;
- return all.filter((d) => d.markets.includes(market));
+  const all = getPublishedDevelopers();
+  if (!market) return all;
+  return all.filter((d) => d.markets.includes(market));
 }
 
 function DeveloperCard({ developer }: { developer: Developer }) {
- const photo = developerImages[developer.slug];
-
- return (
- <Link
- href={`/developers/${developer.slug}`}
- className="group flex h-full flex-col border border-silver bg-paper"
- >
- <EditorialImage
- src={photo?.src}
- alt={photo?.alt ?? `${developer.name}, developer evaluation context`}
- categoryLabel="Developer framework"
- ratio="16:10"
- className="border-0 border-b border-silver"
- />
- <div className="card-pad flex flex-1 flex-col space-y-3">
- <p className="eyebrow">Developer framework</p>
- <h3 className="card-title transition group-hover:text-maroon">{developer.name}</h3>
- <p className="text-sm leading-relaxed text-ink-muted">{developer.tagline}</p>
- <span className="text-link mt-auto pt-2 transition group-hover:translate-x-1">
- Explore Framework →
- </span>
- </div>
- </Link>
- );
+  return (
+    <Link
+      href={`/developers/${developer.slug}`}
+      className="card-lift group flex h-full flex-col border border-silver bg-paper"
+    >
+      <div
+        className={`flex h-36 items-center justify-center border-b border-silver px-8 grayscale transition duration-300 group-hover:grayscale-0 ${
+          developerLogos[developer.slug]?.onDark ? "bg-ink" : "bg-surface"
+        }`}
+      >
+        {developerLogos[developer.slug] ? (
+          <img
+            src={developerLogos[developer.slug].src}
+            alt=""
+            className="max-h-12 w-auto max-w-[14rem] object-contain"
+          />
+        ) : (
+          <span className="text-center font-display text-2xl font-bold tracking-tight text-ink">{developer.name}</span>
+        )}
+      </div>
+      <div className="card-pad flex flex-1 flex-col space-y-3">
+        <h3 className="card-title transition group-hover:text-maroon">{developer.name}</h3>
+        <p className="text-sm leading-relaxed text-ink-muted">{developer.tagline}</p>
+        {developer.nameConfirm ? <p className="text-xs text-ink">{developer.nameConfirm}</p> : null}
+        <span className="text-link mt-auto pt-2 transition group-hover:translate-x-1">Open framework</span>
+      </div>
+    </Link>
+  );
 }
 
 /** Evaluation frameworks, not endorsements. */

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import {
  insightCategories,
  getPublishedInsights,
@@ -125,7 +124,6 @@ export default function InsightsHubPage({
  .
  </p>
  </main>
- <SiteFooter />
  </>
  );
 }

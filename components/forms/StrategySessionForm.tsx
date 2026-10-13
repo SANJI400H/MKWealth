@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import BookingSchedule from "@/components/booking/BookingSchedule";
 import { getAttribution, trackEvent } from "@/lib/analytics";
 
 const fieldClass =
@@ -79,6 +80,9 @@ export default function StrategySessionForm() {
       <div className="w-full rounded-2xl border border-maroon/20 bg-maroon/[0.06] px-6 py-8 text-center backdrop-blur-md">
         <p className="font-display text-xl font-bold text-ink">Request received.</p>
         <p className="mx-auto mt-3 max-w-md text-ink-muted leading-relaxed">{successMessage}</p>
+        <div className="mt-8 text-left">
+          <BookingSchedule />
+        </div>
       </div>
     );
   }
@@ -170,7 +174,7 @@ export default function StrategySessionForm() {
         </button>
       </div>
       <p className="mx-auto max-w-sm text-xs leading-relaxed text-ink-muted">
-        After approval, Morgan sends a Google Calendar invite with Meet. You do not pick a slot on this page.
+        Your details are sent first. If the request is accepted, you can choose a time below. Morgan still confirms the session.
       </p>
     </form>
   );

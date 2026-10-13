@@ -25,7 +25,7 @@ export const videoGuides: VideoGuide[] = [
   {
     id: "cash-on-cash-rak",
     title: "How One Studio Returned 633% Cash-on-Cash",
-    description: "Gross to net to double leverage — real underwriting on a Ras Al Khaimah studio.",
+    description: "Gross to net to double leverage. Real underwriting on a Ras Al Khaimah studio.",
     durationIso: "PT12M",
     durationLabel: "~12 min",
     category: "Market Data",
@@ -36,7 +36,7 @@ export const videoGuides: VideoGuide[] = [
   {
     id: "infinite-returns",
     title: "How I Turn Rental Yield Into Infinite Returns",
-    description: "Payment-plan leverage, refinance at handover, and engineering cash-on-cash — real Dubai numbers.",
+    description: "Payment-plan leverage, refinance at handover, and engineering cash-on-cash. Real Dubai numbers.",
     durationIso: "PT12M",
     durationLabel: "~12 min",
     category: "True Cost",
@@ -47,7 +47,7 @@ export const videoGuides: VideoGuide[] = [
   {
     id: "wynn-short",
     title: "Wynn in 69 seconds",
-    description: "Quick market pulse — then dig into the numbers with Morgan.",
+    description: "Quick market pulse, then dig into the numbers with Morgan.",
     durationIso: "PT1M9S",
     durationLabel: "1 min",
     category: "Strategy",
@@ -57,8 +57,8 @@ export const videoGuides: VideoGuide[] = [
   },
   {
     id: "exit-discipline",
-    title: "22 Million in 7 months — the real lesson",
-    description: "Why not needing to sell wins negotiations — mindset behind disciplined exits.",
+    title: "22 Million in 7 months: the real lesson",
+    description: "Why not needing to sell wins negotiations. Mindset behind disciplined exits.",
     durationIso: "PT1M",
     durationLabel: "Short",
     category: "Off-Plan",

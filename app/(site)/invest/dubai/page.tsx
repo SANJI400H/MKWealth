@@ -3,7 +3,6 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FaqSection from "@/components/insights/FaqSection";
 import GuideCallout from "@/components/insights/GuideCallout";
-import SiteFooter from "@/components/sections/SiteFooter";
 import DubaiInvestTabs from "@/components/invest/DubaiInvestTabs";
 import PageIntro from "@/components/ui/PageIntro";
 import { getPublishedInsights } from "@/content/insights";
@@ -51,7 +50,6 @@ export default function DubaiInvestPage() {
  <>
  <main className="page-shell-wide">
  <Breadcrumbs
- visible={false}
  items={[
  { name: "Home", path: "/" },
  { name: "Invest", path: "/invest" },
@@ -81,7 +79,6 @@ export default function DubaiInvestPage() {
  <GuideCallout />
  <p className="body-copy-sm mt-10">{regulatory.disclaimerShort}</p>
  </main>
- <SiteFooter />
  </>
  );
 }

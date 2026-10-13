@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import WorkWithMorganTabs from "@/components/invest/WorkWithMorganTabs";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -16,7 +15,6 @@ export default function WorkWithMorganPage() {
     <>
       <main className="page-shell">
         <Breadcrumbs
-          visible={false}
           items={[
             { name: "Home", path: "/" },
             { name: "Work With Morgan", path: "/work-with-morgan" },
@@ -24,7 +22,6 @@ export default function WorkWithMorganPage() {
         />
         <WorkWithMorganTabs />
       </main>
-      <SiteFooter />
     </>
   );
 }

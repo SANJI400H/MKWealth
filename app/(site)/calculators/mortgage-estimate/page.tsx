@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import MortgageEstimateCalculator from "@/components/calculators/MortgageEstimateCalculator";
 import { ToolsGateProvider } from "@/components/tools/ToolsGateProvider";
 import { regulatory } from "@/content/regulatory";
@@ -49,7 +48,6 @@ export default async function MortgageEstimatePage() {
         </div>
         <p className="mt-10 max-w-3xl text-xs text-ink-muted">{regulatory.disclaimerShort}</p>
       </main>
-      <SiteFooter />
     </>
   );
 }

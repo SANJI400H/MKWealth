@@ -5,6 +5,7 @@ import PageIntro from "@/components/ui/PageIntro";
 import StickySectionNav from "@/components/ui/StickySectionNav";
 import { developerDetailNav } from "@/content/navigation";
 import type { Developer } from "@/content/developers";
+import { developerLogos } from "@/content/editorial-images";
 import { siteConfig } from "@/lib/site-config";
 import { regulatory } from "@/content/regulatory";
 
@@ -13,11 +14,41 @@ export default function DeveloperDetailTabs({ developer }: { developer: Develope
 
   return (
     <>
+      <div
+        className={`mb-8 flex h-28 items-center justify-center border border-silver px-8 ${
+          developerLogos[d.slug]?.onDark ? "bg-ink" : "bg-surface"
+        }`}
+      >
+        {developerLogos[d.slug] ? (
+          <img src={developerLogos[d.slug].src} alt={`${d.name} logo`} className="max-h-14 w-auto max-w-xs object-contain" />
+        ) : (
+          <p className="font-display text-3xl font-bold tracking-tight text-ink">{d.name}</p>
+        )}
+      </div>
       <PageIntro title={d.name} lead={d.tagline}>
         {d.workingNote ? (
           <p className="mt-6 border border-line bg-surface px-4 py-3 text-sm text-ink-muted">{d.workingNote}</p>
         ) : null}
+        {d.nameConfirm ? <p className="mt-4 text-sm text-ink">{d.nameConfirm}</p> : null}
       </PageIntro>
+
+      <div className="mt-8 grid gap-3 sm:grid-cols-3">
+        <div className="border border-silver bg-surface px-4 py-4">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Years active</p>
+          <p className="mt-2 font-display text-lg font-bold text-ink">{d.yearsActive || "Data coming soon"}</p>
+        </div>
+        <div className="border border-silver bg-surface px-4 py-4">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Delivered versus under construction</p>
+          <p className="mt-2 font-display text-lg font-bold text-ink">{d.deliveredNote || "Data coming soon"}</p>
+        </div>
+        <div className="border border-silver bg-surface px-4 py-4">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Positioning</p>
+          <p className="mt-2 text-sm leading-relaxed text-ink">{d.productPositioning || "Data coming soon"}</p>
+        </div>
+      </div>
+      {d.morganView ? (
+        <blockquote className="mt-6 border-l-4 border-maroon bg-surface px-5 py-4 text-ink">{d.morganView}</blockquote>
+      ) : null}
 
       <StickySectionNav
         items={developerDetailNav}

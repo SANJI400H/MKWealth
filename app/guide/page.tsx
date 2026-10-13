@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import GuideGate from "./GuideGate";
+import SiteNav from "@/components/sections/SiteNav";
+import SiteFooter from "@/components/sections/SiteFooter";
 import { GUIDE_ACCESS_COOKIE, verifyGuideAccessCookie } from "@/lib/guide-access";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -19,11 +21,13 @@ export default async function GuidePage({ searchParams }: Props) {
 
   return (
     <main className="flex min-h-screen flex-col bg-paper">
+      <SiteNav />
       <GuideGate
         initialUnlocked={unlocked}
         error={searchParams.error}
         justUnlocked={searchParams.unlocked === "1"}
       />
+      <SiteFooter />
     </main>
   );
 }

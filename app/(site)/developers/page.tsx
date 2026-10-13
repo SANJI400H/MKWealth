@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import { getPublishedDevelopers } from "@/content/developers";
+import { developerLogos } from "@/content/editorial-images";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -17,7 +17,7 @@ export default function DevelopersIndexPage() {
 
  return (
  <>
- <main className="page-shell">
+ <main className="page-shell-wide">
  <Breadcrumbs
  items={[
  { name: "Home", path: "/" },
@@ -29,20 +29,35 @@ export default function DevelopersIndexPage() {
  How to evaluate developers before trusting a brochure. Working frameworks. Morgan experience slots stay
  empty until verified.
  </p>
- <ul className="mt-12 space-y-6">
- {list.map((d) => (
- <li key={d.slug} className="border-b border-line pb-6">
+ <ul className="mt-12 grid gap-5 sm:grid-cols-2">
+ {list.map((d) => {
+ const logo = developerLogos[d.slug];
+ return (
+ <li key={d.slug} className="border border-silver bg-paper">
  <Link href={`/developers/${d.slug}`} className="group block">
+ <div
+ className={`flex h-28 items-center justify-center border-b border-silver px-8 ${
+ logo?.onDark ? "bg-ink" : "bg-surface"
+ }`}
+ >
+ {logo ? (
+ <img src={logo.src} alt="" className="max-h-12 w-auto max-w-[14rem] object-contain" />
+ ) : (
+ <span className="font-display text-2xl font-bold text-ink">{d.name}</span>
+ )}
+ </div>
+ <div className="px-5 py-5">
  <h2 className="font-display text-xl font-bold text-ink group-hover:text-maroon sm:text-2xl">
  {d.name}
  </h2>
- <p className="mt-2 text-ink-muted">{d.tagline}</p>
+ <p className="mt-2 text-sm leading-relaxed text-ink-muted">{d.tagline}</p>
+ </div>
  </Link>
  </li>
- ))}
+ );
+ })}
  </ul>
  </main>
- <SiteFooter />
  </>
  );
 }

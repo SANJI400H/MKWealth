@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import { pageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site-config";
 
@@ -27,10 +26,9 @@ export default function TermsPage() {
  advice. You are responsible for independent due diligence and professional advice relevant to your
  situation.
  </p>
- <p className="text-sm">TODO: Replace with counsel-approved terms.</p>
+ {/* Counsel still needs to approve the terms. */}
  </div>
  </main>
- <SiteFooter />
  </>
  );
 }

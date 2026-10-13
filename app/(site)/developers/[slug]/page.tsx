@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import DeveloperDetailTabs from "@/components/invest/DeveloperDetailTabs";
 import { getDeveloperBySlug, getPublishedDevelopers } from "@/content/developers";
 import { pageMetadata } from "@/lib/metadata";
@@ -28,9 +27,8 @@ export default function DeveloperPage({ params }: Props) {
 
   return (
     <>
-      <main className="page-shell">
+      <main className="page-shell-wide">
         <Breadcrumbs
-          visible={false}
           items={[
             { name: "Home", path: "/" },
             { name: "Developers", path: "/developers" },
@@ -39,7 +37,6 @@ export default function DeveloperPage({ params }: Props) {
         />
         <DeveloperDetailTabs developer={d} />
       </main>
-      <SiteFooter />
     </>
   );
 }

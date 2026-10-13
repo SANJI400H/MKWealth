@@ -56,9 +56,9 @@ export const guideQualifySteps: GuideQualifyStep[] = [
     field: "budgetRange",
     options: [
       { id: "under-1m", label: "Under AED 1m" },
-      { id: "1-2m", label: "AED 1m – 2m" },
-      { id: "2-5m", label: "AED 2m – 5m" },
-      { id: "5-10m", label: "AED 5m – 10m" },
+      { id: "1-2m", label: "AED 1m to 2m" },
+      { id: "2-5m", label: "AED 2m to 5m" },
+      { id: "5-10m", label: "AED 5m to 10m" },
       { id: "10m-plus", label: "AED 10m+" },
       { id: "undisclosed", label: "Prefer to discuss later" },
     ],
@@ -82,8 +82,8 @@ export const guideQualifySteps: GuideQualifyStep[] = [
     field: "timeline",
     options: [
       { id: "0-3m", label: "Within 3 months" },
-      { id: "3-6m", label: "3 – 6 months" },
-      { id: "6-12m", label: "6 – 12 months" },
+      { id: "3-6m", label: "3 to 6 months" },
+      { id: "6-12m", label: "6 to 12 months" },
       { id: "research", label: "Researching only for now" },
     ],
   },

@@ -135,7 +135,7 @@ export default function GuideQualifyFlow({ onApproved }: Props) {
         <p className="eyebrow">Application received</p>
         <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">Pending Morgan’s review</h1>
         <p className="text-ink-muted">
-          Your details are with Morgan. If approved, you will get access to choose topics — private guide
+          Your details are with Morgan. If approved, you will get access to choose topics, private guide
           videos and PDFs will then be emailed to you.
         </p>
       </div>

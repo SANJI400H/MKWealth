@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import { getCaseStudyBySlug, getPublishedCaseStudies } from "@/content/case-studies";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -85,7 +84,6 @@ export default function CaseStudyPage({ params }: Props) {
           {study.disclaimer ? <p className="text-xs">{study.disclaimer}</p> : null}
         </div>
       </main>
-      <SiteFooter />
     </>
   );
 }

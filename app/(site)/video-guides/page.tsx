@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import VideoGuideCard from "@/components/video/VideoGuideCard";
 import { videoGuides } from "@/content/video-guides";
 import { pageMetadata } from "@/lib/metadata";
@@ -10,7 +9,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = pageMetadata({
   title: "Video Guides | UAE Property Education | Morgan Kaiser",
   description:
-    "Watch Morgan Kaiser’s UAE property video guides — True Cost, off-plan, yield, and strategy. Click to play; next steps on every guide.",
+    "Watch Morgan Kaiser’s UAE property video guides. True Cost, off-plan, yield, and strategy. Click to play; next steps on every guide.",
   path: "/video-guides",
 });
 
@@ -56,7 +55,7 @@ export default function VideoGuidesPage() {
         <p className="mt-8 eyebrow">Education</p>
         <h1 className="mt-4 max-w-2xl font-display text-4xl font-bold text-ink sm:text-5xl">Video Guides</h1>
         <p className="mt-4 max-w-xl text-lg text-ink-muted">
-          Short, numbers-led guides for international investors. Thumbnails load instantly — the player starts
+          Short, numbers-led guides for international investors. Thumbnails load instantly. The player starts
           only when you click play.
         </p>
 
@@ -86,7 +85,6 @@ export default function VideoGuidesPage() {
           </p>
         </section>
       </main>
-      <SiteFooter />
     </>
   );
 }

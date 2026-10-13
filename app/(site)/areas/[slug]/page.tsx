@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import AreaDetailTabs from "@/components/invest/AreaDetailTabs";
 import { getAreaBySlug, getPublishedAreas } from "@/content/areas";
 import { pageMetadata } from "@/lib/metadata";
@@ -28,9 +27,8 @@ export default function AreaPage({ params }: Props) {
 
   return (
     <>
-      <main className="page-shell">
+      <main className="page-shell-wide">
         <Breadcrumbs
-          visible={false}
           items={[
             { name: "Home", path: "/" },
             { name: "Areas", path: "/areas" },
@@ -39,7 +37,6 @@ export default function AreaPage({ params }: Props) {
         />
         <AreaDetailTabs area={area} />
       </main>
-      <SiteFooter />
     </>
   );
 }

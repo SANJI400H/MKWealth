@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import { pageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site-config";
 
@@ -30,10 +29,9 @@ export default function PrivacyPage() {
  Contact: use the WhatsApp or email channels published on this site to request access, correction, or
  deletion where applicable under relevant law.
  </p>
- <p className="text-sm">TODO: Replace with counsel-approved privacy policy for UAE / target jurisdictions.</p>
+ {/* Counsel still needs to approve the UAE privacy wording. */}
  </div>
  </main>
- <SiteFooter />
  </>
  );
 }

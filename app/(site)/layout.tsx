@@ -1,4 +1,5 @@
 import SiteNav from "@/components/sections/SiteNav";
+import SiteFooter from "@/components/sections/SiteFooter";
 import BrandLoader from "@/components/ui/BrandLoader";
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
@@ -7,6 +8,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <BrandLoader />
       <SiteNav />
       {children}
+      <SiteFooter />
     </>
   );
 }

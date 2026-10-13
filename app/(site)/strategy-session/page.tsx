@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import StrategySessionForm from "@/components/forms/StrategySessionForm";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -99,7 +98,6 @@ export default function StrategySessionPage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
     </>
   );
 }

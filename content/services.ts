@@ -40,7 +40,7 @@ export const services: ServiceItem[] = [
     id: "portfolio",
     title: "Property Portfolio Strategy",
     group: "portfolio",
-    summary: "Allocate across assets and markets around yield, handover timing, and capital preservation.",
+    summary: "Allocate across emirates, markets and asset classes. Off-plan is one option, not the only one.",
     whatsappMessage: "Hi Morgan, I'd like to discuss Property Portfolio Strategy.",
   },
   {

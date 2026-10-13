@@ -1,12 +1,11 @@
 /**
- * Low-commitment True Cost worksheet (social “comment COST” magnet).
- * On-site HTML checklist until Morgan supplies a designed PDF.
+ * True Cost worksheet — on-site HTML checklist until a designed PDF ships.
  */
 
 export const trueCostWorksheet = {
   slug: "true-cost",
   title: "True Cost of Buying in Dubai",
-  subtitle: "A one-page checklist for international investors — before you trust a brochure number.",
+  subtitle: "A one-page checklist for international investors, before you trust a brochure number.",
   sections: [
     {
       title: "Acquisition costs to model",
@@ -31,7 +30,7 @@ export const trueCostWorksheet = {
       title: "Questions before you reserve",
       items: [
         "What is total capital deployed at reservation, at 50% built, and at handover?",
-        "What happens if handover slips 6–12 months?",
+        "What happens if handover slips 6 to 12 months?",
         "Who is the end-user demand for this unit type in this micro-location?",
         "What is a realistic exit window and competing supply?",
       ],

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import WhatsAppLink from "@/components/ui/WhatsAppLink";
 import { pageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site-config";
@@ -29,7 +28,6 @@ export default function PortalPage() {
     <>
       <main className="page-shell">
         <Breadcrumbs
-          visible={false}
           items={[
             { name: "Home", path: "/" },
             { name: "Client Portal", path: "/portal" },
@@ -52,7 +50,7 @@ export default function PortalPage() {
             </p>
             <div className="mt-5 flex flex-col gap-3 sm:flex-row">
               <WhatsAppLink
-                message="Hi Morgan — I'm an existing client and need my Client Portal login link."
+                message="Hi Morgan, I'm an existing client and need my Client Portal login link."
                 className="btn-primary w-full justify-center sm:w-auto"
               >
                 WhatsApp Morgan
@@ -77,7 +75,6 @@ export default function PortalPage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
     </>
   );
 }

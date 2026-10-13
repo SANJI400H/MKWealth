@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import { getPublishedCaseStudies } from "@/content/case-studies";
 import { pageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site-config";
@@ -61,7 +60,6 @@ export default function CaseStudiesIndexPage() {
  </ul>
  )}
  </main>
- <SiteFooter />
  </>
  );
 }

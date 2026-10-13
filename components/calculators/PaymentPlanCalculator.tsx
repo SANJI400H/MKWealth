@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { GatedResults } from "@/components/tools/GatedResults";
 import { useToolsGate } from "@/components/tools/ToolsGateProvider";
 import { trackEvent } from "@/lib/analytics";
@@ -9,6 +10,11 @@ import { siteConfig } from "@/lib/site-config";
 
 const fieldClass =
   "w-full rounded-md border border-ink/10 bg-paper px-3 py-2.5 text-base text-ink focus:border-maroon focus:outline-none";
+
+const PaymentTimelineChart = dynamic(() => import("@/components/charts/PaymentTimelineChart"), {
+  ssr: false,
+  loading: () => <div className="mt-6 h-40 animate-pulse bg-surface" aria-hidden />,
+});
 
 function num(value: string) {
   const n = Number(String(value).replace(/,/g, ""));
@@ -136,7 +142,16 @@ export default function PaymentPlanCalculator() {
 
       <GatedResults className="order-1 lg:order-2">
         <div className="border border-line bg-ink/[0.02] p-6">
-          <h2 className="font-display text-xl font-bold text-ink">Liquidity check</h2>
+          <h2 className="font-display text-xl font-bold text-ink">Cash outlay</h2>
+          <p className="mt-2 font-display text-3xl font-bold text-ink">AED {money(result.totalAmount)}</p>
+          <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+            {result.shortfall > 0
+              ? `This plan needs AED ${money(result.shortfall)} more cash than you have set aside.`
+              : `You have about AED ${money(Math.max(0, result.headroom))} of headroom against this schedule.`}
+          </p>
+          <PaymentTimelineChart
+            stages={result.rows.map((row) => ({ label: row.label, amount: row.amount }))}
+          />
           <dl className="mt-6 space-y-3 text-sm">
             {result.rows.map((r) => (
               <div key={r.label} className="flex justify-between gap-3 sm:gap-4 border-b border-line/60 py-2">

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import CalculatorToolsCarousel from "@/components/calculators/CalculatorToolsCarousel";
 import BookMeetingLink from "@/components/ui/BookMeetingLink";
 import StickySectionNav from "@/components/ui/StickySectionNav";
@@ -11,7 +10,7 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = pageMetadata({
   title: "Investment Tools | Morgan Kaiser",
   description:
-    "UAE property calculators. Explore freely; unlock results with name and email — your numbers ship with your enquiry.",
+    "UAE property calculators. Explore freely; unlock results with name and email. Your numbers ship with your enquiry.",
   path: "/tools",
 });
 
@@ -20,7 +19,6 @@ export default function ToolsPage() {
     <>
       <main className="page-shell">
         <Breadcrumbs
-          visible={false}
           items={[
             { name: "Home", path: "/" },
             { name: "Tools", path: "/tools" },
@@ -52,7 +50,7 @@ export default function ToolsPage() {
         <section id="portal" className="page-block space-y-4">
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Client Portal</h2>
           <p className="body-copy">
-            Private Desk for current clients — opens the hosted Private Wealth dashboard.
+            Private Desk for current clients. Opens the hosted Private Wealth dashboard.
           </p>
           <Link href="/portal" className="btn-ghost-dark w-full justify-center sm:w-auto">
             Client Portal →
@@ -66,7 +64,6 @@ export default function ToolsPage() {
           </Link>
         </div>
       </main>
-      <SiteFooter />
     </>
   );
 }

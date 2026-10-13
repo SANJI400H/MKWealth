@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import HubVideoPlayer from "@/components/videos/HubVideoPlayer";
 import { getPublishedIntelligenceVideos } from "@/content/intelligence-videos";
 import { pageMetadata } from "@/lib/metadata";
@@ -52,7 +51,6 @@ export default function VideosHubPage() {
  .
  </p>
  </main>
- <SiteFooter />
  </>
  );
 }

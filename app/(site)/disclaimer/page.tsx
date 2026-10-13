@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import { regulatory } from "@/content/regulatory";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -26,10 +25,9 @@ export default function DisclaimerPage() {
  <li>Investment decisions depend on individual circumstances, including tax in your home country.</li>
  <li>Consult appropriate legal, tax, and financial specialists where needed.</li>
  </ul>
- <p className="text-sm">TODO: Jurisdiction-specific disclaimer language via counsel.</p>
+ {/* Counsel still needs to approve jurisdiction-specific disclaimer language. */}
  </div>
  </main>
- <SiteFooter />
  </>
  );
 }

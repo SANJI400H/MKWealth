@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import { getPublishedReports, getReportBySlug } from "@/content/reports";
 import { pageMetadata } from "@/lib/metadata";
 import { regulatory } from "@/content/regulatory";
@@ -94,7 +93,6 @@ export default function ReportPage({ params }: Props) {
 
  <p className="mt-10 text-xs text-ink-muted">{regulatory.disclaimerShort}</p>
  </main>
- <SiteFooter />
  </>
  );
 }

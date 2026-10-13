@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import { getPublishedResources } from "@/content/resources";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -74,7 +73,6 @@ export default function ResourcesHubPage() {
  </ul>
  </section>
  </main>
- <SiteFooter />
  </>
  );
 }

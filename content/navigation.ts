@@ -35,6 +35,7 @@ export const primaryNav: NavGroup[] = [
  title: "Morgan",
  links: [
  { label: "Overview", href: "/about", description: "Who Morgan is" },
+ { label: "About Huspy", href: "/about-huspy", description: "The partnership behind the advice" },
  { label: "Story", href: "/about#story", description: "Background and path" },
  { label: "Investment Philosophy", href: "/about#philosophy", description: "Vision · Strategy · Property" },
  { label: "Investment Methodology", href: "/about#methodology", description: "How deals are evaluated" },
@@ -52,6 +53,8 @@ export const primaryNav: NavGroup[] = [
  title: "Markets",
  links: [
  { label: "Dubai", href: "/invest/dubai", description: "Primary market" },
+ { label: "Micro markets", href: "/areas", description: "Area frameworks" },
+ { label: "Developers", href: "/developers", description: "Evaluation frameworks" },
  { label: "Abu Dhabi", href: "/invest/abu-dhabi", description: "Lower-volatility context" },
  { label: "Ras Al Khaimah", href: "/invest/rak", description: "Lower entry" },
  ],
@@ -69,8 +72,8 @@ export const primaryNav: NavGroup[] = [
  { label: "Overview", href: "/tools", description: "Calculators for underwriting" },
  { label: "Calculators", href: "/calculators", description: "True yield, costs, mortgage, plans" },
  { label: "Video Guides", href: "/video-guides", description: "Short educational videos" },
- { label: "True Cost worksheet", href: "/true-cost", description: "Buying-cost checklist magnet" },
- { label: "Investor Guide", href: "/guide", description: "Private library — qualify for access" },
+ { label: "True Cost worksheet", href: "/true-cost", description: "Buying costs before you reserve" },
+ { label: "Investor Guide", href: "/guide", description: "Private library. Qualify for access" },
  ],
  },
  ],
@@ -108,7 +111,7 @@ export const primaryNav: NavGroup[] = [
  {
  label: "Client Portal",
  href: "/portal",
- description: "Current investors — Private Desk dashboard",
+ description: "Current investors. Private Desk dashboard",
  },
  ],
  },
@@ -121,6 +124,7 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
  title: "Morgan",
  links: [
  { label: "About", href: "/about" },
+ { label: "About Huspy", href: "/about-huspy" },
  { label: "Methodology", href: "/about#methodology" },
  { label: "Credentials", href: "/about#credentials" },
  ],
@@ -131,6 +135,8 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
  { label: "Dubai", href: "/invest/dubai" },
  { label: "Abu Dhabi", href: "/invest/abu-dhabi" },
  { label: "Ras Al Khaimah", href: "/invest/rak" },
+ { label: "Micro markets", href: "/areas" },
+ { label: "Developers", href: "/developers" },
  { label: "Markets overview", href: "/invest" },
  ],
  },

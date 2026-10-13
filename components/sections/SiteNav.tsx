@@ -8,23 +8,18 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import BookMeetingLink from "@/components/ui/BookMeetingLink";
 import BrandLogo from "@/components/ui/BrandLogo";
 import {
-  cinemaSectionIds,
   groupIsActive,
   pathMatches,
   primaryNav,
   type NavGroup,
 } from "@/content/navigation";
 
-const CINEMA = new Set<string>(cinemaSectionIds);
-
 function DesktopMega({
   group,
   pathname,
-  lightChrome,
 }: {
   group: NavGroup;
   pathname: string;
-  lightChrome: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -39,8 +34,8 @@ function DesktopMega({
     closeTimer.current = setTimeout(() => setOpen(false), 140);
   };
 
-  const linkTone = lightChrome ? "text-white/80 hover:text-white" : "text-ink-muted hover:text-ink";
-  const activeTone = lightChrome ? "text-white" : "text-ink";
+  const linkTone = "text-ink-muted hover:text-ink";
+  const activeTone = "text-ink";
   const multi = group.columns.length > 1 || Boolean(group.featured);
   const childHrefs = group.columns.flatMap((col) => col.links.map((link) => link.href));
   const showViewAll = !childHrefs.includes(group.href);
@@ -216,66 +211,13 @@ function MobileAccordion({
   );
 }
 
-/**
- * One header · three states: cinema light chrome · post-cinema / internal paper surface.
- */
+/** Fixed paper header. Colour does not change with the section underneath. */
 export default function SiteNav() {
   const pathname = usePathname();
-  const onHome = pathname === "/";
   const reduceMotion = useReducedMotion();
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
-  const [cinemaSection, setCinemaSection] = useState("home");
-  const [cinemaRevealed, setCinemaRevealed] = useState(false);
-  const [pastCinema, setPastCinema] = useState(!onHome);
-
-  const overCinema = onHome && CINEMA.has(cinemaSection) && !open;
-  const lightChrome = overCinema && !cinemaRevealed;
-  const solidChrome = open || pastCinema || (onHome && !overCinema);
   const easeOut = [0.16, 1, 0.3, 1] as const;
-
-  useEffect(() => {
-    if (!onHome) {
-      setPastCinema(true);
-      setCinemaSection("home");
-      return;
-    }
-    setPastCinema(false);
-
-    const ratios = new Map<string, number>();
-    const sectionIds = ["home", "about", "services", "invest", "intelligence", "proof", "social", "contact"];
-
-    const sync = () => {
-      let best = "home";
-      let bestRatio = -1;
-      for (const id of sectionIds) {
-        const ratio = ratios.get(id) ?? 0;
-        if (ratio > bestRatio) {
-          bestRatio = ratio;
-          best = id;
-        }
-      }
-      setCinemaSection(best);
-      setPastCinema(!CINEMA.has(best));
-    };
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          ratios.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
-        }
-        sync();
-      },
-      { rootMargin: "-28% 0px -52% 0px", threshold: [0, 0.15, 0.35, 0.55, 0.75, 1] }
-    );
-
-    for (const id of sectionIds) {
-      const el = document.getElementById(id);
-      if (el) io.observe(el);
-    }
-    sync();
-    return () => io.disconnect();
-  }, [onHome]);
 
   useEffect(() => {
     if (!open) return;
@@ -292,44 +234,36 @@ export default function SiteNav() {
   }, [open]);
 
   useEffect(() => {
-    if (!onHome || !CINEMA.has(cinemaSection)) {
-      setCinemaRevealed(false);
-      return;
-    }
-    const section = document.getElementById(cinemaSection);
-    const target = section?.querySelector<HTMLElement>("[data-revealed]");
-    if (!target) {
-      setCinemaRevealed(false);
-      return;
-    }
-    const sync = () => setCinemaRevealed(target.getAttribute("data-revealed") === "true");
-    sync();
-    const mo = new MutationObserver(sync);
-    mo.observe(target, { attributes: true, attributeFilter: ["data-revealed"] });
-    return () => mo.disconnect();
-  }, [onHome, cinemaSection]);
-
-  useEffect(() => {
     setOpen(false);
     setExpanded(null);
   }, [pathname]);
 
-  const headerClass = open
-    ? "border-b border-line bg-paper"
-    : solidChrome
-      ? "border-b border-line/80 bg-paper/90 backdrop-blur-md"
-      : "border-b border-transparent bg-transparent";
+  const headerClass = "border-b border-line bg-paper";
 
   return (
-    <header className={`pointer-events-none fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ${headerClass}`}>
+    <header className={`pointer-events-none fixed inset-x-0 top-0 z-50 ${headerClass}`}>
       <div className="pointer-events-auto mx-auto flex h-14 max-w-content items-center justify-between gap-3 px-5 pt-[env(safe-area-inset-top,0px)] sm:h-16 sm:px-8">
-        <Link href="/" className="relative z-10 shrink-0 transition-opacity hover:opacity-80" aria-label="Home" onClick={() => setOpen(false)}>
-          <BrandLogo size="nav" />
-        </Link>
+        <div className="relative z-10 flex shrink-0 items-center gap-4">
+          <Link href="/" className="transition-opacity hover:opacity-80" aria-label="Home" onClick={() => setOpen(false)}>
+            <BrandLogo size="nav" />
+          </Link>
+          <Link
+            href="/about-huspy"
+            aria-label="In partnership with Huspy"
+            className="flex items-center gap-2 text-[10px] font-semibold uppercase leading-tight tracking-[0.08em] text-ink-muted hover:text-maroon sm:text-[11px] sm:tracking-[0.12em]"
+          >
+            <img
+              src="/images/logos/huspy.svg"
+              alt=""
+              className="h-3.5 w-auto sm:h-4"
+            />
+            <span className="hidden sm:inline">In partnership with Huspy</span>
+          </Link>
+        </div>
 
         <nav className="hidden items-center lg:flex" aria-label="Primary">
           {primaryNav.map((group) => (
-            <DesktopMega key={group.id} group={group} pathname={pathname} lightChrome={lightChrome && !solidChrome} />
+            <DesktopMega key={group.id} group={group} pathname={pathname} />
           ))}
         </nav>
 
@@ -345,7 +279,7 @@ export default function SiteNav() {
           aria-expanded={open}
           aria-controls="mobile-nav-panel"
           aria-label={open ? "Close navigation menu" : "Open navigation menu"}
-          className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm lg:hidden ${lightChrome && !solidChrome ? "text-white" : "text-ink"}`}
+          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm text-ink lg:hidden"
         >
           {open ? <X size={22} strokeWidth={1.5} /> : <Menu size={22} strokeWidth={1.5} />}
         </button>
@@ -366,6 +300,10 @@ export default function SiteNav() {
             className="pointer-events-auto h-[calc(100dvh-3.5rem-env(safe-area-inset-top,0px))] overflow-y-auto overscroll-contain border-b border-line bg-paper pb-[env(safe-area-inset-bottom,0px)] sm:h-[calc(100dvh-4rem-env(safe-area-inset-top,0px))] lg:hidden"
           >
             <nav className="mx-auto flex max-w-content flex-col px-5 py-2 sm:px-8">
+              <Link href="/about-huspy" className="flex items-center gap-3 py-3 text-sm font-semibold text-ink" onClick={() => setOpen(false)}>
+                <img src="/images/logos/huspy.svg" alt="" className="h-4 w-auto" />
+                In partnership with Huspy
+              </Link>
               {primaryNav.map((group) => (
                 <MobileAccordion
                   key={group.id}

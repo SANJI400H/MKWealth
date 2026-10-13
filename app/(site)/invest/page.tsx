@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SiteFooter from "@/components/sections/SiteFooter";
 import { investLocations } from "@/content/invest-locations";
 import { pageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site-config";
@@ -58,7 +57,6 @@ export default function InvestHubPage() {
  </Link>
  </div>
  </main>
- <SiteFooter />
  </>
  );
 }

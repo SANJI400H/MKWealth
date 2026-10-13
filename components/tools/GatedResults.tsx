@@ -22,7 +22,7 @@ export function GatedResults({ children, className = "" }: { children: ReactNode
           className="btn-primary max-w-xs text-center"
           onClick={() => requireAccess()}
         >
-          Calculate — see results
+          Calculate and see results
         </button>
       </div>
     </div>

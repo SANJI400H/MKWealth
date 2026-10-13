@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FaqSection from "@/components/insights/FaqSection";
 import GuideCallout from "@/components/insights/GuideCallout";
-import SiteFooter from "@/components/sections/SiteFooter";
 import RakInvestTabs, { RakCompareLinks } from "@/components/invest/RakInvestTabs";
 import PageIntro from "@/components/ui/PageIntro";
 import { pageMetadata } from "@/lib/metadata";
@@ -42,7 +41,6 @@ export default function RakInvestPage() {
  <>
  <main className="page-shell-wide">
  <Breadcrumbs
- visible={false}
  items={[
  { name: "Home", path: "/" },
  { name: "Invest", path: "/invest" },
@@ -61,7 +59,6 @@ export default function RakInvestPage() {
  <FaqSection items={faqItems} />
  <GuideCallout />
  </main>
- <SiteFooter />
  </>
  );
 }

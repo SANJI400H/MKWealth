@@ -122,7 +122,6 @@ export default function TrueCostGate({ children }: { children?: ReactNode }) {
       <button type="submit" disabled={status === "submitting"} className="btn-primary w-full justify-center">
         {status === "submitting" ? "Unlocking…" : "Unlock the True Cost worksheet"}
       </button>
-      <p className="text-center text-xs text-ink-muted">No spam. Used to send updates and follow up if you ask.</p>
     </form>
   );
 }
