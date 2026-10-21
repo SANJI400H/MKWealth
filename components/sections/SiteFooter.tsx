@@ -18,8 +18,9 @@ export default function SiteFooter() {
             {siteConfig.company} {siteConfig.companyRole} · {siteConfig.location}
           </p>
           <p className="mt-3 text-sm">
-            <Link href="/about-huspy" className="font-semibold text-ink hover:text-maroon">
-              In partnership with Huspy
+            <Link href="/about-huspy" className="inline-flex items-center gap-2 font-semibold text-ink hover:text-maroon">
+              In partnership with
+              <img src="/images/logos/huspy.svg" alt="Huspy" className="h-4 w-auto" />
             </Link>
           </p>
           <div className="mt-6 cta-row">

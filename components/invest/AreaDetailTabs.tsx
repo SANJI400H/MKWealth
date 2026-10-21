@@ -29,9 +29,14 @@ export default function AreaDetailTabs({ area }: { area: Area }) {
   return (
     <>
       {photo ? (
-        <div className="relative mb-8 aspect-[16/7] overflow-hidden bg-surface">
-          <img src={photo} alt={photoAlt} className="h-full w-full object-cover" />
-        </div>
+        <figure className="mb-8">
+          <div className="relative aspect-[16/7] overflow-hidden bg-surface">
+            <img src={photo} alt={photoAlt} className="h-full w-full object-cover" />
+          </div>
+          {area.imageCredit ? (
+            <figcaption className="mt-2 text-[11px] leading-snug text-ink-muted">{area.imageCredit}</figcaption>
+          ) : null}
+        </figure>
       ) : (
         <div className="mb-8 flex aspect-[16/7] items-end border border-silver bg-ink px-6 py-5">
           <p className="font-display text-2xl font-bold text-white">{area.name}</p>

@@ -14,7 +14,7 @@ export const marketImages: Record<string, { src: string; alt: string }> = {
  },
  rak: {
  src: "/images/markets/rak-coast.jpg",
- alt: "Ras Al Khaimah coastal resort and beachfront",
+ alt: "Ras Al Khaimah coastal masterplan",
  },
 };
 
@@ -25,27 +25,27 @@ export const areaImages: Record<string, { src: string; alt: string }> = {
  },
  "business-bay": {
  src: "/images/areas/business-bay.jpg",
- alt: "Business Bay urban corridor",
+ alt: "Business Bay and the canal crossing at night, with D1 Tower",
  },
  "downtown-dubai": {
  src: "/images/areas/downtown-dubai.jpg",
  alt: "Downtown Dubai skyline",
  },
  jvc: {
- src: "",
- alt: "Jumeirah Village Circle photograph still needed",
+ src: "/images/areas/jvc.jpg",
+ alt: "Townhouses in Jumeirah Village Circle",
  },
  "saadiyat-island": {
  src: "/images/areas/saadiyat-island.jpg",
- alt: "Saadiyat Island cultural and waterfront setting",
+ alt: "The dome of Louvre Abu Dhabi on Saadiyat Island",
  },
  "al-marjan-island": {
  src: "/images/areas/al-marjan-island.jpg",
- alt: "Coastal island setting. Al Marjan context",
+ alt: "The seafront on Al Marjan Island, Ras Al Khaimah",
  },
  "hudayriyat-island": {
  src: "/images/areas/hudayriyat-island.jpg",
- alt: "Coastal island landscape. Hudayriyat context",
+ alt: "Hudayriyat Island waterfront at night, Abu Dhabi",
  },
  "ramhan-island": {
  src: "/images/areas/ramhan-island.jpg",
@@ -53,35 +53,35 @@ export const areaImages: Record<string, { src: string; alt: string }> = {
  },
  "yas-island": {
  src: "/images/areas/yas-island.jpg",
- alt: "Yas Island leisure and residential setting",
+ alt: "Yas Bay waterfront and Etihad Arena on Yas Island, Abu Dhabi",
  },
  "al-reem-island": {
  src: "/images/areas/al-reem-island.jpg",
- alt: "Al Reem Island urban waterfront",
+ alt: "Al Reem Island skyline from Al Reem Central Park, Abu Dhabi",
  },
  "maritime-city": {
  src: "/images/areas/maritime-city.jpg",
- alt: "Dubai Maritime City from the air during early works in 2008",
+ alt: "Dubai Maritime City peninsula",
  },
  "palm-jebel-ali": {
  src: "/images/areas/palm-jebel-ali.jpg",
- alt: "Palm Jebel Ali fronds during early construction in 2008",
+ alt: "Palm Jebel Ali yacht club",
  },
  "dubai-islands": {
  src: "/images/areas/dubai-islands.jpg",
- alt: "Dubai Islands, formerly Palm Deira, during early reclamation",
+ alt: "Dubai Islands beachfront",
  },
  "dubai-harbour": {
  src: "",
  alt: "Dubai Harbour photograph still needed",
  },
  "emaar-beachfront": {
- src: "",
- alt: "Emaar Beachfront photograph still needed",
+ src: "/images/areas/emaar-beachfront.jpg",
+ alt: "Emaar Beachfront at night",
  },
  dubailand: {
  src: "/images/areas/dubailand.jpg",
- alt: "Dubailand entrance in 2006",
+ alt: "Legoland Dubai, inside the Dubailand district",
  },
  "dubai-south": {
  src: "/images/areas/dubai-south.jpg",
@@ -89,7 +89,7 @@ export const areaImages: Record<string, { src: string; alt: string }> = {
  },
  jumeirah: {
  src: "/images/areas/jumeirah.jpg",
- alt: "Jumeirah beach and beachfront towers",
+ alt: "Jumeirah Mosque in the Jumeirah district, Dubai",
  },
  bluewaters: {
  src: "/images/areas/bluewaters.jpg",

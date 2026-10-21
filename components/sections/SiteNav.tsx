@@ -252,12 +252,12 @@ export default function SiteNav() {
             aria-label="In partnership with Huspy"
             className="flex items-center gap-2 text-[10px] font-semibold uppercase leading-tight tracking-[0.08em] text-ink-muted hover:text-maroon sm:text-[11px] sm:tracking-[0.12em]"
           >
+            <span className="hidden sm:inline">In partnership with</span>
             <img
               src="/images/logos/huspy.svg"
               alt=""
               className="h-3.5 w-auto sm:h-4"
             />
-            <span className="hidden sm:inline">In partnership with Huspy</span>
           </Link>
         </div>
 
@@ -301,8 +301,8 @@ export default function SiteNav() {
           >
             <nav className="mx-auto flex max-w-content flex-col px-5 py-2 sm:px-8">
               <Link href="/about-huspy" className="flex items-center gap-3 py-3 text-sm font-semibold text-ink" onClick={() => setOpen(false)}>
+                In partnership with
                 <img src="/images/logos/huspy.svg" alt="" className="h-4 w-auto" />
-                In partnership with Huspy
               </Link>
               {primaryNav.map((group) => (
                 <MobileAccordion
