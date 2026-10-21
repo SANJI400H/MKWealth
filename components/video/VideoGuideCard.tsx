@@ -34,7 +34,7 @@ export default function VideoGuideCard({ guide }: { guide: VideoGuide }) {
               trackEvent("watch_video", { video_id: guide.id, platform: "youtube" });
             }}
             disabled={!hasVideo}
-            aria-label={hasVideo ? `Play ${guide.title}` : `${guide.title} coming soon`}
+            aria-label={hasVideo ? `Play ${guide.title}` : guide.title}
           >
             {hasVideo ? (
               <Image

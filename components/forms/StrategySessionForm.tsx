@@ -8,10 +8,10 @@ const fieldClass =
   "w-full rounded-lg border border-ink/10 bg-paper/70 px-4 py-3.5 text-ink shadow-sm backdrop-blur-sm placeholder:text-ink-muted/50 focus:border-maroon focus:outline-none focus:ring-1 focus:ring-maroon/30";
 
 const CAPITAL_OPTIONS = [
-  "AED 2M, 5M",
-  "AED 5M, 10M",
+  "AED 2M to 5M",
+  "AED 5M to 10M",
   "AED 10M+",
-  "AED 1M, 2M",
+  "AED 1M to 2M",
   "Under AED 1M",
   "Prefer to discuss",
 ] as const;

@@ -100,9 +100,8 @@ export default function DubaiInvestTabs({ latest }: { latest: InsightTeaser[] })
             <ul className="mt-2 list-disc space-y-2 pl-5 text-sm text-ink-muted">
               <li>Much more aggressive capital deployment upfront.</li>
               <li>
-                International investors get a maximum loan to value of around 60%, so including fees you are typically
-                50%, sometimes 60%, down before you begin. This makes it inaccessible to many investors and slows your
-                cash on cash return.
+                Banks typically lend international buyers up to 60% of the value (50% on properties over AED 20m),
+                so plan for at least a 40% deposit, plus purchase costs on top.
               </li>
               <li>Renovation opportunities need substantially more cash upfront.</li>
             </ul>
@@ -127,8 +126,8 @@ export default function DubaiInvestTabs({ latest }: { latest: InsightTeaser[] })
         <p className="body-copy mt-4">{regulatory.yields.dubaiGrossIllustrative.value}</p>
         <p className="body-copy-sm mt-2">{regulatory.yields.dubaiGrossIllustrative.note}</p>
         <p className="body-copy mt-4">
-          Acquisition: {regulatory.dubaiAcquisition.dldTransferFeeTypical.value}.{" "}
-          {regulatory.dubaiAcquisition.dldTransferFeeTypical.note}
+          Off-plan, bought direct from the developer: 4% DLD fee plus about AED 5,250 in admin fees. Resale: 4% DLD
+          fee, 2% agency fee plus VAT, plus trustee and title-deed fees.
         </p>
         <p className="mt-4">
           <Link href="/calculators/true-yield" className="font-semibold text-maroon hover:underline">

@@ -119,12 +119,30 @@ export default function AboutPage() {
             </div>
             <div className="flex justify-between gap-4 border-b border-line py-3.5">
               <dt className="text-ink-muted">RERA</dt>
-              <dd className="text-right text-ink">{morganProfile.reraOrDldCredential}</dd>
+              <dd className="text-right text-ink">
+                {morganProfile.reraVerifyUrl ? (
+                  <a href={morganProfile.reraVerifyUrl} target="_blank" rel="noopener" className="underline-offset-2 hover:underline">
+                    {morganProfile.reraOrDldCredential}
+                  </a>
+                ) : (
+                  morganProfile.reraOrDldCredential
+                )}
+              </dd>
             </div>
-            <div className="flex justify-between gap-4 border-b border-line py-3.5">
-              <dt className="text-ink-muted">Awards</dt>
-              <dd className="text-right text-ink">{morganProfile.awards.join("; ")}</dd>
-            </div>
+            {morganProfile.adrecRegistration ? (
+              <div className="flex justify-between gap-4 border-b border-line py-3.5">
+                <dt className="text-ink-muted">ADREC</dt>
+                <dd className="text-right text-ink">{morganProfile.adrecRegistration}</dd>
+              </div>
+            ) : null}
+            {morganProfile.awards.length > 0 ? (
+              <div className="flex justify-between gap-4 border-b border-line py-3.5">
+                <dt className="text-ink-muted">Awards</dt>
+                <dd className="text-right text-ink">
+                  {morganProfile.awards.map((award) => (award.year ? `${award.name} (${award.year})` : award.name)).join("; ")}
+                </dd>
+              </div>
+            ) : null}
             <div className="flex justify-between gap-4 border-b border-line py-3.5">
               <dt className="text-ink-muted">Personal portfolio</dt>
               <dd className="max-w-sm text-right text-ink">{morganProfile.personalPortfolioNote}</dd>

@@ -31,7 +31,9 @@ export default function Proof() {
  title: "Credentials",
  body: hasCredentials
  ? `${morganProfile.reraOrDldCredential ?? "Licence on file"}${
- morganProfile.awards.length ? ` · ${morganProfile.awards.join(" · ")}` : ""
+ morganProfile.awards.length
+ ? ` · ${morganProfile.awards.map((award) => (award.year ? `${award.name} (${award.year})` : award.name)).join(" · ")}`
+ : ""
  }`
  : "Structure ready, awaiting verified licence and recognition details.",
  href: "/about#credentials",

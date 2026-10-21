@@ -46,9 +46,9 @@ export default function AreasIndexPage() {
  {photo ? (
  <img src={photo} alt="" className="aspect-[16/9] w-full object-cover" />
  ) : (
- <div className="flex aspect-[16/9] items-end bg-ink px-4 py-4 text-xs uppercase tracking-[0.14em] text-white/70">
- Photograph coming soon
- </div>
+                  <div className="flex aspect-[16/9] items-end bg-ink px-4 py-4">
+                    <p className="font-display text-lg font-bold text-white">{a.name}</p>
+                  </div>
  )}
  <div className="px-5 py-5">
  <h3 className="font-display text-xl font-bold text-ink group-hover:text-maroon">{a.name}</h3>

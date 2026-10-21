@@ -23,6 +23,10 @@ export const morganProfile = {
  "As an Associate Director at Huspy, Morgan provides strategic property guidance and access to the relationships, market intelligence and opportunities required throughout the property acquisition journey.",
  /** RERA broker number from discovery, keep format as provided */
  reraOrDldCredential: "RERA 92787",
+ /** Official DLD broker-verification URL. Render the link only when this is set. */
+ reraVerifyUrl: null as string | null,
+ /** Abu Dhabi broker registration. Render only when supplied. */
+ adrecRegistration: null as string | null,
  /**
  * Soft proof Morgan authorised for public use (not brokerage unit-volume).
  * Do not turn into a sold-sign / sales-volume claim.
@@ -48,7 +52,10 @@ export const morganProfile = {
  preferredMinimumCapitalAed: "AED 2M+",
  idealClientFilter:
  "International investors building multi-year UAE exposure, not end-users, and not tickets below AED 2M.",
- awards: ["Huspy No.1 Broker", "Allegiance No.1 B2C Broker"] as string[],
+ awards: [
+ { name: "Huspy No.1 Broker", year: null as string | null },
+ { name: "Allegiance No.1 B2C Broker", year: null as string | null },
+ ],
  mediaAppearances: null as string[] | null,
  yearsExperience: null as number | null,
  /**

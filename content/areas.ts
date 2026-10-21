@@ -26,7 +26,7 @@ export interface Area {
  image?: string;
  imageAlt?: string;
  imageCredit?: string;
- /** Leave null when the figure is not verified. UI shows Data coming soon. */
+ /** Leave null when the figure is not verified. The page hides the tile. */
  pricePerSqft?: string | null;
  yieldRange?: string | null;
  priceBand?: string | null;
@@ -360,7 +360,7 @@ export const areas: Area[] = [
  "Treat Dubai Islands as a long-dated waterfront thesis. Masterplan language is not completion evidence. Confirm what is delivered for the phase on offer.",
  investorProfile:
  "Investors who can hold through infrastructure sequencing and who want exposure beyond the established marina cores.",
- priceContext: "Verified price band coming soon. Do not use a citywide average.",
+ priceContext: "No sourced price band is published for this community. Do not use a citywide average.",
  rentalContext: "Income usually waits for handover and a real tenant pool. Model vacancy explicitly.",
  supply: "Phased island supply can cluster. Overlay handover dates against your hold period.",
  infrastructure: "Access roads and bridges are part of the thesis. Verify what is live for your phase.",
@@ -392,7 +392,7 @@ export const areas: Area[] = [
  morganView:
  "Dubai Harbour sits beside the marina and the palm, not at the creek. Underwrite the specific tower, service charges and how the harbour uses the surrounding demand.",
  investorProfile: "Investors comparing waterfront stock next to Dubai Marina who still want unit-level maths.",
- priceContext: "Verified price band coming soon.",
+ priceContext: "No sourced price band is published for this community.",
  rentalContext: "Tourism and marina adjacency can support some strategies. Confirm building rules before modelling short stays.",
  supply: "Nearby marina and beachfront supply is part of the competitive set.",
  infrastructure: "Harbour, beach access and road links into the marina corridor. Verify the building, not the brochure map.",
@@ -421,7 +421,7 @@ export const areas: Area[] = [
  morganView:
  "Treat Emaar Beachfront as its own micro-market, not as Dubai Marina and not as the Palm. Brand and beach do not waive fee, view and exit checks.",
  investorProfile: "Buyers who want beachfront living or a holiday let and can underwrite a premium.",
- priceContext: "Verified price band coming soon. Do not borrow marina averages.",
+ priceContext: "No sourced price band is published for this community. Do not borrow marina averages.",
  rentalContext: "Holiday and end-user demand may both appear. Confirm what the building allows.",
  supply: "Competing beach and marina inventory can pressure rents in a soft cycle.",
  infrastructure: "Beach, marina access and the road corridor. Verify parking and community access for the tower.",
@@ -450,7 +450,7 @@ export const areas: Area[] = [
  morganView:
  "Dubailand is a wide label. Underwrite the community and the building. A district average will mislead you.",
  investorProfile: "Investors seeking lower entry than the waterfront cores, often with an income brief.",
- priceContext: "Verified price band coming soon, by community, not a single Dubailand number.",
+ priceContext: "No sourced price band is published here. Do not collapse Dubailand into one number.",
  rentalContext: "Tenant depth varies by cluster. Model vacancy. Do not import marina rents.",
  supply: "Volume communities inside the district can hand over together. Map the cluster you are buying.",
  infrastructure: "Roads, schools and retail differ by community. Verify the ones your tenant would actually use.",
@@ -482,7 +482,7 @@ export const areas: Area[] = [
  morganView:
  "Dubai South is a long-horizon allocation. Airport and expo adjacency do not replace payment-plan, rent and exit maths.",
  investorProfile: "Patient capital that understands a thinner resale market than central Dubai.",
- priceContext: "Verified price band coming soon.",
+ priceContext: "No sourced price band is published for this community.",
  rentalContext: "Demand stories often cite aviation and logistics. Confirm a realistic lease before modelling yield.",
  supply: "Masterplan phasing can cluster handovers. Time your entry against that calendar.",
  infrastructure: "Al Maktoum International Airport and the southern road network. Verify what serves your community today.",
@@ -514,7 +514,7 @@ export const areas: Area[] = [
  morganView:
  "Say which Jumeirah you mean. The villa streets and the beachfront towers do not share a price or a tenant. Underwrite the asset class in front of you.",
  investorProfile: "End users and families who want the beach corridor, and investors who can fund a heavier cheque.",
- priceContext: "Verified price band coming soon. Villa and tower stock should not be averaged.",
+ priceContext: "No sourced price band is published for this community. Villa and tower stock should not be averaged.",
  rentalContext: "End-user and holiday demand both show up. Confirm use, furnishing and vacancy for the actual unit.",
  supply: "Beachfront towers compete with the marina. Villa stock is a different set.",
  infrastructure: "Beach road, retail and schools. The photo on this page is the beachfront skyline, not a villa street.",
@@ -546,7 +546,7 @@ export const areas: Area[] = [
  morganView:
  "Bluewaters is a small, recognisable island. Pay for it only when rent, service charges and resale comps support the cheque.",
  investorProfile: "End users and holiday-let buyers who want a contained island next to the marina.",
- priceContext: "Verified price band coming soon.",
+ priceContext: "No sourced price band is published for this community.",
  rentalContext: "Tourism adjacency can help some units. Confirm building rules before modelling short stays.",
  supply: "The island is finite, but marina and beach stock next door is not. Compare the set you would actually compete with.",
  infrastructure: "Island access, retail on the island, and Ain Dubai as a landmark rather than a yield.",

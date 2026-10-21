@@ -25,6 +25,18 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      {
+        source: "/",
+        has: [{ type: "host", value: "morgankaiser.com" }],
+        destination: "https://www.morgankaiser.com",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "morgankaiser.com" }],
+        destination: "https://www.morgankaiser.com/:path*",
+        permanent: true,
+      },
       // Legacy market “insights” URLs → invest pillars (avoid duplicate SEO)
       {
         source: "/insights/dubai-off-plan-investment",

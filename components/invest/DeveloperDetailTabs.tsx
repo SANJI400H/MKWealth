@@ -9,8 +9,18 @@ import { developerLogos } from "@/content/editorial-images";
 import { siteConfig } from "@/lib/site-config";
 import { regulatory } from "@/content/regulatory";
 
+function filledStat(value?: string | null) {
+  if (!value || /coming soon/i.test(value)) return null;
+  return value;
+}
+
 export default function DeveloperDetailTabs({ developer }: { developer: Developer }) {
   const d = developer;
+  const stats = [
+    { label: "Years active", value: filledStat(d.yearsActive) },
+    { label: "Delivered versus under construction", value: filledStat(d.deliveredNote) },
+    { label: "Positioning", value: filledStat(d.productPositioning) },
+  ].filter((item): item is { label: string; value: string } => item.value !== null);
 
   return (
     <>
@@ -32,20 +42,18 @@ export default function DeveloperDetailTabs({ developer }: { developer: Develope
         {d.nameConfirm ? <p className="mt-4 text-sm text-ink">{d.nameConfirm}</p> : null}
       </PageIntro>
 
-      <div className="mt-8 grid gap-3 sm:grid-cols-3">
-        <div className="border border-silver bg-surface px-4 py-4">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Years active</p>
-          <p className="mt-2 font-display text-lg font-bold text-ink">{d.yearsActive || "Data coming soon"}</p>
+      {stats.length > 0 ? (
+        <div className="mt-8 grid gap-3 sm:grid-cols-3">
+          {stats.map((item) => (
+            <div key={item.label} className="border border-silver bg-surface px-4 py-4">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">{item.label}</p>
+              <p className={`mt-2 text-ink ${item.label === "Positioning" ? "text-sm leading-relaxed" : "font-display text-lg font-bold"}`}>
+                {item.value}
+              </p>
+            </div>
+          ))}
         </div>
-        <div className="border border-silver bg-surface px-4 py-4">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Delivered versus under construction</p>
-          <p className="mt-2 font-display text-lg font-bold text-ink">{d.deliveredNote || "Data coming soon"}</p>
-        </div>
-        <div className="border border-silver bg-surface px-4 py-4">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Positioning</p>
-          <p className="mt-2 text-sm leading-relaxed text-ink">{d.productPositioning || "Data coming soon"}</p>
-        </div>
-      </div>
+      ) : null}
       {d.morganView ? (
         <blockquote className="mt-6 border-l-4 border-maroon bg-surface px-5 py-4 text-ink">{d.morganView}</blockquote>
       ) : null}
@@ -69,7 +77,9 @@ export default function DeveloperDetailTabs({ developer }: { developer: Develope
 
       <section id="track-record" className="page-block">
         <h2 className="font-display text-2xl font-bold text-ink">Track record</h2>
-        <p className="body-copy mt-4">{d.trackRecord}</p>
+        {d.trackRecord && !/coming soon/i.test(d.trackRecord) ? (
+          <p className="body-copy mt-4">{d.trackRecord}</p>
+        ) : null}
         <ul className="mt-4 list-disc space-y-2 pl-5 text-ink-muted">
           {d.projects.map((p) => (
             <li key={p}>{p}</li>

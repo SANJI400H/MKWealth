@@ -136,7 +136,7 @@ export const developerImages: Record<string, { src: string; alt: string }> = {
 export const developerLogos: Record<string, { src: string; onDark?: boolean }> = {
   emaar: { src: "/images/logos/emaar.svg" },
   nakheel: { src: "/images/logos/nakheel.svg", onDark: true },
-  aldar: { src: "/images/logos/aldar.png" },
+  aldar: { src: "/images/logos/aldar.png", onDark: true },
   modon: { src: "/images/logos/modon.png" },
   meraas: { src: "/images/logos/meraas.svg" },
   sobha: { src: "/images/logos/sobha.svg", onDark: true },

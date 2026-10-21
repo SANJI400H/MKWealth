@@ -10,11 +10,11 @@ import { siteConfig } from "@/lib/site-config";
 import { areaImages } from "@/content/editorial-images";
 import { regulatory } from "@/content/regulatory";
 
-function Metric({ label, value }: { label: string; value?: string | null }) {
+function Metric({ label, value }: { label: string; value: string }) {
   return (
     <div className="border border-silver bg-surface px-4 py-4">
       <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">{label}</p>
-      <p className="mt-2 font-display text-lg font-bold text-ink">{value || "Data coming soon"}</p>
+      <p className="mt-2 font-display text-lg font-bold text-ink">{value}</p>
     </div>
   );
 }
@@ -33,9 +33,8 @@ export default function AreaDetailTabs({ area }: { area: Area }) {
           <img src={photo} alt={photoAlt} className="h-full w-full object-cover" />
         </div>
       ) : (
-        <div className="mb-8 flex aspect-[16/7] items-end justify-between border border-silver bg-ink px-6 py-5">
+        <div className="mb-8 flex aspect-[16/7] items-end border border-silver bg-ink px-6 py-5">
           <p className="font-display text-2xl font-bold text-white">{area.name}</p>
-          <p className="text-xs uppercase tracking-[0.14em] text-white/70">Photograph coming soon</p>
         </div>
       )}
       <PageIntro title={area.name} lead={area.tagline}>
@@ -44,14 +43,24 @@ export default function AreaDetailTabs({ area }: { area: Area }) {
         ) : null}
       </PageIntro>
 
-      <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        <Metric label="Average price per sq ft" value={area.pricePerSqft} />
-        <Metric label="Typical gross yield" value={area.yieldRange} />
-        <Metric label="Typical price band" value={area.priceBand} />
-        <Metric label="Supply pipeline" value={area.supplyPipeline} />
-        <Metric label="Handover window" value={area.handoverWindow} />
-        <Metric label="Who it suits" value={area.suits?.join(", ")} />
-      </div>
+      {(() => {
+        const metrics = [
+          { label: "Average price per sq ft", value: area.pricePerSqft },
+          { label: "Typical gross yield", value: area.yieldRange },
+          { label: "Typical price band", value: area.priceBand },
+          { label: "Supply pipeline", value: area.supplyPipeline },
+          { label: "Handover window", value: area.handoverWindow },
+          { label: "Who it suits", value: area.suits?.join(", ") },
+        ].filter((item): item is { label: string; value: string } => Boolean(item.value));
+        if (!metrics.length) return null;
+        return (
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {metrics.map((item) => (
+              <Metric key={item.label} label={item.label} value={item.value} />
+            ))}
+          </div>
+        );
+      })()}
 
       {area.strengths?.length ? (
         <ul className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -62,20 +71,6 @@ export default function AreaDetailTabs({ area }: { area: Area }) {
           ))}
         </ul>
       ) : null}
-
-      <figure className="mt-8 border border-silver bg-surface px-4 py-6">
-        <svg viewBox="0 0 320 80" className="h-20 w-full" role="img" aria-label="Price and yield chart placeholder">
-          <title>Price and yield series</title>
-          <desc>No verified series is stored for this area yet.</desc>
-          <line x1="8" y1="64" x2="312" y2="64" stroke="#C4C7CB" />
-          <text x="16" y="36" fill="#111111" fontSize="14">
-            Data coming soon
-          </text>
-        </svg>
-        <figcaption className="mt-2 text-xs text-ink-muted">
-          A price or yield chart will draw here when a verified series is added. Nothing is estimated.
-        </figcaption>
-      </figure>
 
       <StickySectionNav
         items={areaDetailNav}
