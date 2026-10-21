@@ -183,11 +183,6 @@ export const aboutSectionNav: SectionNavItem[] = [
  { id: "credentials", label: "Credentials" },
 ];
 
-export const toolsSectionNav: SectionNavItem[] = [
-  { id: "calculators", label: "Calculators" },
-  { id: "portal", label: "Client Portal" },
-];
-
 export const deskSectionNav: SectionNavItem[] = [
   { id: "how-to-use", label: "How to use" },
   { id: "market-stance", label: "Market stance" },

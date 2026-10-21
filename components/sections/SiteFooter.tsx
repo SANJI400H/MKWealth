@@ -1,6 +1,4 @@
 import Link from "next/link";
-import WhatsAppLink from "@/components/ui/WhatsAppLink";
-import BookMeetingLink from "@/components/ui/BookMeetingLink";
 import BrandLogo from "@/components/ui/BrandLogo";
 import SocialIcons from "@/components/ui/SocialIcons";
 import { footerNav } from "@/content/navigation";
@@ -21,21 +19,6 @@ export default function SiteFooter() {
             <Link href="/about-huspy" className="inline-flex items-center gap-2 font-semibold text-ink hover:text-maroon">
               In partnership with
               <img src="/images/logos/huspy.svg" alt="Huspy" className="h-4 w-auto" />
-            </Link>
-          </p>
-          <div className="mt-6 cta-row">
-            <BookMeetingLink href="/strategy-session" className="btn-primary w-full justify-center sm:w-auto" />
-          </div>
-          <p className="mt-4 text-sm text-ink-muted">
-            <WhatsAppLink
-              message="Hi Morgan, I found your site and would like to connect."
-              className="font-semibold text-maroon underline-offset-2 hover:underline"
-            >
-              WhatsApp
-            </WhatsAppLink>
-            {" · "}
-            <Link href="/true-cost" className="font-semibold text-maroon underline-offset-2 hover:underline">
-              True Cost worksheet
             </Link>
           </p>
           <div className="mt-8">

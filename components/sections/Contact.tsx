@@ -10,7 +10,6 @@ export default function Contact() {
     <section id="contact" className="section-pad bg-paper" aria-label="Contact">
       <div className="section-inner">
         <RevealOnScroll>
-          <p className="eyebrow">Conversion</p>
           <h2 className="section-title">
             Your 30-minute
             <br />
