@@ -3,13 +3,14 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FaqSection from "@/components/insights/FaqSection";
 import GuideCallout from "@/components/insights/GuideCallout";
 import AbuDhabiInvestTabs, { AbuDhabiCompareLinks } from "@/components/invest/AbuDhabiInvestTabs";
+import MarketCover from "@/components/invest/MarketCover";
 import PageIntro from "@/components/ui/PageIntro";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
- title: "Abu Dhabi Real Estate Investment vs. Dubai | Morgan Kaiser",
+ title: "Abu Dhabi Property Investment | Morgan Kaiser",
  description:
- "How Abu Dhabi off-plan real estate investment compares to Dubai for foreign buyers, ownership rules, yields, liquidity, and who each market actually suits.",
+ "How Morgan Kaiser looks at Abu Dhabi property for international investors: islands, ready homes, and the differences from Dubai.",
  path: "/invest/abu-dhabi",
 });
 
@@ -36,7 +37,9 @@ const faqItems = [
 export default function AbuDhabiInvestPage() {
  return (
  <>
- <main className="page-shell-wide">
+ <main>
+ <MarketCover id="abu-dhabi" />
+ <div className="page-shell-wide !pt-8 sm:!pt-10">
  <Breadcrumbs
  items={[
  { name: "Home", path: "/" },
@@ -46,8 +49,8 @@ export default function AbuDhabiInvestPage() {
  />
 
  <PageIntro
- title="Abu Dhabi Real Estate Investment"
- lead="Covered with real advisory focus alongside Dubai, useful for diversification, not as identical day-to-day deal flow. Morgan reports strong working knowledge across all three emirates."
+ title="Abu Dhabi Property Investment"
+ lead="An emirate in its own right: island communities, a thinner resale market than Dubai, and a longer hold."
  />
 
  <AbuDhabiInvestTabs />
@@ -55,6 +58,7 @@ export default function AbuDhabiInvestPage() {
 
  <FaqSection items={faqItems} />
  <GuideCallout />
+ </div>
  </main>
  </>
  );

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import ScrollZoom from "@/components/motion/ScrollZoom";
 import EditorialImagePlaceholder from "@/components/ui/EditorialImagePlaceholder";
 import type { AssetRatio } from "@/content/asset-requirements";
 
@@ -24,6 +25,7 @@ export default function EditorialImage({
   className = "",
   sizes = "(min-width: 1024px) 34rem, 88vw",
   priority = false,
+  fit = "cover",
 }: {
   src?: string;
   alt: string;
@@ -33,6 +35,7 @@ export default function EditorialImage({
   className?: string;
   sizes?: string;
   priority?: boolean;
+  fit?: "cover" | "contain";
 }) {
   if (!src) {
     return (
@@ -47,16 +50,28 @@ export default function EditorialImage({
 
   const aspect = ratioClass[ratio];
 
+  const frame = (
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      sizes={sizes}
+      priority={priority}
+      className={fit === "contain" ? "object-contain" : "object-cover"}
+    />
+  );
+
+  if (fit === "contain") {
+    return (
+      <div className={`relative ${aspect} w-full overflow-hidden bg-surface ${className}`}>
+        {frame}
+      </div>
+    );
+  }
+
   return (
-    <div className={`relative ${aspect} w-full overflow-hidden bg-surface ${className}`}>
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        sizes={sizes}
-        priority={priority}
-        className="object-cover transition duration-700 ease-out group-hover:scale-[1.025]"
-      />
-    </div>
+    <ScrollZoom className={`relative ${aspect} w-full bg-surface ${className}`}>
+      {frame}
+    </ScrollZoom>
   );
 }

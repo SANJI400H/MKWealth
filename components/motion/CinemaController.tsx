@@ -16,10 +16,10 @@ export const CINEMA_IDS = ["home", "about", "services"] as const;
 export type CinemaId = (typeof CINEMA_IDS)[number];
 
 /**
- * Full opening snap sequence: cinema film + Philosophy + Approach.
- * One wheel/swipe = one section. After formula, free document scroll resumes.
+ * Full opening snap sequence: cinema film, then Philosophy.
+ * One wheel/swipe = one section. After Philosophy, free document scroll resumes.
  */
-export const OPENING_SNAP_IDS = ["home", "about", "services", "philosophy", "formula"] as const;
+export const OPENING_SNAP_IDS = ["home", "about", "services", "philosophy"] as const;
 export type OpeningSnapId = (typeof OPENING_SNAP_IDS)[number];
 
 export type CinemaArriveMode = "play" | "final";
@@ -80,7 +80,7 @@ function scrollTopForId(id: string) {
 }
 
 function snapZoneBottom() {
- const el = document.getElementById("formula");
+ const el = document.getElementById("philosophy");
  if (!el) {
  const services = document.getElementById("services");
  return (services?.offsetTop ?? 0) + (services?.offsetHeight ?? window.innerHeight);
@@ -136,8 +136,8 @@ function scrollToId(id: string, onDone?: () => void) {
 /**
  * One wheel / swipe = one opening section.
  * Video cues only for home / about / services.
- * Philosophy + Approach snap as full-viewport editorial acts.
- * After formula → normal document scrolling.
+ * Philosophy snaps as a full editorial act, then normal document scrolling.
+ * A section taller than the screen can be read before the next snap.
  */
 export default function CinemaController({ children }: { children: ReactNode }) {
  const indexRef = useRef(0);
@@ -185,9 +185,17 @@ export default function CinemaController({ children }: { children: ReactNode }) 
 
  const releaseToBrowse = () => {
  cancelScrollRef.current?.();
- cancelScrollRef.current = scrollToId("investment-profile", () => {
+ cancelScrollRef.current = scrollToId("invest", () => {
  cancelScrollRef.current = null;
  });
+ };
+
+ const canLeaveSection = (dir: 1 | -1) => {
+ const el = document.getElementById(OPENING_SNAP_IDS[indexRef.current]);
+ if (!el || el.scrollHeight <= window.innerHeight + 8) return true;
+ const rect = el.getBoundingClientRect();
+ if (dir > 0) return rect.bottom <= window.innerHeight + 12;
+ return rect.top >= -12;
  };
 
  const snap = (dir: 1 | -1) => {
@@ -222,6 +230,7 @@ export default function CinemaController({ children }: { children: ReactNode }) 
  const pullingBack = !inSnap && e.deltaY < 0 && window.scrollY <= zoneBottom + 120;
 
  if (!inSnap && !pullingBack) return;
+ if (inSnap && !canLeaveSection(e.deltaY > 0 ? 1 : -1)) return;
 
  e.preventDefault();
  if (Math.abs(e.deltaY) < 6) return;
@@ -233,9 +242,11 @@ export default function CinemaController({ children }: { children: ReactNode }) 
  if (window.scrollY >= zoneBottom - 24) return;
 
  if (["ArrowDown", "PageDown", " "].includes(e.key)) {
+ if (!canLeaveSection(1)) return;
  e.preventDefault();
  snap(1);
  } else if (["ArrowUp", "PageUp"].includes(e.key)) {
+ if (!canLeaveSection(-1)) return;
  e.preventDefault();
  snap(-1);
  }
@@ -257,7 +268,9 @@ export default function CinemaController({ children }: { children: ReactNode }) 
  const end = e.changedTouches[0]?.clientY ?? start;
  const dy = start - end;
  if (Math.abs(dy) < touchSnapThreshold()) return;
- snap(dy > 0 ? 1 : -1);
+ const dir = dy > 0 ? 1 : -1;
+ if (!canLeaveSection(dir)) return;
+ snap(dir);
  };
 
  const onGoto = (e: Event) => {

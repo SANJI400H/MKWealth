@@ -28,7 +28,7 @@ export default function Methodology() {
  body: "Objective, capital, horizon, liquidity, risk, and exit, before any inventory discussion.",
  },
  {
- title: "Underwrite the deal",
+ title: "Underwriting",
  body: "Price, costs, yield assumptions, payment structure, and delivery risk stress-tested against the brief.",
  },
  {

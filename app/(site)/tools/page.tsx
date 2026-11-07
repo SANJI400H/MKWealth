@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = pageMetadata({
   title: "Investment Tools | Morgan Kaiser",
   description:
-    "UAE property calculators. Explore freely; unlock results with name and email. Your numbers ship with your enquiry.",
+    "UAE property calculators. Edit the inputs and read the results on the page.",
   path: "/tools",
 });
 
@@ -25,8 +25,7 @@ export default function ToolsPage() {
 
         <h1 className="page-h1">Tools</h1>
         <p className="page-lead">
-          Browse calculators freely and edit inputs without registering. When you calculate results, a short
-          name and email unlocks your numbers and sends the snapshot with your enquiry.
+          Browse the calculators and edit the inputs. Results stay on the page.
         </p>
 
         <section

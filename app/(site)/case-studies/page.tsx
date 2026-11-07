@@ -25,8 +25,7 @@ export default function CaseStudiesIndexPage() {
  />
  <h1 className="mt-6 font-display text-4xl font-bold text-ink sm:text-5xl">Case studies</h1>
  <p className="mt-4 text-lg text-ink-muted">
- Detailed underwriting stories will live here. None are published until they are real, permissioned, and
- reviewed.
+ Case studies appear here only when they are real, permissioned and reviewed.
  </p>
 
  {published.length === 0 ? (

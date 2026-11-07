@@ -16,7 +16,7 @@ export default function Proof() {
  <p className="eyebrow">Proven in practice</p>
  <h2 className="section-title">After the numbers.</h2>
  <p className="section-lead">
- Credentials and methodology appear here only when verified, never as placeholders presented as fact.
+ Brief first. Underwriting. Acquire only when the mathematics fit.
  </p>
  </RevealOnScroll>
 
@@ -24,7 +24,7 @@ export default function Proof() {
  {[
  {
  title: "Methodology",
- body: "Brief first. Underwrite the deal. Acquire only when the mathematics fit.",
+ body: "Brief first. Underwriting. Acquire only when the mathematics fit.",
  href: "/about#methodology",
  },
  {

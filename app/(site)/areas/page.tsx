@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = pageMetadata({
  title: "Areas | UAE Property Micro-Markets | Morgan Kaiser",
  description:
- "Area underwriting frameworks for Dubai, Abu Dhabi, and Ras Al Khaimah, orientation, not inventory listings.",
+ "Community notes for Dubai, Abu Dhabi, and Ras Al Khaimah. Orientation, not a list of homes for sale.",
  path: "/areas",
 });
 
@@ -28,7 +28,7 @@ export default function AreasIndexPage() {
  <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Areas", path: "/areas" }]} />
  <h1 className="mt-6 font-display text-4xl font-bold text-ink sm:text-5xl">Areas</h1>
  <p className="mt-4 text-lg text-ink-muted">
- Micro-market frameworks for underwriting conversations. Working analysis only, not rankings or forecasts.
+ Community notes for Dubai, Abu Dhabi and Ras Al Khaimah. Orientation, not a ranking or a forecast.
  </p>
 
  {markets.map((market) => {

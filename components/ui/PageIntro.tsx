@@ -27,6 +27,13 @@ export default function PageIntro({
       >
         {title}
       </motion.h1>
+      <motion.span
+        aria-hidden
+        className="mt-5 block h-px w-12 origin-left bg-maroon"
+        initial={reduceMotion ? false : { scaleX: 0, opacity: 0 }}
+        animate={{ scaleX: 1, opacity: 1 }}
+        transition={{ duration: 0.7, delay: reduceMotion ? 0 : 0.12, ease: easePremium }}
+      />
       {lead ? (
         <motion.p
           className="page-lead"

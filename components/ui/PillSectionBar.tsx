@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LayoutGroup, motion, useReducedMotion } from "framer-motion";
 import type { SectionNavItem } from "@/content/navigation";
 
@@ -19,7 +19,7 @@ type PillSectionBarProps = {
 };
 
 /**
- * Centered sticky pill track with sliding maroon active state.
+ * Centered sticky glass pill track. The maroon selection slides, with a short neon-red glow on each shift.
  * Shared by StickySectionNav (scroll) and EditorialTabs (panels).
  */
 export default function PillSectionBar({
@@ -34,6 +34,8 @@ export default function PillSectionBar({
 }: PillSectionBarProps) {
   const reduceMotion = useReducedMotion();
   const trackRef = useRef<HTMLDivElement>(null);
+  const previousActive = useRef(active);
+  const [pulse, setPulse] = useState(0);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -44,10 +46,17 @@ export default function PillSectionBar({
     track.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
   }, [active]);
 
+  useEffect(() => {
+    if (previousActive.current === active) return;
+    previousActive.current = active;
+    if (reduceMotion) return;
+    setPulse((count) => count + 1);
+  }, [active, reduceMotion]);
+
   return (
     <motion.nav
       aria-label={ariaLabel}
-      className={`sticky top-[calc(3.5rem+env(safe-area-inset-top,0px))] z-30 -mx-5 bg-paper/85 px-5 py-3 backdrop-blur-md sm:top-[calc(4rem+env(safe-area-inset-top,0px))] sm:-mx-8 sm:px-8 ${className}`}
+      className={`sticky top-[calc(3.5rem+env(safe-area-inset-top,0px))] z-30 -mx-5 bg-transparent px-5 py-3 sm:top-[calc(4rem+env(safe-area-inset-top,0px))] sm:-mx-8 sm:px-8 ${className}`}
       initial={reduceMotion ? false : { opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: easePremium }}
@@ -56,7 +65,7 @@ export default function PillSectionBar({
         <LayoutGroup id={layoutId}>
           <div
             ref={trackRef}
-            className="no-scrollbar inline-flex max-w-full items-center gap-0.5 overflow-x-auto rounded-full border border-silver/80 bg-surface/80 p-1 shadow-[0_1px_0_rgba(17,17,17,0.04)] sm:gap-1 sm:p-1.5"
+            className="no-scrollbar inline-flex max-w-full items-center gap-0.5 overflow-x-auto rounded-full border border-white/80 bg-white/40 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.95),0_8px_28px_rgba(17,17,17,0.07)] backdrop-blur-2xl backdrop-saturate-150 sm:gap-1 sm:p-1.5"
             role={role}
           >
             {items.map((item) => {
@@ -79,13 +88,17 @@ export default function PillSectionBar({
                   {isActive ? (
                     <motion.span
                       layoutId={`${layoutId}-active`}
-                      className="absolute inset-0 rounded-full bg-maroon"
+                      className="absolute inset-0 rounded-full bg-maroon shadow-[0_1px_2px_rgba(66,16,28,0.28)]"
                       transition={
                         reduceMotion
                           ? { duration: 0 }
-                          : { type: "spring", stiffness: 420, damping: 36, mass: 0.7 }
+                          : { type: "spring", stiffness: 420, damping: 34, mass: 0.65 }
                       }
-                    />
+                    >
+                      {pulse > 0 && !reduceMotion ? (
+                        <span key={pulse} aria-hidden className="pill-shift-neon absolute inset-0 rounded-full" />
+                      ) : null}
+                    </motion.span>
                   ) : null}
                   <span className="relative z-[1] whitespace-nowrap">{item.label}</span>
                 </button>

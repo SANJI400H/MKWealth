@@ -15,7 +15,6 @@ export default function DisclaimerPage() {
  <main className="page-shell">
  <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Disclaimer", path: "/disclaimer" }]} />
  <h1 className="mt-6 font-display text-4xl font-bold text-ink">Disclaimer</h1>
- <p className="mt-2 text-sm text-ink-muted">Placeholder, mark for professional legal review.</p>
  <div className="mt-8 space-y-4 text-ink-muted">
  <p>{regulatory.disclaimerShort}</p>
  <ul className="list-disc space-y-2 pl-5">

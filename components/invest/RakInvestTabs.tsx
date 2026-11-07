@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import AreaCarousel from "@/components/invest/AreaCarousel";
-import DeveloperCarousel from "@/components/invest/DeveloperCarousel";
 import StickySectionNav from "@/components/ui/StickySectionNav";
 import { rakSectionNav } from "@/content/navigation";
 
@@ -17,18 +16,26 @@ export default function RakInvestTabs() {
       />
 
       <section id="overview" className="scroll-mt-[calc(3.5rem+env(safe-area-inset-top,0px)+3.75rem)] sm:scroll-mt-[calc(4rem+env(safe-area-inset-top,0px)+4rem)] mt-10">
-        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">The real trade-off</h2>
+        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Investment thesis</h2>
         <p className="body-copy mt-4">
-          RAK can look attractive on price alone. The decision only holds if you are comfortable with less liquidity and
-          a smaller developer set, not if you need Dubai-style exit options.
+          Ras Al Khaimah is the lower-entry emirate in this set, and it is among the highest yielding markets in the
+          UAE. The resale market is thinner than Dubai. That is the trade.
         </p>
       </section>
 
-      <section id="who" className="page-block">
-        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Who it suits</h2>
+      <section id="compare" className="page-block">
+        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Off-plan and ready</h2>
         <p className="body-copy mt-4">
-          Investors with a longer horizon, lower ticket size, and appetite for tourism-led coastal growth, after Dubai
-          (or instead of it) only when the brief actually fits.
+          Most of the current conversation is off-plan on Al Marjan, with cash staged to construction. Ready stock is
+          limited. Where it exists, it can be let sooner and it needs more cash on day one.
+        </p>
+      </section>
+
+      <section id="costs-yield" className="page-block">
+        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Costs and yield</h2>
+        <p className="body-copy mt-4">
+          Among the highest rental yields in the UAE, with a smaller tenant pool and a thinner exit than Dubai. Model the
+          void and the fees before treating a headline yield as income.
         </p>
       </section>
 
@@ -36,15 +43,14 @@ export default function RakInvestTabs() {
         <AreaCarousel market="rak" />
       </section>
 
-      <section id="developers" className="page-block">
-        <DeveloperCarousel market="rak" />
-      </section>
-
-      <p className="mt-10 text-center">
-        <Link href="/strategy-session" className="text-[12px] font-semibold text-maroon hover:underline">
-          Book Strategy Session →
+      <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+        <Link href="/strategy-session" className="btn-primary w-full justify-center sm:w-auto">
+          Book a strategy session
         </Link>
-      </p>
+        <Link href="/tools" className="btn-ghost-dark w-full justify-center sm:w-auto">
+          Tools
+        </Link>
+      </div>
     </>
   );
 }

@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { GatedResults } from "@/components/tools/GatedResults";
-import { useToolsGate } from "@/components/tools/ToolsGateProvider";
 import { trackEvent } from "@/lib/analytics";
 import { siteConfig } from "@/lib/site-config";
 
@@ -33,7 +32,6 @@ function ratio(n: number) {
  * Educational, not advice. Methodology shown inline.
  */
 export default function TrueYieldCalculator() {
- const { unlocked, setCalculatorSnapshot } = useToolsGate();
  const [purchasePrice, setPurchasePrice] = useState("2000000");
  const [annualRent, setAnnualRent] = useState("140000");
  const [dldPct, setDldPct] = useState("4");
@@ -112,42 +110,12 @@ export default function TrueYieldCalculator() {
  ]);
 
  useEffect(() => {
- setCalculatorSnapshot({
- calculator: "true-yield",
- inputs: {
- purchasePrice,
- annualRent,
- dldPct,
- agencyPct,
- trusteeFee,
- otherAcquisition,
- serviceCharges,
- managementPct,
- vacancyPct,
- maintenance,
- insurance,
- cooling,
- otherAnnual,
- },
- outputs: {
- capital: result.capital,
- netIncome: result.netIncome,
- grossYield: result.grossYield,
- netYieldOnPrice: result.netYieldOnPrice,
- netYieldOnCapital: result.netYieldOnCapital,
- annualCosts: result.annualCosts,
- },
- });
- }, [setCalculatorSnapshot, purchasePrice, annualRent, dldPct, agencyPct, trusteeFee, otherAcquisition, serviceCharges, managementPct, vacancyPct, maintenance, insurance, cooling, otherAnnual, result]);
-
- useEffect(() => {
- if (!unlocked) return;
  trackEvent("calculator_complete", {
  calculator: "true-yield",
  gross_yield: Number(result.grossYield.toFixed(4)),
  net_yield_capital: Number(result.netYieldOnCapital.toFixed(4)),
  });
- }, [unlocked, result.grossYield, result.netYieldOnCapital]);
+ }, [result.grossYield, result.netYieldOnCapital]);
 
  const fields: { label: string; help: string; value: string; set: (v: string) => void; suffix?: string }[] = [
  { label: "Purchase price (AED)", help: "Contract price before acquisition costs.", value: purchasePrice, set: setPurchasePrice },

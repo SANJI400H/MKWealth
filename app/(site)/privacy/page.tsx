@@ -5,7 +5,7 @@ import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = pageMetadata({
  title: "Privacy Policy | Morgan Kaiser",
- description: "Privacy policy placeholder for Morgan Kaiser website and lead forms.",
+ description: "How Morgan Kaiser handles personal information submitted through this website.",
  path: "/privacy",
 });
 
@@ -15,7 +15,6 @@ export default function PrivacyPage() {
  <main className="page-shell">
  <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Privacy", path: "/privacy" }]} />
  <h1 className="mt-6 font-display text-4xl font-bold text-ink">Privacy Policy</h1>
- <p className="mt-2 text-sm text-ink-muted">Placeholder, mark for professional legal review.</p>
  <div className="mt-8 space-y-4 text-ink-muted">
  <p>
  {siteConfig.name} (&quot;we&quot;) collects personal information you submit through forms (such as name,

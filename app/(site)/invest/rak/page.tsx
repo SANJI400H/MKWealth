@@ -3,6 +3,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FaqSection from "@/components/insights/FaqSection";
 import GuideCallout from "@/components/insights/GuideCallout";
 import RakInvestTabs, { RakCompareLinks } from "@/components/invest/RakInvestTabs";
+import MarketCover from "@/components/invest/MarketCover";
 import PageIntro from "@/components/ui/PageIntro";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -39,7 +40,9 @@ const faqItems = [
 export default function RakInvestPage() {
  return (
  <>
- <main className="page-shell-wide">
+ <main>
+ <MarketCover id="rak" />
+ <div className="page-shell-wide !pt-8 sm:!pt-10">
  <Breadcrumbs
  items={[
  { name: "Home", path: "/" },
@@ -50,7 +53,7 @@ export default function RakInvestPage() {
 
  <PageIntro
  title="Ras Al Khaimah Real Estate Investment"
- lead="Lower entry point, thinner resale market, what that trade-off means in practice."
+ lead="Lower entry, and among the highest yields in the UAE. The resale market is thinner than Dubai."
  />
 
  <RakInvestTabs />
@@ -58,6 +61,7 @@ export default function RakInvestPage() {
 
  <FaqSection items={faqItems} />
  <GuideCallout />
+ </div>
  </main>
  </>
  );

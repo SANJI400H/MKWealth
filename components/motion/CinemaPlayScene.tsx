@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { useCinemaCue, type CinemaId } from "@/components/motion/CinemaController";
+import { holdNavForVideo } from "@/components/motion/navPlayback";
 
 type Phase = "idle" | "playing" | "done";
 type PanelSide = "left" | "right";
@@ -252,6 +253,11 @@ export default function CinemaPlayScene({
   useEffect(() => {
     if (phase === "done" && ready) freezeLastFrame();
   }, [phase, ready, freezeLastFrame]);
+
+  useEffect(() => {
+    if (phase !== "playing") return;
+    return holdNavForVideo();
+  }, [phase]);
 
   useEffect(() => () => clearFallback(), []);
 

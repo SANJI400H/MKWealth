@@ -28,11 +28,11 @@ export type NavGroup = {
 export const primaryNav: NavGroup[] = [
  {
  id: "morgan",
- label: "Morgan",
+ label: "About",
  href: "/about",
  columns: [
  {
- title: "Morgan",
+ title: "About",
  links: [
  { label: "Overview", href: "/about", description: "Who Morgan is" },
  { label: "About Huspy", href: "/about-huspy", description: "The partnership behind the advice" },
@@ -52,11 +52,11 @@ export const primaryNav: NavGroup[] = [
  {
  title: "Markets",
  links: [
+ { label: "Abu Dhabi", href: "/invest/abu-dhabi", description: "Lower-volatility context" },
  { label: "Dubai", href: "/invest/dubai", description: "Primary market" },
+ { label: "Ras Al Khaimah", href: "/invest/rak", description: "Lower entry" },
  { label: "Micro markets", href: "/areas", description: "Area frameworks" },
  { label: "Developers", href: "/developers", description: "Evaluation frameworks" },
- { label: "Abu Dhabi", href: "/invest/abu-dhabi", description: "Lower-volatility context" },
- { label: "Ras Al Khaimah", href: "/invest/rak", description: "Lower entry" },
  ],
  },
  ],
@@ -100,23 +100,6 @@ export const primaryNav: NavGroup[] = [
  },
  ],
  },
- {
- id: "portal",
- label: "Portal",
- href: "/portal",
- columns: [
- {
- title: "Client Portal",
- links: [
- {
- label: "Client Portal",
- href: "/portal",
- description: "Current investors. Private Desk dashboard",
- },
- ],
- },
- ],
- },
 ];
 
 export const footerNav: { title: string; links: NavLink[] }[] = [
@@ -132,8 +115,8 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
  {
  title: "Invest",
  links: [
- { label: "Dubai", href: "/invest/dubai" },
  { label: "Abu Dhabi", href: "/invest/abu-dhabi" },
+ { label: "Dubai", href: "/invest/dubai" },
  { label: "Ras Al Khaimah", href: "/invest/rak" },
  { label: "Micro markets", href: "/areas" },
  { label: "Developers", href: "/developers" },
@@ -171,7 +154,7 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
  },
 ];
 
-export const cinemaSectionIds = ["home", "about", "services", "philosophy", "formula"] as const;
+export const cinemaSectionIds = ["home", "about", "services", "philosophy"] as const;
 
 export type SectionNavItem = { id: string; label: string };
 
@@ -192,8 +175,7 @@ export const deskSectionNav: SectionNavItem[] = [
 
 export const dubaiSectionNav: SectionNavItem[] = [
  { id: "overview", label: "Overview" },
- { id: "off-plan", label: "Off-Plan" },
- { id: "secondary", label: "Secondary" },
+ { id: "compare", label: "Off-plan and ready" },
  { id: "costs-yield", label: "Costs & Yield" },
  { id: "areas", label: "Areas" },
  { id: "developers", label: "Developers" },
@@ -202,16 +184,17 @@ export const dubaiSectionNav: SectionNavItem[] = [
 
 export const abuDhabiSectionNav: SectionNavItem[] = [
  { id: "overview", label: "Overview" },
- { id: "ownership", label: "Ownership" },
+ { id: "compare", label: "Off-plan and ready" },
+ { id: "costs-yield", label: "Costs and yield" },
  { id: "areas", label: "Areas" },
  { id: "developers", label: "Developers" },
 ];
 
 export const rakSectionNav: SectionNavItem[] = [
  { id: "overview", label: "Overview" },
- { id: "who", label: "Who it suits" },
+ { id: "compare", label: "Off-plan and ready" },
+ { id: "costs-yield", label: "Costs and yield" },
  { id: "areas", label: "Areas" },
- { id: "developers", label: "Developers" },
 ];
 
 export const areaDetailNav: SectionNavItem[] = [
@@ -237,11 +220,11 @@ export const developerDetailNav: SectionNavItem[] = [
 
 export const workSectionNav: SectionNavItem[] = [
  { id: "strategy", label: "Strategy" },
- { id: "acquisition", label: "Acquisition" },
  { id: "underwriting", label: "Underwriting" },
+ { id: "acquisition", label: "Acquisition" },
  { id: "portfolio", label: "Portfolio" },
  { id: "financing", label: "Financing" },
- { id: "coordination", label: "Coordination" },
+ { id: "coordination", label: "Residency" },
 ];
 
 export function pathMatches(pathname: string, href: string): boolean {

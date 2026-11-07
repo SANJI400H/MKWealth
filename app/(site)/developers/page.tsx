@@ -26,8 +26,7 @@ export default function DevelopersIndexPage() {
  />
  <h1 className="mt-6 font-display text-4xl font-bold text-ink sm:text-5xl">Developers</h1>
  <p className="mt-4 text-lg text-ink-muted">
- How to evaluate developers before trusting a brochure. Working frameworks. Morgan experience slots stay
- empty until verified.
+ The developers Morgan works with. Each note is about the company, not a project listing.
  </p>
  <ul className="mt-12 grid gap-5 sm:grid-cols-2">
  {list.map((d) => {

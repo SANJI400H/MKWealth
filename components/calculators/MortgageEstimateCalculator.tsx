@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { GatedResults } from "@/components/tools/GatedResults";
-import { useToolsGate } from "@/components/tools/ToolsGateProvider";
 import { trackEvent } from "@/lib/analytics";
 import { siteConfig } from "@/lib/site-config";
 import type { AmortizationYear } from "@/components/charts/AmortizationChart";
@@ -87,7 +86,6 @@ function buildSchedule(principal: number, annualRate: number, years: number) {
  * Illustrative UAE amortising mortgage. Educational only, not a lender quote.
  */
 export default function MortgageEstimateCalculator() {
-  const { unlocked, setCalculatorSnapshot } = useToolsGate();
   const [price, setPrice] = useState("2000000");
   const [depositPct, setDepositPct] = useState("40");
   const [rate, setRate] = useState("4.5");
@@ -129,24 +127,10 @@ export default function MortgageEstimateCalculator() {
       : 0;
 
   useEffect(() => {
-    setCalculatorSnapshot({
-      calculator: "mortgage-estimate",
-      inputs: { price, depositPct, rate, termYears, residency, propertyStatus, handoverMonths },
-      outputs: schedule
-        ? {
-            monthly: schedule.payment,
-            totalInterest: schedule.totalInterest,
-            principal: priceN - downAmount,
-          }
-        : null,
-    });
-  }, [setCalculatorSnapshot, price, depositPct, rate, termYears, residency, propertyStatus, handoverMonths, schedule, priceN, downAmount]);
-
-  useEffect(() => {
-    if (!unlocked || completed || !schedule) return;
+    if (completed || !schedule) return;
     setCompleted(true);
     trackEvent("calculator_complete", { calculator: "mortgage-estimate" });
-  }, [unlocked, completed, schedule]);
+  }, [completed, schedule]);
 
   const applyTypicalDown = (nextResidency: Residency) => {
     setResidency(nextResidency);

@@ -15,7 +15,7 @@ export default function CalculatorPreviewCard({
  return (
  <Link
  href={href}
- className="group flex h-full flex-col border border-silver bg-paper transition hover:border-maroon"
+ className="card-lift group flex h-full flex-col border border-silver bg-paper hover:border-maroon"
  >
  <div className="card-pad flex flex-1 flex-col">
  <p className="eyebrow">Calculator</p>

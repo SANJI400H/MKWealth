@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { GatedResults } from "@/components/tools/GatedResults";
-import { useToolsGate } from "@/components/tools/ToolsGateProvider";
 import { trackEvent } from "@/lib/analytics";
 import { siteConfig } from "@/lib/site-config";
 
@@ -29,7 +28,6 @@ type Stage = { label: string; pct: string };
 
 /** Stress-test construction-linked payment schedules against available cash. */
 export default function PaymentPlanCalculator() {
-  const { unlocked, setCalculatorSnapshot } = useToolsGate();
   const [purchasePrice, setPurchasePrice] = useState("2000000");
   const [availableCash, setAvailableCash] = useState("800000");
   const [stages, setStages] = useState<Stage[]>([
@@ -62,24 +60,10 @@ export default function PaymentPlanCalculator() {
   }, [purchasePrice, availableCash, stages]);
 
   useEffect(() => {
-    setCalculatorSnapshot({
-      calculator: "payment-plan",
-      inputs: { purchasePrice, availableCash, stages },
-      outputs: {
-        totalPct: result.totalPct,
-        totalAmount: result.totalAmount,
-        shortfall: result.shortfall,
-        headroom: result.headroom,
-        rows: result.rows,
-      },
-    });
-  }, [setCalculatorSnapshot, purchasePrice, availableCash, stages, result]);
-
-  useEffect(() => {
-    if (!unlocked || completed || result.price <= 0) return;
+    if (completed || result.price <= 0) return;
     setCompleted(true);
     trackEvent("calculator_complete", { calculator: "payment-plan" });
-  }, [unlocked, completed, result.price]);
+  }, [completed, result.price]);
 
   const updateStage = (index: number, patch: Partial<Stage>) => {
     setStages((prev) => prev.map((s, i) => (i === index ? { ...s, ...patch } : s)));

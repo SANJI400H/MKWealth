@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import ScrollZoom from "@/components/motion/ScrollZoom";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import EditorialCarousel from "@/components/ui/EditorialCarousel";
 import { investLocations } from "@/content/invest-locations";
@@ -14,17 +15,19 @@ function MarketCard({
  return (
  <Link
  href={location.slug}
- className="group flex h-full flex-col border border-silver bg-paper"
+ className="card-lift group flex h-full flex-col border border-silver bg-paper"
  >
- <div className="relative aspect-[4/5] overflow-hidden bg-surface">
+ <ScrollZoom className="relative aspect-[4/5] bg-surface">
  <Image
  src={location.image}
  alt={`${location.name}. UAE property investment context`}
  fill
  sizes="(min-width: 1024px) 34rem, (min-width: 768px) 32rem, 88vw"
- className="object-cover transition duration-700 ease-out group-hover:scale-[1.025]"
+ className={`object-cover transition duration-700 ease-out group-hover:scale-[1.03] ${
+ location.id === "abu-dhabi" ? "object-[center_18%]" : "object-center"
+ }`}
  />
- </div>
+ </ScrollZoom>
  <div className="card-pad flex flex-1 flex-col space-y-4">
  <p className="eyebrow">{location.tag}</p>
  <h3 className="card-title-lg transition group-hover:text-maroon">{location.name}</h3>

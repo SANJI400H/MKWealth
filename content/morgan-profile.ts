@@ -62,8 +62,8 @@ export const morganProfile = {
  * TODO verify £87m revenue and £14m Black Horse
  * Current commercial mix from discovery. Off-plan is one strategy, not the only one.
  */
- currentMixNote: "Off-plan and completed stock are both underwritten. The brief decides which structure fits.",
- marketFocusNote: "Strong working knowledge across Dubai, Abu Dhabi and Ras Al Khaimah.",
+ currentMixNote: "Off-plan and completed stock are both considered. The brief decides which structure fits.",
+ marketFocusNote: "Advises across Dubai, Abu Dhabi and Ras Al Khaimah.",
  priorityAreas: [
  "Hudayriyat Island",
  "Ramhan Island",
@@ -105,6 +105,6 @@ export const morganProfile = {
  methodology:
  "After the strategy session, Morgan shares structured materials on the areas under consideration. Once the right emirate and micro-market are identified, the shortlist is limited to options that fit cash-flow and leverage preferences. Exit strategy and financing are discussed together. After acquisition, support continues through fund movement, developer paperwork, and introductions into Morgan’s private investor channel and network.",
  howClientsWork:
- "This is framed as a multi-generational journey, not a one-off purchase. Strategy first, focused research second, underwritten options third, then acquisition support and ongoing portfolio coordination.",
+ "This is framed as a multi-generational journey, not a one-off purchase. Strategy first, focused research second, checked options third, then acquisition support and ongoing portfolio coordination.",
  },
 };

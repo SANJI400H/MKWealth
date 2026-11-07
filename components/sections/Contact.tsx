@@ -16,13 +16,14 @@ export default function Contact() {
             property strategy session.
           </h2>
           <p className="section-lead">
-            Before discussing individual properties, we establish what the investment actually needs to achieve.
+            Before discussing individual properties, Morgan establishes what the investment actually needs to achieve.
           </p>
         </RevealOnScroll>
 
         <RevealOnScroll delayMs={80} className="section-body">
           <div className="flex flex-col items-start gap-4">
             <BookMeetingLink href="/strategy-session" className="btn-primary w-full justify-center sm:w-auto" />
+            <p className="text-sm text-ink-muted">AED 2M+, international investors, not end-user tickets.</p>
             <p className="text-sm text-ink-muted">
               Prefer chat?{" "}
               <WhatsAppLink

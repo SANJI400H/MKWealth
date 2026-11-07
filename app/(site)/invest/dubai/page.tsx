@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FaqSection from "@/components/insights/FaqSection";
 import GuideCallout from "@/components/insights/GuideCallout";
 import DubaiInvestTabs from "@/components/invest/DubaiInvestTabs";
+import MarketCover from "@/components/invest/MarketCover";
 import PageIntro from "@/components/ui/PageIntro";
 import { getPublishedInsights } from "@/content/insights";
 import { regulatory } from "@/content/regulatory";
@@ -48,7 +49,9 @@ export default function DubaiInvestPage() {
 
  return (
  <>
- <main className="page-shell-wide">
+ <main>
+ <MarketCover id="dubai" />
+ <div className="page-shell-wide !pt-8 sm:!pt-10">
  <Breadcrumbs
  items={[
  { name: "Home", path: "/" },
@@ -78,6 +81,7 @@ export default function DubaiInvestPage() {
  <FaqSection items={faqItems} />
  <GuideCallout />
  <p className="body-copy-sm mt-10">{regulatory.disclaimerShort}</p>
+ </div>
  </main>
  </>
  );

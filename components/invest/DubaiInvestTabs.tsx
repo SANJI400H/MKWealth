@@ -28,43 +28,14 @@ export default function DubaiInvestTabs({ latest }: { latest: InsightTeaser[] })
         <div>
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Investment thesis</h2>
           <p className="body-copy mt-4">
-            Dubai remains Morgan&apos;s primary day-to-day market for international investors. Off-plan and completed
-            stock are both underwritten. The brief, capital and risk profile decide which structure fits. Liquidity and
-            marketing volume are not substitutes for unit-level underwriting.
+            Off-plan and completed stock are both checked. The brief, capital and risk profile decide which
+            structure fits. Priority sectors are sea-facing homes, villas, commercial assets and luxury branded
+            residences. Liquidity and marketing volume do not decide the unit.
           </p>
-        </div>
-        <div>
-          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Ownership context</h2>
-          <p className="body-copy mt-4">
-            Foreign buyers have been permitted freehold ownership in designated areas of the UAE since 2002. You typically
-            do not need UAE residency to purchase. You do need clarity on funding, fees, and, if relevant, financing,
-            alongside areas, market movements and potential risks.
-          </p>
-        </div>
-        <div>
-          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Golden Visa</h2>
-          <p className="body-copy mt-4">
-            Commonly cited threshold: {regulatory.goldenVisa.headlineThresholdAed.value}.{" "}
-            {regulatory.goldenVisa.headlineThresholdAed.note}
-          </p>
-          <p className="body-copy-sm mt-2">{regulatory.goldenVisa.offPlanNote}</p>
         </div>
       </section>
 
-      <section id="off-plan" className="page-block">
-        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Off-plan</h2>
-        <p className="body-copy mt-4">
-          Construction-linked acquisitions. Capital is often staged; income is usually delayed until handover and
-          lease-up. Price discovery follows developer lists and incentives; delivery timing is a real risk to model.
-        </p>
-        <ul className="mt-6 list-disc space-y-2 pl-5 text-ink-muted">
-          <li>Payment plans must match your liquidity, not only the headline price</li>
-          <li>Financing, if used, must align with drawdown schedules</li>
-          <li>Exit liquidity depends on project quality and cycle, not marketing volume</li>
-        </ul>
-      </section>
-
-      <section id="secondary" className="page-block">
+      <section id="compare" className="page-block">
         <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Off-plan and ready</h2>
         <p className="body-copy mt-4">
           There are pros and cons to both. Off-plan spreads cash and can suit investors who can wait. Ready stock suits
@@ -75,12 +46,13 @@ export default function DubaiInvestTabs({ latest }: { latest: InsightTeaser[] })
             <h3 className="font-display text-xl font-bold text-ink">Off-plan</h3>
             <p className="mt-4 text-sm font-semibold text-ink">Pros</p>
             <ul className="mt-2 list-disc space-y-2 pl-5 text-sm text-ink-muted">
-              <li>Capital allocation is significantly lighter, and cash deployment is slower, spread over the payment plan.</li>
-              <li>Greater leverage can be assumed, including developer payment plans.</li>
-              <li>Typically bought under market value, so the appreciation curve is more aggressive.</li>
+              <li>
+                Lighter, staged capital, with greater leverage through the developer payment plan, so cash goes out
+                over time rather than on day one.
+              </li>
+              <li>Typically bought under market value, so the appreciation curve is steeper.</li>
               <li>More accessible to international investors.</li>
-              <li>Lets you generate funds significantly faster using the leverage the developer provides.</li>
-              <li>Newest calibre asset in the UAE: specs, amenities, building quality.</li>
+              <li>Newest calibre asset in the UAE: specs, amenities and building quality.</li>
             </ul>
             <p className="mt-4 text-sm font-semibold text-ink">Watch points</p>
             <ul className="mt-2 list-disc space-y-2 pl-5 text-sm text-ink-muted">
@@ -93,17 +65,21 @@ export default function DubaiInvestTabs({ latest }: { latest: InsightTeaser[] })
             <h3 className="font-display text-xl font-bold text-ink">Ready (secondary)</h3>
             <p className="mt-4 text-sm font-semibold text-ink">Pros</p>
             <ul className="mt-2 list-disc space-y-2 pl-5 text-sm text-ink-muted">
-              <li>Useful if you want to live in the residence yourself or want an immediate return.</li>
+              <li>Useful if you want to live in the residence or want an immediate return.</li>
               <li>Can be lucrative for assets you can renovate.</li>
             </ul>
             <p className="mt-4 text-sm font-semibold text-ink">Cons</p>
             <ul className="mt-2 list-disc space-y-2 pl-5 text-sm text-ink-muted">
-              <li>Much more aggressive capital deployment upfront.</li>
+              <li>Much heavier capital deployment up front.</li>
               <li>
                 Banks typically lend international buyers up to 60% of the value (50% on properties over AED 20m),
                 so plan for at least a 40% deposit, plus purchase costs on top.
               </li>
-              <li>Renovation opportunities need substantially more cash upfront.</li>
+              <li>
+                You are usually buying at current market value, so be prepared for volatility. Dubai is a younger,
+                smaller market than London or New York.
+              </li>
+              <li>Renovation opportunities need substantially more cash up front.</li>
             </ul>
           </article>
         </div>
@@ -111,14 +87,14 @@ export default function DubaiInvestTabs({ latest }: { latest: InsightTeaser[] })
           In many cases the delayed gratification of off-plan yields significantly better results in the future, but the
           right choice depends on the investor&apos;s goals.
         </p>
-        <p className="mt-4 flex flex-col gap-2 text-sm sm:flex-row sm:gap-6">
-          <Link href="/calculators/mortgage-estimate" className="font-semibold text-maroon hover:underline">
-            Mortgage calculator
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Link href="/strategy-session" className="btn-primary w-full justify-center sm:w-auto">
+            Book a strategy session
           </Link>
-          <Link href="/calculators/payment-plan" className="font-semibold text-maroon hover:underline">
-            Off-plan payment calculator
+          <Link href="/tools" className="btn-ghost-dark w-full justify-center sm:w-auto">
+            Tools
           </Link>
-        </p>
+        </div>
       </section>
 
       <section id="costs-yield" className="page-block">
@@ -164,11 +140,6 @@ export default function DubaiInvestTabs({ latest }: { latest: InsightTeaser[] })
             </li>
           ))}
         </ul>
-        <p className="mt-6">
-          <Link href="/strategy-session" className="font-semibold text-maroon hover:underline">
-            Book a strategy session →
-          </Link>
-        </p>
       </section>
     </>
   );

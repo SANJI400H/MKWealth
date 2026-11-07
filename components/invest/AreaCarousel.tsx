@@ -47,7 +47,7 @@ export default function AreaCarousel({ market }: { market: AreaMarket }) {
  <p className="eyebrow">Areas to understand</p>
  <h2 className="mt-3 font-display text-2xl font-bold text-ink sm:text-3xl">Micro-markets that matter.</h2>
  <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-muted sm:text-base">
- Framework pages for underwriting orientation, not tourism guides.
+ Community notes for investors, not tourism guides.
  </p>
 
  <div className="mt-8">

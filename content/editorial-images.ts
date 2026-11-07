@@ -53,7 +53,7 @@ export const areaImages: Record<string, { src: string; alt: string }> = {
  },
  "yas-island": {
  src: "/images/areas/yas-island.jpg",
- alt: "Yas Bay waterfront and Etihad Arena on Yas Island, Abu Dhabi",
+ alt: "Ferrari World Abu Dhabi entrance on Yas Island",
  },
  "al-reem-island": {
  src: "/images/areas/al-reem-island.jpg",
@@ -61,19 +61,19 @@ export const areaImages: Record<string, { src: string; alt: string }> = {
  },
  "maritime-city": {
  src: "/images/areas/maritime-city.jpg",
- alt: "Dubai Maritime City peninsula",
+ alt: "Aerial of the Dubai Maritime City peninsula",
  },
  "palm-jebel-ali": {
  src: "/images/areas/palm-jebel-ali.jpg",
- alt: "Palm Jebel Ali yacht club",
+ alt: "Aerial of Palm Jebel Ali",
  },
  "dubai-islands": {
  src: "/images/areas/dubai-islands.jpg",
  alt: "Dubai Islands beachfront",
  },
  "dubai-harbour": {
- src: "",
- alt: "Dubai Harbour photograph still needed",
+ src: "/images/areas/dubai-harbour.jpg",
+ alt: "Marina towers seen from Dubai Harbour",
  },
  "emaar-beachfront": {
  src: "/images/areas/emaar-beachfront.jpg",
@@ -142,8 +142,6 @@ export const developerLogos: Record<string, { src: string; onDark?: boolean }> =
   sobha: { src: "/images/logos/sobha.svg", onDark: true },
   ellington: { src: "/images/logos/ellington.png" },
   "dar-global": { src: "/images/logos/dar-global.svg", onDark: true },
-  damac: { src: "/images/logos/damac.png" },
-  danube: { src: "/images/logos/danube.png", onDark: true },
   alta: { src: "/images/logos/alta.svg", onDark: true },
   beyond: { src: "/images/logos/beyond.webp", onDark: true },
   omniyat: { src: "/images/logos/omniyat.svg", onDark: true },

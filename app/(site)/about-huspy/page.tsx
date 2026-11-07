@@ -65,8 +65,8 @@ export default function AboutHuspyPage() {
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <BookMeetingLink href="/strategy-session" className="btn-primary w-full sm:w-auto" />
-            <Link href="/about" className="btn-ghost-dark w-full justify-center sm:w-auto">
-              About Morgan
+            <Link href="/invest" className="btn-ghost-dark w-full justify-center sm:w-auto">
+              Invest
             </Link>
           </div>
           <p className="mt-4 text-sm text-ink-muted">

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import ScrollZoom from "@/components/motion/ScrollZoom";
 import PageIntro from "@/components/ui/PageIntro";
 import StickySectionNav from "@/components/ui/StickySectionNav";
 import { areaDetailNav } from "@/content/navigation";
@@ -30,9 +31,9 @@ export default function AreaDetailTabs({ area }: { area: Area }) {
     <>
       {photo ? (
         <figure className="mb-8">
-          <div className="relative aspect-[16/7] overflow-hidden bg-surface">
+          <ScrollZoom className="relative aspect-[16/7] bg-surface">
             <img src={photo} alt={photoAlt} className="h-full w-full object-cover" />
-          </div>
+          </ScrollZoom>
           {area.imageCredit ? (
             <figcaption className="mt-2 text-[11px] leading-snug text-ink-muted">{area.imageCredit}</figcaption>
           ) : null}

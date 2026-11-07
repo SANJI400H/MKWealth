@@ -1,9 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
-import EditorialCarousel from "@/components/ui/EditorialCarousel";
 import EditorialImage from "@/components/ui/EditorialImage";
 import { serviceImages } from "@/content/editorial-images";
 import { howMorganWorksStages, type HowMorganStage } from "@/content/how-morgan-works";
@@ -12,13 +10,13 @@ function StageBody({ stage }: { stage: HowMorganStage }) {
  const photo = serviceImages[stage.assetId];
 
  return (
- <div className="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start lg:gap-12">
+ <div className="grid gap-8 rounded-sm border border-maroon/15 bg-gradient-to-br from-white via-paper to-maroon/[0.07] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start lg:gap-12 lg:p-8">
  <div>
  <p className="font-display text-4xl font-bold tracking-tight text-maroon sm:text-6xl">{stage.number}</p>
  <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-ink sm:mt-4 sm:text-4xl">{stage.title}</h3>
  <p className="mt-4 text-base font-medium text-ink sm:text-xl">{stage.question}</p>
  <p className="body-copy mt-4 sm:text-lg">{stage.body}</p>
- <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.16em] text-maroon">We examine</p>
+ <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.16em] text-maroon">Morgan examines</p>
  <ul className="mt-3 grid gap-2 sm:grid-cols-2">
  {stage.examines.map((item) => (
  <li key={item} className="flex gap-2 text-sm text-ink-muted">
@@ -27,9 +25,6 @@ function StageBody({ stage }: { stage: HowMorganStage }) {
  </li>
  ))}
  </ul>
- <Link href={stage.cta.href} className="btn-primary mt-8 inline-flex w-full justify-center sm:w-auto">
- {stage.cta.label} →
- </Link>
  </div>
  <EditorialImage
  src={photo?.src}
@@ -37,7 +32,8 @@ function StageBody({ stage }: { stage: HowMorganStage }) {
  assetId={stage.assetId}
  categoryLabel={stage.categoryLabel}
  ratio="16:10"
- className="border border-silver"
+ fit="contain"
+ className="border border-maroon/10 bg-paper"
  />
  </div>
  );
@@ -57,7 +53,7 @@ export default function HowMorganWorks() {
  <p className="section-lead">A deliberate sequence, strategy and underwriting before inventory.</p>
  </RevealOnScroll>
 
- <div className="section-body hidden md:block">
+ <div className="section-body">
  <div className="flex flex-wrap gap-1 border-b border-silver" role="tablist" aria-label="Engagement stages">
  {howMorganWorksStages.map((s, i) => (
  <button
@@ -90,20 +86,6 @@ export default function HowMorganWorks() {
  >
  <StageBody stage={stage} />
  </div>
- </div>
-
- <div className="section-body md:hidden">
- <EditorialCarousel
- ariaLabel="How Morgan works with you"
- previousLabel="Previous stage"
- nextLabel="Next stage"
- >
- {howMorganWorksStages.map((s) => (
- <article key={s.id} className="border border-silver bg-paper card-pad">
- <StageBody stage={s} />
- </article>
- ))}
- </EditorialCarousel>
  </div>
  </div>
  </section>

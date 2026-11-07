@@ -22,8 +22,7 @@ export default function CalculatorsIndexPage() {
         />
         <h1 className="mt-6 font-display text-4xl font-bold text-ink sm:text-5xl">Investment tools</h1>
         <p className="mt-4 text-lg text-ink-muted">
-          Explore each calculator freely. When you calculate results, a short name and email unlocks your
-          numbers and sends the snapshot to Morgan.
+          Explore each calculator freely. Results show as you edit.
         </p>
         <div className="mt-10">
           <CalculatorToolsCarousel />

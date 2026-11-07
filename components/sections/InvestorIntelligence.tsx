@@ -157,7 +157,7 @@ export default function InvestorIntelligence() {
           <h2 className="section-title">
             Numbers that
             <br />
-            survive underwriting.
+            hold up.
           </h2>
           <p className="section-lead">
             Analysis, tools, and market context, the public knowledge layer behind Morgan&apos;s work.

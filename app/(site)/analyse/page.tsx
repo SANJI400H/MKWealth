@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = pageMetadata({
  title: "Analyse an Investment | Morgan Kaiser",
  description:
- "Ask Morgan Kaiser to underwrite a UAE property opportunity, off-plan or secondary, using your numbers and objectives.",
+ "Ask Morgan Kaiser to review a UAE property opportunity, off-plan or secondary, using your numbers and objectives.",
  path: "/analyse",
 });
 

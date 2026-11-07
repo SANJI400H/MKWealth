@@ -5,7 +5,7 @@ import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = pageMetadata({
  title: "Terms of Use | Morgan Kaiser",
- description: "Terms of use placeholder for the Morgan Kaiser website.",
+ description: "Terms of use for the Morgan Kaiser website.",
  path: "/terms",
 });
 
@@ -15,7 +15,6 @@ export default function TermsPage() {
  <main className="page-shell">
  <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Terms", path: "/terms" }]} />
  <h1 className="mt-6 font-display text-4xl font-bold text-ink">Terms of Use</h1>
- <p className="mt-2 text-sm text-ink-muted">Placeholder, mark for professional legal review.</p>
  <div className="mt-8 space-y-4 text-ink-muted">
  <p>
  By using {siteConfig.siteUrl}, you agree to these terms. Content is provided for general information

@@ -33,7 +33,7 @@ export default function EditorialImagePlaceholder({
  <div
  className={`relative flex ${aspect} w-full flex-col items-center justify-center overflow-hidden border border-silver bg-surface ${className}`}
  role="img"
- aria-label={`${categoryLabel}, image required`}
+ aria-label={categoryLabel}
  >
  <p className="absolute left-4 top-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-maroon">
  {categoryLabel}
@@ -42,10 +42,6 @@ export default function EditorialImagePlaceholder({
  <span className="flex h-10 w-10 items-center justify-center border border-silver text-[11px] font-bold tracking-wide text-ink-muted">
  MK
  </span>
- <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-muted">Image required</p>
- {asset ? (
- <p className="max-w-[14rem] text-xs leading-relaxed text-ink-muted/80">{asset.label}</p>
- ) : null}
  {showDevHint ? (
  <p className="mt-1 max-w-[16rem] font-mono text-[10px] text-ink-muted/60">
  Dev: {asset?.suggestedFilename} · min {asset?.minimumWidth}px · {asset?.ratio}

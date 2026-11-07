@@ -9,44 +9,44 @@ import { workSectionNav } from "@/content/navigation";
 const sections = [
   {
     id: "strategy",
-    title: "Investment Strategy",
+    title: "Strategy",
     who: "Investors clarifying objective, capital, horizon, and risk before any shortlist.",
-    what: "A numbers-first brief: liquidity, return targets, off-plan vs secondary fit, and exit logic.",
+    what: "A numbers-first brief: liquidity, return targets, off-plan versus secondary fit, and exit logic. A full portfolio enhancement.",
     next: "Often leads to underwriting a live opportunity or a strategy session.",
   },
   {
-    id: "acquisition",
-    title: "Property Acquisition",
-    who: "People with a vision to build wealth and prosperity in the UAE who are looking for high returning real estate advice.",
-    what: "A formulated plan that lets you achieve the best returns possible while mitigating downside as aggressively as possible, including unit selection and structuring against payment plans, delivery risk and price discovery. Morgan builds a full A to Z plan on how to acquire assets in the UAE that are profitable and, just as importantly, tells you exactly what to avoid so you do not risk losing money.",
-    next: "Proceed with a position only once the asset clearly fits the investor's vision, goal and direction, or renegotiate the assumptions. At a bare minimum you walk away with 100% clarity on what you do or do not want in the market.",
+    id: "underwriting",
+    title: "Underwriting",
+    who: "Anyone with a brochure, listing, or payment plan who wants the maths stress-tested.",
+    what: "Price, costs, yield assumptions, and structure reviewed against actual liquidity.",
+    next: "Proceed with an acquisition only once the asset clearly fits the investor's vision, goals and direction, or renegotiate the assumptions. At a bare minimum the investor walks away with 100% clarity on what they do and do not want in the market.",
   },
   {
-    id: "underwriting",
-    title: "Deal Underwriting",
-    who: "Anyone with a brochure, listing, or payment plan who wants the maths stress-tested.",
-    what: "Price, costs, yield assumptions, and structure reviewed against your actual liquidity.",
-    next: "Proceed, renegotiate assumptions, or walk away with clarity.",
+    id: "acquisition",
+    title: "Acquisition",
+    who: "People with a vision to build wealth and prosperity in the UAE who are looking for high-returning real estate advice, while mitigating downside risk.",
+    what: "Unit selection and structuring against payment plans, delivery risk and price discovery, including exactly what to avoid.",
+    next: "A shortlist that matches the brief, or a clear decision not to proceed.",
   },
   {
     id: "portfolio",
-    title: "Property Portfolio Strategy",
+    title: "Portfolio",
     who: "International investors, family offices and institutional conglomerates that prioritise diversification and empire expansion in the UAE.",
-    what: "A UAE wide, unbiased overview, not Dubai first, that lets you compare multiple emirates, multiple markets and multiple asset classes at the same time, backed by a deep understanding of international markets.",
-    next: "Targeted acquisition for expansion, or rebalancing and recalibration recommendations for existing assets you may or may not hold.",
+    what: "A UAE-wide overview, not Dubai first, comparing emirates, markets and asset classes at the same time, with a deep understanding of international markets.",
+    next: "Targeted acquisition for expansion, or rebalancing and recalibration recommendations for existing assets.",
   },
   {
     id: "financing",
-    title: "Financing Coordination",
-    who: "Buyers considering a mortgage or construction linked drawdowns, as well as investors who use leverage to snowball their portfolios and increase their cash on cash return potential.",
-    what: "Clarity on funding, fees and, if relevant, financing, alongside areas, market movements and potential risks. Foreign buyers have been permitted freehold ownership in designated areas of the UAE since 2002. Coordination runs via Huspy and lenders where appetite must match the schedule. This is not a personal lending service.",
-    next: "Aligned financing path or a clear cash purchase alternative.",
+    title: "Financing",
+    who: "Buyers considering a mortgage or construction-linked drawdowns, and investors who use leverage to snowball a portfolio and increase cash-on-cash return potential.",
+    what: "Clarity on funding, fees and, if relevant, financing. Coordination runs via Huspy and lenders where appetite must match the schedule. This is not a personal lending service.",
+    next: "An aligned financing path, or a clear cash purchase alternative.",
   },
   {
     id: "coordination",
-    title: "Residency / Purchase Coordination",
-    who: "Investors needing ownership, banking, or residency pathways tied to property.",
-    what: "Coordination of steps and specialists; Golden Visa and banking subject to current rules and third-party process.",
+    title: "Residency",
+    who: "Investors who need ownership, banking, or residency pathways tied to property.",
+    what: "Coordination of the steps and the specialists. Golden Visa and banking stay subject to current rules and to the third party who delivers them.",
     next: "Documented next steps with the right counterparts.",
   },
 ] as const;
@@ -56,7 +56,7 @@ export default function WorkWithMorganTabs() {
     <>
       <PageIntro
         title="Work With Morgan"
-        lead="The engagement model, from strategy through acquisition and coordination. Where regulated specialists deliver (financing, residency paperwork), Morgan coordinates rather than substitutes."
+        lead="The engagement model, from strategy through acquisition and coordination. We are the beehive of your property purchase. Where regulated specialists deliver, Morgan coordinates rather than substitutes."
       />
 
       <StickySectionNav
@@ -94,8 +94,8 @@ export default function WorkWithMorganTabs() {
         <h2 className="font-display text-2xl font-bold text-ink">Take action</h2>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <BookMeetingLink href="/strategy-session" className="btn-primary w-full sm:w-auto" />
-          <Link href="/invest" className="btn-ghost-dark w-full justify-center sm:w-auto">
-            Explore markets
+          <Link href="/areas" className="btn-ghost-dark w-full justify-center sm:w-auto">
+            Certified Options
           </Link>
         </div>
       </section>

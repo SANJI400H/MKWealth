@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { Great_Vibes } from "next/font/google";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import StickySectionNav from "@/components/ui/StickySectionNav";
 import BookMeetingLink from "@/components/ui/BookMeetingLink";
@@ -8,6 +9,8 @@ import { aboutSectionNav } from "@/content/navigation";
 import { morganProfile } from "@/content/morgan-profile";
 import { homepageServices } from "@/content/services";
 import { pageMetadata } from "@/lib/metadata";
+
+const quoteFont = Great_Vibes({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = pageMetadata({
   title: "About Morgan Kaiser | UAE Property Portfolio Strategist",
@@ -19,24 +22,36 @@ export const metadata: Metadata = pageMetadata({
 export default function AboutPage() {
   return (
     <>
-      <main className="page-shell">
+      <main>
+        <section
+          className="relative mt-[calc(3.5rem+env(safe-area-inset-top,0px))] w-full bg-[#100e0c] sm:mt-[calc(4rem+env(safe-area-inset-top,0px))]"
+          aria-label="Morgan Kaiser"
+        >
+          <Image
+            src="/images/morgan-about-cover.jpg"
+            alt="Morgan Kaiser"
+            width={3136}
+            height={1344}
+            priority
+            sizes="100vw"
+            className="h-auto w-full object-contain"
+          />
+          <p
+            className={`${quoteFont.className} absolute left-[5%] top-1/2 z-10 w-[min(40%,32rem)] -translate-y-1/2 text-left text-[clamp(1.35rem,3.1vw,3.5rem)] leading-[1.35] text-white sm:left-[7%]`}
+            style={{ textShadow: "0 2px 16px rgba(0,0,0,0.7)" }}
+          >
+            &quot;If you try everyday you wont miss your lucky day.&quot;
+          </p>
+        </section>
+
+        <div className="page-shell !pt-8 sm:!pt-10">
         <Breadcrumbs
+          visible={false}
           items={[
             { name: "Home", path: "/" },
             { name: "Morgan", path: "/about" },
           ]}
         />
-
-        <div className="relative mt-8 aspect-[16/10] overflow-hidden bg-surface sm:mt-10">
-          <Image
-            src="/images/morgan-portrait.jpg"
-            alt="Morgan Kaiser"
-            fill
-            sizes="(min-width: 768px) 720px, 100vw"
-            className="object-cover"
-            priority
-          />
-        </div>
 
         <StickySectionNav
           items={aboutSectionNav}
@@ -164,9 +179,10 @@ export default function AboutPage() {
 
         <div className="mt-14 flex flex-col gap-3 border-t border-line pt-10 sm:flex-row">
           <BookMeetingLink href="/strategy-session" className="btn-primary w-full sm:w-auto" />
-          <Link href="/work-with-morgan" className="btn-ghost-dark w-full justify-center sm:w-auto">
-            Work With Morgan
+          <Link href="/invest" className="btn-ghost-dark w-full justify-center sm:w-auto">
+            Invest
           </Link>
+        </div>
         </div>
       </main>
     </>

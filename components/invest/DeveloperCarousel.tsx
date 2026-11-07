@@ -26,7 +26,7 @@ function DeveloperCard({ developer }: { developer: Developer }) {
           <img
             src={developerLogos[developer.slug].src}
             alt=""
-            className="max-h-12 w-auto max-w-[14rem] object-contain"
+            className="max-h-12 w-auto max-w-[14rem] object-contain transition duration-500 ease-out group-hover:scale-[1.04]"
           />
         ) : (
           <span className="text-center font-display text-2xl font-bold tracking-tight text-ink">{developer.name}</span>
@@ -59,7 +59,7 @@ export default function DeveloperCarousel({
  <p className="eyebrow">Developers to understand</p>
  <h2 className="mt-3 font-display text-2xl font-bold text-ink sm:text-3xl">Evaluation frameworks.</h2>
  <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-muted sm:text-base">
- Brand strength is not a substitute for unit underwriting. These pages are frameworks, not recommendations.
+ These are the developers Morgan works with. Each page describes the product, not a ranking.
  </p>
 
  <div className="mt-8">

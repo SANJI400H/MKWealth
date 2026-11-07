@@ -13,7 +13,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = pageMetadata({
  title: "Investment Insights | Morgan Kaiser",
  description:
- "Educational analysis on UAE property investment mathematics, markets, deal underwriting, and portfolio strategy by Morgan Kaiser.",
+ "Educational analysis on UAE property investment mathematics, markets, underwriting and portfolio strategy by Morgan Kaiser.",
  path: "/insights",
 });
 

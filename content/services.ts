@@ -17,10 +17,10 @@ export const services: ServiceItem[] = [
   },
   {
     id: "underwriting",
-    title: "Deal Underwriting",
+    title: "Underwriting",
     group: "analysis",
     summary: "Stress-test price, yield, costs, payment structure, and assumptions against your brief.",
-    whatsappMessage: "Hi Morgan, I'd like Deal Underwriting on a UAE property opportunity.",
+    whatsappMessage: "Hi Morgan, I'd like Underwriting on a UAE property opportunity.",
   },
   {
     id: "off-plan",
@@ -33,7 +33,7 @@ export const services: ServiceItem[] = [
     id: "secondary",
     title: "Secondary Market Acquisition",
     group: "acquisition",
-    summary: "Source and underwrite completed or resale stock when immediate income or price discovery matters.",
+    summary: "Source completed or resale stock when immediate income or price discovery matters.",
     whatsappMessage: "Hi Morgan, I'd like help with Secondary Market Acquisition in the UAE.",
   },
   {
@@ -70,10 +70,11 @@ export const services: ServiceItem[] = [
 export const homepageServices = services.filter((s) =>
   ["strategy", "underwriting", "off-plan", "portfolio", "mortgage", "visa"].includes(s.id)
 ).map((s) => {
-  if (s.id === "underwriting") return { ...s, title: "Deal Analysis" };
-  if (s.id === "off-plan") return { ...s, title: "Property Acquisition", summary: "Off-plan and secondary acquisition where the brief, capital, and risk profile fit." };
-  if (s.id === "mortgage") return { ...s, title: "Financing Coordination" };
-  if (s.id === "visa") return { ...s, title: "Purchase / Residency Coordination", summary: "Coordinate ownership setup and residency pathways where property investment is part of the plan." };
-  if (s.id === "strategy") return { ...s, title: "Investment Strategy" };
+  if (s.id === "underwriting") return { ...s, title: "Underwriting" };
+  if (s.id === "off-plan") return { ...s, title: "Acquisition", summary: "Off-plan and secondary acquisition where the brief, capital, and risk profile fit." };
+  if (s.id === "mortgage") return { ...s, title: "Financing" };
+  if (s.id === "visa") return { ...s, title: "Residency", summary: "Coordinate ownership setup and residency pathways where property investment is part of the plan." };
+  if (s.id === "strategy") return { ...s, title: "Strategy" };
+  if (s.id === "portfolio") return { ...s, title: "Portfolio" };
   return s;
 });

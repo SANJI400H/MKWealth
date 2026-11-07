@@ -49,7 +49,7 @@ export const reports: MarketReport[] = [
  },
  {
  type: "paragraph",
- text: "Choose the structure that matches liquidity, risk tolerance, and hold period, then underwrite the unit. Citywide narratives are not a substitute for SPA maths.",
+ text: "Choose the structure that matches liquidity, risk tolerance, and hold period, then test the unit. A citywide story is not a substitute for the sale contract.",
  },
  ],
  sources: [{ label: "Internal framework", note: "Pending Morgan discovery enrichment" }],
@@ -73,7 +73,7 @@ export const reports: MarketReport[] = [
  type: "list",
  items: [
  "Often framed as lower-volatility context relative to Dubai’s marketing volume",
- "Island and mainland product behave differently, underwrite micro-location",
+ "Island and mainland homes behave differently. Judge the street, not the emirate.",
  "Secondary depth can be thinner in some segments",
  "Fee and process stacks may differ, verify at transaction time",
  ],

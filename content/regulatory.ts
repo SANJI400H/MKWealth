@@ -40,14 +40,14 @@ export const regulatory = {
  yields: {
  dubaiGrossIllustrative: {
  value: "Illustrative gross rental yields often discussed in a wide band (commonly cited ~5–9% depending on unit type and area)",
- note: "Not a forecast. Yields vary by asset, entry price, achievable rent, vacancy, and costs. Prefer underwriting a specific unit over citywide averages.",
+ note: "Not a forecast. Yields vary by asset, entry price, achievable rent, vacancy, and costs. Use the specific unit, not a citywide average.",
  source: "Market practice / illustrative only, replace with sourced period data when available",
  lastReviewed: "2026-08-20",
  verified: false,
  } satisfies SourcedClaim,
  abuDhabiGrossIllustrative: {
  value: "Illustrative gross yields in investment zones often discussed in a narrower band than Dubai's wider range",
- note: "Illustrative only. Underwrite the specific asset.",
+ note: "Illustrative only. Check the specific asset.",
  source: "Market practice / illustrative only",
  lastReviewed: "2026-08-20",
  verified: false,

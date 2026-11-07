@@ -4,11 +4,8 @@ import Hero from "@/components/sections/Hero";
 import Bio from "@/components/sections/Bio";
 import Services from "@/components/sections/Services";
 import VisionPhilosophy from "@/components/sections/VisionPhilosophy";
-import FormulaOverFeelings from "@/components/sections/FormulaOverFeelings";
-import InvestmentProfile from "@/components/sections/InvestmentProfile";
 import Invest from "@/components/sections/Invest";
 import HowMorganWorks from "@/components/sections/HowMorganWorks";
-import Proof from "@/components/sections/Proof";
 import VideoGuidesPreview from "@/components/sections/VideoGuidesPreview";
 import Contact from "@/components/sections/Contact";
 import { pageMetadata } from "@/lib/metadata";
@@ -32,13 +29,10 @@ export default async function HomePage() {
  <Bio />
  <Services />
  <VisionPhilosophy />
- <FormulaOverFeelings />
  </CinemaController>
  <div className="relative bg-paper">
- <InvestmentProfile />
  <Invest />
  <HowMorganWorks />
- <Proof />
  <VideoGuidesPreview />
  <Contact />
  </div>

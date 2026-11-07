@@ -14,7 +14,7 @@ export const insightCategories: {
  {
  id: "investment-mathematics",
  label: "Investment Mathematics",
- description: "Yield, capital deployed, costs, and return definitions that survive underwriting.",
+ description: "Yield, capital deployed, costs, and return definitions that survive a unit-level check.",
  },
  {
  id: "market-intelligence",
@@ -23,8 +23,8 @@ export const insightCategories: {
  },
  {
  id: "deal-analysis",
- label: "Deal Analysis",
- description: "How to underwrite off-plan and secondary opportunities unit by unit.",
+ label: "Underwriting",
+ description: "How off-plan and secondary opportunities are tested unit by unit.",
  },
  {
  id: "developer-analysis",
@@ -78,7 +78,7 @@ export const insights: InsightArticle[] = [
  slug: "gross-vs-net-yield-dubai-property",
  title: "Gross Yield vs Net Yield in Dubai Property",
  excerpt:
- "Why advertised yield is not the return that hits your account, and which costs belong in a proper underwrite.",
+ "Why advertised yield is not the return that hits your account, and which costs belong in the calculation.",
  author: "Morgan Kaiser",
  publishedAt: "2026-08-20",
  reviewedAt: "2026-08-20",
@@ -138,7 +138,7 @@ export const insights: InsightArticle[] = [
  risks: [
  "Asking rents are not achieved rents.",
  "Service charges and community fees can move after handover.",
- "Citywide yield bands are not underwriting for a specific unit.",
+ "A citywide yield band does not describe a specific unit.",
  ],
  conclusion:
  "Use gross yield to filter. Use net income and true capital deployed to decide. If you want the numbers pressure-tested against a real brochure or listing, use the True Yield calculator or ask Morgan to analyse the investment.",
