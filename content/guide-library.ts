@@ -53,8 +53,8 @@ export const guideCategories: GuideCategory[] = [
 ];
 
 /**
- * Private guide clips. ready:false until dedicated files replace cinema walks.
- * Public Video Guides live on /video-guides (YouTube click-to-play).
+ * Legacy placeholders. Playback of the real series is the gated player at /guide.
+ * These src values stay empty so the clips are never served from /public.
  */
 export const guideVideos: GuideVideo[] = [
   {
@@ -63,7 +63,7 @@ export const guideVideos: GuideVideo[] = [
     title: "Why Dubai off-plan, right now",
     summary: "The case for off-plan versus completed stock for foreign buyers.",
     poster: "/images/morgan-hero.jpg",
-    src: "/videos/walk-1.mp4",
+    src: "",
     downloadName: "morgan-kaiser-off-plan-basics.mp4",
     ready: false,
   },
@@ -73,7 +73,7 @@ export const guideVideos: GuideVideo[] = [
     title: "Payment plans and handover risk",
     summary: "How to stress-test a plan against your actual liquidity.",
     poster: "/images/morgan-offer.jpg",
-    src: "/videos/walk-2.mp4",
+    src: "",
     downloadName: "morgan-kaiser-payment-plans.mp4",
     ready: false,
   },
@@ -83,7 +83,7 @@ export const guideVideos: GuideVideo[] = [
     title: "Golden Visa eligibility, step by step",
     summary: "What usually qualifies, and what still needs confirmation.",
     poster: "/images/morgan-portrait.jpg",
-    src: "/videos/walk-3.mp4",
+    src: "",
     downloadName: "morgan-kaiser-golden-visa.mp4",
     ready: false,
   },
@@ -93,7 +93,7 @@ export const guideVideos: GuideVideo[] = [
     title: "Reading Dubai deal flow",
     summary: "How Morgan shortlists units from active market context.",
     poster: "/images/morgan-walk-wave-poster.jpg",
-    src: "/videos/morgan-walk-wave.mp4",
+    src: "",
     downloadName: "morgan-kaiser-dubai-market.mp4",
     ready: false,
   },

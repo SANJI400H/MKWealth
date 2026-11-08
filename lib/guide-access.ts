@@ -78,24 +78,39 @@ async function verifySigned(payload: string, signature: string, secret: string):
   }
 }
 
-export async function createGuideAccessToken(): Promise<string | null> {
+const LEAD_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+/** Cookie is bound to one saved lead. An unbound or expired token does not unlock. */
+export async function createGuideAccessToken(leadId: string): Promise<string | null> {
   const secret = getSecret();
-  if (!secret) return null;
+  if (!secret || !LEAD_ID_PATTERN.test(leadId)) return null;
   const exp = Math.floor(Date.now() / 1000) + GUIDE_ACCESS_MAX_AGE_SEC;
-  const payload = String(exp);
+  const payload = `${leadId}|${exp}`;
   const signature = await sign(`guide:${payload}`, secret);
   return `${payload}.${signature}`;
 }
 
-export async function verifyGuideAccessCookie(value: string | undefined | null): Promise<boolean> {
-  if (!value) return false;
+export async function readGuideAccess(
+  value: string | undefined | null,
+): Promise<{ leadId: string } | null> {
+  if (!value) return null;
   const secret = getSecret();
-  if (!secret) return false;
-  const [payload, signature] = value.split(".");
-  if (!payload || !signature) return false;
-  if (!(await verifySigned(`guide:${payload}`, signature, secret))) return false;
-  const exp = Number(payload);
-  return Number.isFinite(exp) && exp * 1000 >= Date.now();
+  if (!secret) return null;
+  const lastDot = value.lastIndexOf(".");
+  if (lastDot <= 0) return null;
+  const payload = value.slice(0, lastDot);
+  const signature = value.slice(lastDot + 1);
+  if (!(await verifySigned(`guide:${payload}`, signature, secret))) return null;
+  const sep = payload.lastIndexOf("|");
+  if (sep <= 0) return null;
+  const leadId = payload.slice(0, sep);
+  const exp = Number(payload.slice(sep + 1));
+  if (!LEAD_ID_PATTERN.test(leadId) || !Number.isFinite(exp) || exp * 1000 < Date.now()) return null;
+  return { leadId };
+}
+
+export async function verifyGuideAccessCookie(value: string | undefined | null): Promise<boolean> {
+  return (await readGuideAccess(value)) !== null;
 }
 
 export async function createGuideGrantToken(email: string): Promise<string | null> {

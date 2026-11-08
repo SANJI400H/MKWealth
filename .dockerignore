@@ -18,6 +18,7 @@ image.env
 image.previous.env
 .image.env.pending
 Image
+guide-videos-private
 docs
 deploy
 tests

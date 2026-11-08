@@ -135,8 +135,8 @@ export default function GuideQualifyFlow({ onApproved }: Props) {
         <p className="eyebrow">Application received</p>
         <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">Pending Morgan’s review</h1>
         <p className="text-ink-muted">
-          Your details are with Morgan. If approved, you will get access to choose topics, private guide
-          videos and PDFs will then be emailed to you.
+          Your details are saved. If this screen stays up, refresh the page. A saved application opens the
+          guides on this browser.
         </p>
       </div>
     );
@@ -236,8 +236,7 @@ export default function GuideQualifyFlow({ onApproved }: Props) {
           </label>
           {error ? <p className="text-sm text-maroon">{error}</p> : null}
           <p className="text-xs text-ink-muted">
-            Access is reviewed. Morgan may approve or decline. Auto-approval can be enabled for trusted
-            funnels.
+            Your name, email, and WhatsApp number unlock the full guide series on this browser.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <button type="button" className="btn-ghost-dark inline-flex w-full items-center justify-center gap-1.5 sm:w-auto" onClick={goBack}>
@@ -245,7 +244,7 @@ export default function GuideQualifyFlow({ onApproved }: Props) {
               Back
             </button>
             <button type="submit" className="btn-primary w-full justify-center sm:w-auto" disabled={loading}>
-              {loading ? "Submitting…" : "Submit for access"}
+              {loading ? "Submitting…" : "Unlock the guides"}
             </button>
           </div>
         </form>

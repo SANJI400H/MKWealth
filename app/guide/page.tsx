@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 import GuideGate from "./GuideGate";
 import SiteNav from "@/components/sections/SiteNav";
 import SiteFooter from "@/components/sections/SiteFooter";
-import { GUIDE_ACCESS_COOKIE, verifyGuideAccessCookie } from "@/lib/guide-access";
+import { guideLeadFromCookies } from "@/lib/guide-session";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Private Investor Guide | Morgan Kaiser",
-  description:
-    "Qualify for Morgan Kaiser's private investor guide. Access after review, or automated approval when enabled.",
+  description: "Morgan Kaiser's private investor guide. The series unlocks after your details are saved.",
   path: "/guide",
   noIndex: true,
 });
@@ -17,7 +15,7 @@ export const metadata: Metadata = pageMetadata({
 type Props = { searchParams: { error?: string; unlocked?: string } };
 
 export default async function GuidePage({ searchParams }: Props) {
-  const unlocked = await verifyGuideAccessCookie(cookies().get(GUIDE_ACCESS_COOKIE)?.value);
+  const unlocked = (await guideLeadFromCookies()) !== null;
 
   return (
     <main className="flex min-h-screen flex-col bg-paper">

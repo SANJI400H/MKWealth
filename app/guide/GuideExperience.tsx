@@ -1,130 +1,179 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Mail } from "lucide-react";
-import WhatsAppLink from "@/components/ui/WhatsAppLink";
-import { guideCategories, type GuideCategoryId } from "@/content/guide-library";
-import { siteConfig } from "@/lib/site-config";
 
-type Step = "categories" | "confirmed";
+type GuideItem = { id: string; title: string; index: number };
 
 /**
- * Post-approval Investor Guide.
- * Leads already captured at qualify. Until real files exist, collect topics and
- * tell the investor materials will be emailed — no stub video/PDF downloads.
+ * Ordered private player. The video element points at the same-origin media
+ * route, which checks the guide cookie. Storage paths never reach the browser.
  */
 export default function GuideExperience() {
-  const [step, setStep] = useState<Step>("categories");
-  const [selected, setSelected] = useState<GuideCategoryId[]>([]);
+  const [guides, setGuides] = useState<GuideItem[] | null>(null);
+  const [error, setError] = useState("");
+  const [index, setIndex] = useState(0);
+  const started = useRef(new Set<string>());
+  const armed = useRef(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const lastProgress = useRef(0);
 
-  const topicLabels = useMemo(
-    () =>
-      selected
-        .map((id) => guideCategories.find((c) => c.id === id)?.label ?? id)
-        .join(", "),
-    [selected],
-  );
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      const response = await fetch("/api/guide/catalog", { credentials: "same-origin", cache: "no-store" });
+      if (cancelled) return;
+      if (!response.ok) {
+        setError("This browser is not unlocked. Submit your details again.");
+        setGuides([]);
+        return;
+      }
+      const data = (await response.json()) as { guides?: GuideItem[] };
+      setGuides(data.guides ?? []);
+    })().catch(() => {
+      if (!cancelled) setError("The guides could not be loaded.");
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
-  const toggleCategory = (id: GuideCategoryId) => {
-    setSelected((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]));
+  const current = guides?.[index] ?? null;
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !current) return;
+    const src = `/api/guide/media/${current.id}`;
+    let destroyed = false;
+    let hls: { destroy: () => void } | null = null;
+
+    const playIfArmed = () => {
+      if (armed.current) void video.play().catch(() => undefined);
+    };
+
+    if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      video.src = src;
+      playIfArmed();
+    } else {
+      void import("hls.js").then(({ default: Hls }) => {
+        if (destroyed || !Hls.isSupported()) return;
+        const instance = new Hls({
+          xhrSetup: (xhr) => {
+            xhr.withCredentials = true;
+          },
+        });
+        if (destroyed) {
+          instance.destroy();
+          return;
+        }
+        instance.loadSource(src);
+        instance.attachMedia(video);
+        instance.on(Hls.Events.MANIFEST_PARSED, playIfArmed);
+        hls = instance;
+      });
+    }
+
+    return () => {
+      destroyed = true;
+      hls?.destroy();
+      video.removeAttribute("src");
+      video.load();
+    };
+  }, [current]);
+
+  const report = useCallback((videoId: string, event: "start" | "progress" | "complete", video: HTMLVideoElement | null) => {
+    const positionSec = video && Number.isFinite(video.currentTime) ? video.currentTime : null;
+    const durationSec = video && Number.isFinite(video.duration) ? video.duration : null;
+    void fetch("/api/guide/watch", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ videoId, event, positionSec, durationSec }),
+    }).catch(() => undefined);
+  }, []);
+
+  const playIndex = (next: number) => {
+    if (!guides || next < 0 || next >= guides.length) return;
+    lastProgress.current = 0;
+    setIndex(next);
   };
 
-  if (step === "confirmed") {
+  if (error) {
     return (
-      <div className="mx-auto flex w-full max-w-xl flex-1 flex-col justify-center gap-6 px-6 py-20 text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-maroon/25 bg-maroon/5 text-maroon">
-          <Mail size={22} strokeWidth={1.5} aria-hidden />
-        </div>
-        <p className="eyebrow">Investor Guide</p>
-        <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">We’ll email your materials</h1>
-        <p className="text-ink-muted leading-relaxed">
-          Thanks. Your topics are noted
-          {topicLabels ? (
-            <>
-              {" "}
-              (<span className="font-medium text-ink">{topicLabels}</span>)
-            </>
-          ) : null}
-          . Private guide videos and PDF briefings will be emailed to the address you registered with.
-        </p>
-        <p className="text-sm text-ink-muted">Check your inbox (and spam folder) over the next day or two.</p>
-        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
-          <Link href="/calculators" className="btn-primary w-full justify-center sm:w-auto">
-            Explore calculators
-          </Link>
-          <Link href="/areas" className="btn-ghost-dark w-full justify-center sm:w-auto">
-            Browse micro markets
-          </Link>
-          <Link href="/developers" className="btn-ghost-dark w-full justify-center sm:w-auto">
-            View developers
-          </Link>
-          <Link href="/" className="btn-ghost-dark w-full justify-center sm:w-auto">
-            Back to home
-          </Link>
-        </div>
-        <p className="text-sm text-ink-muted">
-          <WhatsAppLink message="Hi Morgan, I just requested the investor guide." className="font-semibold text-maroon hover:underline">
-            WhatsApp Morgan
-          </WhatsAppLink>
-          {" · "}
-          <Link href="/strategy-session" className="font-semibold text-maroon hover:underline">
-            Request a strategy session
-          </Link>
-        </p>
-        <p className="mt-6 text-sm text-ink-muted">
-          Already investing with Morgan?{" "}
-          <Link href={siteConfig.clientPortalUrl || "/portal"} className="font-semibold text-maroon hover:underline">
-            Open Client Portal
-          </Link>
-        </p>
+      <div className="mx-auto flex w-full max-w-xl flex-1 flex-col justify-center gap-4 px-6 py-20 text-center">
+        <p className="text-ink-muted">{error}</p>
+        <Link href="/guide" className="font-semibold text-maroon hover:underline">
+          Back to the gate
+        </Link>
+      </div>
+    );
+  }
+
+  if (!guides || !current) {
+    return (
+      <div className="mx-auto flex w-full max-w-xl flex-1 flex-col justify-center px-6 py-20 text-center text-ink-muted">
+        Loading the guides…
       </div>
     );
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-8 px-6 py-14">
-      <div className="text-center">
+    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-14">
+      <div>
         <p className="eyebrow">Private Investor Guide</p>
-        <h1 className="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">What should we send you?</h1>
-        <p className="mx-auto mt-3 max-w-md text-ink-muted">
-          Pick the topics you care about. We’ll email the matching videos and briefings. Nothing to download
-          on this page yet.
+        <h1 className="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">{current.title}</h1>
+        <p className="mt-2 text-sm text-ink-muted">
+          {index + 1} of {guides.length}. The next guide starts when this one ends.
         </p>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2">
-        {guideCategories.map((category) => {
-          const active = selected.includes(category.id);
+      <video
+        key={current.id}
+        ref={videoRef}
+        className="aspect-video w-full bg-ink"
+        controls
+        playsInline
+        preload="metadata"
+        onPlay={(event) => {
+          armed.current = true;
+          if (started.current.has(current.id)) return;
+          started.current.add(current.id);
+          report(current.id, "start", event.currentTarget);
+        }}
+        onTimeUpdate={(event) => {
+          const video = event.currentTarget;
+          if (!Number.isFinite(video.currentTime) || video.currentTime - lastProgress.current < 30) return;
+          lastProgress.current = video.currentTime;
+          report(current.id, "progress", video);
+        }}
+        onEnded={(event) => {
+          report(current.id, "complete", event.currentTarget);
+          if (index < guides.length - 1) playIndex(index + 1);
+        }}
+      />
+
+      <ol className="grid gap-2">
+        {guides.map((guide) => {
+          const active = guide.id === current.id;
           return (
-            <button
-              key={category.id}
-              type="button"
-              onClick={() => toggleCategory(category.id)}
-              className={`rounded-md border px-4 py-4 text-left transition ${
-                active ? "border-ink bg-ink text-paper" : "border-ink/10 bg-paper text-ink hover:border-ink/30"
-              }`}
-              aria-pressed={active}
-            >
-              <span className="block font-display text-base font-bold">{category.label}</span>
-              <span className={`mt-1.5 block text-sm leading-snug ${active ? "text-paper/75" : "text-ink-muted"}`}>
-                {category.description}
-              </span>
-            </button>
+            <li key={guide.id}>
+              <button
+                type="button"
+                onClick={() => playIndex(guide.index)}
+                className={`flex w-full items-center justify-between rounded-md border px-4 py-3 text-left ${
+                  active ? "border-ink bg-ink text-paper" : "border-ink/10 bg-paper text-ink hover:border-ink/30"
+                }`}
+                aria-current={active ? "true" : undefined}
+              >
+                <span className="font-display font-bold">{guide.title}</span>
+                <span className={`text-xs ${active ? "text-paper/70" : "text-ink-muted"}`}>
+                  {String(guide.index + 1).padStart(2, "0")}
+                </span>
+              </button>
+            </li>
           );
         })}
-      </div>
-
-      <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
-        <button
-          type="button"
-          className="btn-primary disabled:opacity-50"
-          disabled={selected.length === 0}
-          onClick={() => setStep("confirmed")}
-        >
-          Confirm and email me these topics
-        </button>
-      </div>
+      </ol>
     </div>
   );
 }

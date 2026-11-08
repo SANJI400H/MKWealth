@@ -23,8 +23,6 @@ export function middleware(request: NextRequest) {
       pathname.startsWith("/api/guide") ||
       pathname.startsWith("/api/lead") ||
       pathname.startsWith("/_next") ||
-      pathname.startsWith("/videos") ||
-      pathname.startsWith("/reports") ||
       pathname.startsWith("/images") ||
       pathname === "/favicon.ico" ||
       pathname === "/robots.txt";

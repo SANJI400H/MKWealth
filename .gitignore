@@ -31,3 +31,6 @@ next-env.d.ts
 
 # local scrape / research dumps
 .firecrawl/
+
+# Private guide masters and encodes. Never commit or ship these in the image.
+guide-videos-private/
