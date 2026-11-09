@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { submitLead } from "@/lib/leads";
+import { LEAD_NOT_DELIVERED_ERROR, leadWasDelivered } from "@/lib/leads-delivery";
 import { getSessionGrantKey, sessionPublicOrigin } from "@/lib/session-access";
 import { siteConfig } from "@/lib/site-config";
 
@@ -47,10 +48,11 @@ export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY;
   const notify = process.env.LEAD_NOTIFY_EMAIL;
   const from = process.env.LEAD_FROM_EMAIL ?? "Morgan Kaiser <onboarding@resend.dev>";
+  let approveEmailed = false;
 
   if (apiKey && notify && approveUrl) {
     try {
-      await fetch("https://api.resend.com/emails", {
+      const sent = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${apiKey}`,
@@ -82,15 +84,24 @@ export async function POST(request: Request) {
           ].join("\n"),
         }),
       });
+      approveEmailed = sent.ok;
+      if (!sent.ok) {
+        console.error("[lead] resend send failed", sent.status, await sent.text().catch(() => ""));
+      }
     } catch (error) {
-      console.error("session-request: notify failed", error);
+      console.error("[lead] resend send failed", error);
     }
+  }
+
+  const emailed = result.emailed || approveEmailed;
+  if (!leadWasDelivered(result.saved, emailed)) {
+    return NextResponse.json({ error: LEAD_NOT_DELIVERED_ERROR }, { status: 503 });
   }
 
   return NextResponse.json({
     ok: true,
     status: "pending",
-    emailed: result.emailed,
+    emailed,
     saved: result.saved,
     leadId: result.leadId,
     message:

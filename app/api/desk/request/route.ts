@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { submitLead } from "@/lib/leads";
+import { LEAD_NOT_DELIVERED_ERROR, leadWasDelivered } from "@/lib/leads-delivery";
 
 /** Prospect requests Private Desk access (does not unlock). Morgan approves via /api/desk/grant. */
 export async function POST(request: Request) {
@@ -24,6 +25,10 @@ export async function POST(request: Request) {
 
   if (!result.ok) {
     return NextResponse.json({ error: result.error }, { status: result.status });
+  }
+
+  if (!leadWasDelivered(result.saved, result.emailed)) {
+    return NextResponse.json({ error: LEAD_NOT_DELIVERED_ERROR }, { status: 503 });
   }
 
   return NextResponse.json({

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { GatedResults } from "@/components/tools/GatedResults";
 import { trackEvent } from "@/lib/analytics";
+import { parseDecimal, requireNonNegativeAmount, requirePercent, requirePositiveAmount } from "@/lib/calculators/validate";
 import { siteConfig } from "@/lib/site-config";
 
 const fieldClass =
@@ -45,6 +46,8 @@ export default function TrueYieldCalculator() {
  const [insurance, setInsurance] = useState("2000");
  const [cooling, setCooling] = useState("0");
  const [otherAnnual, setOtherAnnual] = useState("0");
+ const [includeVat, setIncludeVat] = useState(true);
+ const [dldAdminFee, setDldAdminFee] = useState("580");
  const [started, setStarted] = useState(false);
 
  useEffect(() => {
@@ -54,13 +57,33 @@ export default function TrueYieldCalculator() {
  }, [started]);
 
  const result = useMemo(() => {
- const price = num(purchasePrice);
- const rent = num(annualRent);
+ const invalid = [
+ requirePositiveAmount(purchasePrice),
+ requireNonNegativeAmount(annualRent),
+ requirePercent(dldPct),
+ requirePercent(agencyPct),
+ requireNonNegativeAmount(trusteeFee),
+ requireNonNegativeAmount(dldAdminFee),
+ requireNonNegativeAmount(otherAcquisition),
+ requireNonNegativeAmount(serviceCharges),
+ requirePercent(managementPct),
+ requirePercent(vacancyPct),
+ requireNonNegativeAmount(maintenance),
+ requireNonNegativeAmount(insurance),
+ requireNonNegativeAmount(cooling),
+ requireNonNegativeAmount(otherAnnual),
+ ].some(Boolean);
+ if (invalid) return null;
+
+ const price = parseDecimal(purchasePrice) ?? 0;
+ const rent = parseDecimal(annualRent) ?? 0;
  const dld = price * pct(dldPct);
  const agency = price * pct(agencyPct);
- const trustee = num(trusteeFee);
+ const trustee = parseDecimal(trusteeFee) ?? 0;
+ const dldAdmin = parseDecimal(dldAdminFee) ?? 0;
+ const vat = includeVat ? 0.05 * (agency + trustee) : 0;
  const otherAcq = num(otherAcquisition);
- const capital = price + dld + agency + trustee + otherAcq;
+ const capital = price + dld + agency + trustee + vat + dldAdmin + otherAcq;
 
  const vacancyLoss = rent * pct(vacancyPct);
  const effectiveRent = rent - vacancyLoss;
@@ -92,6 +115,8 @@ export default function TrueYieldCalculator() {
  grossYield,
  netYieldOnPrice,
  netYieldOnCapital,
+ vat,
+ dldAdmin,
  };
  }, [
  purchasePrice,
@@ -99,6 +124,8 @@ export default function TrueYieldCalculator() {
  dldPct,
  agencyPct,
  trusteeFee,
+ dldAdminFee,
+ includeVat,
  otherAcquisition,
  serviceCharges,
  managementPct,
@@ -110,12 +137,30 @@ export default function TrueYieldCalculator() {
  ]);
 
  useEffect(() => {
+ if (!result) return;
  trackEvent("calculator_complete", {
  calculator: "true-yield",
  gross_yield: Number(result.grossYield.toFixed(4)),
  net_yield_capital: Number(result.netYieldOnCapital.toFixed(4)),
  });
- }, [result.grossYield, result.netYieldOnCapital]);
+ }, [result]);
+
+ const fieldErrors: Record<string, string | null> = {
+ "Purchase price (AED)": requirePositiveAmount(purchasePrice),
+ "Annual rent (AED)": requireNonNegativeAmount(annualRent),
+ "DLD / transfer fee %": requirePercent(dldPct),
+ "Agency commission %": requirePercent(agencyPct),
+ "Trustee / registration fee (AED)": requireNonNegativeAmount(trusteeFee),
+ "DLD admin / title deed fee (AED)": requireNonNegativeAmount(dldAdminFee),
+ "Other acquisition costs (AED)": requireNonNegativeAmount(otherAcquisition),
+ "Service charges (AED / year)": requireNonNegativeAmount(serviceCharges),
+ "Management fee % of effective rent": requirePercent(managementPct),
+ "Vacancy assumption %": requirePercent(vacancyPct),
+ "Maintenance (AED / year)": requireNonNegativeAmount(maintenance),
+ "Insurance (AED / year)": requireNonNegativeAmount(insurance),
+ "Cooling / chiller (AED / year)": requireNonNegativeAmount(cooling),
+ "Other annual costs (AED)": requireNonNegativeAmount(otherAnnual),
+ };
 
  const fields: { label: string; help: string; value: string; set: (v: string) => void; suffix?: string }[] = [
  { label: "Purchase price (AED)", help: "Contract price before acquisition costs.", value: purchasePrice, set: setPurchasePrice },
@@ -123,7 +168,8 @@ export default function TrueYieldCalculator() {
  { label: "DLD / transfer fee %", help: "Often ~4% in Dubai freehold, confirm for your transaction.", value: dldPct, set: setDldPct, suffix: "%" },
  { label: "Agency commission %", help: "Buyer-side agency if applicable.", value: agencyPct, set: setAgencyPct, suffix: "%" },
  { label: "Trustee / registration fee (AED)", help: "Fixed or quoted registration/trustee costs.", value: trusteeFee, set: setTrusteeFee },
- { label: "Other acquisition costs (AED)", help: "NOC, admin, furniture packages paid at buy, etc.", value: otherAcquisition, set: setOtherAcquisition },
+ { label: "DLD admin / title deed fee (AED)", help: "Illustrative title-deed and admin fee. Confirm for your transaction.", value: dldAdminFee, set: setDldAdminFee },
+ { label: "Other acquisition costs (AED)", help: "NOC, furniture packages paid at buy, and other quoted costs.", value: otherAcquisition, set: setOtherAcquisition },
  { label: "Service charges (AED / year)", help: "Community / building service charges.", value: serviceCharges, set: setServiceCharges },
  { label: "Management fee % of effective rent", help: "Property manager fee if used.", value: managementPct, set: setManagementPct, suffix: "%" },
  { label: "Vacancy assumption %", help: "Expected void / unpaid period as % of annual rent.", value: vacancyPct, set: setVacancyPct, suffix: "%" },
@@ -149,11 +195,24 @@ export default function TrueYieldCalculator() {
  />
  {f.suffix ? <span className="text-ink-muted">{f.suffix}</span> : null}
  </div>
+ {fieldErrors[f.label] ? <span className="mt-1 block text-xs text-maroon">{fieldErrors[f.label]}</span> : null}
  </label>
  ))}
+ <label className="flex items-start gap-2 text-sm text-ink">
+ <input
+ type="checkbox"
+ className="mt-1"
+ checked={includeVat}
+ onChange={(e) => setIncludeVat(e.target.checked)}
+ />
+ <span>VAT on agency and trustee (5%). Confirm for your transaction.</span>
+ </label>
  </div>
 
  <GatedResults className="order-1 lg:order-2">
+ {!result ? (
+ <p className="text-sm text-ink-muted">Enter valid inputs to see an estimate.</p>
+ ) : (
  <div className="space-y-6 lg:sticky lg:top-24 lg:self-start">
  <div className="rounded-sm border border-line p-5">
  <p className="eyebrow">Outputs</p>
@@ -165,6 +224,14 @@ export default function TrueYieldCalculator() {
  <div className="flex justify-between gap-3 border-b border-line pb-2 sm:gap-4">
  <dt className="min-w-0 pr-2 text-ink-muted">Net annual rental income</dt>
  <dd className="shrink-0 text-right font-semibold tabular-nums text-ink">AED {money(result.netIncome)}</dd>
+ </div>
+ <div className="flex justify-between gap-3 border-b border-line pb-2 sm:gap-4">
+ <dt className="min-w-0 pr-2 text-ink-muted">VAT on agency and trustee</dt>
+ <dd className="shrink-0 text-right font-semibold tabular-nums text-ink">AED {money(result.vat)}</dd>
+ </div>
+ <div className="flex justify-between gap-3 border-b border-line pb-2 sm:gap-4">
+ <dt className="min-w-0 pr-2 text-ink-muted">DLD admin / title deed</dt>
+ <dd className="shrink-0 text-right font-semibold tabular-nums text-ink">AED {money(result.dldAdmin)}</dd>
  </div>
  <div className="flex justify-between gap-3 border-b border-line pb-2 sm:gap-4">
  <dt className="min-w-0 pr-2 text-ink-muted">True capital deployed</dt>
@@ -218,9 +285,9 @@ export default function TrueYieldCalculator() {
  </li>
  </ul>
  <p className="mt-4 text-xs text-ink-muted">
- Gross yield = annual rent ÷ purchase price. True capital = price + DLD + agency + trustee + other
- acquisition. Net income = rent − all annual costs (including vacancy). Net yield on capital = net
- income ÷ true capital.
+ Gross yield = annual rent ÷ purchase price. True capital = price + DLD + agency + trustee + VAT
+ (when included) + DLD admin + other acquisition. Net income = rent − all annual costs (including
+ vacancy). Net yield on capital = net income ÷ true capital. Confirm the fees for your transaction.
  </p>
  </div>
 
@@ -235,6 +302,7 @@ export default function TrueYieldCalculator() {
  . Illustrative only, not advice.
  </p>
  </div>
+ )}
  </GatedResults>
  </div>
  );

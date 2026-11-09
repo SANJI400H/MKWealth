@@ -1,15 +1,13 @@
 import { NextResponse } from "next/server";
 import { getPrivateGuide, GUIDE_VIDEO_BUCKET } from "@/content/private-guides";
 import { guideLeadFromCookies } from "@/lib/guide-session";
+import { getSupabaseServerConfig } from "@/lib/supabase/admin";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 function storageConfig(): { url: string; key: string } | null {
-  const url = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.SUPABASE_URL ?? "").trim().replace(/\/$/, "");
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() ?? "";
-  if (!url || !key) return null;
-  return { url, key };
+  return getSupabaseServerConfig();
 }
 
 /** Playlist only. Segment URLs point back at this site so the cookie is checked again. */

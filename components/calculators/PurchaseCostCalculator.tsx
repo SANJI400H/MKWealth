@@ -4,6 +4,13 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { GatedResults } from "@/components/tools/GatedResults";
 import { trackEvent } from "@/lib/analytics";
+import {
+ parseDecimal,
+ percentAboveWarning,
+ requireNonNegativeAmount,
+ requirePercent,
+ requirePositiveAmount,
+} from "@/lib/calculators/validate";
 import { siteConfig } from "@/lib/site-config";
 
 const fieldClass =
@@ -31,6 +38,8 @@ export default function PurchaseCostCalculator() {
  const [adminFees, setAdminFees] = useState("0");
  const [furniture, setFurniture] = useState("0");
  const [other, setOther] = useState("0");
+ const [includeVat, setIncludeVat] = useState(true);
+ const [dldAdminFee, setDldAdminFee] = useState("580");
  const [started, setStarted] = useState(false);
  const [completed, setCompleted] = useState(false);
 
@@ -40,25 +49,44 @@ export default function PurchaseCostCalculator() {
  trackEvent("calculator_start", { calculator: "purchase-cost" });
  }, [started]);
 
+ const errors = {
+ price: requirePositiveAmount(purchasePrice),
+ dld: requirePercent(dldPct, 20),
+ agency: requirePercent(agencyPct, 20),
+ trustee: requireNonNegativeAmount(trusteeFee),
+ dldAdmin: requireNonNegativeAmount(dldAdminFee),
+ admin: requireNonNegativeAmount(adminFees),
+ furniture: requireNonNegativeAmount(furniture),
+ other: requireNonNegativeAmount(other),
+ };
+ const warnings = {
+ dld: percentAboveWarning(dldPct, 10),
+ agency: percentAboveWarning(agencyPct, 10),
+ };
+ const invalid = Object.values(errors).some(Boolean);
+
  const result = useMemo(() => {
- const price = num(purchasePrice);
+ if (invalid) return null;
+ const price = parseDecimal(purchasePrice) ?? 0;
  const dld = price * pct(dldPct);
  const agency = price * pct(agencyPct);
- const trustee = num(trusteeFee);
+ const trustee = parseDecimal(trusteeFee) ?? 0;
+ const dldAdmin = parseDecimal(dldAdminFee) ?? 0;
+ const vat = includeVat ? 0.05 * (agency + trustee) : 0;
  const admin = num(adminFees);
  const furn = num(furniture);
  const oth = num(other);
- const acquisition = dld + agency + trustee + admin + furn + oth;
+ const acquisition = dld + agency + trustee + vat + dldAdmin + admin + furn + oth;
  const total = price + acquisition;
  const acquisitionPct = price > 0 ? acquisition / price : 0;
- return { price, dld, agency, trustee, admin, furn, oth, acquisition, total, acquisitionPct };
- }, [purchasePrice, dldPct, agencyPct, trusteeFee, adminFees, furniture, other]);
+ return { price, dld, agency, trustee, vat, dldAdmin, admin, furn, oth, acquisition, total, acquisitionPct };
+ }, [invalid, purchasePrice, dldPct, agencyPct, trusteeFee, dldAdminFee, includeVat, adminFees, furniture, other]);
 
  useEffect(() => {
- if (completed || result.price <= 0) return;
+ if (completed || !result || result.price <= 0) return;
  setCompleted(true);
  trackEvent("calculator_complete", { calculator: "purchase-cost" });
- }, [completed, result.price]);
+ }, [completed, result]);
 
  return (
  <div className="grid gap-10 lg:grid-cols-2">
@@ -67,57 +95,87 @@ export default function PurchaseCostCalculator() {
  <span className="text-ink-muted">Purchase price (AED)</span>
  <input
  className={`${fieldClass} mt-1`}
+ inputMode="decimal"
  value={purchasePrice}
  onChange={(e) => setPurchasePrice(e.target.value)}
  />
+ {errors.price ? <span className="mt-1 block text-xs text-maroon">{errors.price}</span> : null}
  </label>
  <label className="block text-sm">
  <span className="text-ink-muted">DLD transfer fee (%)</span>
  <input
  className={`${fieldClass} mt-1`}
+ inputMode="decimal"
  value={dldPct}
  onChange={(e) => setDldPct(e.target.value)}
  />
+ {errors.dld ? <span className="mt-1 block text-xs text-maroon">{errors.dld}</span> : null}
+ {warnings.dld ? <span className="mt-1 block text-xs text-amber-800">{warnings.dld}</span> : null}
  </label>
  <label className="block text-sm">
  <span className="text-ink-muted">Agency commission (%)</span>
  <input
  className={`${fieldClass} mt-1`}
+ inputMode="decimal"
  value={agencyPct}
  onChange={(e) => setAgencyPct(e.target.value)}
  />
+ {errors.agency ? <span className="mt-1 block text-xs text-maroon">{errors.agency}</span> : null}
+ {warnings.agency ? <span className="mt-1 block text-xs text-amber-800">{warnings.agency}</span> : null}
  </label>
  <label className="block text-sm">
  <span className="text-ink-muted">Trustee / registration (AED)</span>
  <input
  className={`${fieldClass} mt-1`}
+ inputMode="decimal"
  value={trusteeFee}
  onChange={(e) => setTrusteeFee(e.target.value)}
  />
+ {errors.trustee ? <span className="mt-1 block text-xs text-maroon">{errors.trustee}</span> : null}
+ </label>
+ <label className="flex items-start gap-2 text-sm text-ink">
+ <input type="checkbox" className="mt-1" checked={includeVat} onChange={(e) => setIncludeVat(e.target.checked)} />
+ <span>VAT on agency and trustee (5%). Confirm for your transaction.</span>
+ </label>
+ <label className="block text-sm">
+ <span className="text-ink-muted">DLD admin / title deed fee (AED)</span>
+ <input
+ className={`${fieldClass} mt-1`}
+ inputMode="decimal"
+ value={dldAdminFee}
+ onChange={(e) => setDldAdminFee(e.target.value)}
+ />
+ {errors.dldAdmin ? <span className="mt-1 block text-xs text-maroon">{errors.dldAdmin}</span> : null}
  </label>
  <label className="block text-sm">
  <span className="text-ink-muted">Admin / NOC / misc (AED)</span>
  <input
  className={`${fieldClass} mt-1`}
+ inputMode="decimal"
  value={adminFees}
  onChange={(e) => setAdminFees(e.target.value)}
  />
+ {errors.admin ? <span className="mt-1 block text-xs text-maroon">{errors.admin}</span> : null}
  </label>
  <label className="block text-sm">
  <span className="text-ink-muted">Furniture / fit-out (AED)</span>
  <input
  className={`${fieldClass} mt-1`}
+ inputMode="decimal"
  value={furniture}
  onChange={(e) => setFurniture(e.target.value)}
  />
+ {errors.furniture ? <span className="mt-1 block text-xs text-maroon">{errors.furniture}</span> : null}
  </label>
  <label className="block text-sm">
  <span className="text-ink-muted">Other acquisition (AED)</span>
  <input
  className={`${fieldClass} mt-1`}
+ inputMode="decimal"
  value={other}
  onChange={(e) => setOther(e.target.value)}
  />
+ {errors.other ? <span className="mt-1 block text-xs text-maroon">{errors.other}</span> : null}
  </label>
  <p className="text-xs text-ink-muted">
  Defaults are illustrative (e.g. ~4% DLD framing). Confirm actual fees for your transaction, buyer/seller
@@ -126,6 +184,9 @@ export default function PurchaseCostCalculator() {
  </div>
 
  <GatedResults className="order-1 lg:order-2">
+ {!result ? (
+ <p className="text-sm text-ink-muted">Enter valid inputs to see an estimate.</p>
+ ) : (
  <div className="border border-line bg-ink/[0.02] p-6">
  <h2 className="font-display text-xl font-bold text-ink">Cost stack</h2>
  <dl className="mt-6 space-y-3 text-sm">
@@ -134,6 +195,8 @@ export default function PurchaseCostCalculator() {
  ["DLD", result.dld],
  ["Agency", result.agency],
  ["Trustee", result.trustee],
+ ["VAT on agency and trustee", result.vat],
+ ["DLD admin / title deed", result.dldAdmin],
  ["Admin / misc", result.admin],
  ["Furniture", result.furn],
  ["Other", result.oth],
@@ -156,6 +219,7 @@ export default function PurchaseCostCalculator() {
  {siteConfig.cta.strategySession}
  </Link>
  </div>
+ )}
  </GatedResults>
  </div>
  );

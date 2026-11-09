@@ -203,7 +203,9 @@ async function saveLeadToDatabase(
 ): Promise<{ ok: true; id: string } | { ok: false; error: string }> {
   const supabase = getSupabaseAdmin();
   if (!supabase) {
-    return { ok: false, error: "Supabase not configured (missing URL or SERVICE_ROLE_KEY)." };
+    const error = "Supabase not configured (missing URL or SERVICE_ROLE_KEY).";
+    console.error("[lead] supabase insert failed", error);
+    return { ok: false, error };
   }
 
   const row = {
@@ -235,7 +237,7 @@ async function saveLeadToDatabase(
 
   const { data, error } = await supabase.from("website_leads").insert(row).select("id").single();
   if (error) {
-    console.error("lead: Supabase insert failed", error.message);
+    console.error("[lead] supabase insert failed", error.message);
     return { ok: false, error: error.message };
   }
   return { ok: true, id: data.id as string };
@@ -246,7 +248,10 @@ async function notifyByEmail(payload: LeadPayload) {
   const to = process.env.LEAD_NOTIFY_EMAIL;
   const from = process.env.LEAD_FROM_EMAIL ?? "Morgan Kaiser <onboarding@resend.dev>";
 
-  if (!apiKey || !to) return false;
+  if (!apiKey || !to) {
+    console.error("[lead] resend send failed", "RESEND_API_KEY or LEAD_NOTIFY_EMAIL is missing");
+    return false;
+  }
 
   try {
     const tier = deriveLeadTier(payload);
@@ -274,13 +279,13 @@ async function notifyByEmail(payload: LeadPayload) {
 
     if (!response.ok) {
       const detail = await response.text().catch(() => "");
-      console.error("lead: Resend failed", response.status, detail);
+      console.error("[lead] resend send failed", response.status, detail);
       return false;
     }
 
     return true;
   } catch (error) {
-    console.error("lead: Resend request error", error);
+    console.error("[lead] resend send failed", error);
     return false;
   }
 }
@@ -290,19 +295,7 @@ export async function submitLead(body: LeadInput) {
   if (!parsed.ok) return parsed;
 
   const saved = await saveLeadToDatabase(parsed.payload);
-
-  if (!saved.ok) {
-    console.error("lead: database save failed —", saved.error);
-  }
-
   const emailed = await notifyByEmail(parsed.payload);
-  if (!emailed) {
-    console.info("lead (email not configured or failed):", {
-      email: parsed.payload.email,
-      source: parsed.payload.source,
-      saved: saved.ok,
-    });
-  }
 
   return {
     ok: true as const,

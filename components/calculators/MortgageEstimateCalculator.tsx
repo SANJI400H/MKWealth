@@ -112,7 +112,7 @@ export default function MortgageEstimateCalculator() {
   if (!(priceN > 0)) errors.push("Enter a property price above zero.");
   if (pctN < 0 || pctN > 100) errors.push("Down payment must be between 0 and 100 percent.");
   if (num(rate) < 0 || num(rate) > 20) errors.push("Interest rate should sit between 0 and 20 percent.");
-  if (num(termYears) < 1 || num(termYears) > 30) errors.push("Loan term should be between 1 and 30 years.");
+  if (num(termYears) < 1 || num(termYears) > 25) errors.push("Loan term should be between 1 and 25 years.");
 
   const schedule = useMemo(() => {
     if (errors.length) return null;
@@ -282,7 +282,7 @@ export default function MortgageEstimateCalculator() {
                 <p className="mt-1 font-display text-2xl font-bold text-ink">AED {money(schedule.totalInterest)}</p>
               </div>
               <div className="border border-line p-4">
-                <p className="text-xs text-ink-muted">Total cost of the loan</p>
+                <p className="text-xs text-ink-muted">Total repaid (principal + interest)</p>
                 <p className="mt-1 font-display text-2xl font-bold text-ink">AED {money(schedule.totalPaid)}</p>
               </div>
             </div>

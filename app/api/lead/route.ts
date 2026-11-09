@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { submitLead } from "@/lib/leads";
+import { LEAD_NOT_DELIVERED_ERROR, leadWasDelivered } from "@/lib/leads-delivery";
 import {
   createToolsAccessToken,
   shouldUnlockToolsForLeadSource,
@@ -30,6 +31,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: result.error }, { status: result.status });
   }
 
+  if (!leadWasDelivered(result.saved, result.emailed)) {
+    return NextResponse.json({ error: LEAD_NOT_DELIVERED_ERROR }, { status: 503 });
+  }
+
   const response = NextResponse.json({
     ok: true,
     emailed: result.emailed,
@@ -37,7 +42,7 @@ export async function POST(request: Request) {
     leadId: result.leadId,
   });
 
-  if (shouldUnlockToolsForLeadSource(result.payload.source)) {
+  if (result.saved && shouldUnlockToolsForLeadSource(result.payload.source)) {
     const token = await createToolsAccessToken();
     if (token) {
       response.cookies.set(
