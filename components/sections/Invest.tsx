@@ -1,88 +1,64 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import ScrollZoom from "@/components/motion/ScrollZoom";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import EditorialCarousel from "@/components/ui/EditorialCarousel";
-import { investLocations } from "@/content/invest-locations";
+import { catalogueShelves, getShelfProjects } from "@/content/invest-catalogue";
 
-function MarketCard({
- location,
-}: {
- location: (typeof investLocations)[number];
-}) {
- return (
- <Link
- href={location.slug}
- className="card-lift group flex h-full flex-col border border-silver bg-paper"
- >
- <ScrollZoom className="relative aspect-[4/5] bg-surface">
- <Image
- src={location.image}
- alt={`${location.name}. UAE property investment context`}
- fill
- sizes="(min-width: 1024px) 34rem, (min-width: 768px) 32rem, 88vw"
- className={`object-cover transition duration-700 ease-out group-hover:scale-[1.03] ${
- location.id === "abu-dhabi" ? "object-[center_18%]" : "object-center"
- }`}
- />
- </ScrollZoom>
- <div className="card-pad flex flex-1 flex-col space-y-4">
- <p className="eyebrow">{location.tag}</p>
- <h3 className="card-title-lg transition group-hover:text-maroon">{location.name}</h3>
- <p className="body-copy">{location.summary}</p>
- <ul className="space-y-2 border-t border-silver pt-4 text-sm text-ink-muted">
- {location.factors.map((f) => (
- <li key={f} className="flex gap-2">
- <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-maroon" aria-hidden />
- <span>{f}</span>
- </li>
- ))}
- </ul>
- <span className="text-link mt-auto pt-2 transition group-hover:translate-x-1">
- Explore {location.name} →
- </span>
- </div>
- </Link>
- );
+function ShelfCard({ shelf }: { shelf: (typeof catalogueShelves)[number] }) {
+  const projects = getShelfProjects(shelf.id);
+
+  return (
+    <Link href={shelf.href} className="card-lift group flex h-full flex-col border border-silver bg-paper">
+      <div className="card-pad flex flex-1 flex-col">
+        <p className="eyebrow">{shelf.kicker}</p>
+        <h3 className="card-title-lg mt-3 transition group-hover:text-maroon">{shelf.name}</h3>
+        <p className="body-copy mt-3">{shelf.summary}</p>
+        <ul className="mt-4 space-y-2 border-t border-silver pt-4 text-sm text-ink-muted">
+          {projects.map((project) => (
+            <li key={project.slug} className="flex gap-2">
+              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-maroon" aria-hidden />
+              <span>{project.name}</span>
+            </li>
+          ))}
+        </ul>
+        <span className="text-link mt-auto pt-4 transition group-hover:translate-x-1">Explore {shelf.name} →</span>
+      </div>
+    </Link>
+  );
 }
 
-/** Post-cinema interactive markets. Apple-inspired exploration, no autoplay. */
+/** Purchase-type shelves. No autoplay. */
 export default function Invest() {
- return (
- <section id="invest" className="section-pad bg-paper" aria-label="Invest in the UAE">
- <div className="section-inner">
- <RevealOnScroll>
- <p className="eyebrow">Invest in the UAE</p>
- <h2 className="section-title">
- Three markets.
- <br />
- Different rules.
- </h2>
- <p className="section-lead">
- The right market depends on what the capital needs to achieve, not which brochure arrives first.
- </p>
- </RevealOnScroll>
+  return (
+    <section id="invest" className="section-pad bg-paper" aria-label="Invest">
+      <div className="section-inner">
+        <RevealOnScroll>
+          <p className="eyebrow">Invest</p>
+          <h2 className="section-title">
+            Four ways
+            <br />
+            to buy.
+          </h2>
+          <p className="section-lead">
+            Offplan, offplan resale, commercial, and ready homes. The community sits on the project, not in the menu.
+          </p>
+        </RevealOnScroll>
 
- <div className="section-body">
- <EditorialCarousel
- ariaLabel="Explore UAE investment markets"
- previousLabel="Previous market"
- nextLabel="Next market"
- >
- {investLocations.map((location) => (
- <MarketCard key={location.id} location={location} />
- ))}
- </EditorialCarousel>
- </div>
+        <div className="section-body">
+          <EditorialCarousel ariaLabel="Explore how to buy" previousLabel="Previous shelf" nextLabel="Next shelf">
+            {catalogueShelves.map((shelf) => (
+              <ShelfCard key={shelf.id} shelf={shelf} />
+            ))}
+          </EditorialCarousel>
+        </div>
 
- <RevealOnScroll className="mt-8">
- <Link href="/invest" className="btn-ghost-dark">
- Explore All Markets →
- </Link>
- </RevealOnScroll>
- </div>
- </section>
- );
+        <RevealOnScroll className="mt-8">
+          <Link href="/invest" className="btn-ghost-dark">
+            See the full list →
+          </Link>
+        </RevealOnScroll>
+      </div>
+    </section>
+  );
 }

@@ -50,13 +50,12 @@ export const primaryNav: NavGroup[] = [
  href: "/invest",
  columns: [
  {
- title: "Markets",
+ title: "How you buy",
  links: [
- { label: "Abu Dhabi", href: "/invest/abu-dhabi", description: "Lower-volatility context" },
- { label: "Dubai", href: "/invest/dubai", description: "Primary market" },
- { label: "Ras Al Khaimah", href: "/invest/rak", description: "Lower entry" },
- { label: "Micro markets", href: "/areas", description: "Area frameworks" },
- { label: "Developers", href: "/developers", description: "Evaluation frameworks" },
+ { label: "Offplan", href: "/invest/offplan", description: "Homes still sold by the developer" },
+ { label: "Offplan resale", href: "/invest/offplan-resale", description: "Part-paid homes in unfinished communities" },
+ { label: "Commercial", href: "/invest/commercial", description: "Office launches and office resales" },
+ { label: "Secondary", href: "/invest/secondary", description: "Ready homes in named communities" },
  ],
  },
  ],
@@ -115,12 +114,11 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
  {
  title: "Invest",
  links: [
- { label: "Abu Dhabi", href: "/invest/abu-dhabi" },
- { label: "Dubai", href: "/invest/dubai" },
- { label: "Ras Al Khaimah", href: "/invest/rak" },
- { label: "Micro markets", href: "/areas" },
- { label: "Developers", href: "/developers" },
- { label: "Markets overview", href: "/invest" },
+ { label: "Offplan", href: "/invest/offplan" },
+ { label: "Offplan resale", href: "/invest/offplan-resale" },
+ { label: "Commercial", href: "/invest/commercial" },
+ { label: "Secondary", href: "/invest/secondary" },
+ { label: "Overview", href: "/invest" },
  ],
  },
  {

@@ -55,7 +55,7 @@ export const siteConfig = {
   /** Dedicated Investor Guide property (subdomain). Empty = guide stays on main host path /guide. */
   guideUrl: (process.env.NEXT_PUBLIC_GUIDE_URL ?? "").replace(/\/$/, ""),
   cta: {
-    strategySession: "Book Your 30-Minute Strategy Session",
+    strategySession: "Book Your Session",
     analyse: "Analyse My Investment",
     analyseSubmit: "Ask Morgan to Analyse This Investment",
     insights: "Explore Intelligence",

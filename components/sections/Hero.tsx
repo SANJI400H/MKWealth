@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import BookMeetingLink from "@/components/ui/BookMeetingLink";
 import { siteConfig } from "@/lib/site-config";
 import { holdNavForVideo } from "@/components/motion/navPlayback";
@@ -84,6 +85,9 @@ export default function Hero() {
             </p>
             <div className="cta-row mt-5 w-full md:justify-start">
               <BookMeetingLink href="/strategy-session" className="btn-primary w-full justify-center sm:w-auto" />
+              <Link href="/guide" className="btn-ghost-dark w-full justify-center sm:w-auto">
+                Watch Free Guide
+              </Link>
             </div>
           </div>
 

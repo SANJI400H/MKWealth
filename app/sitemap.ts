@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
 import { getPublishedAreas } from "@/content/areas";
 import { getPublishedDevelopers } from "@/content/developers";
+import { catalogueProjects, projectPath } from "@/content/invest-catalogue";
 
 /** Soft launch sitemap: Tier 1 + Tier 2 only. Intelligence hubs re-added when content earns them. */
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -12,6 +13,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/work-with-morgan",
     "/strategy-session",
     "/invest",
+    "/invest/offplan",
+    "/invest/offplan-resale",
+    "/invest/commercial",
+    "/invest/secondary",
     "/invest/dubai",
     "/invest/abu-dhabi",
     "/invest/rak",
@@ -36,8 +41,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const areaRoutes = getPublishedAreas().map((a) => `/areas/${a.slug}`);
   const developerRoutes = getPublishedDevelopers().map((d) => `/developers/${d.slug}`);
+  const projectRoutes = catalogueProjects.map((project) => projectPath(project));
 
-  return [...staticRoutes, ...areaRoutes, ...developerRoutes].map((path) => ({
+  return [...staticRoutes, ...projectRoutes, ...areaRoutes, ...developerRoutes].map((path) => ({
     url: `${siteConfig.siteUrl}${path}`,
     lastModified: new Date(),
     changeFrequency: path === "" ? "weekly" : "monthly",
