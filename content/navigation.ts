@@ -1,9 +1,11 @@
+import { siteConfig } from "@/lib/site-config";
+
 /**
  * Global IA. Morgan · Invest · Tools · Work With Morgan · Portal
  * Soft launch: Intelligence hubs stay in codebase but are not advertised.
  * Investor Guide: unlock via qualification questions (dataroom-style) → cookie.
  * Calculators: soft gate (Name / WhatsApp / email).
- * Portal / Private Desk: current investors → hosted dashboard URL (or /portal teaser).
+ * Portal / Private Desk: current investors → hosted dashboard.
  */
 
 export type NavLink = {
@@ -140,7 +142,7 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
  },
  {
  title: "Clients",
- links: [{ label: "Client Portal", href: "/portal" }],
+ links: [{ label: "Client Portal", href: siteConfig.clientPortalUrl }],
  },
  {
  title: "Legal",

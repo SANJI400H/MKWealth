@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import StrategySessionForm from "@/components/forms/StrategySessionForm";
 import { pageMetadata } from "@/lib/metadata";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = pageMetadata({
   title: "30-Minute Property Strategy Session | Morgan Kaiser",
@@ -92,9 +92,9 @@ export default function StrategySessionPage() {
             <li>3. If approved, Morgan sends a Google Calendar invitation with Google Meet.</li>
           </ol>
           <div className="mt-8 flex justify-center">
-            <Link href="/portal" className="btn-ghost-dark w-full justify-center sm:w-auto">
+            <a href={siteConfig.clientPortalUrl} className="btn-ghost-dark w-full justify-center sm:w-auto">
               Client Portal
-            </Link>
+            </a>
           </div>
         </section>
       </main>

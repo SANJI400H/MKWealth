@@ -2,6 +2,11 @@
 const isDevCommand =
   process.argv.includes("dev") || process.env.npm_lifecycle_event === "dev";
 
+/** Temporary client dashboard. Same fallback as lib/site-config.ts. */
+const clientPortalUrl = (
+  process.env.NEXT_PUBLIC_CLIENT_PORTAL_URL || "https://ml-private-wealth.tiiny.site"
+).replace(/\/$/, "");
+
 const nextConfig = {
   reactStrictMode: true,
   output: "standalone",
@@ -59,15 +64,20 @@ const nextConfig = {
         destination: "/about#credentials",
         permanent: true,
       },
-      // Private Desk = Client Portal (hosted dashboard or /portal teaser)
+      // Client Portal and Private Desk open the hosted dashboard for now.
+      {
+        source: "/portal",
+        destination: clientPortalUrl,
+        permanent: false,
+      },
       {
         source: "/desk",
-        destination: "/portal",
+        destination: clientPortalUrl,
         permanent: false,
       },
       {
         source: "/desk/unlock",
-        destination: "/portal",
+        destination: clientPortalUrl,
         permanent: false,
       },
     ];

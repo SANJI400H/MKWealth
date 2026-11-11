@@ -14,6 +14,7 @@ import {
   primaryNav,
   type NavGroup,
 } from "@/content/navigation";
+import { siteConfig } from "@/lib/site-config";
 
 function DesktopMega({
   group,
@@ -327,9 +328,9 @@ export default function SiteNav() {
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
-          <Link href="/portal" className="text-[11px] font-medium text-ink-muted hover:text-ink">
+          <a href={siteConfig.clientPortalUrl} className="text-[11px] font-medium text-ink-muted hover:text-ink">
             Client login
-          </Link>
+          </a>
           <BookMeetingLink href="/strategy-session" className="btn-primary btn-sm">
             Book Strategy Session
           </BookMeetingLink>
@@ -378,9 +379,13 @@ export default function SiteNav() {
                   onNavigate={() => setOpen(false)}
                 />
               ))}
-              <Link href="/portal" className="mt-4 text-sm font-medium text-ink-muted" onClick={() => setOpen(false)}>
+              <a
+                href={siteConfig.clientPortalUrl}
+                className="mt-4 text-sm font-medium text-ink-muted"
+                onClick={() => setOpen(false)}
+              >
                 Client login
-              </Link>
+              </a>
               <BookMeetingLink href="/strategy-session" className="btn-primary mt-4 mb-6 w-full">
                 Book Strategy Session
               </BookMeetingLink>

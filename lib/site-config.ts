@@ -48,10 +48,12 @@ export const siteConfig = {
   },
   defaultOgImage: "/images/og-default.jpg",
   /**
-   * Hosted Private Wealth / client maintenance dashboard (Firebase).
-   * Leave empty until the dashboard is deployed; Portal page shows a contact fallback.
+   * Hosted Private Wealth dashboard. Temporary public host until the real portal is live.
+   * Env overrides this when NEXT_PUBLIC_CLIENT_PORTAL_URL is set.
    */
-  clientPortalUrl: (process.env.NEXT_PUBLIC_CLIENT_PORTAL_URL ?? "").replace(/\/$/, ""),
+  clientPortalUrl: (
+    process.env.NEXT_PUBLIC_CLIENT_PORTAL_URL || "https://ml-private-wealth.tiiny.site"
+  ).replace(/\/$/, ""),
   /** Dedicated Investor Guide property (subdomain). Empty = guide stays on main host path /guide. */
   guideUrl: (process.env.NEXT_PUBLIC_GUIDE_URL ?? "").replace(/\/$/, ""),
   cta: {
