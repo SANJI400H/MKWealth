@@ -21,22 +21,17 @@ export default function Contact() {
         </RevealOnScroll>
 
         <RevealOnScroll delayMs={80} className="section-body">
-          <div className="flex flex-col items-start gap-4">
+          <div className="cta-row w-full">
             <BookMeetingLink href="/strategy-session" className="btn-primary w-full justify-center sm:w-auto" />
-            <p className="text-sm text-ink-muted">AED 2M+, international investors, not end-user tickets.</p>
-            <p className="text-sm text-ink-muted">
-              Prefer chat?{" "}
-              <WhatsAppLink
-                message="Hi Morgan, I'd like to book a 30-minute property strategy session."
-                className="font-semibold text-maroon underline-offset-2 hover:underline"
-              >
-                WhatsApp Morgan
-              </WhatsAppLink>
-              {" · "}
-              <Link href="/true-cost" className="font-semibold text-maroon underline-offset-2 hover:underline">
-                Get the True Cost worksheet
-              </Link>
-            </p>
+            <Link href="/guide" className="btn-ghost-dark w-full justify-center sm:w-auto">
+              Watch Free Guide
+            </Link>
+            <WhatsAppLink
+              message="Hi Morgan, I'd like to book a 30-minute property strategy session."
+              className="btn-ghost-dark w-full justify-center sm:w-auto"
+            >
+              WhatsApp Morgan
+            </WhatsAppLink>
           </div>
         </RevealOnScroll>
       </div>

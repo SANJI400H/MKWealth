@@ -20,6 +20,8 @@ type EditorialCarouselProps = {
  className?: string;
  previousLabel?: string;
  nextLabel?: string;
+ /** Width of each snap slide. Defaults to one large card with a peek of the next. */
+ slideClassName?: string;
 };
 
 /**
@@ -32,6 +34,7 @@ export default function EditorialCarousel({
  className = "",
  previousLabel = "Previous",
  nextLabel = "Next",
+ slideClassName = "w-[88%] shrink-0 snap-start sm:w-[82%] md:w-[min(76%,32rem)] lg:w-[min(70%,34rem)]",
 }: EditorialCarouselProps) {
  const trackRef = useRef<HTMLDivElement>(null);
  const [index, setIndex] = useState(0);
@@ -111,7 +114,7 @@ export default function EditorialCarousel({
  <div
  key={i}
  data-carousel-slide
- className="w-[88%] shrink-0 snap-start sm:w-[82%] md:w-[min(76%,32rem)] lg:w-[min(70%,34rem)]"
+ className={slideClassName}
  >
  {child}
  </div>
