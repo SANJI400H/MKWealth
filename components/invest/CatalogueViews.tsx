@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import BookMeetingLink from "@/components/ui/BookMeetingLink";
-import PageIntro from "@/components/ui/PageIntro";
 import StickySectionNav from "@/components/ui/StickySectionNav";
 import GlassProjectCarousel from "@/components/invest/GlassProjectCarousel";
 import {
@@ -72,87 +71,95 @@ function sectionId(label: string) {
     .replace(/^-|-$/g, "");
 }
 
-const investSections = catalogueShelves.map((shelf) => ({ id: shelf.id, label: shelf.name }));
+const sectionAnchor = {
+  scrollMarginTop: "calc(4rem + env(safe-area-inset-top, 0px) + 5.75rem)",
+};
+
+const investSections = [
+  { id: "overview", label: "Overview" },
+  ...catalogueShelves.map((shelf) => ({ id: shelf.id, label: shelf.name })),
+];
 const investCover = projectMedia["infinity-ramhan-island"];
+
+function CatalogueCover({ image, label, credit }: { image: string; label: string; credit?: string }) {
+  return (
+    <section
+      className="relative mt-[calc(3.5rem+env(safe-area-inset-top,0px))] w-full bg-[#100e0c] sm:mt-[calc(4rem+env(safe-area-inset-top,0px))]"
+      aria-label={label}
+    >
+      <div className="relative aspect-[3136/1344] w-full">
+        <Image src={image} alt="" fill priority className="object-cover" sizes="100vw" />
+      </div>
+      {credit ? (
+        <p className="absolute bottom-3 left-[5%] z-10 text-[11px] text-white/80 sm:left-[7%]">{credit}</p>
+      ) : null}
+    </section>
+  );
+}
 
 export function InvestCatalogueHub() {
   return (
     <>
-      <section
-        className="relative mt-[calc(3.5rem+env(safe-area-inset-top,0px))] w-full overflow-hidden bg-[#100e0c] sm:mt-[calc(4rem+env(safe-area-inset-top,0px))]"
-        aria-label="Invest"
-      >
-        <div className="relative aspect-[2.35/1] min-h-[16rem] w-full sm:min-h-[22rem]">
-          {investCover ? (
-            <Image
-              src={investCover.image}
-              alt=""
-              fill
-              priority
-              className="object-cover"
-              sizes="100vw"
-            />
-          ) : null}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 via-[42%] to-transparent to-[78%]" />
-          <div className="absolute left-[5%] top-1/2 z-10 -translate-y-1/2 sm:left-[7%]">
-            <h1
-              className="font-display text-[clamp(2.25rem,5vw,4.5rem)] font-bold leading-[1.02] text-white"
-              style={{ textShadow: "0 2px 16px rgba(0,0,0,0.7)" }}
-            >
-              Invest
-            </h1>
-            <p className="mt-3 max-w-md text-sm leading-relaxed text-white/90 sm:text-base">
-              Offplan, offplan resale, commercial, and ready homes.
-            </p>
-          </div>
-        </div>
-      </section>
+      {investCover ? <CatalogueCover image={investCover.image} label="Invest" credit={investCover.credit} /> : null}
 
-      <Breadcrumbs visible={false} items={[{ name: "Home", path: "/" }, { name: "Invest", path: "/invest" }]} />
-      <StickySectionNav
-        items={investSections}
-        layoutId="invest-section-pill"
-        ariaLabel="Invest sections"
-        className="mt-8 w-full !mx-0"
-      />
+      <div className="page-shell !pt-8 sm:!pt-10">
+        <Breadcrumbs visible={false} items={[{ name: "Home", path: "/" }, { name: "Invest", path: "/invest" }]} />
+        <StickySectionNav
+          items={investSections}
+          layoutId="invest-section-pill"
+          ariaLabel="Invest sections"
+          className="mt-8"
+        />
 
-      {catalogueShelves.map((shelf) => {
-        const projects = getShelfProjects(shelf.id);
-        return (
-          <section
-            key={shelf.id}
-            id={shelf.id}
-            style={{ scrollMarginTop: "calc(4rem + env(safe-area-inset-top, 0px) + 5.75rem)" }}
-            className="pt-5"
-          >
-            <div className="mx-auto w-full max-w-3xl px-4 sm:px-8">
-              <p className="eyebrow">{shelf.kicker}</p>
-              <h2 className="mt-2 font-display text-3xl font-bold text-ink">
+        <section id="overview" className="pt-10" style={sectionAnchor}>
+          <h1 className="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">Invest</h1>
+          <p className="mt-3 text-lg text-ink-muted">Offplan, offplan resale, commercial, and ready homes.</p>
+          <p className="body-copy mt-8">
+            Listed by how you buy. Each shelf below is one way into the catalogue, and each card opens that project.
+          </p>
+          <dl className="mt-8 grid gap-3 sm:grid-cols-2">
+            {catalogueShelves.map((shelf) => (
+              <div key={shelf.id} className="border border-silver bg-surface px-4 py-4">
+                <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">{shelf.kicker}</dt>
+                <dd className="mt-2 font-display text-lg font-bold text-ink">
+                  <Link href={`#${shelf.id}`} className="hover:text-maroon">
+                    {shelf.name}
+                  </Link>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        {catalogueShelves.map((shelf) => {
+          const projects = getShelfProjects(shelf.id);
+          return (
+            <section key={shelf.id} id={shelf.id} className="page-block space-y-4" style={sectionAnchor}>
+              <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">
                 <Link href={shelf.href} className="hover:text-maroon">
                   {shelf.name}
                 </Link>
               </h2>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-muted sm:text-base">{shelf.summary}</p>
-            </div>
-            <GlassProjectCarousel projects={projects} label={`${shelf.name} projects`} className="mt-4 pb-5" />
-          </section>
-        );
-      })}
+              <p className="body-copy">{shelf.summary}</p>
+              <GlassProjectCarousel projects={projects} label={`${shelf.name} projects`} className="mt-6" />
+            </section>
+          );
+        })}
 
-      <div className="page-shell !pt-4">
-        <section className="max-w-3xl space-y-4 border-t border-line pt-10">
+        <section className="page-block space-y-4">
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Ownership</h2>
           <p className="body-copy">
             Foreign nationals have been permitted freehold ownership in designated areas of Dubai since 2002, and in
             designated zones of Abu Dhabi and Ras Al Khaimah as well. Residency is not required to buy. What is required
             is clarity on funding, fees and, if relevant, financing.
           </p>
-          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Golden Visa</h2>
+          <h2 className="pt-4 font-display text-2xl font-bold text-ink sm:text-3xl">Golden Visa</h2>
           <p className="body-copy">
             Property at or above the commonly cited federal threshold may qualify, subject to current rules, including how
             a mortgage and an off-plan payment are treated. Confirm the requirement at the time of application.
           </p>
         </section>
+
         <div className="mt-14 flex flex-col gap-3 border-t border-line pt-10 sm:flex-row">
           <BookMeetingLink href="/strategy-session" className="btn-primary w-full sm:w-auto" />
           <Link href="/guide" className="btn-ghost-dark w-full justify-center sm:w-auto">
@@ -170,21 +177,36 @@ export function InvestCatalogueHub() {
 export function ShelfListing({ shelfId }: { shelfId: ShelfId }) {
   const shelf = getShelf(shelfId);
   const projects = getShelfProjects(shelfId);
+  const cover = projectMedia[projects[0]?.slug ?? ""];
 
   return (
     <main>
-      <div className="page-shell !pb-0">
+      {cover ? <CatalogueCover image={cover.image} label={shelf.name} credit={cover.credit} /> : null}
+      <div className={cover ? "page-shell !pt-8 sm:!pt-10" : "page-shell"}>
         <Breadcrumbs
+          visible={false}
           items={[
             { name: "Home", path: "/" },
             { name: "Invest", path: "/invest" },
             { name: shelf.name, path: shelf.href },
           ]}
         />
-        <p className="eyebrow mt-8">{shelf.kicker}</p>
-        <PageIntro title={shelf.name} lead={shelf.summary} />
+        <section className="pt-10">
+          <h1 className="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">{shelf.name}</h1>
+          <p className="mt-3 text-lg text-ink-muted">{shelf.kicker}</p>
+          <p className="body-copy mt-8">{shelf.summary}</p>
+        </section>
+        <GlassProjectCarousel projects={projects} label={`${shelf.name} projects`} className="mt-8" />
+        <div className="mt-14 flex flex-col gap-3 border-t border-line pt-10 sm:flex-row">
+          <BookMeetingLink href="/strategy-session" className="btn-primary w-full sm:w-auto" />
+          <Link href="/guide" className="btn-ghost-dark w-full justify-center sm:w-auto">
+            Watch Free Guide
+          </Link>
+          <Link href="/invest" className="btn-ghost-dark w-full justify-center sm:w-auto">
+            Invest
+          </Link>
+        </div>
       </div>
-      <GlassProjectCarousel projects={projects} label={`${shelf.name} projects`} />
     </main>
   );
 }
@@ -204,39 +226,9 @@ export function ProjectListing({ project }: { project: CatalogueProject }) {
 
   return (
     <main>
-      <section
-        className="relative mt-[calc(3.5rem+env(safe-area-inset-top,0px))] w-full overflow-hidden bg-[#100e0c] sm:mt-[calc(4rem+env(safe-area-inset-top,0px))]"
-        aria-label={project.name}
-      >
-        <div className="relative aspect-[2.35/1] min-h-[16rem] w-full sm:min-h-[22rem]">
-          {media ? (
-            <Image
-              src={media.image}
-              alt={`${project.name} render`}
-              fill
-              priority
-              className="object-cover"
-              sizes="100vw"
-            />
-          ) : null}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 via-[42%] to-transparent to-[78%]" />
-          <div className="absolute left-[5%] top-1/2 z-10 w-[min(52%,40rem)] -translate-y-1/2 sm:left-[7%]">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/80">{shelf.name}</p>
-            <h1
-              className="mt-3 font-display text-[clamp(1.75rem,4vw,3.75rem)] font-bold leading-[1.05] text-white"
-              style={{ textShadow: "0 2px 16px rgba(0,0,0,0.7)" }}
-            >
-              {project.name}
-            </h1>
-            <p className="mt-3 max-w-md text-sm leading-relaxed text-white/90 sm:text-base">{project.product}</p>
-          </div>
-          {media ? (
-            <p className="absolute bottom-3 left-[5%] z-10 text-[11px] text-white/80 sm:left-[7%]">{media.credit}</p>
-          ) : null}
-        </div>
-      </section>
+      {media ? <CatalogueCover image={media.image} label={project.name} credit={media.credit} /> : null}
 
-      <div className="page-shell-wide !pt-8 sm:!pt-10">
+      <div className={media ? "page-shell !pt-8 sm:!pt-10" : "page-shell"}>
         <Breadcrumbs
           visible={false}
           items={[
@@ -253,9 +245,12 @@ export function ProjectListing({ project }: { project: CatalogueProject }) {
           className="mt-8"
         />
 
-        <section id="overview" className="scroll-mt-[calc(3.5rem+env(safe-area-inset-top,0px)+3.75rem)] pt-10 sm:scroll-mt-[calc(4rem+env(safe-area-inset-top,0px)+4rem)]">
+        <section id="overview" className="pt-10" style={sectionAnchor}>
+          <h1 className="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">{project.name}</h1>
+          <p className="mt-3 text-lg text-ink-muted">{project.product}</p>
+          <p className="body-copy-sm mt-1">{shelf.name}</p>
           {metrics.length > 0 ? (
-            <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <dl className="mt-8 grid gap-3 sm:grid-cols-2">
               {metrics.map((fact) => (
                 <div key={fact.label} className="border border-silver bg-surface px-4 py-4">
                   <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">{fact.label}</dt>
@@ -272,7 +267,8 @@ export function ProjectListing({ project }: { project: CatalogueProject }) {
           <section
             key={fact.label}
             id={sectionId(fact.label)}
-            className="page-block scroll-mt-[calc(3.5rem+env(safe-area-inset-top,0px)+3.75rem)] sm:scroll-mt-[calc(4rem+env(safe-area-inset-top,0px)+4rem)]"
+            className="page-block"
+            style={sectionAnchor}
           >
             <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">{fact.label}</h2>
             <p className="body-copy mt-4">
@@ -282,7 +278,7 @@ export function ProjectListing({ project }: { project: CatalogueProject }) {
         ))}
 
         {media && media.gallery.length > 0 ? (
-          <section id="images" className="page-block scroll-mt-[calc(3.5rem+env(safe-area-inset-top,0px)+3.75rem)] sm:scroll-mt-[calc(4rem+env(safe-area-inset-top,0px)+4rem)]">
+          <section id="images" className="page-block" style={sectionAnchor}>
             <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Images</h2>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {media.gallery.map((src) => (
@@ -295,7 +291,7 @@ export function ProjectListing({ project }: { project: CatalogueProject }) {
         ) : null}
 
         {related.length > 0 ? (
-          <section id="more" className="page-block scroll-mt-[calc(3.5rem+env(safe-area-inset-top,0px)+3.75rem)] sm:scroll-mt-[calc(4rem+env(safe-area-inset-top,0px)+4rem)]">
+          <section id="more" className="page-block" style={sectionAnchor}>
             <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Also in {shelf.name}</h2>
             <ProjectIndex projects={related} />
           </section>

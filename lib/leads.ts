@@ -3,6 +3,7 @@
  * Persists to Supabase (when configured) and emails Morgan via Resend.
  */
 
+import { appendLeadToSheet } from "@/lib/lead-sheet";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
 
 const PHONE_PATTERN = /^\+?[1-9]\d{7,14}$/;
@@ -296,11 +297,13 @@ export async function submitLead(body: LeadInput) {
 
   const saved = await saveLeadToDatabase(parsed.payload);
   const emailed = await notifyByEmail(parsed.payload);
+  const sheeted = await appendLeadToSheet(parsed.payload, saved.ok ? saved.id : "");
 
   return {
     ok: true as const,
     emailed,
     saved: saved.ok,
+    sheeted,
     leadId: saved.ok ? saved.id : null,
     payload: parsed.payload,
   };

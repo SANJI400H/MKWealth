@@ -75,7 +75,7 @@ function GlassCard({
       ref={ref}
       data-carousel-slide
       style={reduce ? undefined : { scale, opacity }}
-      className="aspect-[16/10] h-[clamp(11rem,calc(100svh-27rem),18rem)] w-auto max-w-[min(78vw,32rem)] shrink-0 snap-start will-change-transform"
+      className="aspect-[16/10] w-[min(85%,32rem)] shrink-0 snap-start will-change-transform"
     >
       <Link
         href={projectPath(project)}
@@ -88,7 +88,7 @@ function GlassCard({
             alt=""
             fill
             priority={priority}
-            sizes="(min-width: 640px) 544px, 78vw"
+            sizes="(min-width: 640px) 512px, 85vw"
             className="object-cover transition duration-700 ease-out motion-reduce:transition-none group-hover:scale-[1.035]"
           />
         ) : null}
@@ -238,7 +238,7 @@ export default function GlassProjectCarousel({
             scrollToIndex(Math.min(count - 1, index + 1));
           }
         }}
-        className="no-scrollbar flex cursor-grab snap-x snap-mandatory gap-5 overflow-x-auto scroll-pl-[max(1rem,calc((100%-48rem)/2+1rem))] px-[max(1rem,calc((100%-48rem)/2+1rem))] pb-2 active:cursor-grabbing focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-maroon sm:scroll-pl-[max(2rem,calc((100%-48rem)/2+2rem))] sm:px-[max(2rem,calc((100%-48rem)/2+2rem))]"
+        className="no-scrollbar flex cursor-grab snap-x snap-mandatory gap-5 overflow-x-auto pb-2 active:cursor-grabbing focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-maroon"
       >
         {projects.map((project, i) => (
           <GlassCard
@@ -257,7 +257,7 @@ export default function GlassProjectCarousel({
         <div className="w-4 shrink-0" aria-hidden />
       </div>
 
-      <div className="mx-auto mt-6 flex w-full max-w-3xl items-center justify-between gap-4 px-4 sm:px-8">
+      <div className="mt-6 flex w-full items-center justify-between gap-4">
         <div className="flex items-center gap-1.5" role="tablist" aria-label="Projects">
           {projects.map((project, i) => (
             <button

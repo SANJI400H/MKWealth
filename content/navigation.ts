@@ -52,10 +52,11 @@ export const primaryNav: NavGroup[] = [
  {
  title: "How you buy",
  links: [
- { label: "Offplan", href: "/invest/offplan", description: "Homes still sold by the developer" },
- { label: "Offplan resale", href: "/invest/offplan-resale", description: "Part-paid homes in unfinished communities" },
- { label: "Commercial", href: "/invest/commercial", description: "Office launches and office resales" },
- { label: "Secondary", href: "/invest/secondary", description: "Ready homes in named communities" },
+ { label: "Overview", href: "/invest", description: "How the catalogue is organised" },
+ { label: "Offplan", href: "/invest#offplan", description: "Homes still sold by the developer" },
+ { label: "Offplan resale", href: "/invest#offplan-resale", description: "Part-paid homes in unfinished communities" },
+ { label: "Commercial", href: "/invest#commercial", description: "Office launches and office resales" },
+ { label: "Secondary", href: "/invest#secondary", description: "Ready homes in named communities" },
  ],
  },
  ],
@@ -69,8 +70,8 @@ export const primaryNav: NavGroup[] = [
  title: "Tools",
  links: [
  { label: "Overview", href: "/tools", description: "Calculators for underwriting" },
- { label: "Calculators", href: "/calculators", description: "True yield, costs, mortgage, plans" },
- { label: "Video Guides", href: "/video-guides", description: "Short educational videos" },
+ { label: "Calculators", href: "/tools#calculators", description: "True yield, costs, mortgage, plans" },
+ { label: "Video Guides", href: "/tools#video-guides", description: "Short educational videos" },
  { label: "True Cost worksheet", href: "/true-cost", description: "Buying costs before you reserve" },
  { label: "Investor Guide", href: "/guide", description: "Private library. Qualify for access" },
  ],
@@ -114,19 +115,19 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
  {
  title: "Invest",
  links: [
- { label: "Offplan", href: "/invest/offplan" },
- { label: "Offplan resale", href: "/invest/offplan-resale" },
- { label: "Commercial", href: "/invest/commercial" },
- { label: "Secondary", href: "/invest/secondary" },
  { label: "Overview", href: "/invest" },
+ { label: "Offplan", href: "/invest#offplan" },
+ { label: "Offplan resale", href: "/invest#offplan-resale" },
+ { label: "Commercial", href: "/invest#commercial" },
+ { label: "Secondary", href: "/invest#secondary" },
  ],
  },
  {
  title: "Tools",
  links: [
  { label: "Overview", href: "/tools" },
- { label: "Calculators", href: "/calculators" },
- { label: "Video Guides", href: "/video-guides" },
+ { label: "Calculators", href: "/tools#calculators" },
+ { label: "Video Guides", href: "/tools#video-guides" },
  { label: "True Cost worksheet", href: "/true-cost" },
  ],
  },
@@ -155,6 +156,12 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
 export const cinemaSectionIds = ["home", "about", "services", "philosophy"] as const;
 
 export type SectionNavItem = { id: string; label: string };
+
+export const toolsSectionNav: SectionNavItem[] = [
+  { id: "overview", label: "Overview" },
+  { id: "calculators", label: "Calculators" },
+  { id: "video-guides", label: "Video Guides" },
+];
 
 export const aboutSectionNav: SectionNavItem[] = [
  { id: "overview", label: "Overview" },

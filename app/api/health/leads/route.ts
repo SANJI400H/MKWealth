@@ -1,5 +1,6 @@
 import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
+import { leadSheetConfigured } from "@/lib/lead-sheet";
 import { getSupabaseAdmin, missingSupabaseEnv } from "@/lib/supabase/admin";
 
 export const dynamic = "force-dynamic";
@@ -31,6 +32,9 @@ export async function GET(request: Request) {
     RESEND_API_KEY: configured("RESEND_API_KEY"),
     LEAD_NOTIFY_EMAIL: configured("LEAD_NOTIFY_EMAIL"),
     LEAD_FROM_EMAIL: configured("LEAD_FROM_EMAIL"),
+    GOOGLE_SHEET: leadSheetConfigured(),
+    GA4: configured("NEXT_PUBLIC_GA_MEASUREMENT_ID"),
+    META_PIXEL: configured("NEXT_PUBLIC_META_PIXEL_ID"),
   };
 
   const supabase = getSupabaseAdmin();
